@@ -1,0 +1,10 @@
+.MenuItem {
+  text-align: center;
+  cursor: pointer;
+}
+.MenuItem+.MenuItem {
+  margin-left: 20px;
+}
+.MenuItem.selected {
+  border-bottom: 3px solid black;
+}
