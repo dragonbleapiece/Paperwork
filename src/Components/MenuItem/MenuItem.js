@@ -2,27 +2,27 @@ import React, { Component } from 'react';
 import './MenuItem.css';
 
 class MenuItem extends Component {
-  constructor() {
-    super();
+  constructor(props) {
+    super(props);
     this.state = {
-      selected: false,
-      class: ""
+      active: this.props.active,
     }
+    this.className = () => {
+      return(
+        "MenuItem "+ (this.props.active ? "active" : "")
+      )
+    };
   }
-
   onClick() {
-    if (this.state.selected == false) {
-      this.setState({selected: true, class: "selected"});
-    }
+    this.props.handleClick(this.props.index);
+    this.className();
   }
   render() {
+    console.log(this.props.children, this.state.active);
     return (
-      <div
-        className={this.state.class + " MenuItem"}
-        onClick={this.onClick.bind(this)}
-      >
+      <li className={this.className()} onClick={this.onClick.bind(this)}>
         {this.props.children}
-      </div>
+      </li>
     );
   }
 }

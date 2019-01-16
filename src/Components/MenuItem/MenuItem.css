@@ -1,10 +1,11 @@
 .MenuItem {
+  list-style: none;
   text-align: center;
   cursor: pointer;
 }
 .MenuItem+.MenuItem {
   margin-left: 20px;
 }
-.MenuItem.selected {
+.MenuItem.active {
   border-bottom: 3px solid black;
 }
