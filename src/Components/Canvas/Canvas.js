@@ -23,8 +23,6 @@ class Canvas extends Component {
 
     const {width, height, cells} = this.props;
 
-    console.log(cells);
-
     sk.createCanvas(width, height);
   	var columns = sk.floor(width/cells);
   	var rows = sk.floor(height/cells);
