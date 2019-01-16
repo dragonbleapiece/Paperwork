@@ -10,6 +10,10 @@ class Canvas extends Component {
   static _instance;
   static _P5;
 
+  state = {
+    functions: []
+  };
+
   constructor(props) {
     if(Canvas._instance != undefined) {
       return Canvas._instance;
@@ -17,6 +21,18 @@ class Canvas extends Component {
     super(props);
 
     Canvas._instance = this;
+  }
+
+  addDraw(f) {
+    this.setState({
+      functions: [this.state.functions, f]
+    });
+  }
+
+  resetDraw() {
+    this.setState({
+      functions: []
+    });
   }
 
   setup(sk) {

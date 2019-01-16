@@ -1,11 +1,13 @@
 import React, { Component } from 'react';
 import './Box.css';
+import p5 from 'p5';
 
 /*Pencil*/
 class Box extends Component {
 
   constructor(props) {
     super(props);
+    this.className = this.constructor.name;
   }
 
   draw(sk) {
@@ -14,8 +16,8 @@ class Box extends Component {
 
   render() {
     return (
-      <div className="Box">
-
+      <div className={this.className}>
+        <span>{this.constructor.name}</span>
       </div>
     );
   }
