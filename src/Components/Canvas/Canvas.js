@@ -19,13 +19,23 @@ class Canvas extends Component {
       return Canvas._instance;
     }
     super(props);
-
+    this.initP5();
     Canvas._instance = this;
+  }
+
+  initP5() {
+    let self = this;
+    let s = (sk) => {
+      sk.setup = self.setup.bind(self, sk);
+      sk.draw = self.draw.bind(self, sk);
+    }
+
+    Canvas._P5 = new p5(s, 'renderer');
   }
 
   addDraw(f) {
     this.setState({
-      functions: [this.state.functions, f]
+      functions: this.state.functions.concat(f)
     });
   }
 
@@ -36,35 +46,20 @@ class Canvas extends Component {
   }
 
   setup(sk) {
-
     const {width, height, cells} = this.props;
-
     sk.createCanvas(width, height);
   }
 
   draw(sk) {
-    for(let f in this.state.functions) {
+    for(let i = 0; i < this.state.functions.length; ++i) {
+      let f = this.state.functions[i];
       f(sk);
     }
   }
 
 
   componentDidMount() {
-    let s = (sk) => {
-      sk.setup = () => {
-        if(Canvas._instance != undefined) {
-          Canvas._instance.setup(sk);
-        }
-      }
 
-      sk.draw = () => {
-        if(Canvas._instance != undefined) {
-          Canvas._instance.draw(sk);
-        }
-      }
-    }
-
-    Canvas._P5 = new p5(s, 'renderer');
   }
 
 

@@ -5,6 +5,7 @@ import Canvas from '../../Components/Canvas/Canvas';
 import Menu from '../../Components/Menu/Menu';
 import Instructions from '../../Components/Instructions/Instructions';
 import Rectangle from '../../Components/Rectangle/Rectangle';
+import Grid from '../../Components/Grid/Grid';
 
 class App extends Component {
   render() {
@@ -21,7 +22,7 @@ class App extends Component {
           <Menu links={links}></Menu>
         </header>
         <main>
-            <div className="Instruction"></div>
+            <Instructions><Grid columns="20" rows="10" ref={box => Instructions.addElement(box)}/><Rectangle width="10" height="10" ref={box => Instructions.addElement(box)}/></Instructions>
             <div className="CanvasContainer">
               <Canvas width={window.innerWidth*0.5} height={window.innerHeight-60} cells="20"/>
             </div>

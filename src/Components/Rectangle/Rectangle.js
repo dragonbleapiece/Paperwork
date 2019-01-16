@@ -7,10 +7,10 @@ class Rectangle extends Box {
 
   constructor(props) {
     super(props);
-    this.className += " " + this.constructor.name;
-    const {x, y, width, height} = this.props;
-    this.x = x;
-    this.y = y;
+    this.className += " " + Rectangle.name;
+    const {width, height} = this.props;
+    this.x = 0;
+    this.y = 0;
     this.width = width;
     this.height = height;
   }

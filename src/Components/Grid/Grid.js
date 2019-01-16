@@ -7,24 +7,40 @@ class Grid extends Box {
 
   constructor(props) {
     super(props);
-    this.className += " " + this.constructor.name;
-    const {x, y} = this.props;
-    this.x = x;
-    this.y = y;
+    this.className += " " + Grid.name;
+    const {columns, rows} = this.props;
+    this.columns = columns;
+    this.rows = rows;
   }
 
   draw(sk) {
-    var columns = sk.floor(width/cells);
-  	var rows = sk.floor(height/cells);
+
+    var column = sk.width/this.columns;
+  	var row = sk.height/this.rows;
+    var elem = this.next;
+    if(elem !== undefined) {
+      var x = elem.x;
+      var y = elem.y;
+    }
 
   	sk.background(0);
   	sk.stroke(255);
-  	for(var i = 0; i <= columns; i++) {
-  		for(var j = 0; j <= rows; j++) {
-  			sk.line(i * cells, 0, i * cells, height);
-  			sk.line(0, j * cells, width, j * cells);
+  	for(var i = 0; i <= this.columns; i++) {
+  		for(var j = 0; j <= this.rows; j++) {
+  			sk.line(i * column, 0, i * column, sk.height);
+  			sk.line(0, j * row, sk.width, j * row);
+        if(elem !== undefined) {
+          elem.x = i * column + x;
+          elem.y = j * row + y;
+          elem.draw(sk);
+        }
   		}
   	}
+
+    if(elem !== undefined) {
+      elem.x = x;
+      elem.y = y;
+    }
   }
 
   render() {
@@ -36,4 +52,4 @@ class Grid extends Box {
   }
 }
 
-export default Rectangle;
+export default Grid;

@@ -7,7 +7,8 @@ class Box extends Component {
 
   constructor(props) {
     super(props);
-    this.className = this.constructor.name;
+    this.className = Box.name;
+    this.next = undefined;
   }
 
   draw(sk) {
