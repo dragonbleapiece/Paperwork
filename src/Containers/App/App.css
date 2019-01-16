@@ -22,3 +22,14 @@
   font-size: 24px;
   border-bottom: black solid 1px;
 }
+main {
+  display: flex;
+  flex-direction: row;
+}
+.Instruction {
+
+}
+
+.CanvasContainer {
+
+}

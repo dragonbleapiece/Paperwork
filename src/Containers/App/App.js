@@ -13,17 +13,19 @@ class App extends Component {
       {title: "Markov chain", active: true},
       {title: "Cellular automaton", active: false}
     ];
-
+    console.log(window);
     return (
       <div className="App">
-        <Canvas width="800" height="400" cells="20"/>
-        <Instructions>
-
-        </Instructions>
         <header className="App-header">
           <div className="App-logo">Paper&#123; &#125;</div>
           <Menu links={links}></Menu>
         </header>
+        <main>
+            <div className="Instruction"></div>
+            <div className="CanvasContainer">
+              <Canvas width={window.innerWidth*0.5} height={window.innerHeight-60} cells="20"/>
+            </div>
+        </main>
       </div>
     );
   }
