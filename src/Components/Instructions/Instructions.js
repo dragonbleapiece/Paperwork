@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import './Instructions.css';
-import '../Canvas/Canvas';
+import Canvas from '../Canvas/Canvas';
 
 class Instructions extends Component {
 
@@ -16,7 +16,7 @@ class Instructions extends Component {
     let canvas = new Canvas();
 
     for(let child in this.props.children) {
-      canvas.addDraw(chils.draw.bind(child));
+      canvas.addDraw(child.draw.bind(child));
     }
 
     return (

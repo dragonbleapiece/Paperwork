@@ -3,6 +3,8 @@ import './App.css';
 import Canvas from '../../Components/Canvas/Canvas';
 // import Components
 import Menu from '../../Components/Menu/Menu';
+import Instructions from '../../Components/Instructions/Instructions';
+import Rectangle from '../../Components/Rectangle/Rectangle';
 
 class App extends Component {
   render() {
@@ -15,6 +17,9 @@ class App extends Component {
     return (
       <div className="App">
         <Canvas width="800" height="400" cells="20"/>
+        <Instructions>
+
+        </Instructions>
         <header className="App-header">
           <div className="App-logo">Paper&#123; &#125;</div>
           <Menu links={links}></Menu>

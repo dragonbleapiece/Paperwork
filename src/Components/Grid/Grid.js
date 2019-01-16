@@ -1,22 +1,30 @@
 import React, { Component } from 'react';
-import './Rectangle.css';
+import './Grid.css';
 import Box from '../Box/Box';
 
 /*Pencil*/
-class Rectangle extends Box {
+class Grid extends Box {
 
   constructor(props) {
     super(props);
     this.className += " " + this.constructor.name;
-    const {x, y, width, height} = this.props;
+    const {x, y} = this.props;
     this.x = x;
     this.y = y;
-    this.width = width;
-    this.height = height;
   }
 
   draw(sk) {
-    sk.rect(this.x, this.y, this.width, this.height);
+    var columns = sk.floor(width/cells);
+  	var rows = sk.floor(height/cells);
+
+  	sk.background(0);
+  	sk.stroke(255);
+  	for(var i = 0; i <= columns; i++) {
+  		for(var j = 0; j <= rows; j++) {
+  			sk.line(i * cells, 0, i * cells, height);
+  			sk.line(0, j * cells, width, j * cells);
+  		}
+  	}
   }
 
   render() {

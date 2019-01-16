@@ -40,21 +40,12 @@ class Canvas extends Component {
     const {width, height, cells} = this.props;
 
     sk.createCanvas(width, height);
-  	var columns = sk.floor(width/cells);
-  	var rows = sk.floor(height/cells);
-
-  	sk.background(0);
-  	sk.stroke(255);
-  	for(var i = 0; i < columns; i++) {
-  		for(var j = 0; j < rows; j++) {
-  			sk.line(i * cells, 0, i * cells, height);
-  			sk.line(0, j * cells, width, j * cells);
-  		}
-  	}
   }
 
   draw(sk) {
-
+    for(let f in this.state.functions) {
+      f(sk);
+    }
   }
 
 
@@ -73,13 +64,13 @@ class Canvas extends Component {
       }
     }
 
-    Canvas._P5 = new p5(s);
+    Canvas._P5 = new p5(s, 'renderer');
   }
 
 
   render() {
     return (
-      <div className="Canvas">
+      <div id="renderer">
 
       </div>
     );
