@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import MaterialIcon, {colorPalette} from 'material-icons-react';
 import './App.css';
 import Canvas from '../../Components/Canvas/Canvas';
 // import Components
@@ -10,20 +11,9 @@ import Ellipse from '../../Components/Ellipse/Ellipse';
 import Grid from '../../Components/Grid/Grid';
 import Markov from '../../Components/Markov/Markov';
 
-window.onresize() {
-    
-}
-
 class App extends Component {
   constructor(props){
     super(props);
-    this.CalcCanvasSize();
-  }
-
-  CalcCanvasSize() {
-    let canvasWidth = window.innerWidth*0.5-60;
-    let canvasHeight = window.innerHeight-180;
-    this.CanvasSize = (canvasWidth < canvasHeight) ? canvasWidth : canvasHeight;
   }
 
   render() {
@@ -41,16 +31,18 @@ class App extends Component {
         </header>
         <main>
             <Instructions>
-              <Grid columns="20" rows="10"/>
+              <Grid columns="10" rows="10"/>
               <Markov>
                 <Rectangle width="10" height="10" />
                 <Triangle width="10" height="10" />
               </Markov>
             </Instructions>
             <div className="Render">
-              <div className="EditionMenu"></div>
+              <div className="EditionMenu">
+               <MaterialIcon icon="dashboard" />
+              </div>
               <div className="CanvasContainer">
-                <Canvas width={this.CanvasSize} height={this.CanvasSize} cells="20"/>
+                <Canvas/>
               </div>
             </div>
         </main>

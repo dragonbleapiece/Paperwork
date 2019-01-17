@@ -11,7 +11,9 @@ class Canvas extends Component {
   static _P5;
 
   state = {
-    function: undefined
+    function: undefined,
+    width: 0,
+    height: 0
   };
 
   constructor(props) {
@@ -19,8 +21,15 @@ class Canvas extends Component {
       return Canvas._instance;
     }
     super(props);
-    this.initP5();
+    
     Canvas._instance = this;
+  }
+
+  CalcCanvasSize() {
+    let canvasWidth = window.innerWidth*0.5-60;
+    let canvasHeight = window.innerHeight-180;
+    let CanvasSize = (canvasWidth < canvasHeight) ? canvasWidth : canvasHeight;
+    this.setState({width: CanvasSize, height: CanvasSize}, () => {console.log("width", this.state.width)});
   }
 
   initP5() {
@@ -28,6 +37,7 @@ class Canvas extends Component {
     let s = (sk) => {
       sk.setup = self.setup.bind(self, sk);
       sk.draw = self.draw.bind(self, sk);
+      sk.windowResized = self.windowResized.bind(self, sk);
     }
 
     Canvas._P5 = new p5(s, 'renderer');
@@ -45,8 +55,13 @@ class Canvas extends Component {
     });
   }
 
+  windowResized(sk) {
+    this.CalcCanvasSize();
+    sk.resizeCanvas(this.state.width, this.state.height);
+  }
+
   setup(sk) {
-    const {width, height, cells} = this.props;
+    const {width, height} = this.state;
     sk.createCanvas(width, height);
     sk.noLoop();
   }
@@ -60,7 +75,8 @@ class Canvas extends Component {
 
 
   componentDidMount() {
-
+    this.initP5();
+    this.CalcCanvasSize();
   }
 
 
