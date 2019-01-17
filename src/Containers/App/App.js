@@ -5,7 +5,10 @@ import Canvas from '../../Components/Canvas/Canvas';
 import Menu from '../../Components/Menu/Menu';
 import Instructions from '../../Components/Instructions/Instructions';
 import Rectangle from '../../Components/Rectangle/Rectangle';
+import Triangle from '../../Components/Triangle/Triangle';
+import Ellipse from '../../Components/Ellipse/Ellipse';
 import Grid from '../../Components/Grid/Grid';
+import Markov from '../../Components/Markov/Markov';
 
 class App extends Component {
   render() {
@@ -22,7 +25,7 @@ class App extends Component {
           <Menu links={links}></Menu>
         </header>
         <main>
-            <Instructions><Grid columns="20" rows="10" ref={box => Instructions.addElement(box)}/><Rectangle width="10" height="10" ref={box => Instructions.addElement(box)}/></Instructions>
+            <Instructions><Grid columns="20" rows="10"/><Markov><Rectangle width="10" height="10" /><Triangle width="10" height="10" /></Markov></Instructions>
             <div className="CanvasContainer">
               <Canvas width={window.innerWidth*0.5} height={window.innerHeight-60} cells="20"/>
             </div>

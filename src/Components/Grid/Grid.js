@@ -25,17 +25,22 @@ class Grid extends Box {
 
   	sk.background(0);
   	sk.stroke(255);
-  	for(var i = 0; i <= this.columns; i++) {
-  		for(var j = 0; j <= this.rows; j++) {
-  			sk.line(i * column, 0, i * column, sk.height);
-  			sk.line(0, j * row, sk.width, j * row);
+  	for(var i = 0; i < this.columns; i++) {
+      sk.line(0, 0, 0, sk.height);
+  		for(var j = 0; j < this.rows; j++) {
+        sk.line(0, 0, sk.width, 0);
         if(elem !== undefined) {
-          elem.x = i * column + x;
-          elem.y = j * row + y;
+
+          /*elem.x = i * column + x;
+          elem.y = j * row + y;*/
           elem.draw(sk);
         }
+        sk.translate(0, row);
   		}
+      sk.translate(column, 0);
+      sk.translate(0, -sk.height);
   	}
+    sk.translate(-sk.width, 0);
 
     if(elem !== undefined) {
       elem.x = x;

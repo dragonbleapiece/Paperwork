@@ -2,12 +2,15 @@ import React, { Component } from 'react';
 import './Instructions.css';
 import Canvas from '../Canvas/Canvas';
 import Box from '../Box/Box';
+import BoxGroup from '../BoxGroup/BoxGroup';
 
-class Instructions extends Component {
+class Instructions extends BoxGroup {
 
   static _instance;
   static addElement(elmnt) {
-    Instructions._instance.addElement(elmnt);
+    if(Instructions._instance !== undefined) {
+      Instructions._instance.addElement(elmnt);
+    }
   }
 
   constructor(props) {
@@ -15,20 +18,16 @@ class Instructions extends Component {
       return Instructions._instance;
     }
     super(props);
-    this.elements = [];
     Instructions._instance = this;
   }
 
-  addElement(elmnt) {
-    this.elements.push(elmnt);
-  }
-
   componentDidMount() {
+    console.log(this.elements);
     let canvas = new Canvas();
     let next = undefined;
     let children = this.elements.reverse();
 
-    if(children !== undefined) {
+    if(children.length > 0) {
       for(let i = 0; i < children.length; ++i) {
         let child = children[i];
         if(child instanceof Box) {
@@ -37,14 +36,14 @@ class Instructions extends Component {
         }
       }
 
-      canvas.addDraw(children[children.length - 1].draw.bind(children[children.length - 1]));
+      canvas.sendDraw(children[children.length - 1].draw.bind(children[children.length - 1]));
     }
   }
 
   render() {
     return (
       <div className={this.className}>
-      {this.props.children}
+      {this.initElements()}
       </div>
     );
   }

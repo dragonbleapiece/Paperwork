@@ -1,22 +1,22 @@
 import React, { Component } from 'react';
-import './Rectangle.css';
+import './Ellipse.css';
 import Box from '../Box/Box';
 
 /*Pencil*/
-class Rectangle extends Box {
+class Ellipse extends Box {
 
   constructor(props) {
     super(props);
-    this.className += " " + Rectangle.name;
+    this.className += " " + Ellipse.name;
     const {width, height} = this.props;
-    this.x = 0;
-    this.y = 0;
     this.width = width;
     this.height = height ? height : width;
+    this.x = width / 2;
+    this.y = this.height / 2;
   }
 
   draw(sk) {
-    sk.rect(this.x, this.y, this.width, this.height);
+    sk.ellipse(this.x, this.y, this.width, this.height);
   }
 
   render() {
@@ -28,4 +28,4 @@ class Rectangle extends Box {
   }
 }
 
-export default Rectangle;
+export default Ellipse;
