@@ -7,7 +7,22 @@ import Instructions from '../../Components/Instructions/Instructions';
 import Rectangle from '../../Components/Rectangle/Rectangle';
 import Grid from '../../Components/Grid/Grid';
 
+window.onresize() {
+    
+}
+
 class App extends Component {
+  constructor(props){
+    super(props);
+    this.CalcCanvasSize();
+  }
+
+  CalcCanvasSize() {
+    let canvasWidth = window.innerWidth*0.5-60;
+    let canvasHeight = window.innerHeight-180;
+    this.CanvasSize = (canvasWidth < canvasHeight) ? canvasWidth : canvasHeight;
+  }
+
   render() {
 
     let MainLinks = [
@@ -29,7 +44,7 @@ class App extends Component {
             <div className="Render">
               <div className="EditionMenu"></div>
               <div className="CanvasContainer">
-                <Canvas width={window.innerWidth*0.5-120} height={window.innerWidth*0.5-120} cells="20"/>
+                <Canvas width={this.CanvasSize} height={this.CanvasSize} cells="20"/>
               </div>
             </div>
         </main>
