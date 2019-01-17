@@ -6,6 +6,11 @@
 .MenuItem+.MenuItem {
   margin-left: 20px;
 }
+.MenuItem:hover {
+  padding-top: 3px;
+  border-bottom: 3px solid black;
+}
 .MenuItem.active {
+  padding-top: 3px;
   border-bottom: 3px solid black;
 }
