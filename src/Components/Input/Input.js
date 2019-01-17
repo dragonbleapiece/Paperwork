@@ -10,6 +10,7 @@ class Input extends Box {
     super(props);
     this.className += " " + Input.name;
     this.value = 0;
+    this.parent = function() {};
   }
 
   draw(sk) {
@@ -18,12 +19,20 @@ class Input extends Box {
     }
   }
 
+  onChange() {
+    this.callParent();
+  }
+
+  callParent() {
+    this.parent();
+  }
+
   render() {
     const {min, max, value} = this.props;
 
     return (
       <div className={this.className}>
-        <input type="range" min={min} max={max} value={value} class="slider" />
+        <input type="range" min={min} max={max} value={value} onChange={this.onChange} class="slider" />
       </div>
     );
   }

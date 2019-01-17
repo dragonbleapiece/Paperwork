@@ -25,11 +25,16 @@ class BoxGroup extends Box {
     }
   }
 
-  initElements(instance = Box) {
+  initElements(instance = Box, callback = function() {}) {
     this.elements = [];
     const children = React.Children.map(this.props.children,
        (child, index) => React.cloneElement(child, {
-         ref : box => {if(box instanceof instance) this.addElement(box)}
+         ref : box => {
+            if(box instanceof instance) {
+              this.addElement(box);
+              box.parent = callback;
+            }
+          }
        })
     );
     return children;

@@ -10,12 +10,14 @@ class Markov extends BoxGroup {
   constructor(props) {
     super(props);
     this.className += " " + Markov.name;
+    this.proba = [];
   }
 
-  /*addElement(elmnt, proba) {
-    super.addElement(elmnt);
-    this.proba.push(parseFloat(proba));
-  }*/
+  addProba(array) {
+    if(array instanceof Array) {
+      this.proba.push(array);
+    }
+  }
 
   draw(sk) {
     let proba = 0;
