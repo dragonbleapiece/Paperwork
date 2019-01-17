@@ -11,7 +11,7 @@ class Canvas extends Component {
   static _P5;
 
   state = {
-    functions: []
+    function: undefined
   };
 
   constructor(props) {
@@ -33,26 +33,27 @@ class Canvas extends Component {
     Canvas._P5 = new p5(s, 'renderer');
   }
 
-  addDraw(f) {
+  sendDraw(f) {
     this.setState({
-      functions: this.state.functions.concat(f)
+      function: f
     });
   }
 
   resetDraw() {
     this.setState({
-      functions: []
+      function: undefined
     });
   }
 
   setup(sk) {
     const {width, height, cells} = this.props;
     sk.createCanvas(width, height);
+    sk.noLoop();
   }
 
   draw(sk) {
-    for(let i = 0; i < this.state.functions.length; ++i) {
-      let f = this.state.functions[i];
+    let f = this.state.function;
+    if(f !== undefined) {
       f(sk);
     }
   }

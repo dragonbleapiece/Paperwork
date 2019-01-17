@@ -1,0 +1,6 @@
+.Box {
+    border: black solid 1px;
+    padding: 5px;
+    margin: 5px;
+    cursor: grab;
+}
