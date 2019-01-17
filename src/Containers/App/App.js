@@ -10,9 +10,6 @@ import Ellipse from '../../Components/Ellipse/Ellipse';
 import Grid from '../../Components/Grid/Grid';
 import Markov from '../../Components/Markov/Markov';
 
-window.onresize() {
-    
-}
 
 class App extends Component {
   constructor(props){
