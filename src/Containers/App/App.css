@@ -1,4 +1,7 @@
 .App {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
   text-align: center;
   font-family: 'Space Grotesk', Arial, sans-serif;
   background-color: white;
@@ -22,14 +25,41 @@
   font-size: 24px;
   border-bottom: black solid 1px;
 }
+
 main {
   display: flex;
   flex-direction: row;
+  height: 100%;
 }
-.Instruction {
 
+.Instructions {
+ width: 50%;
+ border-right: black solid 1px;
+ display: flex;
+ flex-direction: row;
+ align-items: baseline;
+}
+
+.Render {
+  width: 50%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+
+
+.EditionMenu {
+  width: 100%;
+  height: 60px;
+  text-align: center;
+  border-bottom: black solid 1px;
 }
 
 .CanvasContainer {
-
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  flex: 1;
 }

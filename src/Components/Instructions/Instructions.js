@@ -43,7 +43,7 @@ class Instructions extends Component {
 
   render() {
     return (
-      <div className={this.className}>
+      <div className={this.props.className}>
       {this.props.children}
       </div>
     );
