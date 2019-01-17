@@ -14,12 +14,10 @@ constructor(props){
   handleClick(menuItem) {
     this.setState({
       activeItem: menuItem
-    });
-    console.log(this.state.activeItem);
+    }, () => {console.log(this.state.activeItem)});
   }
 
   render() {
-    console.log(this.state.activeItem);
     let linksMarkup = this.props.links.map((link, index) => {
       return (
       <MenuItem key={index} index={index} active={this.state.activeItem === index} handleClick={this.handleClick.bind(this)}>{link.title}</MenuItem>

@@ -18,6 +18,7 @@ class Instructions extends BoxGroup {
       return Instructions._instance;
     }
     super(props);
+    this.className = this.constructor.name;
     Instructions._instance = this;
   }
 

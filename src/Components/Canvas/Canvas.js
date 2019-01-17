@@ -48,6 +48,7 @@ class Canvas extends Component {
   setup(sk) {
     const {width, height, cells} = this.props;
     sk.createCanvas(width, height);
+    sk.noLoop();
   }
 
   draw(sk) {

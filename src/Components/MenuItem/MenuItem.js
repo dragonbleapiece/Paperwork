@@ -4,9 +4,6 @@ import './MenuItem.css';
 class MenuItem extends Component {
   constructor(props) {
     super(props);
-    this.state = {
-      active: this.props.active,
-    }
     this.className = () => {
       return(
         "MenuItem "+ (this.props.active ? "active" : "")
@@ -18,7 +15,7 @@ class MenuItem extends Component {
     this.className();
   }
   render() {
-    console.log(this.props.children, this.state.active);
+    console.log(this.props.children, this.props.active);
     return (
       <li className={this.className()} onClick={this.onClick.bind(this)}>
         {this.props.children}

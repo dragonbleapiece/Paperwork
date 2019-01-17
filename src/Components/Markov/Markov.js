@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import BoxGroup from '../BoxGroup/BoxGroup';
+import Input from '../Input/Input';
 import './Markov.css';
 import p5 from 'p5';
 
@@ -9,7 +10,6 @@ class Markov extends BoxGroup {
   constructor(props) {
     super(props);
     this.className += " " + Markov.name;
-    this.proba = new Array(this.elements.length);
   }
 
   /*addElement(elmnt, proba) {
@@ -21,9 +21,11 @@ class Markov extends BoxGroup {
     let proba = 0;
     let rand = sk.random(100);
     for(let i = 0; i < this.elements.length; ++i) {
-      proba += 100 / this.elements.length; //this.proba[i];
+      let element = this.elements[i];
+      proba += element.value;
       if(rand <= proba) {
-        this.elements[i].draw(sk);
+        element.draw(sk);
+        break;
       }
     }
   }
@@ -32,7 +34,7 @@ class Markov extends BoxGroup {
     return (
       <div className={this.className}>
         <span>{this.constructor.name}</span>
-        {this.initElements()}
+        {this.initElements(Input)}
       </div>
     );
   }
