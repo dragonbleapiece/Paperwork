@@ -30,10 +30,13 @@ class Grid extends Box {
   		for(var j = 0; j < this.rows; j++) {
         sk.line(0, 0, sk.width, 0);
         if(elem !== undefined) {
-
+          sk.noStroke();
+          sk.translate(column / 2 - elem.next.width / 2, row / 2 - elem.next.height / 2);
           /*elem.x = i * column + x;
           elem.y = j * row + y;*/
           elem.draw(sk);
+          sk.translate(-(column / 2 - elem.next.width / 2), -(row / 2 - elem.next.height / 2));
+          sk.stroke(255);
         }
         sk.translate(0, row);
   		}
