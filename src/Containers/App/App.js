@@ -11,6 +11,8 @@ import Ellipse from '../../Components/Figures/Ellipse/Ellipse';
 import Grid from '../../Components/Grid/Grid';
 import Markov from '../../Components/Markov/Markov';
 import Blue from '../../Components/Transforms/Colors/Blue';
+import Green from '../../Components/Transforms/Colors/Green';
+import Red from '../../Components/Transforms/Colors/Red';
 
 class App extends Component {
   constructor(props){
@@ -33,8 +35,8 @@ class App extends Component {
         <main>
             <Instructions>
               <Grid columns="10" rows="10"/>
-              <Blue />
-              <Rectangle width="10" height="10" />
+              <Red />
+              <Rectangle width="10" height="5" />
             </Instructions>
             <div className="Render">
               <div className="EditionMenu">
