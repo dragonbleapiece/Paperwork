@@ -32,7 +32,7 @@ class Instructions extends BoxGroup {
       for(let i = 0; i < children.length; ++i) {
         let child = children[i];
         if(child instanceof Box) {
-          child.next = next;
+          child.addNext(next);
           next = child;
         }
       }

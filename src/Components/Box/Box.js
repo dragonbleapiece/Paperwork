@@ -13,8 +13,10 @@ class Box extends Component {
   }
 
   addNext(elmnt) {
-    this.next = elmnt;
-    this.nextType = elmnt.constructor.type;
+    if(elmnt !== undefined) {
+      this.next = elmnt;
+      this.nextType = elmnt.constructor.name;
+    }
   }
 
   draw(sk) {
