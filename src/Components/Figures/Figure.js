@@ -1,20 +1,14 @@
 import React, { Component } from 'react';
-import './Box.css';
+import Box from '../Box/Box';
+import './Figure.css';
 import p5 from 'p5';
 
 /*Pencil*/
-class Box extends Component {
+class Figure extends Box {
 
   constructor(props) {
     super(props);
-    this.className = Box.name;
-    this.next = undefined;
-    this.nextType = undefined;
-  }
-
-  addNext(elmnt) {
-    this.next = elmnt;
-    this.nextType = elmnt.constructor.type;
+    this.className += " " + Figure.name;
   }
 
   draw(sk) {
@@ -30,4 +24,4 @@ class Box extends Component {
   }
 }
 
-export default Box;
+export default Figure;

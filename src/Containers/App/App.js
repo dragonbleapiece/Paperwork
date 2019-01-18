@@ -5,9 +5,9 @@ import Canvas from '../../Components/Canvas/Canvas';
 // import Components
 import Menu from '../../Components/Menu/Menu';
 import Instructions from '../../Components/Instructions/Instructions';
-import Rectangle from '../../Components/Rectangle/Rectangle';
-import Triangle from '../../Components/Triangle/Triangle';
-import Ellipse from '../../Components/Ellipse/Ellipse';
+import Rectangle from '../../Components/Figures/Rectangle/Rectangle';
+import Triangle from '../../Components/Figures/Triangle/Triangle';
+import Ellipse from '../../Components/Figures/Ellipse/Ellipse';
 import Grid from '../../Components/Grid/Grid';
 import Markov from '../../Components/Markov/Markov';
 
