@@ -17,6 +17,7 @@ import Blue from '../../Components/Transforms/Colors/Blue';
 import Green from '../../Components/Transforms/Colors/Green';
 import Red from '../../Components/Transforms/Colors/Red';
 
+
 class App extends Component {
   state = {
     DownloadName: "Untitled.jpg"
@@ -47,9 +48,9 @@ class App extends Component {
         </header>
         <main>
             <Instructions>
-              <Grid columns="5" rows="5"/>
-              <Blue/>
-              <Ellipse width="80" height="80"/>
+              <Grid columns="10" rows="10" />
+              <Red />
+              <Rectangle width="50" height="5" />
             </Instructions>
             <div className="Render border-left">
               <div className="editionMenu border-bottom">

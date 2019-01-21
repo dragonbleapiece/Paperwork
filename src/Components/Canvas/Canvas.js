@@ -1,8 +1,9 @@
 import React, { Component } from 'react';
-import p5 from 'p5';
 import './Canvas.css';
 import PropTypes from 'prop-types';
 
+var p5 = require('p5');
+require('p5.js-svg')(p5);
 
 class Canvas extends Component {
 
@@ -21,7 +22,7 @@ class Canvas extends Component {
       return Canvas._instance;
     }
     super(props);
-    
+
     Canvas._instance = this;
   }
 
@@ -82,8 +83,11 @@ class Canvas extends Component {
 
   render() {
     return (
-      <div id="renderer">
-
+      <div className="CanvasContainer">
+        <div id="renderer">
+        </div>
+        <div id="svg">
+        </div>
       </div>
     );
   }

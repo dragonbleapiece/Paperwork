@@ -24,13 +24,6 @@ class Color extends Transform {
     }
   }
 
-  render() {
-    return (
-      <div className={this.className}>
-        <span>{this.constructor.name}</span>
-      </div>
-    );
-  }
 }
 
 export default Color;

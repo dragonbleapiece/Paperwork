@@ -1,7 +1,10 @@
 import React, { Component } from 'react';
 import './BoxGroup.css';
 import Box from '../Box/Box';
+import {shallow, instance} from 'enzyme';
 import p5 from 'p5';
+import DropBox from '../DropBox/DropBox';
+import DragBox from '../DragBox/DragBox';
 
 /*Pencil*/
 class BoxGroup extends Box {
@@ -9,43 +12,50 @@ class BoxGroup extends Box {
   constructor(props) {
     super(props);
     this.className = BoxGroup.name;
-    this.elements = [];
+    this.state.elements = [];
   }
 
-  addElement(elmnt) {
-    if(elmnt instanceof Box) {
-      this.elements.push(elmnt);
+  setElements(elmnts) {
+    if(elmnts !== undefined) {
+      this.setState({
+        elements: elmnts
+      });
     }
   }
 
   draw(sk) {
-    for(let i = 0; i < this.elements.length; ++i) {
-       let element = this.elements[i];
+    for(let i = 0; i < this.state.elements.length; ++i) {
+       let element = this.state.elements[i];
        element.draw(sk);
     }
   }
 
   initElements(instance = Box, callback = function() {}) {
-    this.elements = [];
+
+    let elements = [];
+
     const children = React.Children.map(this.props.children,
-       (child, index) => React.cloneElement(child, {
-         ref : box => {
-            if(box instanceof instance) {
-              this.addElement(box);
-              box.parent = callback;
-            }
-          }
-       })
-    );
-    return children;
+       (child, index) => {
+              elements.push(child);
+              //box.parent = callback;
+    });
+
+    this.setElements(elements);
   }
 
+  componentDidMount() {
+    this.initElements();
+  }
+
+
   render() {
+
     return (
-      <div className={this.className}>
-        <span>{this.constructor.name}</span>
-        {this.initElements()}
-      </div>
+      <DragBox name={this.constructor.name} className={this.className}>
+        <DropBox>
+          {this.props.chidren}
+        </DropBox>
+      </DragBox>
     );
   }
 }
