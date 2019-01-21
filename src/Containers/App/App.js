@@ -52,14 +52,16 @@ class App extends Component {
               <Red />
               <Rectangle width="50" height="5" />
             </Instructions>
-            <div className="Render border-left">
+            <div className="render border-left">
               <div className="editionMenu border-bottom">
                 <div className="save">
-                  <a className="button save border-right" href="" download={this.state.DownloadName} onClick={(event) => this.downloadImage(event.target)}>
+                  <a className="button save__button border-right" href="" download={this.state.DownloadName} onClick={(event) => this.downloadImage(event.target)}>
                     <SVG src={icon_save_alt}/>
                   </a>
-                  <input type="text" value={this.state.DownloadName} onChange={(event) => {this.setState({DownloadName: event.target.value})}}/>
-                  <input type="radio" />
+                  <input className="save__name" type="text" value={this.state.DownloadName} onChange={(event) => {this.setState({DownloadName: event.target.value})}}/>
+                  <div className="save__format">
+                    <input className="button" type="radio" />
+                  </div>
                 </div>
                 <div className="button displayCode border-left">
                   <SVG src={icon_code}/>

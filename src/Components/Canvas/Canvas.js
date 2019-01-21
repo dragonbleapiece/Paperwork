@@ -83,7 +83,7 @@ class Canvas extends Component {
 
   render() {
     return (
-      <div className="CanvasContainer">
+      <div className="canvasContainer">
         <div id="renderer">
         </div>
         <div id="svg">
