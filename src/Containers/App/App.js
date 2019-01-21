@@ -1,7 +1,10 @@
 import React, { Component } from 'react';
-import MaterialIcon, {colorPalette} from 'material-icons-react';
 import './App.css';
 import Canvas from '../../Components/Canvas/Canvas';
+//import Icons
+import SVG from 'react-svg'
+import icon_save_alt from '../../Icons/save_alt.svg';
+import icon_code from '../../Icons/code.svg';
 // import Components
 import Menu from '../../Components/Menu/Menu';
 import Instructions from '../../Components/Instructions/Instructions';
@@ -15,8 +18,18 @@ import Green from '../../Components/Transforms/Colors/Green';
 import Red from '../../Components/Transforms/Colors/Red';
 
 class App extends Component {
+  state = {
+    DownloadName: "Untitled.jpg"
+  }
   constructor(props){
     super(props);
+  }
+
+  downloadImage = function(el) {
+    var canvas = document.getElementById("defaultCanvas0");
+    var image = canvas.toDataURL("image/jpeg");
+    el.href = image;
+    console.log("Hey !");
   }
 
   render() {
@@ -28,23 +41,30 @@ class App extends Component {
     console.log(window);
     return (
       <div className="App">
-        <header className="App-header">
+        <header className="App-header border-bottom">
           <div className="App-logo">Paper&#123; &#125;</div>
           <Menu links={MainLinks}></Menu>
         </header>
         <main>
             <Instructions>
-              <Grid columns="10" rows="10"/>
-              <Red />
-              <Rectangle width="10" height="5" />
+              <Grid columns="5" rows="5"/>
+              <Blue/>
+              <Ellipse width="80" height="80"/>
             </Instructions>
-            <div className="Render">
-              <div className="EditionMenu">
-               <MaterialIcon icon="dashboard" />
+            <div className="Render border-left">
+              <div className="editionMenu border-bottom">
+                <div className="save">
+                  <a className="button save border-right" href="" download={this.state.DownloadName} onClick={(event) => this.downloadImage(event.target)}>
+                    <SVG src={icon_save_alt}/>
+                  </a>
+                  <input type="text" value={this.state.DownloadName} onChange={(event) => {this.setState({DownloadName: event.target.value})}}/>
+                  <input type="radio" />
+                </div>
+                <div className="button displayCode border-left">
+                  <SVG src={icon_code}/>
+                </div>
               </div>
-              <div className="CanvasContainer">
                 <Canvas/>
-              </div>
             </div>
         </main>
       </div>
