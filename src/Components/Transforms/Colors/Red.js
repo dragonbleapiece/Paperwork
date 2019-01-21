@@ -12,14 +12,6 @@ class Red extends Color {
     this.b = 0;
     this.a = 255;
   }
-
-  render() {
-    return (
-      <div className={this.className}>
-        <span>{this.constructor.name}</span>
-      </div>
-    );
-  }
 }
 
 export default Red;

@@ -14,6 +14,7 @@ import Blue from '../../Components/Transforms/Colors/Blue';
 import Green from '../../Components/Transforms/Colors/Green';
 import Red from '../../Components/Transforms/Colors/Red';
 
+
 class App extends Component {
   constructor(props){
     super(props);
@@ -34,9 +35,9 @@ class App extends Component {
         </header>
         <main>
             <Instructions>
-              <Grid columns="10" rows="10"/>
+              <Grid columns="10" rows="10" />
               <Red />
-              <Rectangle width="10" height="5" />
+              <Rectangle width="50" height="5" />
             </Instructions>
             <div className="Render">
               <div className="EditionMenu">

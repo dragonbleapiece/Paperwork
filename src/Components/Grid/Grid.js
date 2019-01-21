@@ -18,48 +18,34 @@ class Grid extends Box {
     var column = sk.width/this.columns;
   	var row = sk.height/this.rows;
     var elem = this.next;
-    if(elem !== undefined) {
-      var x = elem.x;
-      var y = elem.y;
-    }
 
   	sk.background(0);
   	sk.stroke(255);
   	for(var i = 0; i < this.columns; i++) {
-      sk.line(0, 0, 0, sk.height);
-  		for(var j = 0; j < this.rows; j++) {
-        sk.line(0, 0, sk.width, 0);
-        if(elem !== undefined) {
-          sk.noStroke();
-          if(elem.next !== undefined)
-            sk.translate(column / 2 - elem.next.width / 2, row / 2 - elem.next.height / 2);
-          /*elem.x = i * column + x;
-          elem.y = j * row + y;*/
-          elem.draw(sk);
-          if(elem.next !== undefined)
-            sk.translate(-(column / 2 - elem.next.width / 2), -(row / 2 - elem.next.height / 2));
-          sk.stroke(255);
-        }
-        sk.translate(0, row);
-  		}
-      sk.translate(column, 0);
-      sk.translate(0, -sk.height);
+      sk.push();
+        sk.translate(column * i, 0);
+        sk.line(0, 0, 0, sk.height);
+    		for(var j = 0; j < this.rows; j++) {
+          sk.push();
+            sk.translate(0, j * row);
+            sk.line(0, 0, sk.width, 0);
+            if(elem !== undefined) {
+              sk.noStroke();
+              if(elem.next !== undefined)
+                sk.translate(column / 2 - elem.next.width / 2, row / 2 - elem.next.height / 2);
+              /*elem.x = i * column + x;
+              elem.y = j * row + y;*/
+              elem.draw(sk);
+              if(elem.next !== undefined)
+                sk.translate(-(column / 2 - elem.next.width / 2), -(row / 2 - elem.next.height / 2));
+            }
+          sk.pop();
+    		}
+      sk.pop();
   	}
-    sk.translate(-sk.width, 0);
 
-    if(elem !== undefined) {
-      elem.x = x;
-      elem.y = y;
-    }
   }
 
-  render() {
-    return (
-      <div className={this.className}>
-        <span>{this.constructor.name}</span>
-      </div>
-    );
-  }
 }
 
 export default Grid;

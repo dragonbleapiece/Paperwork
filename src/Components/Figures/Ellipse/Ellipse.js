@@ -19,13 +19,6 @@ class Ellipse extends Figure {
     sk.ellipse(this.x, this.y, this.width, this.height);
   }
 
-  render() {
-    return (
-      <div className={this.className}>
-        <span>{this.constructor.name}</span>
-      </div>
-    );
-  }
 }
 
 export default Ellipse;

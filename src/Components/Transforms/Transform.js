@@ -14,14 +14,6 @@ class Transform extends Box {
   draw(sk) {
 
   }
-
-  render() {
-    return (
-      <div className={this.className}>
-        <span>{this.constructor.name}</span>
-      </div>
-    );
-  }
 }
 
 export default Transform;
