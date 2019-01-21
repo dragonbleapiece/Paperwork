@@ -3,6 +3,7 @@ import { findDOMNode } from 'react-dom';
 import {ItemTypes} from '../../Constants.js';
 import { DropTarget, DragSource } from 'react-dnd';
 
+//Standard functions for react-dnd
 function collect(connect, monitor) {
   console.log(monitor.getItemType());
   return {
@@ -17,13 +18,14 @@ function collect(connect, monitor) {
   };
 }
 
+//Functions for dropping the box
 const boxTarget = {
-  canDrop(props, monitor) {
+  /*canDrop(props, monitor) {
     // You can disallow drop based on props or item
     const item = monitor.getItem();
     //return canMakeChessMove(item.fromPosition, props.position);
     return true;
-  },
+  },*/
 
   hover(props, monitor, component) {
     // This is fired very often and lets you perform side effects
@@ -31,9 +33,9 @@ const boxTarget = {
     // here—if you need them, put monitor.isOver() into collect() so you
     // can just use componentDidUpdate() to handle enter/leave.
 
+    return;
+
     // You can access the coordinates if you need them
-    const clientOffset = monitor.getClientOffset();
-    const componentRect = findDOMNode(component).getBoundingClientRect();
 
     // You can check whether we're over a nested drop target
     const isJustOverThisOne = monitor.isOver({ shallow: true });
@@ -50,11 +52,23 @@ const boxTarget = {
     }
 
     // Obtain the dragged item
-    const item = monitor.getItem();
-
+    let item = monitor.getItem();
 
     // You can do something with it
-    //ChessActions.movePiece(item.fromPosition, props.position);
+    const clientOffset = monitor.getClientOffset();
+    const componentRect = findDOMNode(component).getBoundingClientRect();
+
+    if(clientOffset.x > componentRect.right
+      || clientOffset.y > componentRect.bottom
+      || clientOffset.x < componentRect.left
+      || clientOffset.y < componentRect.top) {
+      return;
+    }
+
+    // You give to the currently moving item the new positions
+    item.x += clientOffset.x;
+    item.y += clientOffset.y;
+
 
     // You can also do nothing and return a drop result,
     // which will be available as monitor.getDropResult()
@@ -64,7 +78,6 @@ const boxTarget = {
 };
 
 
-/*Pencil*/
 class DropBox extends Component {
 
 
@@ -78,7 +91,7 @@ class DropBox extends Component {
   render() {
     const { isOver, canDrop, connectDropTarget } = this.props;
     return connectDropTarget(
-      <div>
+      <div className={this.constructor.name}>
         {this.props.children}
       </div>
     );

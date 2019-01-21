@@ -1,16 +1,29 @@
 import React, { Component } from 'react';
+import { findDOMNode } from 'react-dom';
 import {ItemTypes} from '../../Constants.js';
 import {DragSource} from 'react-dnd';
 
+//Functions for dragging the box
 const boxSource = {
   beginDrag(props, monitor, component) {
-    return {};
+    const componentRect = findDOMNode(component).getBoundingClientRect();
+    let item = {
+      x: -componentRect.width / 2,
+      y: -componentRect.height / 2
+    }
+    return item;
   },
-  endDrag(props, monitor) {
+  endDrag(props, monitor, component) {
+    const item = monitor.getItem();
+    const result = monitor.getDropResult();
+    if(result !== null && result.moved) {
+      component.setState(item);
+    }
     return {};
   }
 };
 
+//Standard functions for react-dnd
 function collect(connect, monitor) {
   return {
     connectDragSource: connect.dragSource(),
@@ -19,11 +32,13 @@ function collect(connect, monitor) {
 }
 
 
-/*Pencil*/
 class DragBox extends Component {
 
 
-  state = {};
+  state = {
+    x: undefined,
+    y: undefined
+  };
 
   constructor(props) {
     super(props);
@@ -33,8 +48,14 @@ class DragBox extends Component {
   render() {
     const { isDragging, connectDragSource } = this.props;
 
+    const style = {
+      "position": "absolute",
+      "top": this.state.y + "px",
+      "left": this.state.x + "px"
+    };
+
     return connectDragSource(
-      <div className={this.props.className}>
+      <div className={this.props.className} style={style}>
         <span>{this.props.name}</span>
         {this.props.children}
       </div>
