@@ -13,9 +13,9 @@ import DragBox from '../DragBox/DragBox';
 class Instructions extends BoxGroup {
 
   static _instance;
-  static addElement(elmnt) {
+  static setElements(elmnts) {
     if(Instructions._instance !== undefined) {
-      Instructions._instance.addElement(elmnt);
+      Instructions._instance.setElements(elmnts);
     }
   }
 

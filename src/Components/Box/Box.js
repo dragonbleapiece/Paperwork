@@ -40,6 +40,4 @@ class Box extends Component {
   }
 }
 
-Box.nbBox = 0;
-
 export default Box;
