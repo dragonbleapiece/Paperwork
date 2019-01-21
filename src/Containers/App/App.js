@@ -42,10 +42,8 @@ class App extends Component {
             <div className="Render">
               <div className="EditionMenu">
                <MaterialIcon icon="dashboard" />
-              </div>
-              <div className="CanvasContainer">
+              </div>        
                 <Canvas/>
-              </div>
             </div>
         </main>
       </div>

@@ -1,25 +1,7 @@
 import React, { Component } from 'react';
 import './Box.css';
 import p5 from 'p5';
-import {ItemTypes} from '../../Constants.js';
-import {DragSource} from 'react-dnd';
-
-const boxSource = {
-  beginDrag(props) {
-    return {};
-  },
-  endDrag(props, monitor) {
-    return monitor.getDropResult();
-  }
-};
-
-function collect(connect, monitor) {
-  return {
-    connectDragSource: connect.dragSource(),
-    isDragging: monitor.isDragging()
-  }
-}
-
+import DragBox from '../DragBox/DragBox';
 
 /*Pencil*/
 class Box extends Component {
@@ -43,31 +25,12 @@ class Box extends Component {
     }
   }
 
-  getDragBox() {
-    let self = this;
-    let Component = (props) => {
-      const { isDragging, connectDragSource } = props;
-      return connectDragSource(
-        <div className={props.className}>
-          <span>{props.name}</span>
-          {props.children}
-        </div>
-      );
-    };
-    return this.getDragSource(Component);
-  }
-
-  getDragSource(box) {
-    return DragSource(ItemTypes.BOX, boxSource, collect)(box);
-  }
 
   draw(sk) {
 
   }
 
   render() {
-
-    const DragBox = this.getDragBox();
 
     return (
       <DragBox name={this.constructor.name} className={this.className}>

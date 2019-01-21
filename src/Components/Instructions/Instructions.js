@@ -4,9 +4,11 @@ import Canvas from '../Canvas/Canvas';
 import Box from '../Box/Box';
 import BoxGroup from '../BoxGroup/BoxGroup';
 import {shallow, instance} from 'enzyme';
-import { DragDropContextProvider } from 'react-dnd';
+import { DragDropContext } from 'react-dnd';
 import HTML5Backend from 'react-dnd-html5-backend';
 import ItemTypes from '../../Constants.js';
+import DropBox from '../DropBox/DropBox';
+import DragBox from '../DragBox/DragBox';
 
 class Instructions extends BoxGroup {
 
@@ -58,15 +60,15 @@ class Instructions extends BoxGroup {
 
   render() {
     return (
-      <DragDropContextProvider backend={HTML5Backend}>
-        <div className={this.className}>
+      <div className={this.className}>
+        <DropBox>
           {this.props.children}
-        </div>
-      </DragDropContextProvider>
+        </DropBox>
+      </div>
     );
   }
 }
 
 Instructions._instance = undefined;
 
-export default Instructions;
+export default DragDropContext(HTML5Backend)(Instructions);
