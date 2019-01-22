@@ -46,11 +46,8 @@ class App extends Component {
         </header>
         <main>
             <Workspace>
-              
+              <Grid rows="10" columns="10" />
             </Workspace>
-            <ContextMenu>
-
-            </ContextMenu>
             <div className="render border-left">
               <div className="editionMenu border-bottom">
                 <div className="save">
