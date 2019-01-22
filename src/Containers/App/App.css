@@ -59,7 +59,13 @@ table {
 .border-bottom {
   border-bottom: black solid 1px;
 }
-
+input[type=radio] {
+  position: absolute;
+  opacity: 0;
+  cursor: pointer;
+  height: 0;
+  width: 0;
+}
 /* App */
 
 .App {
@@ -109,10 +115,16 @@ main {
 
 .button:hover {
   background-color: black;
+  color: white;
 }
 
 .button:hover svg {
   fill: white;
+}
+
+input:checked+label {
+  background-color: black;
+  color: white;
 }
 
 .Instructions {
@@ -140,12 +152,15 @@ main {
 .save {
   display: flex;
   height: 100%;
-}
-.canvasContainer {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
   flex: 1;
 }
 
+.save__name {
+  flex: 1 1;
+  text-align: end;
+  padding: 0 20px;
+}
+
+.save__format {
+  display: flex;
+}

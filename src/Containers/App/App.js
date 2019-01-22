@@ -20,7 +20,8 @@ import Red from '../../Components/Transforms/Colors/Red';
 
 class App extends Component {
   state = {
-    DownloadName: "Untitled.jpg"
+    DownloadName: "Untitled",
+    DownloadFormat: "jpg"
   }
   constructor(props){
     super(props);
@@ -37,9 +38,8 @@ class App extends Component {
 
     let MainLinks = [
       {title: "Markov chain", active: true},
-      {title: "Cellular automaton", active: false}
+      {title: "Mode", active: false}
     ];
-    console.log(window);
     return (
       <div className="App">
         <header className="App-header border-bottom">
@@ -55,12 +55,15 @@ class App extends Component {
             <div className="render border-left">
               <div className="editionMenu border-bottom">
                 <div className="save">
-                  <a className="button save__button border-right" href="" download={this.state.DownloadName} onClick={(event) => this.downloadImage(event.target)}>
+                  <a className="button save__button border-right" href="" download={this.state.DownloadName+"."+this.state.DownloadFormat} onClick={(event) => this.downloadImage(event.target)}>
                     <SVG src={icon_save_alt}/>
                   </a>
                   <input className="save__name" type="text" value={this.state.DownloadName} onChange={(event) => {this.setState({DownloadName: event.target.value})}}/>
                   <div className="save__format">
-                    <input className="button" type="radio" />
+                    <input id="save__jpg" type="radio" value="jpg" name="saveFormat" defaultChecked onChange={(event) => {if(event.target.checked) {this.setState({DownloadFormat: event.target.value})}}}/>
+                    <label for="save__jpg" className="button border-left">.jpg</label>
+                    <input id="save__svg" type="radio" value="svg" name="saveFormat" onChange={(event) => {if(event.target.checked) {this.setState({DownloadFormat: event.target.value})}}}/>
+                    <label for="save__svg" className="button border-left">.svg</label>
                   </div>
                 </div>
                 <div className="button displayCode border-left">
