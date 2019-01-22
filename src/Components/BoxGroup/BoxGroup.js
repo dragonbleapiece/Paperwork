@@ -23,7 +23,7 @@ class BoxGroup extends Box {
     }
   }
 
-  addClass(elmnt) {
+  addElement(elmnt) {
     if(elmnt !== undefined && this.unauthorized.indexOf(elmnt) == -1) {
       let elements = this.state.elements;
       elements.push(elmnt);

@@ -41,7 +41,7 @@ class Canvas extends Component {
     let canvasWidth = window.innerWidth*0.5-60;
     let canvasHeight = window.innerHeight-180;
     let CanvasSize = (canvasWidth < canvasHeight) ? canvasWidth : canvasHeight;
-    this.setState({width: CanvasSize, height: CanvasSize}, () => {console.log("width", this.state.width)});
+    this.setState({width: CanvasSize, height: CanvasSize});
   }
 
   initP5() {
@@ -87,6 +87,7 @@ class Canvas extends Component {
 
   draw(sk) {
     let f = this.state.function;
+    console.log(f);
     if(f !== undefined) {
       f(sk);
     }
@@ -94,17 +95,18 @@ class Canvas extends Component {
 
 
   componentDidMount() {
-    this.initP5();
     this.CalcCanvasSize();
+    this.initP5();
   }
 
+  componentDidUpdate() {
+    Canvas._P5.draw();
+  }
 
   render() {
     return (
       <div className="canvasContainer">
         <div id="renderer">
-        </div>
-        <div id="svg">
         </div>
       </div>
     );

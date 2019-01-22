@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import './Box.css';
 import p5 from 'p5';
 import DragBox from '../DragBox/DragBox';
+import ContextMenuBox from '../ContextMenuBox/ContextMenuBox';
 
 /*Pencil*/
 class Box extends Component {
@@ -34,9 +35,11 @@ class Box extends Component {
   render() {
 
     return (
-      <DragBox name={this.constructor.name} className={this.className}>
-        {this.props.children}
-      </DragBox>
+      <ContextMenuBox id={this.constructor.name} unauthorized={this.unauthorized}>
+        <DragBox name={this.constructor.name} className={this.className}>
+          {this.props.children}
+        </DragBox>
+      </ContextMenuBox>
     );
   }
 }

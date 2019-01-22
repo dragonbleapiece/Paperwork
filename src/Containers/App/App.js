@@ -19,6 +19,12 @@ import Blue from '../../Components/Transforms/Colors/Blue';
 import Green from '../../Components/Transforms/Colors/Green';
 import Red from '../../Components/Transforms/Colors/Red';
 
+import {getClassFromName} from '../../Components/Index';
+
+window.addClassToWorkspace = function(name) {
+  let cl = getClassFromName(name);
+  Workspace.addChild(cl);
+};
 
 class App extends Component {
   state = {

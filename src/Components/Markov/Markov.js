@@ -36,7 +36,6 @@ class Markov extends BoxGroup {
     return (
       <div className={this.className}>
         <span>{this.constructor.name}</span>
-        {this.initElements(Input)}
       </div>
     );
   }

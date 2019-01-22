@@ -11,30 +11,27 @@ import Red from './Transforms/Colors/Red';
 import Blue from './Transforms/Colors/Blue';
 import Green from './Transforms/Colors/Green';
 
-export default Index = [
-  {
-    type: Figure,
-    elements: [
-      {type: Rectangle},
-      {type: Triangle},
-      {type: Ellipse}
-    ]
-  },
-  {
-    type: Color,
-    elements: [
-      {type: Red},
-      {type: Blue},
-      {type: Green}
-    ]
-  },
-  {
-    type: Markov
-  },
-  {
-    type: Distribution,
-      elements: [
-        {type: Grid}
-      ]
+export function getClassFromName(name) {
+  switch(name) {
+    case('Figure'):
+      return Figure;
+    case('Rectangle'):
+      return Rectangle;
+    case('Triangle'):
+      return Triangle;
+    case('Ellipse'):
+      return Ellipse;
+    case('Distribution'):
+      return Distribution;
+    case('Grid'):
+      return Grid;
+    case('Markov'):
+      return Markov;
+    case('Transform'):
+      return Markov;
+    case('Color'):
+      return Color;
+    default:
+      return null;
   }
-];
+}

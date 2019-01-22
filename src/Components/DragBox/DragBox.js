@@ -54,9 +54,9 @@ class DragBox extends Component {
       "left": this.state.x + "px"
     };
 
-    return connectDragSource(
+    return (
       <div className={this.props.className} style={style}>
-        <span>{this.props.name}</span>
+        {connectDragSource(<span>{this.props.name}</span>)}
         {this.props.children}
       </div>
     );

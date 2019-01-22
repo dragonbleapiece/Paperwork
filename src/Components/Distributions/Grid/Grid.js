@@ -8,9 +8,9 @@ class Grid extends Distribution {
   constructor(props) {
     super(props);
     this.className += " " + Grid.name;
-    const {columns, rows} = this.props;
-    this.columns = columns;
-    this.rows = rows;
+    //const {columns, rows} = this.props;
+    this.columns = 10;
+    this.rows = 10;
   }
 
   draw(sk) {
