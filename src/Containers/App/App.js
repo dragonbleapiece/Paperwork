@@ -56,7 +56,7 @@ class App extends Component {
             <div className="render border-left">
               <div className="editionMenu border-bottom">
                 <div className="save">
-                  <a className="button save__button border-right" href="" download={this.state.DownloadName+"."+this.state.DownloadFormat} onClick={(event) => this.downloadImage(event.target)}>
+                  <a className="button save__button border-right" onClick={(event) => this.downloadImage(event.target)}>
                     <SVG src={icon_save_alt}/>
                   </a>
                   <input className="save__name" type="text" value={this.state.DownloadName} onChange={(event) => {this.setState({DownloadName: event.target.value})}}/>
