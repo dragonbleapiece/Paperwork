@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import './Instructions.css';
+import './Workspace.css';
 import Canvas from '../Canvas/Canvas';
 import Box from '../Box/Box';
 import BoxGroup from '../BoxGroup/BoxGroup';
@@ -10,22 +10,22 @@ import ItemTypes from '../../Constants.js';
 import DropBox from '../DropBox/DropBox';
 import DragBox from '../DragBox/DragBox';
 
-class Instructions extends BoxGroup {
+class Workspace extends BoxGroup {
 
   static _instance;
   static setElements(elmnts) {
-    if(Instructions._instance !== undefined) {
-      Instructions._instance.setElements(elmnts);
+    if(Workspace._instance !== undefined) {
+      Workspace._instance.setElements(elmnts);
     }
   }
 
   constructor(props) {
-    if(Instructions._instance !== undefined) {
-      return Instructions._instance;
+    if(Workspace._instance !== undefined) {
+      return Workspace._instance;
     }
     super(props);
     this.className = this.constructor.name;
-    Instructions._instance = this;
+    Workspace._instance = this;
   }
 
 
@@ -69,6 +69,6 @@ class Instructions extends BoxGroup {
   }
 }
 
-Instructions._instance = undefined;
+Workspace._instance = undefined;
 
-export default DragDropContext(HTML5Backend)(Instructions);
+export default DragDropContext(HTML5Backend)(Workspace);

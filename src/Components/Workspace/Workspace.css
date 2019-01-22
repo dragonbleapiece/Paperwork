@@ -1,0 +1,7 @@
+.Workspace {
+    width: 50%;
+    display: flex;
+    flex-direction: row;
+    align-items: baseline;
+   }
+   

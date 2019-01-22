@@ -104,7 +104,6 @@ main {
   display: flex;
   align-items: center;
   justify-content: center;
-  min-width: 60px;
   height: 100%;
   cursor: pointer;
 }
@@ -125,13 +124,6 @@ main {
 input:checked+label {
   background-color: black;
   color: white;
-}
-
-.Instructions {
- width: 50%;
- display: flex;
- flex-direction: row;
- align-items: baseline;
 }
 
 .DropBox {
@@ -158,10 +150,13 @@ input:checked+label {
 }
 .save {
   display: flex;
+
   height: 100%;
   flex: 1;
 }
-
+.save__button {
+  width: 60px;
+}
 .save__name {
   flex: 1 1;
   text-align: end;
@@ -170,4 +165,12 @@ input:checked+label {
 
 .save__format {
   display: flex;
+}
+
+.save__formatItem {
+  width: 60px;
+}
+
+.displayCode {
+  width: 60px;
 }

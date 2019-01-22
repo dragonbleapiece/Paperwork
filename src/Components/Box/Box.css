@@ -2,9 +2,4 @@
     border: black solid 1px;
     padding: 5px;
     margin: 5px;
-    cursor: grab;
-}
-.Box:hover {
-    background-color: black;
-    color: white;
 }
