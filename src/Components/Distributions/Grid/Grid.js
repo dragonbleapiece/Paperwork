@@ -1,9 +1,9 @@
 import React, { Component } from 'react';
+import Distribution from '../Distribution';
 import './Grid.css';
-import Box from '../Box/Box';
 
 /*Pencil*/
-class Grid extends Box {
+class Grid extends Distribution {
 
   constructor(props) {
     super(props);

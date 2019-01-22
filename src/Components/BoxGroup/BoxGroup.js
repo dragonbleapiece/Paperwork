@@ -23,6 +23,16 @@ class BoxGroup extends Box {
     }
   }
 
+  addClass(elmnt) {
+    if(elmnt !== undefined && this.unauthorized.indexOf(elmnt) == -1) {
+      let elements = this.state.elements;
+      elements.push(elmnt);
+      this.setState({
+        elements: elements
+      });
+    }
+  }
+
   draw(sk) {
     for(let i = 0; i < this.state.elements.length; ++i) {
        let element = this.state.elements[i];

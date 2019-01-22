@@ -5,7 +5,6 @@ import { DropTarget, DragSource } from 'react-dnd';
 
 //Standard functions for react-dnd
 function collect(connect, monitor) {
-  console.log(monitor.getItemType());
   return {
     // Call this function inside render()
     // to let React DnD handle the drag events:

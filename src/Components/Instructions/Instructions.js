@@ -19,6 +19,12 @@ class Instructions extends BoxGroup {
     }
   }
 
+  static addElement(elmnt) {
+    if(Instructions._instance !== undefined) {
+      Instructions._instance.addElement(elmnt);
+    }
+  }
+
   constructor(props) {
     if(Instructions._instance !== undefined) {
       return Instructions._instance;

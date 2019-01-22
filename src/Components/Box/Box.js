@@ -14,6 +14,7 @@ class Box extends Component {
     this.className = Box.name;
     this.next = undefined;
     this.nextType = undefined;
+    this.unauthorized = [];
   }
 
   addNext(elmnt) {
