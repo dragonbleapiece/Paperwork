@@ -19,6 +19,12 @@ class Workspace extends BoxGroup {
     }
   }
 
+  static addElement(elmnt) {
+    if(Workspace._instance !== undefined) {
+      Workspace._instance.addElement(elmnt);
+    }
+  }
+
   constructor(props) {
     if(Workspace._instance !== undefined) {
       return Workspace._instance;

@@ -12,8 +12,7 @@ import Workspace from '../../Components/Workspace/Workspace';
 import Rectangle from '../../Components/Figures/Rectangle/Rectangle';
 import Triangle from '../../Components/Figures/Triangle/Triangle';
 import Ellipse from '../../Components/Figures/Ellipse/Ellipse';
-
-import Grid from '../../Components/Grid/Grid';
+import Grid from '../../Components/Distributions/Grid/Grid';
 import Markov from '../../Components/Markov/Markov';
 
 import Blue from '../../Components/Transforms/Colors/Blue';
@@ -31,9 +30,10 @@ class App extends Component {
   }
 
   downloadImage = function(el) {
-    var canvas = document.getElementById("defaultCanvas0");
-    var image = canvas.toDataURL("image/jpeg");
-    el.href = image;
+    //var canvas = document.getElementById("defaultCanvas0");
+    //var image = canvas.toDataURL("image/jpeg");
+    //el.href = image;
+    Canvas.savePaper(this.state.DownloadName, this.state.DownloadFormat);
     console.log("Hey !");
   }
 
@@ -51,7 +51,7 @@ class App extends Component {
             <div className="render border-left">
               <div className="editionMenu border-bottom">
                 <div className="save">
-                  <a className="button save__button border-right" href="" download={this.state.DownloadName+"."+this.state.DownloadFormat} onClick={(event) => this.downloadImage(event.target)}>
+                  <a className="button save__button border-right" onClick={(event) => this.downloadImage(event.target)}>
                     <SVG src={icon_save_alt}/>
                   </a>
                   <input className="save__name" type="text" value={this.state.DownloadName} onChange={(event) => {this.setState({DownloadName: event.target.value})}}/>

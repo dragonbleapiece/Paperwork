@@ -10,6 +10,12 @@ class Canvas extends Component {
   /*Singleton*/
   static _instance;
   static _P5;
+  static savePaper(filename, extension) {
+    if(Canvas._P5 !== undefined) {
+      Canvas._P5.savePaper(filename, extension);
+    }
+  }
+
 
   state = {
     function: undefined,
@@ -26,6 +32,11 @@ class Canvas extends Component {
     Canvas._instance = this;
   }
 
+  setfilename(filename, ext = undefined) {
+    this.filename = filename;
+    if(ext !== undefined) this.extension = ext;
+  }
+
   CalcCanvasSize() {
     let canvasWidth = window.innerWidth*0.5-60;
     let canvasHeight = window.innerHeight-180;
@@ -39,6 +50,7 @@ class Canvas extends Component {
       sk.setup = self.setup.bind(self, sk);
       sk.draw = self.draw.bind(self, sk);
       sk.windowResized = self.windowResized.bind(self, sk);
+      sk.savePaper = self.savePaper.bind(self, sk);
     }
 
     Canvas._P5 = new p5(s, 'renderer');
@@ -59,6 +71,12 @@ class Canvas extends Component {
   windowResized(sk) {
     this.CalcCanvasSize();
     sk.resizeCanvas(this.state.width, this.state.height);
+  }
+
+  savePaper(sk, filename, extension) {
+    if(filename !== undefined || extension !== undefined) {
+      sk.saveCanvas(filename, extension);
+    }
   }
 
   setup(sk) {
