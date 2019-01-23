@@ -3,7 +3,6 @@ import './Workspace.css';
 import Canvas from '../Canvas/Canvas';
 import Box from '../Box/Box';
 import BoxGroup from '../BoxGroup/BoxGroup';
-import Markov from '../Markov/Markov';
 import {shallow, instance} from 'enzyme';
 import { DragDropContext } from 'react-dnd';
 import HTML5Backend from 'react-dnd-html5-backend';
@@ -30,6 +29,12 @@ class Workspace extends BoxGroup {
   static addChild(box) {
     if(Workspace._instance !== undefined) {
       Workspace._instance.addChild(box);
+    }
+  }
+
+  static forceUpdate() {
+    if(Workspace._instance !== undefined) {
+      Workspace._instance.forceUpdate();
     }
   }
 
