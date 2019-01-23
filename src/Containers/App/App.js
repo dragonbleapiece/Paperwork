@@ -7,17 +7,7 @@ import icon_save_alt from '../../Icons/save_alt.svg';
 import icon_code from '../../Icons/code.svg';
 // import Components
 import Workspace from '../../Components/Workspace/Workspace';
-
-import Rectangle from '../../Components/Figures/Rectangle/Rectangle';
-import Triangle from '../../Components/Figures/Triangle/Triangle';
-import Ellipse from '../../Components/Figures/Ellipse/Ellipse';
-import Grid from '../../Components/Distributions/Grid/Grid';
-import Markov from '../../Components/Markov/Markov';
-
-import Blue from '../../Components/Transforms/Colors/Blue';
-import Green from '../../Components/Transforms/Colors/Green';
-import Red from '../../Components/Transforms/Colors/Red';
-
+// import Boxes
 import {getClassFromName} from '../../Components/Index';
 
 window.addClassToElement = function(name, target) {
@@ -53,7 +43,7 @@ class App extends Component {
         </header>
         <main>
             <Workspace>
-              <Grid rows="10" columns="10" />
+
             </Workspace>
             <div className="render border-left">
               <div className="editionMenu border-bottom">
@@ -64,9 +54,9 @@ class App extends Component {
                   <input className="save__name" type="text" value={this.state.DownloadName} onChange={(event) => {this.setState({DownloadName: event.target.value})}}/>
                   <div className="save__format">
                     <input id="save__jpg" type="radio" value="jpg" name="saveFormat" defaultChecked onChange={(event) => {if(event.target.checked) {this.setState({DownloadFormat: event.target.value})}}}/>
-                    <label for="save__jpg" className="save__formatItem button border-left">.jpg</label>
+                    <label htmlFor="save__jpg" className="save__formatItem button border-left">.jpg</label>
                     <input id="save__svg" type="radio" value="svg" name="saveFormat" onChange={(event) => {if(event.target.checked) {this.setState({DownloadFormat: event.target.value})}}}/>
-                    <label for="save__svg" className="save__formatItem button border-left">.svg</label>
+                    <label htmlFor="save__svg" className="save__formatItem button border-left">.svg</label>
                   </div>
                 </div>
                 <div className="button displayCode border-left">
