@@ -87,7 +87,6 @@ class Canvas extends Component {
 
   draw(sk) {
     let f = this.state.function;
-    console.log(f);
     if(f !== undefined) {
       f(sk);
     }

@@ -54,19 +54,22 @@ class Grid extends Distribution {
   }
   wrapperStyle = { width: 100, margin: 20};
   render() {
+    const BoxWrapper = this.boxWrapper();
     return(
-      <div style={this.wrapperStyle}>
+      <BoxWrapper>
+        {this.props.children}
         <Slider
         min={1}
         max={20}
         defaultValue={this.state.columns}
         marks={{0: 0, 20: 20}}
         step={1}
+        style={this.wrapperStyle}
         railStyle={{ backgroundColor: 'black' }}
         dotStyle={{ borderColor: 'black' }}
         onChange={(value) => {this.setState({columns: value, rows: value}); Canvas._P5.draw();}}
         />
-      </div>
+      </BoxWrapper>
     );
   }
 
