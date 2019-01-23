@@ -4,6 +4,8 @@ import './Grid.css';
 import Slider, { Range } from 'rc-slider';
 import 'rc-slider/assets/index.css';
 import Canvas from '../../Canvas/Canvas';
+import DragBox from '../../DragBox/DragBox';
+import ContextMenuBox from '../../ContextMenuBox/ContextMenuBox';
 
 /*Pencil*/
 class Grid extends Distribution {
@@ -52,11 +54,13 @@ class Grid extends Distribution {
   	}
 
   }
+
+  
   wrapperStyle = { width: 100, margin: 20};
   render() {
-    const BoxWrapper = this.boxWrapper();
     return(
-      <BoxWrapper>
+      <ContextMenuBox id={this.constructor.name} unauthorized={this.unauthorized}>
+        <DragBox name={this.constructor.name} className={this.className}>
         {this.props.children}
         <Slider
         min={1}
@@ -69,7 +73,8 @@ class Grid extends Distribution {
         dotStyle={{ borderColor: 'black' }}
         onChange={(value) => {this.setState({columns: value, rows: value}); Canvas._P5.draw();}}
         />
-      </BoxWrapper>
+      </DragBox>
+    </ContextMenuBox>
     );
   }
 

@@ -55,7 +55,7 @@ class ContextMenuBox extends Component {
 
     return (
       <>
-        <ContextMenuTrigger id={this.props.id} holdToDisplay={1000}>
+        <ContextMenuTrigger id={this.props.id} holdToDisplay={-1}>
             {this.props.children}
         </ContextMenuTrigger>
         <ContextMenu id={this.props.id}>

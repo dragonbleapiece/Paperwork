@@ -26,6 +26,7 @@ const boxSource = {
 //Standard functions for react-dnd
 function collect(connect, monitor) {
   return {
+    connectDragPreview: connect.dragPreview(),
     connectDragSource: connect.dragSource(),
     isDragging: monitor.isDragging()
   }
@@ -44,9 +45,9 @@ class DragBox extends Component {
     super(props);
   }
 
-
   render() {
-    const { isDragging, connectDragSource } = this.props;
+    const { isDragging, connectDragSource, connectDragPreview } = this.props;
+    console.log(this.state);
 
     const style = {
       "position": "absolute",
@@ -54,7 +55,7 @@ class DragBox extends Component {
       "left": this.state.x + "px"
     };
 
-    return (
+    return connectDragPreview(
       <div className={this.props.className} style={style}>
         {connectDragSource(<span>{this.props.name}</span>)}
         {this.props.children}
