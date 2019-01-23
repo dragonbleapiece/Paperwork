@@ -37,6 +37,9 @@ const menu = [
   {
     type: 'Grid',
     icon: icon_save_alt
+  },
+  {
+    type: 'Rectangle'
   }
 ];
 
@@ -50,7 +53,7 @@ class ContextMenuBox extends Component {
 
   handleClick(event, data) {
     if(data.type !== undefined) {
-      window.addClassToWorkspace(data.type);
+      window.addClassToElement(data.type, data.el);
     }
   }
 
@@ -58,7 +61,7 @@ class ContextMenuBox extends Component {
 
     let menuItems = menu.map(
       (item, index) => this.props.unauthorized.indexOf(item.type) == -1 &&
-      <MenuItem className="ContextMenu__item" onClick={this.handleClick} data={{ type: item.type }} key={index}>
+      <MenuItem className="ContextMenu__item" onClick={this.handleClick} data={{ type: item.type, el: this.props.el }} key={index}>
         {item.icon && <span className="react-contextmenu-itemIcon"><SVG src={item.icon}/></span>}
         <span className="react-contextmenu-itemText">{item.type}</span>
       </MenuItem>

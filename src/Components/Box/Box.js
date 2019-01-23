@@ -8,7 +8,10 @@ import ContextMenuBox from '../ContextMenuBox/ContextMenuBox';
 class Box extends Component {
 
 
-  state = {};
+  state = {
+    children: [],
+    style: {}
+  };
 
   constructor(props) {
     super(props);
@@ -16,6 +19,16 @@ class Box extends Component {
     this.next = undefined;
     this.nextType = undefined;
     this.unauthorized = [];
+  }
+
+  addChild(child) {
+    if(!child) return;
+    let obj = new child(); //tricky
+    if(this.unauthorized.indexOf(child.name) === -1 && obj instanceof Box) {
+      this.setState({
+        children: [child]
+      });
+    }
   }
 
   addNext(elmnt) {
@@ -27,20 +40,38 @@ class Box extends Component {
     }
   }
 
+  setPosition(style) {
+    this.setState({
+      style: style
+    });
+  }
 
   draw(sk) {
 
+  }
+
+  getChildren() {
+    let children = [];
+
+    if(this.state.children.length > 0) {
+      let Component = this.state.children[0];
+      children.push(<Component key={0} ref={el => {this.next = el; console.log(el);}}/>);
+    }
+
+    return children;
   }
 
 
   render() {
 
     return (
-      <ContextMenuBox id={this.constructor.name} unauthorized={this.unauthorized}>
-        <DragBox name={this.constructor.name} className={this.className}>
-        {this.props.children}
-        </DragBox>
-      </ContextMenuBox>
+      <div className={this.className} style={this.state.style}>
+        <ContextMenuBox id={this.constructor.name} unauthorized={this.unauthorized} el={this}>
+          <DragBox name={this.constructor.name} setPosition={this.setPosition.bind(this)}>
+            {this.getChildren()}
+          </DragBox>
+        </ContextMenuBox>
+      </div>
     );
   }
 }

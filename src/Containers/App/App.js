@@ -6,7 +6,6 @@ import SVG from 'react-svg'
 import icon_save_alt from '../../Icons/save_alt.svg';
 import icon_code from '../../Icons/code.svg';
 // import Components
-import ContextMenu from '../../Components/ContextMenu/ContextMenu';
 import Workspace from '../../Components/Workspace/Workspace';
 
 import Rectangle from '../../Components/Figures/Rectangle/Rectangle';
@@ -21,9 +20,12 @@ import Red from '../../Components/Transforms/Colors/Red';
 
 import {getClassFromName} from '../../Components/Index';
 
-window.addClassToWorkspace = function(name) {
+window.addClassToElement = function(name, target) {
   let cl = getClassFromName(name);
-  Workspace.addChild(cl);
+  target.addChild(cl);
+  if(!(target instanceof Workspace)) {
+    Workspace.forceUpdate();
+  }
 };
 
 class App extends Component {
@@ -40,7 +42,6 @@ class App extends Component {
     //var image = canvas.toDataURL("image/jpeg");
     //el.href = image;
     Canvas.savePaper(this.state.DownloadName, this.state.DownloadFormat);
-    console.log("Hey !");
   }
 
   render() {

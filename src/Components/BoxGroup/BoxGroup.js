@@ -33,6 +33,19 @@ class BoxGroup extends Box {
     }
   }
 
+  addChild(child) {
+
+    if(!child) return;
+    let obj = new child(); //tricky
+    if(this.unauthorized.indexOf(child.name) === -1 && obj instanceof Box) {
+      let children = this.state.children;
+      children.push(child);
+      this.setState({
+        children: children
+      });
+    }
+  }
+
   draw(sk) {
     for(let i = 0; i < this.state.elements.length; ++i) {
        let element = this.state.elements[i];
@@ -54,9 +67,18 @@ class BoxGroup extends Box {
   }
 
   componentDidMount() {
-    this.initElements();
+    //this.initElements();
   }
 
+  getChildren() {
+    let children = [];
+    for(let i = 0; i < this.state.children.length; ++i) {
+      let Component = this.state.children[i];
+      children.push(<Component key={i} ref={el => this.elements[i] = el}/>);
+    }
+
+    return children;
+  }
 
   render() {
 

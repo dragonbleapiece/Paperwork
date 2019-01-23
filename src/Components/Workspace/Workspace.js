@@ -49,18 +49,6 @@ class Workspace extends BoxGroup {
     Workspace._instance = this;
   }
 
-  addChild(box) {
-    if(!box) return;
-    let obj = new box; //tricky
-    if(obj instanceof Box) {
-      let children = this.state.children;
-      children.push(box);
-      this.setState({
-        children: children
-      });
-    }
-  }
-
   componentDidUpdate() {
     let canvas = new Canvas();
     let firstBox = this.elements[0];
@@ -100,17 +88,13 @@ class Workspace extends BoxGroup {
   }*/
 
   render() {
-    let children = [];
-    for(let i = 0; i < this.state.children.length; ++i) {
-      let Component = this.state.children[i];
-      children.push(<Component key={i} ref={el => this.elements[i] = el}/>);
-    }
+
 
     return (
       <div className={this.className}>
-        <ContextMenuBox id={this.constructor.name} unauthorized={this.unauthorized}>
+        <ContextMenuBox id={this.constructor.name} unauthorized={this.unauthorized} el={this}>
           <DropBox>
-            {children}
+            {this.getChildren()}
           </DropBox>
         </ContextMenuBox>
       </div>

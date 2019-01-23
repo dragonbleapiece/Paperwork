@@ -17,7 +17,7 @@ const boxSource = {
     const item = monitor.getItem();
     const result = monitor.getDropResult();
     if(result !== null && result.moved) {
-      component.setState(item);
+      component.setPosition(item);
     }
     return {};
   }
@@ -35,27 +35,27 @@ function collect(connect, monitor) {
 
 class DragBox extends Component {
 
-
-  state = {
-    x: undefined,
-    y: undefined
-  };
-
   constructor(props) {
     super(props);
+  }
+
+  setPosition(coord) {
+    if(!coord) return;
+    const style = {
+      "position": "absolute",
+      "top": coord.x + "px",
+      "left": coord.y + "px"
+    };
+    this.props.setPosition(style);
   }
 
   render() {
     const { isDragging, connectDragSource, connectDragPreview } = this.props;
 
-    const style = {
-      "position": "absolute",
-      "top": this.state.y + "px",
-      "left": this.state.x + "px"
-    };
+
 
     return connectDragPreview(
-      <div className={this.props.className} style={style}>
+      <div>
         {connectDragSource(<span>{this.props.name}</span>)}
         {this.props.children}
       </div>

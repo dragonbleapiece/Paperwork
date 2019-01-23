@@ -8,11 +8,10 @@ class Triangle extends Figure {
   constructor(props) {
     super(props);
     this.className += " " + Triangle.name;
-    const {width, height} = this.props;
     this.x = 0;
-    this.y = height;
-    this.width = width;
-    this.height = height ? height : width;
+    this.y = 10;
+    this.width = 10;
+    this.height = 10;
   }
 
   draw(sk) {

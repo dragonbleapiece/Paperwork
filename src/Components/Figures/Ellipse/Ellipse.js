@@ -8,10 +8,9 @@ class Ellipse extends Figure {
   constructor(props) {
     super(props);
     this.className += " " + Ellipse.name;
-    const {width, height} = this.props;
-    this.width = width;
-    this.height = height ? height : width;
-    this.x = width / 2;
+    this.width = 10;
+    this.height = 10;
+    this.x = this.width / 2;
     this.y = this.height / 2;
   }
 
