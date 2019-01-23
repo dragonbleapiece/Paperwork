@@ -32,14 +32,28 @@ class Box extends Component {
 
   }
 
+  boxWrapper() {
+    let Component = (props) => {
+      return (
+        <ContextMenuBox id={this.constructor.name} unauthorized={this.unauthorized}>
+          <DragBox name={this.constructor.name} className={this.className}>
+            {props.children}
+          </DragBox>
+        </ContextMenuBox>
+      );
+    };
+
+    return Component;
+  }
+
   render() {
 
+    const BoxWrapper = this.boxWrapper();
+
     return (
-      <ContextMenuBox id={this.constructor.name} unauthorized={this.unauthorized}>
-        <DragBox name={this.constructor.name} className={this.className}>
-          {this.props.children}
-        </DragBox>
-      </ContextMenuBox>
+      <BoxWrapper>
+        {this.props.children}
+      </BoxWrapper>
     );
   }
 }
