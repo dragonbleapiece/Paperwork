@@ -2,10 +2,11 @@
     display: flex;
     flex-direction: column;
     border: black solid 1px;
-    padding: 5px;
-    margin: 5px;
 }
 
-.Box > span {
+.Box__title {
+  color: white;
+  background-color: black;
+  padding: 5px;
   cursor: move;
 }

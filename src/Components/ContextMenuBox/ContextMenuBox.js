@@ -3,9 +3,8 @@ import './ContextMenuBox.css';
 import { ContextMenu, MenuItem, ContextMenuTrigger } from "react-contextmenu";
 
 //import Icons
-import SVG from 'react-svg'
-import icon_save_alt from '../../Icons/save_alt.svg';
-import icon_code from '../../Icons/code.svg';
+import SVG from 'react-svg';
+import grid_on from '../../Icons/grid_on.svg';
 
 const menu = [
   {
@@ -31,12 +30,12 @@ const menu = [
     type: 'Distribution',
       elements: [
         {type: 'Grid',
-         icon: icon_save_alt}
+         icon: grid_on}
       ]
   },
   {
     type: 'Grid',
-    icon: icon_save_alt
+    icon: grid_on
   }
 ];
 
