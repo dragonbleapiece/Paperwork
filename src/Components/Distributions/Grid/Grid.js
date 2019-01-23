@@ -6,6 +6,7 @@ import 'rc-slider/assets/index.css';
 import Canvas from '../../Canvas/Canvas';
 import DragBox from '../../DragBox/DragBox';
 import ContextMenuBox from '../../ContextMenuBox/ContextMenuBox';
+import Workspace from '../../Workspace/Workspace';
 
 /*Pencil*/
 class Grid extends Distribution {
@@ -55,7 +56,7 @@ class Grid extends Distribution {
 
   }
 
-  
+
   wrapperStyle = { width: 100, margin: 20};
   render() {
     return(
@@ -71,7 +72,7 @@ class Grid extends Distribution {
         style={this.wrapperStyle}
         railStyle={{ backgroundColor: 'black' }}
         dotStyle={{ borderColor: 'black' }}
-        onChange={(value) => {this.setState({columns: value, rows: value}); Canvas._P5.draw();}}
+        onChange={(value) => {this.setState({columns: value, rows: value}); Workspace.forceUpdate();}}
         />
       </DragBox>
     </ContextMenuBox>
