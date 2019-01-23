@@ -103,6 +103,7 @@ class Canvas extends Component {
     Canvas._P5.draw();
   }
 
+
   render() {
     return (
       <div className="canvasContainer">

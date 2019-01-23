@@ -1,4 +1,6 @@
 .Box {
+    display: flex;
+    flex-direction: column;
     border: black solid 1px;
     padding: 5px;
     margin: 5px;
