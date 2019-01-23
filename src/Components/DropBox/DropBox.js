@@ -19,12 +19,12 @@ function collect(connect, monitor) {
 
 //Functions for dropping the box
 const boxTarget = {
-  /*canDrop(props, monitor) {
+  canDrop(props, monitor) {
     // You can disallow drop based on props or item
     const item = monitor.getItem();
     //return canMakeChessMove(item.fromPosition, props.position);
     return true;
-  },*/
+  },
 
   hover(props, monitor, component) {
     // This is fired very often and lets you perform side effects
