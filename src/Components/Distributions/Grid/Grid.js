@@ -66,7 +66,7 @@ class Grid extends Distribution {
         min={1}
         max={20}
         defaultValue={this.state.columns}
-        marks={{0: 0, 20: 20}}
+        marks={{1: 1, 20: 20}}
         step={1}
         style={this.wrapperStyle}
         railStyle={{ backgroundColor: 'black' }}
