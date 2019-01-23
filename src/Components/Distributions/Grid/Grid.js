@@ -1,6 +1,9 @@
 import React, { Component } from 'react';
 import Distribution from '../Distribution';
 import './Grid.css';
+import Slider, { Range } from 'rc-slider';
+import 'rc-slider/assets/index.css';
+import Canvas from '../../Canvas/Canvas';
 
 /*Pencil*/
 class Grid extends Distribution {
@@ -12,20 +15,24 @@ class Grid extends Distribution {
     this.columns = 10;
     this.rows = 10;
   }
+  state = {
+    columns: 8,
+    rows: 8
+  }
 
   draw(sk) {
 
-    var column = sk.width/this.columns;
-  	var row = sk.height/this.rows;
+    var column = sk.width/this.state.columns;
+  	var row = sk.height/this.state.rows;
     var elem = this.next;
 
   	sk.background(0);
   	sk.stroke(255);
-  	for(var i = 0; i < this.columns; i++) {
+  	for(var i = 0; i < this.state.columns; i++) {
       sk.push();
         sk.translate(column * i, 0);
         sk.line(0, 0, 0, sk.height);
-    		for(var j = 0; j < this.rows; j++) {
+    		for(var j = 0; j < this.state.rows; j++) {
           sk.push();
             sk.translate(0, j * row);
             sk.line(0, 0, sk.width, 0);
@@ -44,6 +51,23 @@ class Grid extends Distribution {
       sk.pop();
   	}
 
+  }
+  wrapperStyle = { width: 100, margin: 20};
+  render() {
+    return(
+      <div style={this.wrapperStyle}>
+        <Slider
+        min={1}
+        max={20}
+        defaultValue={this.state.columns}
+        marks={{0: 0, 20: 20}}
+        step={1}
+        railStyle={{ backgroundColor: 'black' }}
+        dotStyle={{ borderColor: 'black' }}
+        onChange={(value) => {this.setState({columns: value, rows: value}); Canvas._P5.draw();}}
+        />
+      </div>
+    );
   }
 
 }
