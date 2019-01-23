@@ -47,7 +47,6 @@ class DragBox extends Component {
 
   render() {
     const { isDragging, connectDragSource, connectDragPreview } = this.props;
-    console.log(this.state);
 
     const style = {
       "position": "absolute",
