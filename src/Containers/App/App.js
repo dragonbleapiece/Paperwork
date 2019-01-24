@@ -18,6 +18,27 @@ window.addClassToElement = function(name, target) {
   }
 };
 
+window.isAuthorized = function(type, unauthorized) {
+  let r = true;
+  if(!type) return false;
+
+  if(unauthorized instanceof Array) {
+    let obj;
+    if(typeof type === "string") {
+      let cl = getClassFromName(type);
+      obj = new cl();
+    } else {
+      obj = new type();
+    }
+
+    for(let i = 0; i < unauthorized.length && r; ++i) {
+      r = r && !(obj instanceof getClassFromName(unauthorized[i]));
+    }
+  }
+
+  return r;
+}
+
 class App extends Component {
   state = {
     DownloadName: "Untitled",

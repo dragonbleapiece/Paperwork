@@ -24,7 +24,7 @@ class Box extends Component {
   addChild(child) {
     if(!child) return;
     let obj = new child(); //tricky
-    if(this.unauthorized.indexOf(child.name) === -1 && obj instanceof Box) {
+    if(window.isAuthorized(child, this.unauthorized) && obj instanceof Box) {
       this.setState({
         children: [child]
       });
@@ -40,7 +40,7 @@ class Box extends Component {
     }
   }
 
-  setPosition(style) {
+  setStyle(style) {
     this.setState({
       style: style
     });
@@ -67,7 +67,7 @@ class Box extends Component {
     return (
       <div className={this.className} style={this.state.style}>
         <ContextMenuBox id={this.constructor.name} unauthorized={this.unauthorized} el={this}>
-          <DragBox name={this.constructor.name} setPosition={this.setPosition.bind(this)}>
+          <DragBox name={this.constructor.name} el={this}>
             {this.getChildren()}
           </DragBox>
         </ContextMenuBox>
