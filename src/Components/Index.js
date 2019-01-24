@@ -6,6 +6,7 @@ import Distribution from './Distributions/Distribution';
 import Grid from './Distributions/Grid/Grid';
 import Markov from './Markov/Markov';
 import Transform from './Transforms/Transform';
+import Translate from './Transforms/Translate/Translate';
 import Color from './Transforms/Colors/Color';
 import Red from './Transforms/Colors/Red';
 import Blue from './Transforms/Colors/Blue';
@@ -31,6 +32,8 @@ export function getClassFromName(name) {
       return Markov;
     case('Color'):
       return Color;
+    case('Translate'):
+      return Translate;
     default:
       return null;
   }

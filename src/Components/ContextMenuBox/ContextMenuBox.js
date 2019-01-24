@@ -33,6 +33,12 @@ const menu = [
         {type: 'Grid',
          icon: grid_on}
       ]
+  },
+  {
+    type: 'Transform',
+    elements: [
+      {type: 'Translate'}
+    ]
   }
 ];
 
@@ -64,12 +70,12 @@ class ContextMenuBox extends Component {
             <span className="react-contextmenu-itemText">{item.type}</span></>
           }>
               {item.elements.map(
-                (subItem, index) => 
+                (subItem, index) =>
                   <MenuItem onClick={this.handleClick} data={{ type: subItem.type, el: this.props.el }} key={index}>
                     {subItem.icon && <span className="react-contextmenu-itemIcon"><SVG src={subItem.icon}/></span>}
                     <span className="react-contextmenu-itemText">{subItem.type}</span>
                   </MenuItem>
-                
+
               )}
           </SubMenu>);
         }
