@@ -66,8 +66,11 @@ class Grid extends Distribution {
           marks={{1: 1, 20: 20}}
           step={1}
           style={this.wrapperStyle}
+          handleStyle={{ borderColor: 'black'}}
+          trackStyle={{ backgroundColor: 'black' }}
           railStyle={{ backgroundColor: 'black' }}
           dotStyle={{ borderColor: 'black' }}
+          activeHandleStyle={{borderColor: 'red'}}
           onChange={(value) => {this.setState({columns: value, rows: value}); Workspace.forceUpdate();}}
           />
           {this.getChildren()}

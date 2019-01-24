@@ -61,7 +61,7 @@ class DragBox extends Component {
 
     return connectDragPreview(
       <div>
-        {connectDragSource(<span>{this.props.name}</span>)}
+        {connectDragSource(<span className="Box__title">{this.props.name}</span>)}
         {this.props.children}
       </div>
     );
