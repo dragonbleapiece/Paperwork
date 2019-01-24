@@ -7,10 +7,8 @@ import {DragSource} from 'react-dnd';
 const boxSource = {
   beginDrag(props, monitor, component) {
     const componentRect = findDOMNode(component).getBoundingClientRect();
-    let item = {
-      x: -componentRect.width / 2,
-      y: -componentRect.height / 2
-    }
+    const clientOffset = monitor.getClientOffset();
+    let item = clientOffset;
     return item;
   },
   endDrag(props, monitor, component) {
@@ -39,15 +37,22 @@ class DragBox extends Component {
     super(props);
   }
 
-  setPosition(coord) {
-    if(!coord) return;
+  setPosition(d) {
+    if(!d) return;
+    const coord = {
+      x: !Number.isNaN(parseInt(this.props.el.state.style.left)) ? parseInt(this.props.el.state.style.left) : 0,
+      y: !Number.isNaN(parseInt(this.props.el.state.style.top)) ? parseInt(this.props.el.state.style.top) : 0
+    };
+
+    console.log(coord);
     const style = {
       "position": "absolute",
-      "top": coord.x + "px",
-      "left": coord.y + "px"
+      "top": d.y + coord.y + "px",
+      "left": d.x + coord.x + "px"
     };
-    this.props.setPosition(style);
+    this.props.el.setStyle(style);
   }
+
 
   render() {
     const { isDragging, connectDragSource, connectDragPreview } = this.props;

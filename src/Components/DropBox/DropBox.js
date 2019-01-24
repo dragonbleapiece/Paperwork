@@ -65,8 +65,8 @@ const boxTarget = {
     }
 
     // You give to the currently moving item the new positions
-    item.x += clientOffset.x;
-    item.y += clientOffset.y;
+    item.x = clientOffset.x - item.x;
+    item.y = clientOffset.y - item.y;
 
 
     // You can also do nothing and return a drop result,

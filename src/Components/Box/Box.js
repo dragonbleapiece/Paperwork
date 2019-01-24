@@ -40,7 +40,7 @@ class Box extends Component {
     }
   }
 
-  setPosition(style) {
+  setStyle(style) {
     this.setState({
       style: style
     });
@@ -67,7 +67,7 @@ class Box extends Component {
     return (
       <div className={this.className} style={this.state.style}>
         <ContextMenuBox id={this.constructor.name} unauthorized={this.unauthorized} el={this}>
-          <DragBox name={this.constructor.name} setPosition={this.setPosition.bind(this)}>
+          <DragBox name={this.constructor.name} el={this}>
             {this.getChildren()}
           </DragBox>
         </ContextMenuBox>
