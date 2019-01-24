@@ -14,13 +14,48 @@
 .react-contextmenu-item {
   display: flex;
   justify-content: flex-start;
+  width: 100%;
   height: 40px;
+  cursor: pointer;
 }
 
-.react-contextmenu-item:hover {
+.react-contextmenu-submenu>.react-contextmenu-item {
+  cursor: auto;
+}
+
+.react-contextmenu .react-contextmenu-item:hover {
   color: white;
   background-color: black;
-  cursor: pointer;
+}
+
+.react-contextmenu .react-contextmenu .react-contextmenu-item {
+  color: black;
+  background-color: white;
+}
+
+.react-contextmenu .react-contextmenu .react-contextmenu-item svg {
+  fill: black;
+}
+
+.react-contextmenu .react-contextmenu .react-contextmenu-item:hover {
+  color: white;
+  background-color: black;
+}
+
+.react-contextmenu .react-contextmenu .react-contextmenu-item:hover svg {
+  fill: white;
+}
+
+.react-contextmenu-item>.react-contextmenu {
+  display: none;
+}
+
+.react-contextmenu-item:hover>.react-contextmenu {
+  display: flex;
+}
+
+.react-contextmenu-item:has(.react-contextmenu) {
+  color: red;
 }
 
 .react-contextmenu-item:hover svg {

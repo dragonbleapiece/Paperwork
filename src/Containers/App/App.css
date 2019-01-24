@@ -148,15 +148,18 @@ input:checked+label {
   height: 60px;
   text-align: center;
 }
+
 .save {
   display: flex;
 
   height: 100%;
   flex: 1;
 }
+
 .save__button {
   width: 60px;
 }
+
 .save__name {
   flex: 1 1;
   text-align: end;

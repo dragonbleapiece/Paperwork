@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import './ContextMenuBox.css';
-import { ContextMenu, MenuItem, ContextMenuTrigger } from "react-contextmenu";
+import { ContextMenu, MenuItem, SubMenu, ContextMenuTrigger } from "react-contextmenu";
 
 //import Icons
 import SVG from 'react-svg';
@@ -28,17 +28,11 @@ const menu = [
   },
   {
     type: 'Distribution',
+    icon: grid_on,
       elements: [
         {type: 'Grid',
          icon: grid_on}
       ]
-  },
-  {
-    type: 'Grid',
-    icon: grid_on
-  },
-  {
-    type: 'Rectangle'
   }
 ];
 
@@ -57,13 +51,29 @@ class ContextMenuBox extends Component {
   }
 
   render() {
-
     let menuItems = menu.map(
-      (item, index) => this.props.unauthorized.indexOf(item.type) == -1 &&
-      <MenuItem className="ContextMenu__item" onClick={this.handleClick} data={{ type: item.type, el: this.props.el }} key={index}>
-        {item.icon && <span className="react-contextmenu-itemIcon"><SVG src={item.icon}/></span>}
-        <span className="react-contextmenu-itemText">{item.type}</span>
-      </MenuItem>
+      (item, index) => {
+        if (!item.elements) {
+          return (<MenuItem onClick={this.handleClick} data={{ type: item.type, el: this.props.el }} key={index}>
+            {item.icon && <span className="react-contextmenu-itemIcon"><SVG src={item.icon}/></span>}
+            <span className="react-contextmenu-itemText">{item.type}</span>
+          </MenuItem>);
+        } else {
+          return (<SubMenu title={
+            <>{item.icon && <span className="react-contextmenu-itemIcon"><SVG src={item.icon}/></span>}
+            <span className="react-contextmenu-itemText">{item.type}</span></>
+          }>
+              {item.elements.map(
+                (subItem, index) => 
+                  <MenuItem onClick={this.handleClick} data={{ type: subItem.type, el: this.props.el }} key={index}>
+                    {subItem.icon && <span className="react-contextmenu-itemIcon"><SVG src={subItem.icon}/></span>}
+                    <span className="react-contextmenu-itemText">{subItem.type}</span>
+                  </MenuItem>
+                
+              )}
+          </SubMenu>);
+        }
+      }
     );
 
     return (
