@@ -14,7 +14,7 @@ class Loop extends Box {
   draw(sk) {
     for(let i = 0; i < this.nbIterations; ++i) {
       if(this.next !== undefined) {
-        this.next.draw();
+        this.next.draw(sk);
       }
     }
   }

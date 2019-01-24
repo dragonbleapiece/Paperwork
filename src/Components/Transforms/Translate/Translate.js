@@ -16,7 +16,7 @@ class Translate extends Transform {
     sk.push();
       sk.translate(this.destX, this.destY);
       if(this.next !== undefined) {
-        this.next.draw();
+        this.next.draw(sk);
       }
     sk.pop();
   }
