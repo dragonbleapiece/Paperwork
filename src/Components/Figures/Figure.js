@@ -13,6 +13,7 @@ class Figure extends Box {
     this.y = 0;
     this.width = 0;
     this.height = 0;
+    this.unauthorized = ["Color", "Figure", "Distribution"];
   }
 
   draw(sk) {

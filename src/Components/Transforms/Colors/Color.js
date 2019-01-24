@@ -9,11 +9,10 @@ class Color extends Transform {
   constructor(props) {
     super(props);
     this.className += " " + Color.name;
-    const {r, g, b, a} = this.props;
-    this.r = r;
-    this.g = g;
-    this.b = b;
-    this.a = a ? a : 255;
+    this.r = 0;
+    this.g = 0;
+    this.b = 0;
+    this.a = 255;
   }
 
   draw(sk) {

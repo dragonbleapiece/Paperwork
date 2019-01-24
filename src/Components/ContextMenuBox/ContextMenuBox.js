@@ -59,7 +59,7 @@ class ContextMenuBox extends Component {
   render() {
 
     let menuItems = menu.map(
-      (item, index) => this.props.unauthorized.indexOf(item.type) == -1 &&
+      (item, index) => window.isAuthorized(item.type, this.props.unauthorized) &&
       <MenuItem className="ContextMenu__item" onClick={this.handleClick} data={{ type: item.type, el: this.props.el }} key={index}>
         {item.icon && <span className="react-contextmenu-itemIcon"><SVG src={item.icon}/></span>}
         <span className="react-contextmenu-itemText">{item.type}</span>

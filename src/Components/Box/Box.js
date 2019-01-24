@@ -24,7 +24,7 @@ class Box extends Component {
   addChild(child) {
     if(!child) return;
     let obj = new child(); //tricky
-    if(this.unauthorized.indexOf(child.name) === -1 && obj instanceof Box) {
+    if(window.isAuthorized(child, this.unauthorized) && obj instanceof Box) {
       this.setState({
         children: [child]
       });
