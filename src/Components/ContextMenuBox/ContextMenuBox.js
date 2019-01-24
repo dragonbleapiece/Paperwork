@@ -34,12 +34,11 @@ const menu = [
       ]
   },
   {
-    type: 'Grid',
-    icon: grid_on
+    type: 'Transform',
+    elements: [
+      {type: 'Translate'}
+    ]
   },
-  {
-    type: 'Rectangle'
-  }
 ];
 
 class ContextMenuBox extends Component {
