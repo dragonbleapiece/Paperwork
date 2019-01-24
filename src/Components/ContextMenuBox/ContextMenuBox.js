@@ -65,7 +65,7 @@ class ContextMenuBox extends Component {
             <span className="react-contextmenu-itemText">{item.type}</span>
           </MenuItem>);
         } else {
-          return (<SubMenu title={
+          return (<SubMenu key={index} title={
             <>{item.icon && <span className="react-contextmenu-itemIcon"><SVG src={item.icon}/></span>}
             <span className="react-contextmenu-itemText">{item.type}</span></>
           }>
