@@ -39,11 +39,13 @@ class Markov extends BoxGroup {
     let defaultValues = [];
     let sliders;
 
+    console.log(length);
+
     for(let i = 0; i < length; ++i) {
       defaultValues.push((100 / length) * i);
     }
 
-    if(length - 1 <= 0) {
+    if(length - 1 > 0) {
       sliders = this.state.children.map((child, index) =>
           <Range
           min={0}
@@ -68,7 +70,6 @@ class Markov extends BoxGroup {
     return(
       <>
         {sliders}
-        {this.getChildren()}
       </>
     );
   }

@@ -5,6 +5,7 @@ import {shallow, instance} from 'enzyme';
 import p5 from 'p5';
 import DropBox from '../DropBox/DropBox';
 import DragBox from '../DragBox/DragBox';
+import ContextMenuBox from '../ContextMenuBox/ContextMenuBox';
 
 /*Pencil*/
 class BoxGroup extends Box {
@@ -87,12 +88,16 @@ class BoxGroup extends Box {
   render() {
 
     return (
-      <DragBox icon={this.props.icon} name={this.constructor.name} className={this.className} el={this}>
-        {this.renderBox()}
-        <DropBox>
-          {this.getChildren()}
-        </DropBox>
-      </DragBox>
+      <div className={this.className} style={this.state.style}>
+        <ContextMenuBox id={this.constructor.name} unauthorized={this.unauthorized} el={this}>
+          <DragBox icon={this.props.icon} name={this.constructor.name} className={this.className} el={this}>
+            {this.renderBox()}
+            <DropBox>
+              {this.getChildren()}
+            </DropBox>
+          </DragBox>
+        </ContextMenuBox>
+      </div>
     );
   }
 }
