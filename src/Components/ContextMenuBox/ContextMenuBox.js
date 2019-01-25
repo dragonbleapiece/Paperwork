@@ -37,7 +37,8 @@ const menu = [
   {
     type: 'Transform',
     elements: [
-      {type: 'Translate'}
+      {type: 'Translate'},
+      {type: 'Rotate'}
     ]
   }
 ];
@@ -53,6 +54,7 @@ class ContextMenuBox extends Component {
   handleClick(event, data) {
     if(data.type !== undefined) {
       window.addClassToElement(data.type, data.el);
+      data.el.addIcon(data.icon);
     }
   }
 
