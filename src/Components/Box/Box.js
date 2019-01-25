@@ -31,6 +31,10 @@ class Box extends Component {
     }
   }
 
+  addIcon(icon) {
+    this.icon = icon;
+  }
+
   addNext(elmnt) {
     if(elmnt !== undefined) {
       if(elmnt instanceof Box) {
@@ -62,12 +66,13 @@ class Box extends Component {
   }
 
 
+
   render() {
 
     return (
       <div className={this.className} style={this.state.style}>
         <ContextMenuBox id={this.constructor.name} unauthorized={this.unauthorized} el={this}>
-          <DragBox name={this.constructor.name} el={this}>
+          <DragBox icon={this.icon} name={this.constructor.name} el={this}>
             {this.getChildren()}
           </DragBox>
         </ContextMenuBox>
