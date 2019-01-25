@@ -54,29 +54,24 @@ class Grid extends Distribution {
 
 
   wrapperStyle = { width: 100, margin: 20};
-  render() {
+
+  renderBox() {
     return(
-      <div className={this.className} style={this.state.style}>
-        <ContextMenuBox id={this.constructor.name} unauthorized={this.unauthorized} el={this}>
-          <DragBox name={this.constructor.name} el={this}>
-          <Slider
-          min={1}
-          max={20}
-          defaultValue={this.state.columns}
-          marks={{1: 1, 20: 20}}
-          step={1}
-          style={this.wrapperStyle}
-          handleStyle={{ borderColor: 'black'}}
-          trackStyle={{ backgroundColor: 'black' }}
-          railStyle={{ backgroundColor: 'black' }}
-          dotStyle={{ borderColor: 'black' }}
-          activeHandleStyle={{borderColor: 'red'}}
-          onChange={(value) => {this.setState({columns: value, rows: value}); Workspace.forceUpdate();}}
-          />
-          {this.getChildren()}
-        </DragBox>
-      </ContextMenuBox>
-    </div>
+      <Slider
+      min={1}
+      max={20}
+      defaultValue={this.state.columns}
+      marks={{1: 1, 20: 20}}
+      step={1}
+      style={this.wrapperStyle}
+      handleStyle={{ borderColor: 'black'}}
+      trackStyle={{ backgroundColor: 'black' }}
+      railStyle={{ backgroundColor: 'black' }}
+      dotStyle={{ borderColor: 'black' }}
+      activeHandleStyle={{borderColor: 'red'}}
+      onChange={(value) => {this.setState({columns: value, rows: value}); Workspace.forceUpdate();}}
+      />
+      {this.getChildren()}
     );
   }
 

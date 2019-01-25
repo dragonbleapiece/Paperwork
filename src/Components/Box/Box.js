@@ -65,7 +65,11 @@ class Box extends Component {
     return children;
   }
 
-
+  renderBox() {
+    return(
+      {this.getChildren()}
+    );
+  }
 
   render() {
 
@@ -73,7 +77,7 @@ class Box extends Component {
       <div className={this.className} style={this.state.style}>
         <ContextMenuBox id={this.constructor.name} unauthorized={this.unauthorized} el={this}>
           <DragBox icon={this.icon} name={this.constructor.name} el={this}>
-            {this.getChildren()}
+            {this.renderBox()}
           </DragBox>
         </ContextMenuBox>
       </div>
