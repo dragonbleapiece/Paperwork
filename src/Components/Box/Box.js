@@ -19,6 +19,7 @@ class Box extends Component {
     this.next = undefined;
     this.nextType = undefined;
     this.unauthorized = [];
+    this.icon = [];
   }
 
   addChild(child) {
@@ -31,10 +32,6 @@ class Box extends Component {
     }
   }
 
-  addIcon(icon) {
-    this.icon = icon;
-  }
-
   addNext(elmnt) {
     if(elmnt !== undefined) {
       if(elmnt instanceof Box) {
@@ -42,6 +39,10 @@ class Box extends Component {
         this.nextType = elmnt.constructor.name;
       }
     }
+  }
+
+  addIcon(icon) {
+    this.icon.push(icon);
   }
 
   setStyle(style) {
@@ -59,24 +60,24 @@ class Box extends Component {
 
     if(this.state.children.length > 0) {
       let Component = this.state.children[0];
-      children.push(<Component key={0} ref={el => {this.next = el; console.log(el);}}/>);
+      children.push(<Component key={0} ref={el => {this.next = el; console.log(el);}} icon={this.icon[0]}/>);
     }
-
     return children;
   }
 
   renderBox() {
-    return(
-      {this.getChildren()}
+    return (
+      <>
+        {this.getChildren()}
+      </>
     );
   }
 
   render() {
-
     return (
       <div className={this.className} style={this.state.style}>
         <ContextMenuBox id={this.constructor.name} unauthorized={this.unauthorized} el={this}>
-          <DragBox icon={this.icon} name={this.constructor.name} el={this}>
+          <DragBox icon={this.props.icon} name={this.constructor.name} el={this}>
             {this.renderBox()}
           </DragBox>
         </ContextMenuBox>

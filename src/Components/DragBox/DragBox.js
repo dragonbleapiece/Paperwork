@@ -5,7 +5,6 @@ import {DragSource} from 'react-dnd';
 
 //import Icons
 import SVG from 'react-svg';
-import drag_indicator from '../../Icons/drag_indicator.svg';
 
 //Functions for dragging the box
 const boxSource = {
@@ -66,7 +65,7 @@ class DragBox extends Component {
     return connectDragPreview(
       <div>
         {connectDragSource(<span className="Box__title">
-        <SVG src={drag_indicator}/>
+        {this.props.icon && <SVG src={this.props.icon}/>}
         {this.props.name}</span>)}
         {this.props.children}
       </div>
