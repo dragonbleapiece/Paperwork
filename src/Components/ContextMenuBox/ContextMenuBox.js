@@ -28,11 +28,10 @@ const menu = [
   },
   {
     type: 'Distribution',
-    icon: grid_on,
-      elements: [
-        {type: 'Grid',
-         icon: grid_on}
-      ]
+    elements: [
+      {type: 'Grid',
+      icon: grid_on}
+    ]
   },
   {
     type: 'Transform',
