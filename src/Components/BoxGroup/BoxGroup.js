@@ -83,9 +83,9 @@ class BoxGroup extends Box {
   render() {
 
     return (
-      <DragBox name={this.constructor.name} className={this.className}>
+      <DragBox icon={this.props.icon} name={this.constructor.name} className={this.className}>
         <DropBox>
-          {this.props.chidren}
+          {this.renderBox()}
         </DropBox>
       </DragBox>
     );

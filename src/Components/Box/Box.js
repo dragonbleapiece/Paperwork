@@ -65,14 +65,20 @@ class Box extends Component {
     return children;
   }
 
-
+  renderBox() {
+    return (
+      <>
+        {this.getChildren()}
+      </>
+    );
+  }
 
   render() {
     return (
       <div className={this.className} style={this.state.style}>
         <ContextMenuBox id={this.constructor.name} unauthorized={this.unauthorized} el={this}>
           <DragBox icon={this.props.icon} name={this.constructor.name} el={this}>
-            {this.getChildren()}
+            {this.renderBox()}
           </DragBox>
         </ContextMenuBox>
       </div>
