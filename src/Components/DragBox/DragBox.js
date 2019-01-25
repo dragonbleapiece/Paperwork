@@ -3,6 +3,10 @@ import { findDOMNode } from 'react-dom';
 import {ItemTypes} from '../../Constants.js';
 import {DragSource} from 'react-dnd';
 
+//import Icons
+import SVG from 'react-svg';
+import drag_indicator from '../../Icons/drag_indicator.svg';
+
 //Functions for dragging the box
 const boxSource = {
   beginDrag(props, monitor, component) {
@@ -61,7 +65,9 @@ class DragBox extends Component {
 
     return connectDragPreview(
       <div>
-        {connectDragSource(<span className="Box__title">{this.props.name}</span>)}
+        {connectDragSource(<span className="Box__title">
+        <SVG src={drag_indicator}/>
+        {this.props.name}</span>)}
         {this.props.children}
       </div>
     );
