@@ -58,7 +58,7 @@ class Grid extends Distribution {
     return(
       <div className={this.className} style={this.state.style}>
         <ContextMenuBox id={this.constructor.name} unauthorized={this.unauthorized} el={this}>
-          <DragBox name={this.constructor.name} el={this}>
+          <DragBox icon={this.props.icon} name={this.constructor.name} el={this}>
           <Slider
           min={1}
           max={20}

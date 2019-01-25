@@ -74,9 +74,9 @@ class BoxGroup extends Box {
     let children = [];
     for(let i = 0; i < this.state.children.length; ++i) {
       let Component = this.state.children[i];
-      children.push(<Component key={i} ref={el => this.elements[i] = el}/>);
+      children.push(<Component key={i} ref={el => this.elements[i] = el} icon={this.icon[i]}/>);
     }
-
+    console.log(this.icon[0]);
     return children;
   }
 

@@ -5,12 +5,14 @@ import { ContextMenu, MenuItem, SubMenu, ContextMenuTrigger } from "react-contex
 //import Icons
 import SVG from 'react-svg';
 import grid_on from '../../Icons/grid_on.svg';
+import drag_indicator from '../../Icons/drag_indicator.svg';
 
 const menu = [
   {
     type: 'Figure',
     elements: [
-      {type: 'Rectangle'},
+      {type: 'Rectangle',
+      icon: drag_indicator},
       {type: 'Triangle'},
       {type: 'Ellipse'}
     ]
@@ -61,7 +63,7 @@ class ContextMenuBox extends Component {
     let menuItems = menu.map(
       (item, index) => {
         if (!item.elements) {
-          return (<MenuItem onClick={this.handleClick} data={{ type: item.type, el: this.props.el }} key={index}>
+          return (<MenuItem onClick={this.handleClick} data={{ type: item.type, el: this.props.el, icon: item.icon }} key={index}>
             {item.icon && <span className="react-contextmenu-itemIcon"><SVG src={item.icon}/></span>}
             <span className="react-contextmenu-itemText">{item.type}</span>
           </MenuItem>);
@@ -72,7 +74,7 @@ class ContextMenuBox extends Component {
           }>
               {item.elements.map(
                 (subItem, index) =>
-                  <MenuItem onClick={this.handleClick} data={{ type: subItem.type, el: this.props.el }} key={index}>
+                  <MenuItem onClick={this.handleClick} data={{ type: subItem.type, el: this.props.el, icon: subItem.icon }} key={index}>
                     {subItem.icon && <span className="react-contextmenu-itemIcon"><SVG src={subItem.icon}/></span>}
                     <span className="react-contextmenu-itemText">{subItem.type}</span>
                   </MenuItem>

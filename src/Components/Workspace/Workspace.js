@@ -88,8 +88,6 @@ class Workspace extends BoxGroup {
   }*/
 
   render() {
-
-
     return (
       <div className={this.className}>
         <ContextMenuBox id={this.constructor.name} unauthorized={this.unauthorized} el={this}>
