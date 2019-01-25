@@ -13,6 +13,7 @@ class BoxGroup extends Box {
     super(props);
     this.className = BoxGroup.name;
     this.state.elements = [];
+    this.elements = [];
   }
 
   setElements(elmnts) {
@@ -76,16 +77,20 @@ class BoxGroup extends Box {
       let Component = this.state.children[i];
       children.push(<Component key={i} ref={el => this.elements[i] = el} icon={this.icon[i]}/>);
     }
-    console.log(this.icon[0]);
     return children;
+  }
+
+  renderBox() {
+    return;
   }
 
   render() {
 
     return (
-      <DragBox icon={this.props.icon} name={this.constructor.name} className={this.className}>
+      <DragBox icon={this.props.icon} name={this.constructor.name} className={this.className} el={this}>
+        {this.renderBox()}
         <DropBox>
-          {this.renderBox()}
+          {this.getChildren()}
         </DropBox>
       </DragBox>
     );

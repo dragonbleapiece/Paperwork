@@ -1,8 +1,10 @@
 import React, { Component } from 'react';
 import BoxGroup from '../BoxGroup/BoxGroup';
 import Input from '../Input/Input';
+import Slider, { Range } from 'rc-slider';
+import 'rc-slider/assets/index.css';
 import './Markov.css';
-import p5 from 'p5';
+import Workspace from '../Workspace/Workspace';
 
 /*Pencil*/
 class Markov extends BoxGroup {
@@ -22,23 +24,55 @@ class Markov extends BoxGroup {
   draw(sk) {
     let proba = 0;
     let rand = sk.random(100);
-    for(let i = 0; i < this.elements.length; ++i) {
+    /*for(let i = 0; i < this.elements.length; ++i) {
       let element = this.elements[i];
       proba += element.value;
       if(rand <= proba) {
         element.draw(sk);
         break;
       }
-    }
+    }*/
   }
 
-  render() {
-    return (
-      <div className={this.className}>
-        <span>{this.constructor.name}</span>
-      </div>
+  renderBox() {
+    const length = this.state.children.length;
+    let defaultValues = [];
+    let sliders;
+
+    for(let i = 0; i < length; ++i) {
+      defaultValues.push((100 / length) * i);
+    }
+
+    if(length - 1 <= 0) {
+      sliders = this.state.children.map((child, index) =>
+          <Range
+          min={0}
+          max={100}
+          defaultValue={defaultValues}
+          marks={{0: 0, 100: 100}}
+          step={1}
+          count={length - 1}
+          allowCross={false}
+          style={{ width: 100, margin: 20}}
+          handleStyle={{ borderColor: 'black'}}
+          trackStyle={{ backgroundColor: 'black' }}
+          railStyle={{ backgroundColor: 'black' }}
+          dotStyle={{ borderColor: 'black' }}
+          activeHandleStyle={{borderColor: 'red'}}
+          onChange={(value) => {Workspace.forceUpdate();}}
+          key={index}
+          />
+      );
+    }
+
+    return(
+      <>
+        {sliders}
+        {this.getChildren()}
+      </>
     );
   }
+
 }
 
 export default Markov;

@@ -53,8 +53,6 @@ class Grid extends Distribution {
   }
 
 
-  wrapperStyle = { width: 100, margin: 20};
-
   renderBox() {
     return(
       <>
@@ -64,7 +62,7 @@ class Grid extends Distribution {
         defaultValue={this.state.columns}
         marks={{1: 1, 20: 20}}
         step={1}
-        style={this.wrapperStyle}
+        style={{ width: 100, margin: 20}}
         handleStyle={{ borderColor: 'black'}}
         trackStyle={{ backgroundColor: 'black' }}
         railStyle={{ backgroundColor: 'black' }}
