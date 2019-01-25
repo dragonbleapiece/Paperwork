@@ -42,7 +42,7 @@ window.isAuthorized = function(type, unauthorized) {
 class App extends Component {
   state = {
     DownloadName: "Untitled",
-    DownloadFormat: "jpg"
+    DownloadFormat: "svg"
   }
   constructor(props){
     super(props);
@@ -74,10 +74,10 @@ class App extends Component {
                   </a>
                   <input className="save__name" type="text" value={this.state.DownloadName} onChange={(event) => {this.setState({DownloadName: event.target.value})}}/>
                   <div className="save__format">
-                    <input id="save__jpg" type="radio" value="jpg" name="saveFormat" defaultChecked onChange={(event) => {if(event.target.checked) {this.setState({DownloadFormat: event.target.value})}}}/>
-                    <label htmlFor="save__jpg" className="save__formatItem button border-left">.jpg</label>
-                    <input id="save__svg" type="radio" value="svg" name="saveFormat" onChange={(event) => {if(event.target.checked) {this.setState({DownloadFormat: event.target.value})}}}/>
+                    <input id="save__svg" type="radio" value="svg" name="saveFormat" defaultChecked onChange={(event) => {if(event.target.checked) {this.setState({DownloadFormat: event.target.value})}}}/>
                     <label htmlFor="save__svg" className="save__formatItem button border-left">.svg</label>
+                    <input id="save__jpg" type="radio" value="jpg" name="saveFormat" onChange={(event) => {if(event.target.checked) {this.setState({DownloadFormat: event.target.value})}}}/>
+                    <label htmlFor="save__jpg" className="save__formatItem button border-left">.jpg</label>
                   </div>
                 </div>
                 <div className="button displayCode border-left">

@@ -5,16 +5,23 @@ import { ContextMenu, MenuItem, SubMenu, ContextMenuTrigger } from "react-contex
 //import Icons
 import SVG from 'react-svg';
 import grid_on from '../../Icons/grid_on.svg';
-import drag_indicator from '../../Icons/drag_indicator.svg';
+import square from '../../Icons/square.svg';
+import triangle from '../../Icons/triangle.svg';
+import ellipse from '../../Icons/ellipse.svg';
+
+import translate from '../../Icons/translate.svg';
+import rotate from '../../Icons/rotate.svg';
 
 const menu = [
   {
     type: 'Figure',
     elements: [
       {type: 'Rectangle',
-      icon: drag_indicator},
-      {type: 'Triangle'},
-      {type: 'Ellipse'}
+      icon: square},
+      {type: 'Triangle',
+      icon: triangle},
+      {type: 'Ellipse',
+      icon: ellipse}
     ]
   },
   {
@@ -38,8 +45,10 @@ const menu = [
   {
     type: 'Transform',
     elements: [
-      {type: 'Translate'},
-      {type: 'Rotate'}
+      {type: 'Translate',
+      icon: translate},
+      {type: 'Rotate',
+      icon: rotate}
     ]
   }
 ];
