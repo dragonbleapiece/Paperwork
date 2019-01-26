@@ -62,7 +62,7 @@ class Grid extends Distribution {
         defaultValue={this.state.columns}
         marks={{1: 1, 20: 20}}
         step={1}
-        style={{ width: 100, margin: 20}}
+        className="Box__slider"
         handleStyle={{ borderColor: 'black'}}
         trackStyle={{ backgroundColor: 'black' }}
         railStyle={{ backgroundColor: 'black' }}

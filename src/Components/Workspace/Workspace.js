@@ -92,7 +92,7 @@ class Workspace extends BoxGroup {
       <div className={this.className}>
         <ContextMenuBox id={this.constructor.name} unauthorized={this.unauthorized} el={this}>
           <DropBox>
-            {!this.state.children.length && <span>Clic droit</span>}
+            {!this.state.children.length && <span className="Workspace__placeholder">Right click here</span>}
             {this.getChildren()}
           </DropBox>
         </ContextMenuBox>

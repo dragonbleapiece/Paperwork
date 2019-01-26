@@ -1,19 +1,66 @@
 .Box {
     display: flex;
     flex-direction: column;
+    margin: 20px;
     border: black solid 1px;
-    margin: 3px;
     background-color: white;
 }
 
 .Box__title {
   display: flex;
-  justify-content: center;
-  align-items: center;
-  height: 30px;
+  justify-content: flex-start;
+  align-items: stretch;
+  height: 60px;
   color: white;
   fill: white;
   background-color: black;
   cursor: move;
   cursor: grab;
+}
+
+.Box__titleIcon {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 60px;
+}
+
+.Box__titleText {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex: 1;
+  padding: 0 20px;
+}
+
+.Box__content {
+  display: flex;
+  flex-direction: column;
+  min-width: 100px;
+}
+
+.Box .Box__content .Box__slider {
+  width: 100px;
+  width: calc(100% + -40px);
+  min-width: 100px;
+  margin: 20px;
+} 
+/* Overwrite rc-slider style */
+.Box .Box__content .Box__slider .rc-slider-handle {
+  border: solid 2px black;
+}
+.Box .Box__content .Box__slider .rc-slider-handle:focus {
+  border-color: black;
+  box-shadow: none;
+}
+.Box .Box__content .Box__slider .rc-slider-handle-click-focused:focus {
+  border-color: black;
+  box-shadow: unset;
+}
+.Box .Box__content .Box__slider .rc-slider-handle:hover {
+  border-color: black;
+}
+.Box .Box__content .Box__slider .rc-slider-handle:active {
+  border-color: black;
+  box-shadow: none;
 }

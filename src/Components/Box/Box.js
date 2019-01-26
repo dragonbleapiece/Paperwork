@@ -78,7 +78,9 @@ class Box extends Component {
       <div className={this.className} style={this.state.style}>
         <ContextMenuBox id={this.constructor.name} unauthorized={this.unauthorized} el={this}>
           <DragBox icon={this.props.icon} name={this.constructor.name} el={this}>
+          <span className="Box__content">
             {this.renderBox()}
+          </span>
           </DragBox>
         </ContextMenuBox>
       </div>

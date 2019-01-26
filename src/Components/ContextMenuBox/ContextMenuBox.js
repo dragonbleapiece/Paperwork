@@ -4,6 +4,8 @@ import { ContextMenu, MenuItem, SubMenu, ContextMenuTrigger } from "react-contex
 
 //import Icons
 import SVG from 'react-svg';
+import arrow_right from '../../Icons/arrow_right.svg';
+
 import grid_on from '../../Icons/grid_on.svg';
 import square from '../../Icons/square.svg';
 import triangle from '../../Icons/triangle.svg';
@@ -78,8 +80,12 @@ class ContextMenuBox extends Component {
           </MenuItem>);
         } else {
           return (<SubMenu key={index} title={
-            <>{item.icon && <span className="react-contextmenu-itemIcon"><SVG src={item.icon}/></span>}
-            <span className="react-contextmenu-itemText">{item.type}</span></>
+            <><span  className="react-contextmenu-itemLabel">
+              {item.icon && <span className="react-contextmenu-itemIcon"><SVG src={item.icon}/></span>}
+              <span className="react-contextmenu-itemText">{item.type}</span>
+            </span>
+            <span className="react-contextmenu-itemIcon"><SVG src={arrow_right}/></span>
+            </>
           }>
               {item.elements.map(
                 (subItem, index) =>
