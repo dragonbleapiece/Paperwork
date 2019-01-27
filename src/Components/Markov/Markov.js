@@ -13,25 +13,27 @@ class Markov extends BoxGroup {
     super(props);
     this.className += " " + Markov.name;
     this.proba = [];
-  }
-
-  addProba(array) {
-    if(array instanceof Array) {
-      this.proba.push(array);
-    }
+    this.elementsLength = this.state.children.length;
+    this.currentState = parseInt(Math.random() * (this.elementsLength));
   }
 
   draw(sk) {
+    if(this.elementsLength === 0) return;
+    let element = this.elements[this.currentState];
+    if(this.elementsLength === 1) {
+      element.draw(sk);
+      return;
+    }
     let proba = 0;
     let rand = sk.random(100);
-    /*for(let i = 0; i < this.elements.length; ++i) {
-      let element = this.elements[i];
-      proba += element.value;
-      if(rand <= proba) {
-        element.draw(sk);
-        break;
-      }
-    }*/
+    let i;
+
+    for(i = 0; i < this.elementsLength && rand > proba; ++i) {
+      proba += this.proba[this.currentState][i];
+    }
+
+    this.elements[i - 1].draw(sk);
+    this.currentState = i - 1;
   }
 
   renderBox() {
@@ -39,33 +41,46 @@ class Markov extends BoxGroup {
     let defaultValues = [];
     let sliders;
 
-    console.log(length);
-
-    for(let i = 0; i < length; ++i) {
+    for(let i = 1; i <= length - 1; ++i) {
       defaultValues.push((100 / length) * i);
     }
 
     if(length - 1 > 0) {
-      sliders = this.state.children.map((child, index) =>
-          <Range
-          min={0}
-          max={100}
-          defaultValue={defaultValues}
-          marks={{0: 0, 100: 100}}
-          step={1}
-          count={length - 1}
-          allowCross={false}
-          style={{ width: 100, margin: 20}}
-          handleStyle={{ borderColor: 'black'}}
-          trackStyle={{ backgroundColor: 'black' }}
-          railStyle={{ backgroundColor: 'black' }}
-          dotStyle={{ borderColor: 'black' }}
-          activeHandleStyle={{borderColor: 'red'}}
-          onChange={(value) => {Workspace.forceUpdate();}}
-          key={index}
-          />
+      let propsRange = {
+        min: 0,
+        max: 100,
+        defaultValue: defaultValues,
+        marks: {0:0, 100:100},
+        step: 1,
+        count: length - 1,
+        pushable: true,
+        style: {width: 100, margin: 20},
+        handleStyle: { borderColor: 'black'},
+        trackStyle: { backgroundColor: 'black' },
+        railStyle: { backgroundColor: 'black' },
+        dotStyle: { borderColor: 'black' },
+        activeHandleStyle: {borderColor: 'red'},
+        key: 0
+      };
+
+      if(this.elementsLength !== length) {
+        propsRange.value = defaultValues;
+      }
+
+      sliders = this.state.children.map((child, index) => {
+          if(this.elementsLength !== length) {
+            this.proba[index] = defaultValues;
+            console.log(this.proba[index]);
+          }
+          propsRange.key = index;
+          propsRange.onChange = (value) => {this.proba[index] = value; Workspace.forceUpdate();}
+          return React.createElement(Range, propsRange);
+        }
       );
     }
+
+
+    this.elementsLength = length;
 
     return(
       <>

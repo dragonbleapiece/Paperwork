@@ -13,26 +13,7 @@ class BoxGroup extends Box {
   constructor(props) {
     super(props);
     this.className = BoxGroup.name;
-    this.state.elements = [];
     this.elements = [];
-  }
-
-  setElements(elmnts) {
-    if(elmnts !== undefined) {
-      this.setState({
-        elements: elmnts
-      });
-    }
-  }
-
-  addElement(elmnt) {
-    if(elmnt !== undefined && this.unauthorized.indexOf(elmnt) == -1) {
-      let elements = this.state.elements;
-      elements.push(elmnt);
-      this.setState({
-        elements: elements
-      });
-    }
   }
 
   addChild(child) {

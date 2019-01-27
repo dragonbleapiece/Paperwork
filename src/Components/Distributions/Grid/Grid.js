@@ -37,13 +37,12 @@ class Grid extends Distribution {
             sk.line(0, 0, sk.width, 0);
             if(elem !== undefined) {
               sk.noStroke();
-              if(elem.next !== undefined)
-                sk.translate(column / 2 - elem.next.width / 2, row / 2 - elem.next.height / 2);
+              sk.push();
+                sk.translate(column / 2, row / 2);
+                elem.draw(sk);
+              sk.pop();
               /*elem.x = i * column + x;
               elem.y = j * row + y;*/
-              elem.draw(sk);
-              if(elem.next !== undefined)
-                sk.translate(-(column / 2 - elem.next.width / 2), -(row / 2 - elem.next.height / 2));
             }
           sk.pop();
     		}
