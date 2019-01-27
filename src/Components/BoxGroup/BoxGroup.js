@@ -22,7 +22,7 @@ class BoxGroup extends Box {
     let obj = new child(); //tricky
     if(this.unauthorized.indexOf(child.name) === -1 && obj instanceof Box) {
       let children = this.state.children;
-      children.push(child);
+      children.push({type: child, id: Box.id});
       this.setState({
         children: children
       });
@@ -54,11 +54,11 @@ class BoxGroup extends Box {
   }
 
   getChildren() {
-    let children = [];
-    for(let i = 0; i < this.state.children.length; ++i) {
-      let Component = this.state.children[i];
-      children.push(<Component key={i} ref={el => this.elements[i] = el} icon={this.icon[i]}/>);
-    }
+    let children = this.state.children.map((child, index) =>
+      <child.type key={child.id} id={child.id} ref={el => this.elements[index] = el} icon={this.icon[index]}/>
+    );
+
+
     return children;
   }
 
@@ -70,7 +70,7 @@ class BoxGroup extends Box {
 
     return (
       <div className={this.className} style={this.state.style}>
-        <ContextMenuBox id={this.constructor.name} unauthorized={this.unauthorized} el={this}>
+        <ContextMenuBox id={this.constructor.name + this.props.id} unauthorized={this.unauthorized} el={this}>
           <DragBox icon={this.props.icon} name={this.constructor.name} className={this.className} el={this}>
             {this.renderBox()}
             <DropBox>

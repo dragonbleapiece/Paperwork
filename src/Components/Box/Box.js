@@ -7,6 +7,9 @@ import ContextMenuBox from '../ContextMenuBox/ContextMenuBox';
 /*Pencil*/
 class Box extends Component {
 
+  static get id() {
+    return Box._id++;
+  }
 
   state = {
     children: [],
@@ -27,7 +30,7 @@ class Box extends Component {
     let obj = new child(); //tricky
     if(window.isAuthorized(child, this.unauthorized) && obj instanceof Box) {
       this.setState({
-        children: [child]
+        children: [{type:child, id:Box.id}]
       });
     }
   }
@@ -59,24 +62,20 @@ class Box extends Component {
     let children = [];
 
     if(this.state.children.length > 0) {
-      let Component = this.state.children[0];
-      children.push(<Component key={0} ref={el => {this.next = el; console.log(el);}} icon={this.icon[0]}/>);
+      let child = this.state.children[0];
+      children.push(<child.type key={child.id} id={child.id} ref={el => {this.next = el; console.log(el);}} icon={this.icon[0]}/>);
     }
     return children;
   }
 
   renderBox() {
-    return (
-      <>
-        {this.getChildren()}
-      </>
-    );
+    return this.getChildren();
   }
 
   render() {
     return (
       <div className={this.className} style={this.state.style}>
-        <ContextMenuBox id={this.constructor.name} unauthorized={this.unauthorized} el={this}>
+        <ContextMenuBox id={this.constructor.name + this.props.id} unauthorized={this.unauthorized} el={this}>
           <DragBox icon={this.props.icon} name={this.constructor.name} el={this}>
           <span className="Box__content">
             {this.renderBox()}
@@ -87,5 +86,7 @@ class Box extends Component {
     );
   }
 }
+
+Box._id = 0; //or use shortid ?
 
 export default Box;

@@ -36,9 +36,9 @@ export function getClassFromName(name) {
     case('Red'):
       return Red;
     case('Blue'):
-      return Red;
+      return Blue;
     case('Green'):
-      return Red;
+      return Green;
     case('Translate'):
       return Translate;
     case('Rotate'):

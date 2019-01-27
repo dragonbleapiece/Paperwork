@@ -14,6 +14,10 @@ import ellipse from '../../Icons/ellipse.svg';
 import translate from '../../Icons/translate.svg';
 import rotate from '../../Icons/rotate.svg';
 
+function test() {
+  console.log("test");
+}
+
 const menu = [
   {
     type: 'Figure',
@@ -65,6 +69,7 @@ class ContextMenuBox extends Component {
 
   handleClick(event, data) {
     if(data.type !== undefined) {
+      console.log(data.el);
       window.addClassToElement(data.type, data.el);
       data.el.addIcon(data.icon);
     }
