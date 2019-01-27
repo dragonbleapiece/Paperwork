@@ -28,7 +28,7 @@ class Markov extends BoxGroup {
     let rand = sk.random(100);
     let i;
 
-    for(i = 0; i < this.elementsLength && rand > proba; ++i) {
+    for(i = 0; i < this.elementsLength && rand >= proba; ++i) {
       proba = this.proba[this.currentState][i];
     }
 
