@@ -25,7 +25,7 @@ class Markov extends BoxGroup {
       return;
     }
     let proba = 0;
-    let rand = sk.random(100);
+    let rand = parseInt(Math.random() * (100));
     let i;
 
     for(i = 0; i < this.elementsLength && rand >= proba; ++i) {
@@ -53,7 +53,7 @@ class Markov extends BoxGroup {
         marks: {0:0, 100:100},
         step: 1,
         count: length - 1,
-        pushable: true,
+        pushable: 0,
         style: {width: 100, margin: 20},
         handleStyle: { borderColor: 'black'},
         trackStyle: { backgroundColor: 'black' },
