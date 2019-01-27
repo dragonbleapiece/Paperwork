@@ -63,14 +63,17 @@ class Grid extends Distribution {
         marks={{1: 1, 20: 20}}
         step={1}
         className="Box__slider"
-        handleStyle={{ borderColor: 'black'}}
-        trackStyle={{ backgroundColor: 'black' }}
-        railStyle={{ backgroundColor: 'black' }}
-        dotStyle={{ borderColor: 'black' }}
-        activeHandleStyle={{borderColor: 'red'}}
+        style={{padding: '3px 0'}}
+        trackStyle={{height: '8px', backgroundColor: 'black', borderRadius: 'unset' }}
+        railStyle={{height: '8px', backgroundColor: 'black', borderRadius: 'unset' }}
+        handleStyle={{marginTop: '-3px', borderColor: 'black' }}
+        dotStyle={{bottom: '-4px', borderColor: 'black' }}
         onChange={(value) => {this.setState({columns: value, rows: value}); Workspace.forceUpdate();}}
         />
-        {this.getChildren()}
+        <div>
+          {!this.state.children.length && <span className="Box__placeholder">Right click to add</span>}
+          {this.getChildren()}
+        </div>
       </>
     );
   }

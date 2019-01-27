@@ -5,6 +5,7 @@ import {DragSource} from 'react-dnd';
 
 //import Icons
 import SVG from 'react-svg';
+import cancel from '../../Icons/cancel.svg';
 
 //Functions for dragging the box
 const boxSource = {
@@ -65,8 +66,10 @@ class DragBox extends Component {
     return connectDragPreview(
       <div>
         {connectDragSource(<span className="Box__title">
-        {this.props.icon && <SVG className="Box__titleIcon" src={this.props.icon}/>}
-        <span className="Box__titleText">{this.props.name}</span></span>)}
+          {this.props.icon && <SVG className="Box__titleIcon" src={this.props.icon}/>}
+          <span className="Box__titleText">{this.props.name}</span>
+          <SVG className="Box__titleClose button" src={cancel}/>
+        </span>)}
         {this.props.children}
       </div>
     );

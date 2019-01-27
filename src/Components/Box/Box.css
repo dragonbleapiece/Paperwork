@@ -1,4 +1,4 @@
-.Box {
+.Box, .BoxGroup {
     display: flex;
     flex-direction: column;
     margin: 20px;
@@ -31,6 +31,10 @@
   align-items: center;
   flex: 1;
   padding: 0 20px;
+}
+
+.Box__titleClose {
+  width: 60px;
 }
 
 .Box__content {
