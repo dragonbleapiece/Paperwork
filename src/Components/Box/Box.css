@@ -49,6 +49,11 @@
   min-width: 100px;
   margin: 20px;
 } 
+
+.Box__placeholder {
+  color: grey;
+}
+
 /* Overwrite rc-slider style */
 .Box .Box__content .Box__slider .rc-slider-handle {
   border: solid 2px black;

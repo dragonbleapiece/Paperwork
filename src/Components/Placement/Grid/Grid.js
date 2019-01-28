@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import Distribution from '../Distribution';
+import Placement from '../Placement';
 import './Grid.css';
 import Slider, { Range } from 'rc-slider';
 import 'rc-slider/assets/index.css';
@@ -9,7 +9,7 @@ import ContextMenuBox from '../../ContextMenuBox/ContextMenuBox';
 import Workspace from '../../Workspace/Workspace';
 
 /*Pencil*/
-class Grid extends Distribution {
+class Grid extends Placement {
 
   constructor(props) {
     super(props);

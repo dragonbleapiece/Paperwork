@@ -20,7 +20,14 @@ function test() {
 
 const menu = [
   {
-    type: 'Figure',
+    type: 'Placement',
+    elements: [
+      {type: 'Grid',
+      icon: grid_on}
+    ]
+  },
+  {
+    type: 'Elements',
     elements: [
       {type: 'Rectangle',
       icon: square},
@@ -40,13 +47,6 @@ const menu = [
   },
   {
     type: 'Markov'
-  },
-  {
-    type: 'Distribution',
-    elements: [
-      {type: 'Grid',
-      icon: grid_on}
-    ]
   },
   {
     type: 'Transform',

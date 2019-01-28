@@ -8,8 +8,8 @@ class Ellipse extends Figure {
   constructor(props) {
     super(props);
     this.className += " " + Ellipse.name;
-    this.width = 10;
-    this.height = 10;
+    this.width = 40;
+    this.height = 40;
     this.x = this.width / 2;
     this.y = this.height / 2;
   }

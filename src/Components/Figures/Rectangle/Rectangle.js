@@ -10,8 +10,8 @@ class Rectangle extends Figure {
     this.className += " " + Rectangle.name;
     this.x = 0;
     this.y = 0;
-    this.width = 10;
-    this.height = 10;
+    this.width = 40;
+    this.height = 40;
   }
 
   draw(sk) {

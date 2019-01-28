@@ -10,8 +10,8 @@ class Triangle extends Figure {
     this.className += " " + Triangle.name;
     this.x = 0;
     this.y = 10;
-    this.width = 10;
-    this.height = 10;
+    this.width = 40;
+    this.height = 40;
   }
 
   draw(sk) {

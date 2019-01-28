@@ -2,8 +2,8 @@ import Figure from './Figures/Figure';
 import Rectangle from './Figures/Rectangle/Rectangle';
 import Triangle from './Figures/Triangle/Triangle';
 import Ellipse from './Figures/Ellipse/Ellipse';
-import Distribution from './Distributions/Distribution';
-import Grid from './Distributions/Grid/Grid';
+import Placement from './Placement/Placement';
+import Grid from './Placement/Grid/Grid';
 import Markov from './Markov/Markov';
 import Transform from './Transforms/Transform';
 import Translate from './Transforms/Translate/Translate';
@@ -23,8 +23,8 @@ export function getClassFromName(name) {
       return Triangle;
     case('Ellipse'):
       return Ellipse;
-    case('Distribution'):
-      return Distribution;
+    case('Placement'):
+      return Placement;
     case('Grid'):
       return Grid;
     case('Markov'):
