@@ -84,7 +84,11 @@ class Box extends Component {
           <DragBox icon={this.props.icon} name={this.constructor.name} el={this}>
           <span className="Box__content">
             {this.renderBox()}
-            {!this.state.children.length && this.unauthorized.indexOf("*") === -1 && <span className="Box__placeholder">Right click to add</span>}
+            {!this.state.children.length && this.unauthorized.indexOf("*") === -1 &&
+            <div className="Box__container">
+              <span className="Box__placeholder">Right click to add</span>
+            </div>
+            }
           </span>
           </DragBox>
         </ContextMenuBox>

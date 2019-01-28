@@ -1,12 +1,11 @@
 import React, { Component } from 'react';
 import Placement from '../Placement';
 import './Grid.css';
-import Slider, { Range } from 'rc-slider';
 import 'rc-slider/assets/index.css';
 import Canvas from '../../Canvas/Canvas';
 import DragBox from '../../DragBox/DragBox';
 import ContextMenuBox from '../../ContextMenuBox/ContextMenuBox';
-import Workspace from '../../Workspace/Workspace';
+import SliderBox from '../../Input/SliderBox/SliderBox';
 
 /*Pencil*/
 class Grid extends Placement {
@@ -55,23 +54,14 @@ class Grid extends Placement {
   renderBox() {
     return(
       <>
-        <Slider
+        <SliderBox
         min={1}
         max={20}
         defaultValue={this.state.columns}
         marks={{1: 1, 20: 20}}
         step={1}
-        className="Box__slider"
-        style={{padding: '3px 0'}}
-        trackStyle={{height: '8px', backgroundColor: 'black', borderRadius: 'unset' }}
-        railStyle={{height: '8px', backgroundColor: 'black', borderRadius: 'unset' }}
-        handleStyle={{marginTop: '-3px', borderColor: 'black' }}
-        dotStyle={{bottom: '-4px', borderColor: 'black' }}
-        onChange={(value) => {this.setState({columns: value, rows: value}); Workspace.forceUpdate();}}
+        onChange={(value) => {this.setState({columns: value, rows: value});}}
         />
-        <div>
-          {this.getChildren()}
-        </div>
       </>
     );
   }
