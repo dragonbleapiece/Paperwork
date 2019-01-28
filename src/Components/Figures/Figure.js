@@ -13,11 +13,18 @@ class Figure extends Box {
     this.y = 0;
     this.width = 0;
     this.height = 0;
-    this.unauthorized = ["Color", "Figure", "Distribution"];
+    this.unauthorized = ["*"];
+  }
+
+  drawFigure(sk) {
+
   }
 
   draw(sk) {
-
+    sk.push();
+      sk.translate(-this.width / 2, -this.height / 2);
+      this.drawFigure(sk);
+    sk.pop();
   }
 }
 

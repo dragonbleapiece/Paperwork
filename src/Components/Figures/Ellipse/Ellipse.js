@@ -14,7 +14,7 @@ class Ellipse extends Figure {
     this.y = this.height / 2;
   }
 
-  draw(sk) {
+  drawFigure(sk) {
     sk.ellipse(this.x, this.y, this.width, this.height);
   }
 

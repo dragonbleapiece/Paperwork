@@ -14,7 +14,7 @@ class Rectangle extends Figure {
     this.height = 40;
   }
 
-  draw(sk) {
+  drawFigure(sk) {
     sk.rect(this.x, this.y, this.width, this.height);
   }
 

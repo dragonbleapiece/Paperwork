@@ -32,7 +32,13 @@ window.isAuthorized = function(type, unauthorized) {
     }
 
     for(let i = 0; i < unauthorized.length && r; ++i) {
-      r = r && !(obj instanceof getClassFromName(unauthorized[i]));
+      console.log(unauthorized);
+      let unauthorizedClass = getClassFromName(unauthorized[i]);
+      if(unauthorizedClass === null) {
+        console.error(unauthorized[i] + " : Invalid unauthorized Class");
+        continue;
+      }
+      r = r && !(obj instanceof unauthorizedClass);
     }
   }
 

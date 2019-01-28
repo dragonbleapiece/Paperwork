@@ -30,7 +30,7 @@ export function getClassFromName(name) {
     case('Markov'):
       return Markov;
     case('Transform'):
-      return Markov;
+      return Transform;
     case('Color'):
       return Color;
     case('Red'):

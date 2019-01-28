@@ -76,31 +76,43 @@ class ContextMenuBox extends Component {
   }
 
   render() {
+
+    if(this.props.el.unauthorized.indexOf("*") !== -1) {
+      return (
+        <ContextMenuTrigger id={this.props.id} holdToDisplay={-1}>
+            {this.props.children}
+        </ContextMenuTrigger>
+      );
+    }
+
     let menuItems = menu.map(
       (item, index) => {
-        if (!item.elements) {
-          return (<MenuItem onClick={this.handleClick} data={{ type: item.type, el: this.props.el, icon: item.icon }} key={index}>
-            {item.icon && <span className="react-contextmenu-itemIcon"><SVG src={item.icon}/></span>}
-            <span className="react-contextmenu-itemText">{item.type}</span>
-          </MenuItem>);
-        } else {
-          return (<SubMenu key={index} title={
-            <><span  className="react-contextmenu-itemLabel">
+        if(this.props.el.unauthorized.indexOf(item.type) === -1) {
+          if (!item.elements) {
+            return (<MenuItem onClick={this.handleClick} data={{ type: item.type, el: this.props.el, icon: item.icon }} key={index}>
               {item.icon && <span className="react-contextmenu-itemIcon"><SVG src={item.icon}/></span>}
               <span className="react-contextmenu-itemText">{item.type}</span>
-            </span>
-            <span className="react-contextmenu-itemIcon"><SVG src={arrow_right}/></span>
-            </>
-          }>
-              {item.elements.map(
-                (subItem, index) =>
-                  <MenuItem onClick={this.handleClick} data={{ type: subItem.type, el: this.props.el, icon: subItem.icon }} key={index}>
-                    {subItem.icon && <span className="react-contextmenu-itemIcon"><SVG src={subItem.icon}/></span>}
-                    <span className="react-contextmenu-itemText">{subItem.type}</span>
-                  </MenuItem>
+            </MenuItem>);
+          } else {
+            return (<SubMenu key={index} title={
+              <>
+                <span  className="react-contextmenu-itemLabel">
+                {item.icon && <span className="react-contextmenu-itemIcon"><SVG src={item.icon}/></span>}
+                <span className="react-contextmenu-itemText">{item.type}</span>
+                </span>
+                <span className="react-contextmenu-itemIcon"><SVG src={arrow_right}/></span>
+              </>
+            }>
+                {item.elements.map(
+                  (subItem, index) =>
+                    <MenuItem onClick={this.handleClick} data={{ type: subItem.type, el: this.props.el, icon: subItem.icon }} key={index}>
+                      {subItem.icon && <span className="react-contextmenu-itemIcon"><SVG src={subItem.icon}/></span>}
+                      <span className="react-contextmenu-itemText">{subItem.type}</span>
+                    </MenuItem>
 
-              )}
-          </SubMenu>);
+                )}
+            </SubMenu>);
+          }
         }
       }
     );
