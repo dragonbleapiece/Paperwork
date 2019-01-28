@@ -3,6 +3,7 @@ import './Box.css';
 import p5 from 'p5';
 import DragBox from '../DragBox/DragBox';
 import ContextMenuBox from '../ContextMenuBox/ContextMenuBox';
+import { ContextMenuTrigger } from "react-contextmenu";
 
 /*Pencil*/
 class Box extends Component {
@@ -89,18 +90,20 @@ class Box extends Component {
   render() {
     return (
       <div className={this.className} style={this.state.style}>
-        <ContextMenuBox id={this.constructor.name + this.props.id} unauthorized={this.unauthorized} el={this}>
+        <ContextMenuTrigger>
           <DragBox icon={this.props.icon} name={this.constructor.name} onClose={this.removeFromParent.bind(this)} el={this}>
-          <span className="Box__content">
-            {this.renderBox()}
+            <span className="Box__content">
+              {this.renderBox()}
 
-            {this.unauthorized.indexOf("*") === -1 && <div className="Box__container">
-              {!this.state.children.length && <span className="Box__placeholder">Right click to add</span>}
-              {this.getChildren()}
-            </div>}
-          </span>
+              {this.unauthorized.indexOf("*") === -1 && <ContextMenuBox id={this.constructor.name + this.props.id} unauthorized={this.unauthorized} el={this}>
+                <div className="Box__container">
+                  {!this.state.children.length && <span className="Box__placeholder">Right click to add</span>}
+                  {this.getChildren()}
+                </div>
+              </ContextMenuBox>}
+            </span>
           </DragBox>
-        </ContextMenuBox>
+        </ContextMenuTrigger>
       </div>
     );
   }

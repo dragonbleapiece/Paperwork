@@ -6,6 +6,8 @@ import p5 from 'p5';
 import DropBox from '../DropBox/DropBox';
 import DragBox from '../DragBox/DragBox';
 import ContextMenuBox from '../ContextMenuBox/ContextMenuBox';
+import { ContextMenuTrigger } from "react-contextmenu";
+
 
 /*Pencil*/
 class BoxGroup extends Box {
@@ -75,21 +77,21 @@ class BoxGroup extends Box {
 
     return (
       <div className={this.className} style={this.state.style}>
-        <ContextMenuBox id={this.constructor.name + this.props.id} unauthorized={this.unauthorized} el={this}>
-          <DragBox icon={this.props.icon} name={this.constructor.name} onClose={this.removeFromParent.bind(this)} className={this.className} el={this}>
-            <span className="Box__content">
-              {this.renderBox()}
-
-              <DropBox>
-                {this.unauthorized.indexOf("*") === -1 && <div className="Box__container">
-                  {!this.state.children.length && <span className="Box__placeholder">Right click to add</span>}
-                  {this.getChildren()}
-                </div>}
-              </DropBox>
-            </span>
-
-          </DragBox>
-        </ContextMenuBox>
+          <ContextMenuTrigger>
+            <DragBox icon={this.props.icon} name={this.constructor.name} onClose={this.removeFromParent.bind(this)} className={this.className} el={this}>
+              <span className="Box__content">
+                {this.renderBox()}
+                <DropBox>
+                  {this.unauthorized.indexOf("*") === -1 && <ContextMenuBox id={this.constructor.name + this.props.id} unauthorized={this.unauthorized} el={this}>
+                    <div className="Box__container">
+                      {!this.state.children.length && <span className="Box__placeholder">Right click to add</span>}
+                      {this.getChildren()}
+                    </div>
+                  </ContextMenuBox>}
+                </DropBox>
+              </span>
+            </DragBox>
+          </ContextMenuTrigger>
       </div>
     );
   }
