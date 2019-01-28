@@ -69,7 +69,7 @@ class Grid extends Placement {
         dotStyle={{bottom: '-4px', borderColor: 'black' }}
         onChange={(value) => {this.setState({columns: value, rows: value}); Workspace.forceUpdate();}}
         />
-        <div>
+        <div className="Box__container">
           {!this.state.children.length && <span className="Box__placeholder">Right click to add</span>}
           {this.getChildren()}
         </div>
