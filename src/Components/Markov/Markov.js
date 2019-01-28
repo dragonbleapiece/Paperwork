@@ -1,10 +1,10 @@
 import React, { Component } from 'react';
 import BoxGroup from '../BoxGroup/BoxGroup';
-import Input from '../Input/Input';
-import Slider, { Range } from 'rc-slider';
 import 'rc-slider/assets/index.css';
 import './Markov.css';
 import Workspace from '../Workspace/Workspace';
+import RangeBox from '../Input/RangeBox/RangeBox';
+
 
 /*Pencil*/
 class Markov extends BoxGroup {
@@ -61,13 +61,7 @@ class Markov extends BoxGroup {
         marks: {0:0, 100:1},
         step: 10,
         count: length - 1,
-        pushable: 0,
-        style: {width: 100, margin: 20},
-        handleStyle: { borderColor: 'black'},
-        trackStyle: { backgroundColor: 'black' },
-        railStyle: { backgroundColor: 'black' },
-        dotStyle: { borderColor: 'black' },
-        activeHandleStyle: {borderColor: 'red'}
+        pushable: 0
       };
 
       sliders = this.state.children.map((child, index) => {
@@ -77,7 +71,7 @@ class Markov extends BoxGroup {
           }
           propsRange.key = this.idElement[index];
           propsRange.onChange = (value) => {this.proba[index] = value; Workspace.forceUpdate();}
-          return React.createElement(Range, propsRange);
+      return <RangeBox {...propsRange}/>;
         }
       );
     }
