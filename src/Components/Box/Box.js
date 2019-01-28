@@ -45,8 +45,7 @@ class Box extends Component {
 
   removeFromParent() {
     let children = this.props.parent.state.children;
-    children.splice(children.findIndex(el => el.id === this.id), 1);
-    console.log(children);
+    children = children.filter(el => el.id !== this.props.id);
     this.props.parent.setChildren(children);
   }
 

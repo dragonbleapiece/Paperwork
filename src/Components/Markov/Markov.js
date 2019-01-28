@@ -4,7 +4,7 @@ import 'rc-slider/assets/index.css';
 import './Markov.css';
 import Workspace from '../Workspace/Workspace';
 import RangeBox from '../Input/RangeBox/RangeBox';
-
+import shortid from 'shortid';
 
 /*Pencil*/
 class Markov extends BoxGroup {
@@ -16,19 +16,18 @@ class Markov extends BoxGroup {
     this.elementsLength = this.state.children.length;
     this.currentState = parseInt(Math.random() * (this.elementsLength));
     this.idElement = [];
-    this.id = 0;
   }
 
   setChildren(children) {
     super.setChildren(children);
-    this.elementsLength = this.state.children.length;
     this.currentState = parseInt(Math.random() * (this.elementsLength));
   }
 
   draw(sk) {
-    if(this.elementsLength === 0) return;
+    let length = this.state.children.length;
+    if(length === 0) return;
     let element = this.elements[this.currentState];
-    if(this.elementsLength === 1) {
+    if(length === 1) {
       element.draw(sk);
       return;
     }
@@ -36,7 +35,7 @@ class Markov extends BoxGroup {
     let rand = parseInt(Math.random() * (100));
     let i;
 
-    for(i = 0; i < this.elementsLength && rand >= proba; ++i) {
+    for(i = 0; i < length && rand >= proba; ++i) {
       proba = this.proba[this.currentState][i];
     }
 
@@ -67,11 +66,11 @@ class Markov extends BoxGroup {
       sliders = this.state.children.map((child, index) => {
           if(this.elementsLength !== length) {
             this.proba[index] = defaultValues;
-            this.idElement[index] = this.id++
+            this.idElement[index] = shortid.generate();
           }
           propsRange.key = this.idElement[index];
           propsRange.onChange = (value) => {this.proba[index] = value; Workspace.forceUpdate();}
-      return <RangeBox {...propsRange}/>;
+          return <RangeBox {...propsRange}/>;
         }
       );
     }
