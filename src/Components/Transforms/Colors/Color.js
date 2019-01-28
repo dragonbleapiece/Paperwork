@@ -19,7 +19,7 @@ class Color extends Transform {
   draw(sk) {
     let c = sk.color(this.r, this.g, this.b, this.a);
     sk.fill(c);
-    if(this.next !== undefined) {
+    if(this.next) {
       this.next.draw(sk);
     }
   }
