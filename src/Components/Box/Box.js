@@ -38,6 +38,10 @@ class Box extends Component {
   removeFromParent() {
     let children = this.props.parent.state.children;
     children = children.splice(children.findIndex(el => el.id === this.id), 1);
+    console.log(children);
+    this.props.parent.setState({
+      children: children
+    })
   }
 
   addNext(elmnt) {
@@ -64,6 +68,7 @@ class Box extends Component {
   }
 
   getChildren() {
+    this.next = undefined;
     let children = [];
 
     if(this.state.children.length > 0) {
@@ -74,21 +79,21 @@ class Box extends Component {
   }
 
   renderBox() {
-    return this.getChildren();
+    return null;
   }
 
   render() {
     return (
       <div className={this.className} style={this.state.style}>
         <ContextMenuBox id={this.constructor.name + this.props.id} unauthorized={this.unauthorized} el={this}>
-          <DragBox icon={this.props.icon} name={this.constructor.name} el={this}>
+          <DragBox icon={this.props.icon} name={this.constructor.name} onClose={this.removeFromParent.bind(this)} el={this}>
           <span className="Box__content">
             {this.renderBox()}
-            {!this.state.children.length && this.unauthorized.indexOf("*") === -1 &&
-            <div className="Box__container">
-              <span className="Box__placeholder">Right click to add</span>
-            </div>
-            }
+
+            {this.unauthorized.indexOf("*") === -1 && <div className="Box__container">
+              {!this.state.children.length && <span className="Box__placeholder">Right click to add</span>}
+              {this.getChildren()}
+            </div>}
           </span>
           </DragBox>
         </ContextMenuBox>

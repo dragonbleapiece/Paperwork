@@ -53,6 +53,7 @@ class BoxGroup extends Box {
   }
 
   getChildren() {
+    this.elements = [];
     let children = this.state.children.map((child, index) =>
       <child.type key={child.id} id={child.id} parent={this} ref={el => this.elements[index] = el} icon={this.icon[index]}/>
     );
@@ -70,7 +71,7 @@ class BoxGroup extends Box {
     return (
       <div className={this.className} style={this.state.style}>
         <ContextMenuBox id={this.constructor.name + this.props.id} unauthorized={this.unauthorized} el={this}>
-          <DragBox icon={this.props.icon} name={this.constructor.name} className={this.className} el={this}>
+          <DragBox icon={this.props.icon} name={this.constructor.name} onClose={this.removeFromParent.bind(this)} className={this.className} el={this}>
             {this.renderBox()}
             <DropBox>
               {this.getChildren()}
