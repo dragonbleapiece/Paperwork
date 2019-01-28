@@ -43,7 +43,7 @@ class Workspace extends BoxGroup {
       return Workspace._instance;
     }
     super(props);
-    this.className = this.constructor.name;
+    this.className = this.constructor.className;
     this.state.children = [];
     this.elements = []; //no this.state.elements
     this.unauthorized = ["Markov"];
@@ -93,7 +93,7 @@ class Workspace extends BoxGroup {
   render() {
     return (
       <div className={this.className}>
-        <ContextMenuBox id={this.constructor.name} unauthorized={this.unauthorized} el={this}>
+        <ContextMenuBox id={this.constructor.className} unauthorized={this.unauthorized} el={this}>
           <DropBox>
             {!this.state.children.length && <span className="Workspace__placeholder">Right click here</span>}
             {this.getChildren()}
@@ -104,6 +104,7 @@ class Workspace extends BoxGroup {
   }
 }
 
+Workspace.className = "Workspace";
 Workspace._instance = undefined;
 
 export default DragDropContext(HTML5Backend)(Workspace);

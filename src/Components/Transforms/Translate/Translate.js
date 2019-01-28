@@ -7,7 +7,7 @@ class Translate extends Transform {
 
   constructor(props) {
     super(props);
-    this.className += " " + Translate.name;
+    this.className += " " + Translate.className;
     this.destX = 10;
     this.destY = 10;
   }
@@ -21,5 +21,7 @@ class Translate extends Transform {
     sk.pop();
   }
 }
+
+Translate.className = "Translate";
 
 export default Translate;

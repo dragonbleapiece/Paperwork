@@ -8,7 +8,7 @@ class Figure extends Box {
 
   constructor(props) {
     super(props);
-    this.className += " " + Figure.name;
+    this.className += " " + Figure.className;
     this.x = 0;
     this.y = 0;
     this.width = 0;
@@ -27,5 +27,7 @@ class Figure extends Box {
     sk.pop();
   }
 }
+
+Figure.className = "Figure";
 
 export default Figure;

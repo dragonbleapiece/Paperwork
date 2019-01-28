@@ -7,7 +7,7 @@ class Rectangle extends Figure {
 
   constructor(props) {
     super(props);
-    this.className += " " + Rectangle.name;
+    this.className += " " + Rectangle.className;
     this.x = 0;
     this.y = 0;
     this.width = 40;
@@ -19,5 +19,7 @@ class Rectangle extends Figure {
   }
 
 }
+
+Rectangle.className = "Rectangle";
 
 export default Rectangle;

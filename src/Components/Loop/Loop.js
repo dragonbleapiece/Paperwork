@@ -7,7 +7,7 @@ class Loop extends Box {
 
   constructor(props) {
     super(props);
-    this.className += " " + Loop.name;
+    this.className += " " + Loop.className;
     this.nbIterations = 10;
   }
 
@@ -19,5 +19,7 @@ class Loop extends Box {
     }
   }
 }
+
+Loop.className = "Loop";
 
 export default Loop;

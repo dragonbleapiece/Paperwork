@@ -8,7 +8,7 @@ class Color extends Transform {
 
   constructor(props) {
     super(props);
-    this.className += " " + Color.name;
+    this.className += " " + Color.className;
     this.r = 0;
     this.g = 0;
     this.b = 0;
@@ -25,5 +25,7 @@ class Color extends Transform {
   }
 
 }
+
+Color.className = "Color";
 
 export default Color;

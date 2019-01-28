@@ -7,7 +7,7 @@ class Rotate extends Transform {
 
   constructor(props) {
     super(props);
-    this.className += " " + Rotate.name;
+    this.className += " " + Rotate.className;
     this.rotate = 20;
   }
 
@@ -20,5 +20,7 @@ class Rotate extends Transform {
     sk.pop();
   }
 }
+
+Rotate.className = "Rotate";
 
 export default Rotate;

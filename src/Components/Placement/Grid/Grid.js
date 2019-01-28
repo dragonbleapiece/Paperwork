@@ -12,7 +12,7 @@ class Grid extends Placement {
 
   constructor(props) {
     super(props);
-    this.className += " " + Grid.name;
+    this.className += " " + Grid.className;
     //const {columns, rows} = this.props;
     this.state.columns = 8;
     this.state.rows = 8;
@@ -67,5 +67,7 @@ class Grid extends Placement {
   }
 
 }
+
+Grid.className = "Grid";
 
 export default Grid;
