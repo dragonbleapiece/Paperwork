@@ -70,7 +70,6 @@ class Grid extends Placement {
         onChange={(value) => {this.setState({columns: value, rows: value}); Workspace.forceUpdate();}}
         />
         <div>
-          {!this.state.children.length && <span className="Box__placeholder">Right click to add</span>}
           {this.getChildren()}
         </div>
       </>

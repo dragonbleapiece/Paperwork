@@ -75,6 +75,7 @@ class BoxGroup extends Box {
             {this.renderBox()}
             <DropBox>
               {this.getChildren()}
+              {!this.state.children.length && this.unauthorized.indexOf("*") === -1 && <span className="Box__placeholder">Right click to add</span>}
             </DropBox>
           </DragBox>
         </ContextMenuBox>

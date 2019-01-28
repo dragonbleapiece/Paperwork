@@ -46,6 +46,7 @@ class Workspace extends BoxGroup {
     this.className = this.constructor.name;
     this.state.children = [];
     this.elements = []; //no this.state.elements
+    this.unauthorized = ["Markov"];
     Workspace._instance = this;
   }
 

@@ -9,13 +9,13 @@ class Triangle extends Figure {
     super(props);
     this.className += " " + Triangle.name;
     this.x = 0;
-    this.y = 10;
+    this.y = 0;
     this.width = 40;
     this.height = 40;
   }
 
-  draw(sk) {
-    sk.triangle(this.x, this.y, this.x + this.width, this.y, (this.x + this.width) / 2, this.y - this.height);
+  drawFigure(sk) {
+    sk.triangle(this.x, this.y + this.height, this.x + this.width, this.y + this.height, (this.x + this.width) / 2, this.y);
   }
 }
 
