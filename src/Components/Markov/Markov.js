@@ -17,6 +17,12 @@ class Markov extends BoxGroup {
     this.currentState = parseInt(Math.random() * (this.elementsLength));
   }
 
+  setChildren(children) {
+    super.setChildren(children);
+    this.elementsLength = this.state.children.length;
+    this.currentState = parseInt(Math.random() * (this.elementsLength));
+  }
+
   draw(sk) {
     if(this.elementsLength === 0) return;
     let element = this.elements[this.currentState];

@@ -35,13 +35,17 @@ class Box extends Component {
     }
   }
 
-  removeFromParent() {
-    let children = this.props.parent.state.children;
-    children = children.splice(children.findIndex(el => el.id === this.id), 1);
-    console.log(children);
-    this.props.parent.setState({
+  setChildren(children) {
+    this.setState({
       children: children
     })
+  }
+
+  removeFromParent() {
+    let children = this.props.parent.state.children;
+    children.splice(children.findIndex(el => el.id === this.id), 1);
+    console.log(children);
+    this.props.parent.setChildren(children);
   }
 
   addNext(elmnt) {

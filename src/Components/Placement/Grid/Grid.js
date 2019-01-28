@@ -34,7 +34,7 @@ class Grid extends Placement {
           sk.push();
             sk.translate(0, j * row);
             sk.line(0, 0, sk.width, 0);
-            if(elem !== undefined) {
+            if(elem) {
               sk.noStroke();
               sk.push();
                 sk.translate(column / 2, row / 2);

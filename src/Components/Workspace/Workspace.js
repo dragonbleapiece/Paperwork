@@ -53,8 +53,10 @@ class Workspace extends BoxGroup {
   componentDidUpdate() {
     let canvas = new Canvas();
     let firstBox = this.elements[0];
-    if(firstBox !== undefined) {
+    if(firstBox) {
       canvas.sendDraw(firstBox.draw.bind(firstBox));
+    } else {
+      Canvas._P5.clear();
     }
   }
 

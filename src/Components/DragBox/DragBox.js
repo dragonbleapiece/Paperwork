@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import { findDOMNode } from 'react-dom';
 import {ItemTypes} from '../../Constants.js';
 import {DragSource} from 'react-dnd';
+import Workspace from '../Workspace/Workspace';
 
 //import Icons
 import SVG from 'react-svg';
@@ -57,6 +58,13 @@ class DragBox extends Component {
     this.props.el.setStyle(style);
   }
 
+  onClose() {
+      if(this.props.onClose !== undefined) {
+        this.props.onClose();
+      }
+      Workspace.forceUpdate();
+  }
+
 
   render() {
     const { isDragging, connectDragSource, connectDragPreview } = this.props;
@@ -68,7 +76,7 @@ class DragBox extends Component {
         {connectDragSource(<span className="Box__title">
           {this.props.icon && <SVG className="Box__titleIcon" src={this.props.icon}/>}
           <span className="Box__titleText">{this.props.name}</span>
-          <span className="Box__titleClose button" onClick={this.props.onClose}>
+          <span className="Box__titleClose button" onClick={this.onClose.bind(this)}>
             <SVG src={cancel}/>
           </span>
         </span>)}

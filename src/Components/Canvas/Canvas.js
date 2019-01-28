@@ -51,6 +51,7 @@ class Canvas extends Component {
       sk.draw = self.draw.bind(self, sk);
       sk.windowResized = self.windowResized.bind(self, sk);
       sk.savePaper = self.savePaper.bind(self, sk);
+
     }
 
     Canvas._P5 = new p5(s, 'renderer');
@@ -91,7 +92,6 @@ class Canvas extends Component {
       f(sk);
     }
   }
-
 
   componentDidMount() {
     this.CalcCanvasSize();

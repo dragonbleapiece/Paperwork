@@ -29,6 +29,11 @@ class BoxGroup extends Box {
     }
   }
 
+  setChildren(children) {
+    this.elements = [];
+    super.setChildren(children);
+  }
+
   draw(sk) {
     for(let i = 0; i < this.elements.length; ++i) {
        let element = this.elements[i];
@@ -72,11 +77,17 @@ class BoxGroup extends Box {
       <div className={this.className} style={this.state.style}>
         <ContextMenuBox id={this.constructor.name + this.props.id} unauthorized={this.unauthorized} el={this}>
           <DragBox icon={this.props.icon} name={this.constructor.name} onClose={this.removeFromParent.bind(this)} className={this.className} el={this}>
-            {this.renderBox()}
-            <DropBox>
-              {this.getChildren()}
-              {!this.state.children.length && this.unauthorized.indexOf("*") === -1 && <span className="Box__placeholder">Right click to add</span>}
-            </DropBox>
+            <span className="Box__content">
+              {this.renderBox()}
+
+              <DropBox>
+                {this.unauthorized.indexOf("*") === -1 && <div className="Box__container">
+                  {!this.state.children.length && <span className="Box__placeholder">Right click to add</span>}
+                  {this.getChildren()}
+                </div>}
+              </DropBox>
+            </span>
+
           </DragBox>
         </ContextMenuBox>
       </div>
