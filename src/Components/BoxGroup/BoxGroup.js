@@ -14,7 +14,7 @@ class BoxGroup extends Box {
 
   constructor(props) {
     super(props);
-    this.className = BoxGroup.name;
+    this.className = BoxGroup.className;
     this.elements = [];
   }
 
@@ -78,11 +78,11 @@ class BoxGroup extends Box {
     return (
       <div className={this.className} style={this.state.style}>
           <ContextMenuTrigger>
-            <DragBox icon={this.props.icon} name={this.constructor.name} onClose={this.removeFromParent.bind(this)} className={this.className} el={this}>
+            <DragBox icon={this.props.icon} name={this.constructor.className} onClose={this.removeFromParent.bind(this)} className={this.className} el={this}>
               <span className="Box__content">
                 {this.renderBox()}
                 <DropBox>
-                  {this.unauthorized.indexOf("*") === -1 && <ContextMenuBox id={this.constructor.name + this.props.id} unauthorized={this.unauthorized} el={this}>
+                  {this.unauthorized.indexOf("*") === -1 && <ContextMenuBox id={this.constructor.className + this.props.id} unauthorized={this.unauthorized} el={this}>
                     <div className="Box__container">
                       {!this.state.children.length && <span className="Box__placeholder">Right click to add</span>}
                       {this.getChildren()}
@@ -96,5 +96,7 @@ class BoxGroup extends Box {
     );
   }
 }
+
+BoxGroup.className = "BoxGroup";
 
 export default BoxGroup;

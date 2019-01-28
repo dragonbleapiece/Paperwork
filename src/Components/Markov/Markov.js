@@ -11,7 +11,7 @@ class Markov extends BoxGroup {
 
   constructor(props) {
     super(props);
-    this.className += " " + Markov.name;
+    this.className += " " + Markov.className;
     this.proba = [];
     this.elementsLength = this.state.children.length;
     this.currentState = parseInt(Math.random() * (this.elementsLength));
@@ -87,5 +87,7 @@ class Markov extends BoxGroup {
   }
 
 }
+
+Markov.className = "Markov";
 
 export default Markov;

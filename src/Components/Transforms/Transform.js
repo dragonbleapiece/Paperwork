@@ -8,12 +8,14 @@ class Transform extends Box {
 
   constructor(props) {
     super(props);
-    this.className += " " + Transform.name;
+    this.className += " " + Transform.className;
   }
 
   draw(sk) {
 
   }
 }
+
+Transform.className = "Transform";
 
 export default Transform;

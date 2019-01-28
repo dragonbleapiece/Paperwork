@@ -19,7 +19,8 @@ class Box extends Component {
 
   constructor(props) {
     super(props);
-    this.className = Box.name;
+    this.className = Box.className;
+    this.name = Box.className;
     this.next = undefined;
     this.nextType = undefined;
     this.unauthorized = [];
@@ -91,11 +92,11 @@ class Box extends Component {
     return (
       <div className={this.className} style={this.state.style}>
         <ContextMenuTrigger>
-          <DragBox icon={this.props.icon} name={this.constructor.name} onClose={this.removeFromParent.bind(this)} el={this}>
+          <DragBox icon={this.props.icon} name={this.constructor.className} onClose={this.removeFromParent.bind(this)} el={this}>
             <span className="Box__content">
               {this.renderBox()}
 
-              {this.unauthorized.indexOf("*") === -1 && <ContextMenuBox id={this.constructor.name + this.props.id} unauthorized={this.unauthorized} el={this}>
+              {this.unauthorized.indexOf("*") === -1 && <ContextMenuBox id={this.constructor.className + this.props.id} unauthorized={this.unauthorized} el={this}>
                 <div className="Box__container">
                   {!this.state.children.length && <span className="Box__placeholder">Right click to add</span>}
                   {this.getChildren()}
@@ -110,5 +111,6 @@ class Box extends Component {
 }
 
 Box._id = 0; //or use shortid ?
+Box.className = "Box";
 
 export default Box;

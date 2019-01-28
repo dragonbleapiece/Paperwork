@@ -8,12 +8,14 @@ class Placement extends Box {
 
   constructor(props) {
     super(props);
-    this.className += " " + Placement.name;
+    this.className += " " + Placement.className;
   }
 
   draw(sk) {
 
   }
 }
+
+Placement.className = "Placement";
 
 export default Placement;

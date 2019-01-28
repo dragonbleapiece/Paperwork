@@ -90,11 +90,13 @@ class DropBox extends Component {
   render() {
     const { isOver, canDrop, connectDropTarget } = this.props;
     return connectDropTarget(
-      <div className={this.constructor.name}>
+      <div className={this.constructor.className}>
         {this.props.children}
       </div>
     );
   }
 }
+
+DropBox.className = "DropBox";
 
 export default DropTarget(ItemTypes.BOX, boxTarget, collect)(DropBox);

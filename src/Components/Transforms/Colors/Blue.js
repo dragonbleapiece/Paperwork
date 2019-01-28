@@ -15,4 +15,6 @@ class Blue extends Color {
 
 }
 
+Blue.className = "Blue";
+
 export default Blue;

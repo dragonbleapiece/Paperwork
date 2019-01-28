@@ -7,7 +7,7 @@ class Ellipse extends Figure {
 
   constructor(props) {
     super(props);
-    this.className += " " + Ellipse.name;
+    this.className += " " + Ellipse.className;
     this.width = 40;
     this.height = 40;
     this.x = this.width / 2;
@@ -19,5 +19,7 @@ class Ellipse extends Figure {
   }
 
 }
+
+Ellipse.className = "Ellipse";
 
 export default Ellipse;

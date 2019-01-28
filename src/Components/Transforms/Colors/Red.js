@@ -14,4 +14,6 @@ class Red extends Color {
   }
 }
 
+Red.className = "Red";
+
 export default Red;
