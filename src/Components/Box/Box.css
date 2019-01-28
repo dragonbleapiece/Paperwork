@@ -33,8 +33,16 @@
   padding: 0 20px;
 }
 
+.Box__titleClose svg {
+  fill: black;
+  background-color: white;
+  border-radius: 50%;
+}
+
 .Box__titleClose {
-  width: 60px;
+  position: relative;
+  right: -12px;
+  top: -12px;
 }
 
 .Box__content {
