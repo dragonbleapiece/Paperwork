@@ -62,10 +62,6 @@ class Grid extends Placement {
         step={1}
         onChange={(value) => {this.setState({columns: value, rows: value});}}
         />
-        <div className="Box__container">
-          {!this.state.children.length && <span className="Box__placeholder">Right click to add</span>}
-          {this.getChildren()}
-        </div>
       </>
     );
   }
