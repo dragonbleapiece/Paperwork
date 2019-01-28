@@ -72,13 +72,13 @@ class DragBox extends Component {
 
 
     return connectDragPreview(
-      <div>
+      <div className="Box__wrapper">
+        <span className="Box__titleClose" onClick={this.onClose.bind(this)}>
+            <SVG src={cancel}/>
+        </span>
         {connectDragSource(<span className="Box__title">
           {this.props.icon && <SVG className="Box__titleIcon" src={this.props.icon}/>}
           <span className="Box__titleText">{this.props.name}</span>
-          <span className="Box__titleClose button" onClick={this.onClose.bind(this)}>
-            <SVG src={cancel}/>
-          </span>
         </span>)}
         {this.props.children}
       </div>
