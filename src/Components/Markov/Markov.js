@@ -15,6 +15,8 @@ class Markov extends BoxGroup {
     this.proba = [];
     this.elementsLength = this.state.children.length;
     this.currentState = parseInt(Math.random() * (this.elementsLength));
+    this.idElement = [];
+    this.id = 0;
   }
 
   setChildren(children) {
@@ -65,20 +67,15 @@ class Markov extends BoxGroup {
         trackStyle: { backgroundColor: 'black' },
         railStyle: { backgroundColor: 'black' },
         dotStyle: { borderColor: 'black' },
-        activeHandleStyle: {borderColor: 'red'},
-        key: 0
+        activeHandleStyle: {borderColor: 'red'}
       };
-
-      if(this.elementsLength !== length) {
-        propsRange.value = defaultValues;
-      }
 
       sliders = this.state.children.map((child, index) => {
           if(this.elementsLength !== length) {
             this.proba[index] = defaultValues;
-            console.log(this.proba[index]);
+            this.idElement[index] = this.id++
           }
-          propsRange.key = index;
+          propsRange.key = this.idElement[index];
           propsRange.onChange = (value) => {this.proba[index] = value; Workspace.forceUpdate();}
           return React.createElement(Range, propsRange);
         }
