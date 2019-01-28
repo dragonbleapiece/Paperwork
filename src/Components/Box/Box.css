@@ -34,7 +34,10 @@
   justify-content: center;
   align-items: center;
   flex: 1;
-  padding: 0 20px;
+}
+
+.Box__titleIcon+.Box__titleText {
+  padding-right: 60px;
 }
 
 .Box__titleClose {
