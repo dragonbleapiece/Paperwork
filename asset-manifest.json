@@ -1,10 +1,10 @@
 {
-  "main.css": "/PAPER/static/css/main.084072e9.chunk.css",
-  "main.js": "/PAPER/static/js/main.d6331890.chunk.js",
-  "main.js.map": "/PAPER/static/js/main.d6331890.chunk.js.map",
+  "main.css": "/PAPER/static/css/main.661e2187.chunk.css",
+  "main.js": "/PAPER/static/js/main.691d2d64.chunk.js",
+  "main.js.map": "/PAPER/static/js/main.691d2d64.chunk.js.map",
   "static/css/1.b28c5957.chunk.css": "/PAPER/static/css/1.b28c5957.chunk.css",
-  "static/js/1.bfb970c1.chunk.js": "/PAPER/static/js/1.bfb970c1.chunk.js",
-  "static/js/1.bfb970c1.chunk.js.map": "/PAPER/static/js/1.bfb970c1.chunk.js.map",
+  "static/js/1.c806c9be.chunk.js": "/PAPER/static/js/1.c806c9be.chunk.js",
+  "static/js/1.c806c9be.chunk.js.map": "/PAPER/static/js/1.c806c9be.chunk.js.map",
   "runtime~main.js": "/PAPER/static/js/runtime~main.68dbcf4a.js",
   "runtime~main.js.map": "/PAPER/static/js/runtime~main.68dbcf4a.js.map",
   "static/media/save_alt.svg": "/PAPER/static/media/save_alt.3ccde972.svg",
@@ -17,9 +17,9 @@
   "static/media/translate.svg": "/PAPER/static/media/translate.aaf3d874.svg",
   "static/media/rotate.svg": "/PAPER/static/media/rotate.5d1fc53d.svg",
   "static/media/code.svg": "/PAPER/static/media/code.74f0e940.svg",
+  "static/css/main.661e2187.chunk.css.map": "/PAPER/static/css/main.661e2187.chunk.css.map",
   "static/css/1.b28c5957.chunk.css.map": "/PAPER/static/css/1.b28c5957.chunk.css.map",
-  "static/css/main.084072e9.chunk.css.map": "/PAPER/static/css/main.084072e9.chunk.css.map",
   "index.html": "/PAPER/index.html",
-  "precache-manifest.bcb64bca79677fc2bb7f7fe54acbd9a3.js": "/PAPER/precache-manifest.bcb64bca79677fc2bb7f7fe54acbd9a3.js",
+  "precache-manifest.3d738f2e59be62e9027b91e804526d83.js": "/PAPER/precache-manifest.3d738f2e59be62e9027b91e804526d83.js",
   "service-worker.js": "/PAPER/service-worker.js"
 }
