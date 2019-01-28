@@ -30,8 +30,8 @@ class BoxGroup extends Box {
   }
 
   draw(sk) {
-    for(let i = 0; i < this.state.elements.length; ++i) {
-       let element = this.state.elements[i];
+    for(let i = 0; i < this.elements.length; ++i) {
+       let element = this.elements[i];
        element.draw(sk);
     }
   }
@@ -46,7 +46,6 @@ class BoxGroup extends Box {
               //box.parent = callback;
     });
 
-    this.setElements(elements);
   }
 
   componentDidMount() {
@@ -55,7 +54,7 @@ class BoxGroup extends Box {
 
   getChildren() {
     let children = this.state.children.map((child, index) =>
-      <child.type key={child.id} id={child.id} ref={el => this.elements[index] = el} icon={this.icon[index]}/>
+      <child.type key={child.id} id={child.id} parent={this} ref={el => this.elements[index] = el} icon={this.icon[index]}/>
     );
 
 

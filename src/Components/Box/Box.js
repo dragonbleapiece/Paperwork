@@ -35,6 +35,11 @@ class Box extends Component {
     }
   }
 
+  removeFromParent() {
+    let children = this.props.parent.state.children;
+    children = children.splice(children.findIndex(el => el.id === this.id), 1);
+  }
+
   addNext(elmnt) {
     if(elmnt !== undefined) {
       if(elmnt instanceof Box) {
@@ -63,7 +68,7 @@ class Box extends Component {
 
     if(this.state.children.length > 0) {
       let child = this.state.children[0];
-      children.push(<child.type key={child.id} id={child.id} ref={el => {this.next = el; console.log(el);}} icon={this.icon[0]}/>);
+      children.push(<child.type key={child.id} parent={this} id={child.id} ref={el => {this.next = el}} icon={this.icon[0]}/>);
     }
     return children;
   }
