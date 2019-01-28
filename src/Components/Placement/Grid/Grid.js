@@ -25,19 +25,20 @@ class Grid extends Placement {
     var elem = this.next;
 
   	sk.background(0);
-  	sk.stroke(255);
+  	if(!elem) sk.stroke(255);
   	for(var i = 0; i < this.state.columns; i++) {
       sk.push();
         sk.translate(column * i, 0);
-        sk.line(0, 0, 0, sk.height);
+        if(!elem) sk.line(0, 0, 0, sk.height);
     		for(var j = 0; j < this.state.rows; j++) {
           sk.push();
             sk.translate(0, j * row);
-            sk.line(0, 0, sk.width, 0);
+            if(!elem) sk.line(0, 0, sk.width, 0);
             if(elem) {
               sk.noStroke();
               sk.push();
                 sk.translate(column / 2, row / 2);
+                sk.scale(row / 2, column / 2);
                 elem.draw(sk);
               sk.pop();
               /*elem.x = i * column + x;
