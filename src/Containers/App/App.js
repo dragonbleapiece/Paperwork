@@ -18,6 +18,15 @@ window.addClassToElement = function(name, target) {
   }
 };
 
+window.getIconClassFromName = function(name) {
+  let cl = getClassFromName(name);
+  if(cl) {
+    return cl.icon;
+  } else {
+    return undefined;
+  }
+}
+
 window.isAuthorized = function(type, unauthorized) {
   let r = true;
   if(!type) return false;

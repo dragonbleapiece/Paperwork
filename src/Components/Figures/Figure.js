@@ -1,7 +1,6 @@
 import React, { Component } from 'react';
 import Box from '../Box/Box';
 import './Figure.css';
-import p5 from 'p5';
 
 /*Pencil*/
 class Figure extends Box {
@@ -29,5 +28,6 @@ class Figure extends Box {
 }
 
 Figure.className = "Figure";
+Figure.icon = undefined;
 
 export default Figure;

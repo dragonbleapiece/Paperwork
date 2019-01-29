@@ -6,35 +6,19 @@ import { ContextMenu, MenuItem, SubMenu, ContextMenuTrigger } from "react-contex
 import SVG from 'react-svg';
 import arrow_right from '../../Icons/arrow_right.svg';
 
-import grid_on from '../../Icons/grid_on.svg';
-import square from '../../Icons/square.svg';
-import triangle from '../../Icons/triangle.svg';
-import ellipse from '../../Icons/ellipse.svg';
-
-import translate from '../../Icons/translate.svg';
-import rotate from '../../Icons/rotate.svg';
-
-function test() {
-  console.log("test");
-}
-
 const menu = [
   {
     type: 'Placement',
     elements: [
-      {type: 'Grid',
-      icon: grid_on}
+      {type: 'Grid'}
     ]
   },
   {
     type: 'Elements',
     elements: [
-      {type: 'Rectangle',
-      icon: square},
-      {type: 'Triangle',
-      icon: triangle},
-      {type: 'Ellipse',
-      icon: ellipse}
+      {type: 'Rectangle'},
+      {type: 'Triangle'},
+      {type: 'Ellipse'}
     ]
   },
   {
@@ -52,10 +36,8 @@ const menu = [
   {
     type: 'Transform',
     elements: [
-      {type: 'Translate',
-      icon: translate},
-      {type: 'Rotate',
-      icon: rotate}
+      {type: 'Translate'},
+      {type: 'Rotate'}
     ]
   }
 ];
@@ -72,7 +54,6 @@ class ContextMenuBox extends Component {
     if(data.type !== undefined) {
       console.log(data.el);
       window.addClassToElement(data.type, data.el);
-      data.el.addIcon(data.icon);
     }
   }
 
@@ -89,27 +70,32 @@ class ContextMenuBox extends Component {
     let menuItems = menu.map(
       (item, index) => {
         if(this.props.el.unauthorized.indexOf(item.type) === -1) {
+          let icon = window.getIconClassFromName(item.type);
           if (!item.elements) {
-            return (<MenuItem onClick={this.handleClick} data={{ type: item.type, el: this.props.el, icon: item.icon }} key={index}>
-              {item.icon && <span className="react-contextmenu-itemIcon"><SVG src={item.icon}/></span>}
+            return (<MenuItem onClick={this.handleClick} data={{ type: item.type, el: this.props.el }} key={index}>
+              {icon && <span className="react-contextmenu-itemIcon"><SVG src={icon}/></span>}
               <span className="react-contextmenu-itemText">{item.type}</span>
             </MenuItem>);
           } else {
             return (<SubMenu key={index} title={
               <>
                 <span  className="react-contextmenu-itemLabel">
-                {item.icon && <span className="react-contextmenu-itemIcon"><SVG src={item.icon}/></span>}
+                {icon && <span className="react-contextmenu-itemIcon"><SVG src={icon}/></span>}
                 <span className="react-contextmenu-itemText">{item.type}</span>
                 </span>
                 <span className="react-contextmenu-itemIcon"><SVG src={arrow_right}/></span>
               </>
             }>
                 {item.elements.map(
-                  (subItem, index) =>
-                    <MenuItem onClick={this.handleClick} data={{ type: subItem.type, el: this.props.el, icon: subItem.icon }} key={index}>
-                      {subItem.icon && <span className="react-contextmenu-itemIcon"><SVG src={subItem.icon}/></span>}
-                      <span className="react-contextmenu-itemText">{subItem.type}</span>
-                    </MenuItem>
+                  (subItem, index) => {
+                    let subIcon = window.getIconClassFromName(subItem.type);
+                    return (
+                      <MenuItem onClick={this.handleClick} data={{ type: subItem.type, el: this.props.el, icon: subItem.icon }} key={index}>
+                        {subIcon && <span className="react-contextmenu-itemIcon"><SVG src={subIcon}/></span>}
+                        <span className="react-contextmenu-itemText">{subItem.type}</span>
+                      </MenuItem>
+                    );
+                  }
 
                 )}
             </SubMenu>);

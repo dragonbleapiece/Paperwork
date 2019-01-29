@@ -176,5 +176,6 @@ class Markov extends BoxGroup {
 }
 
 Markov.className = "Markov";
+Markov.icon = undefined;
 
 export default Markov;

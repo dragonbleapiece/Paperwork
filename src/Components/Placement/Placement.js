@@ -17,5 +17,6 @@ class Placement extends Box {
 }
 
 Placement.className = "Placement";
+Placement.icon = undefined;
 
 export default Placement;

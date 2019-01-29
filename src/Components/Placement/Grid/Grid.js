@@ -6,6 +6,7 @@ import Canvas from '../../Canvas/Canvas';
 import DragBox from '../../DragBox/DragBox';
 import ContextMenuBox from '../../ContextMenuBox/ContextMenuBox';
 import SliderBox from '../../Input/SliderBox/SliderBox';
+import grid_on from '../../../Icons/grid_on.svg';
 
 /*Pencil*/
 class Grid extends Placement {
@@ -70,5 +71,6 @@ class Grid extends Placement {
 }
 
 Grid.className = "Grid";
+Grid.icon = grid_on;
 
 export default Grid;

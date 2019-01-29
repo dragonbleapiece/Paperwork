@@ -17,5 +17,6 @@ class Transform extends Box {
 }
 
 Transform.className = "Transform";
+Transform.icon = undefined;
 
 export default Transform;

@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import Transform from '../Transform';
 import './Rotate.css';
+import rotate from '../../../Icons/rotate.svg';
 
 /*Pencil*/
 class Rotate extends Transform {
@@ -22,5 +23,6 @@ class Rotate extends Transform {
 }
 
 Rotate.className = "Rotate";
+Rotate.icon = rotate;
 
 export default Rotate;

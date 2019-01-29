@@ -62,7 +62,7 @@ class BoxGroup extends Box {
   getChildren() {
     this.elements = [];
     let children = this.state.children.map((child, index) =>
-      <child.type key={child.id} id={child.id} parent={this} ref={el => this.elements[index] = el} icon={this.icon[index]}/>
+      <child.type key={child.id} id={child.id} parent={this} ref={el => this.elements[index] = el}/>
     );
 
 
@@ -78,7 +78,7 @@ class BoxGroup extends Box {
     return (
       <div className={this.className} style={this.state.style}>
           <ContextMenuTrigger>
-            <DragBox icon={this.props.icon} name={this.constructor.className} onClose={this.removeFromParent.bind(this)} className={this.className} el={this}>
+            <DragBox icon={this.constructor.icon} name={this.constructor.className} onClose={this.removeFromParent.bind(this)} className={this.className} el={this}>
               <span className="Box__content">
                 {this.renderBox()}
                 <DropBox>
@@ -98,5 +98,6 @@ class BoxGroup extends Box {
 }
 
 BoxGroup.className = "BoxGroup";
+BoxGroup.icon = undefined;
 
 export default BoxGroup;
