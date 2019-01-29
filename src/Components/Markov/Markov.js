@@ -62,7 +62,7 @@ class Markov extends BoxGroup {
     if(length === 0) return;
     let element = this.elements[this.currentState];
     if(length === 1) {
-      element.draw(sk);
+      if(element) element.draw(sk);
       return;
     }
     let proba = 0;
@@ -108,63 +108,53 @@ class Markov extends BoxGroup {
         </span>;
 
           if(this.elementsLength !== length) {
-            this.state.proba[index] = defaultValues;
+            this.state.proba[index] = [...defaultValues]; //remove reference
             this.idElement[index] = shortid.generate();
+            propsRange.innerRef = (el) => {if(el) this.state.proba[index] = el.state.bounds};
+            propsRange.innerRef.bind(this);
           }
           propsRange.key = this.idElement[index];
           propsRange.onChange = (value) => {this.state.proba[index] = value; Workspace.forceUpdate();}
-          
 
           for (let i = 0; i < length; i++) {
+            let propsInput = {
+              type: "number",
+              key: this.idElement[index]+i,
+              min: 0,
+              max: 100,
+              step: 10,
+            };
             if (i == 0) {
-              inputs.push(<input key={shortid.generate()} type="number" min={0} max={100} step={10} value={ this.state.proba[index][i] } onChange={(event) => {
+              propsInput.value = this.state.proba[index][i];
+              propsInput.onChange = (event) => {
                 let proba = this.state.proba;
-                checkRight(event.target.value, i, proba[index]);
+                let value = parseInt(event.target.value);
+                checkLeft(value, i, proba[index]);
+                checkRight(value, i, proba[index]);
                 this.setState({proba:proba});
-              }
-            }/>);  
+              };
             } else if (i == length-1) {
-              inputs.push(<input key={shortid.generate()} type="number" min={0} max={100} step={10} value={ 100-this.state.proba[index][i-1] } onChange={(event) => {
+              propsInput.value = 100-this.state.proba[index][i-1];
+              propsInput.onChange = (event) => {
                 let proba = this.state.proba;
-                checkLeft(100-event.target.value, i-1, proba[index]);
+                let value = parseInt(event.target.value);
+                checkLeft(100-value, i-1, proba[index]);
+                checkRight(100-value, i-1, proba[index]);
                 this.setState({proba:proba});
-                }
-              }/>);
+              };
             } else {
-              inputs.push(<input key={shortid.generate()} type="number" min={0} max={100} step={10} value={ this.state.proba[index][i]-this.state.proba[index][i-1] } onChange={(event) => {
+              propsInput.value = this.state.proba[index][i]-this.state.proba[index][i-1];
+              propsInput.onChange = (event) => {
                 let proba = this.state.proba;
-                checkLeft(parseInt(event.target.value)+this.state.proba[index][i-1], i, proba[index]);
-                checkRight(parseInt(event.target.value)+this.state.proba[index][i-1], i, proba[index]);
+                let value = parseInt(event.target.value);
+                checkLeft(value+this.state.proba[index][i-1], i, proba[index]);
+                checkRight(value+this.state.proba[index][i-1], i, proba[index]);
                 this.setState({proba:proba});
-              }
-            }/>);
+              };
             }
+            inputs.push(<input {...propsInput}/>);
           }
 
-          // for (let i = 0; i < length; i++) {
-          //   if (i == 0) {
-          //     inputs.push(<input key={shortid.generate()} type="number" min={0} max={100} step={10} value={this.state.proba[index][i]} onChange={(event) => {
-          //       let proba = this.state.proba;
-          //       proba[index][i] = event.target.value;
-          //       this.setState({proba:proba});
-          //     }
-          //     }/>);
-          //   } else if (i == length-1) {
-          //     inputs.push(<input key={shortid.generate()} type="number" min={0} max={100} step={10} value={ 100-this.state.proba[index][i-1] } onChange={(event) => {
-          //       let proba = this.state.proba;
-          //       proba[index][i-1] = 100-this.state.proba[index][i-1] >= 0 && 100-event.target.value;
-          //       this.setState({proba:proba});
-          //     }
-          //     }/>);
-          //   } else {
-          //     inputs.push(<input key={shortid.generate()} type="number" min={0} max={100} step={10} value={ this.state.proba[index][i]-this.state.proba[index][i-1] } onChange={(event) => {
-          //       let proba = this.state.proba;
-          //       proba[index][i-1] = this.state.proba[index][i]-this.state.proba[index][i-1] >= 0 && this.state.proba[index][i]-event.target.value;
-          //       this.setState({proba:proba});
-          //     }
-          //     }/>);
-          //   }
-          // }
           return (
             <>
             <div className="Markov__Containers">
@@ -185,11 +175,7 @@ class Markov extends BoxGroup {
 
     this.elementsLength = length;
 
-    return(
-      <>
-        {sliders}
-      </>
-    );
+    return sliders;
   }
 
 }
