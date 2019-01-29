@@ -9,9 +9,10 @@ import Transform from './Transforms/Transform';
 import Translate from './Transforms/Translate/Translate';
 import Rotate from './Transforms/Rotate/Rotate';
 import Color from './Transforms/Colors/Color';
-import Red from './Transforms/Colors/Red';
+
 import Blue from './Transforms/Colors/Blue';
-import Green from './Transforms/Colors/Green';
+import Cyan from './Transforms/Colors/Cyan';
+
 
 export function getClassFromName(name) {
   switch(name) {
@@ -33,12 +34,10 @@ export function getClassFromName(name) {
       return Transform;
     case('Color'):
       return Color;
-    case('Red'):
-      return Red;
-    case('Blue'):
+      case('Blue'):
       return Blue;
-    case('Green'):
-      return Green;
+      case('Cyan'):
+      return Cyan;
     case('Translate'):
       return Translate;
     case('Rotate'):

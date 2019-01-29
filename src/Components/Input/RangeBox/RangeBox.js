@@ -20,7 +20,7 @@ class RangeBox extends Input {
         max={this.props.max}
         defaultValue={this.props.defaultValue}
         marks={this.props.marks}
-        step={this.props.steps}
+        step={this.props.step}
         count={this.props.count}
         pushable={this.props.pushable}
         className="Box__slider"

@@ -3,18 +3,18 @@ import Color from './Color';
 import p5 from 'p5';
 
 /*Pencil*/
-class Red extends Color {
+class Cyan extends Color {
 
   constructor(props) {
     super(props);
-    this.r = 255;
-    this.g = 0;
-    this.b = 0;
+    this.r = 0;
+    this.g = 255;
+    this.b = 255;
     this.a = 255;
   }
+
 }
 
-Red.className = "Red";
-Red.icon = undefined;
+Cyan.className = "Cyan";
 
-export default Red;
+export default Cyan;
