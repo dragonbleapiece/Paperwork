@@ -76,7 +76,7 @@ class Canvas extends Component {
 
   savePaper(sk, filename, extension) {
     if(filename !== undefined || extension !== undefined) {
-      sk.saveCanvas(filename, extension);
+      sk.save(filename + "." + extension); 
     }
   }
 

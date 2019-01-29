@@ -6,17 +6,22 @@ import Workspace from '../Workspace/Workspace';
 import RangeBox from '../Input/RangeBox/RangeBox';
 import shortid from 'shortid';
 
-function clamp_left(a, b) {
-  return a < b ? b : a;
-}
+//import Icons
+import SVG from 'react-svg';
+import next from '../../Icons/next.svg';
+import unknown from '../../Icons/unknown.svg';
 
-function clamp_right(a, b) {
-  return a > b ? b : a;
-}
+// function clamp_left(a, b) {
+//   return a < b ? b : a;
+// }
 
-function clamp(a, b) {
-  return clamp_right(a, clamp_left(a, b));
-}
+// function clamp_right(a, b) {
+//   return a > b ? b : a;
+// }
+
+// function clamp(a, b) {
+//   return clamp_right(a, clamp_left(a, b));
+// }
 
 function checkLeft(userValue, i, handle) {
   if (i < 0) return;
@@ -94,7 +99,13 @@ class Markov extends BoxGroup {
       };
 
       sliders = this.state.children.map((child, index) => {
-        let inputs = [];
+        let inputs = [], RangeIcon;
+        
+        RangeIcon = <span className="Markov__RangeIcon">
+          <SVG src={child.type.icon}/>
+          <SVG src={next}/>
+          <SVG src={unknown}/>
+        </span>;
 
           if(this.elementsLength !== length) {
             this.state.proba[index] = defaultValues;
@@ -103,6 +114,7 @@ class Markov extends BoxGroup {
           propsRange.key = this.idElement[index];
           propsRange.onChange = (value) => {this.state.proba[index] = value; Workspace.forceUpdate();}
           
+
           for (let i = 0; i < length; i++) {
             if (i == 0) {
               inputs.push(<input key={shortid.generate()} type="number" min={0} max={100} step={10} value={ this.state.proba[index][i] } onChange={(event) => {
@@ -155,8 +167,15 @@ class Markov extends BoxGroup {
           // }
           return (
             <>
-              <RangeBox {...propsRange}/>
-              {inputs}
+            <div className="Markov__Containers">
+                <div className="Markov__RangeContainer">
+                  {RangeIcon}
+                  <RangeBox {...propsRange}/>
+                </div>
+                <div className="Markov__InputsContainer">
+                  {inputs}
+                </div>
+              </div>
             </>
             );
         }

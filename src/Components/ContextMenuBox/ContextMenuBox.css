@@ -3,6 +3,11 @@
   height: 100%;
 }
 
+div+.DropBox>.react-contextmenu-wrapper {
+  margin-top: 10px;
+  border-top: 1px solid black;
+}
+
 .react-contextmenu {
   display: flex;
   flex-direction: column;

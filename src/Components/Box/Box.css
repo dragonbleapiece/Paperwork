@@ -67,10 +67,7 @@
 } 
 
 .Box__container {
-
   padding: 20px;
-  border-top: 1px dashed gray;
-  margin-top: 10px;
 }
 
 .Box__placeholder {

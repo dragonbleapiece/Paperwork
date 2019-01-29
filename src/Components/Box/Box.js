@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import './Box.css';
 import p5 from 'p5';
+import DropBox from '../DropBox/DropBox';
 import DragBox from '../DragBox/DragBox';
 import ContextMenuBox from '../ContextMenuBox/ContextMenuBox';
 import { ContextMenuTrigger } from "react-contextmenu";
@@ -89,13 +90,14 @@ class Box extends Component {
           <DragBox icon={this.constructor.icon} name={this.constructor.className} onClose={this.removeFromParent.bind(this)} el={this}>
             <span className="Box__content">
               {this.renderBox()}
-
+              <DropBox>
               {this.unauthorized.indexOf("*") === -1 && <ContextMenuBox id={this.constructor.className + this.props.id} unauthorized={this.unauthorized} el={this}>
                 <div className="Box__container">
                   {!this.state.children.length && <span className="Box__placeholder">Right click to add</span>}
                   {this.getChildren()}
                 </div>
               </ContextMenuBox>}
+              </DropBox>
             </span>
           </DragBox>
         </ContextMenuTrigger>
