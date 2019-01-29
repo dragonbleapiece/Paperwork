@@ -152,7 +152,10 @@ class Markov extends BoxGroup {
                 this.setState({proba:proba});
               };
             }
-            inputs.push(<input {...propsInput}/>);
+            inputs.push(<><span className="Markov__InputIcon">
+            <SVG src={this.state.children[i].type.icon}/>
+          </span><input {...propsInput}/></>);
+            //console.log(this.state.children[i].type.icon);
           }
 
           return (
