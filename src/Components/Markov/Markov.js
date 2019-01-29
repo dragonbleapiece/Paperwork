@@ -28,7 +28,7 @@ class Markov extends BoxGroup {
     if(length === 0) return;
     let element = this.elements[this.currentState];
     if(length === 1) {
-      element.draw(sk);
+      if(element) element.draw(sk);
       return;
     }
     let proba = 0;
