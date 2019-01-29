@@ -5,10 +5,6 @@ import Slider, { Range } from 'rc-slider';
 import './RangeBox.css';
 
 class RangeBox extends Input {
-    constructor(props) {
-        super(props);
-    }
-
     render() {
         let trackStyleArray = new Array(this.props.count);
         trackStyleArray.fill({height: '8px', backgroundColor: 'black', borderRadius: 'unset' });
@@ -16,13 +12,7 @@ class RangeBox extends Input {
         handleStyleArray.fill({marginTop: '-3px', borderColor: 'black' });
         return(
         <Range
-        min={this.props.min}
-        max={this.props.max}
-        defaultValue={this.props.defaultValue}
-        marks={this.props.marks}
-        step={this.props.step}
-        count={this.props.count}
-        pushable={this.props.pushable}
+        {...this.props}
         className="Box__slider"
         style={{padding: '3px 0'}}
         trackStyle={trackStyleArray}
@@ -30,6 +20,7 @@ class RangeBox extends Input {
         handleStyle={handleStyleArray}
         dotStyle={{bottom: '-4px', borderColor: 'black' }}
         onChange={(value) => {this.props.onChange(value); Workspace.forceUpdate();}}
+        ref={el => {if(this.props.innerRef) this.props.innerRef(el);}}
         />
         );
     }
