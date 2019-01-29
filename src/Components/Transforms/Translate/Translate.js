@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import Transform from '../Transform';
 import './Translate.css';
+import translate from '../../../Icons/translate.svg';
 
 /*Pencil*/
 class Translate extends Transform {
@@ -23,5 +24,7 @@ class Translate extends Transform {
 }
 
 Translate.className = "Translate";
+Translate.icon = translate;
+
 
 export default Translate;

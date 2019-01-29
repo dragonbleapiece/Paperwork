@@ -21,5 +21,6 @@ class Loop extends Box {
 }
 
 Loop.className = "Loop";
+Loop.icon = undefined;
 
 export default Loop;

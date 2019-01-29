@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import './Ellipse.css';
 import Figure from '../Figure';
+import ellipse from '../../../Icons/ellipse.svg';
 
 /*Pencil*/
 class Ellipse extends Figure {
@@ -21,5 +22,6 @@ class Ellipse extends Figure {
 }
 
 Ellipse.className = "Ellipse";
+Ellipse.icon = ellipse;
 
 export default Ellipse;

@@ -16,5 +16,6 @@ class Blue extends Color {
 }
 
 Blue.className = "Blue";
+Blue.icon = undefined;
 
 export default Blue;

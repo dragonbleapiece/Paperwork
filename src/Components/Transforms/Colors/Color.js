@@ -27,5 +27,6 @@ class Color extends Transform {
 }
 
 Color.className = "Color";
+Color.icon = undefined;
 
 export default Color;

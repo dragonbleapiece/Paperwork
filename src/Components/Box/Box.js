@@ -24,7 +24,6 @@ class Box extends Component {
     this.next = undefined;
     this.nextType = undefined;
     this.unauthorized = [];
-    this.icon = [];
   }
 
   addChild(child) {
@@ -58,10 +57,6 @@ class Box extends Component {
     }
   }
 
-  addIcon(icon) {
-    this.icon.push(icon);
-  }
-
   setStyle(style) {
     this.setState({
       style: style
@@ -78,7 +73,7 @@ class Box extends Component {
 
     if(this.state.children.length > 0) {
       let child = this.state.children[0];
-      children.push(<child.type key={child.id} parent={this} id={child.id} ref={el => {this.next = el}} icon={this.icon[0]}/>);
+      children.push(<child.type key={child.id} parent={this} id={child.id} ref={el => {this.next = el}}/>);
     }
     return children;
   }
@@ -91,7 +86,7 @@ class Box extends Component {
     return (
       <div className={this.className} style={this.state.style}>
         <ContextMenuTrigger>
-          <DragBox icon={this.props.icon} name={this.constructor.className} onClose={this.removeFromParent.bind(this)} el={this}>
+          <DragBox icon={this.constructor.icon} name={this.constructor.className} onClose={this.removeFromParent.bind(this)} el={this}>
             <span className="Box__content">
               {this.renderBox()}
 
@@ -111,5 +106,6 @@ class Box extends Component {
 
 Box._id = 0; //or use shortid ?
 Box.className = "Box";
+Box.icon = undefined;
 
 export default Box;

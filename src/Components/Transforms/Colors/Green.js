@@ -16,5 +16,6 @@ class Green extends Color {
 }
 
 Green.className = "Green";
+Green.icon = undefined;
 
 export default Green;

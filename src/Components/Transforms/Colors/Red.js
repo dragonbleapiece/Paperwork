@@ -15,5 +15,6 @@ class Red extends Color {
 }
 
 Red.className = "Red";
+Red.icon = undefined;
 
 export default Red;

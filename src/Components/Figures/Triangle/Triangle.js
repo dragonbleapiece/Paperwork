@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import './Triangle.css';
 import Figure from '../Figure';
+import triangle from '../../../Icons/triangle.svg';
 
 /*Pencil*/
 class Triangle extends Figure {
@@ -20,5 +21,6 @@ class Triangle extends Figure {
 }
 
 Triangle.className = "Triangle";
+Triangle.icon = triangle;
 
 export default Triangle;
