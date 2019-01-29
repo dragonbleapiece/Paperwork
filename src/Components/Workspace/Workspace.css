@@ -4,7 +4,8 @@
     flex-direction: row;
     align-items: baseline;
     position: relative;
-   }
+    overflow-y: auto;
+}
 .Workspace__placeholder {
     position: relative;
     left: 50%;

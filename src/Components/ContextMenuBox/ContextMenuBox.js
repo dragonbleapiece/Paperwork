@@ -40,9 +40,10 @@ const menu = [
   {
     type: 'Color',
     elements: [
-      {type: 'Red'},
       {type: 'Blue'},
-      {type: 'Green'}
+      {type: 'Cyan'},
+      {type: 'Magenta'},
+      {type: 'Yellow'}
     ]
   },
   {

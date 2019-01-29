@@ -6,13 +6,42 @@ import Workspace from '../Workspace/Workspace';
 import RangeBox from '../Input/RangeBox/RangeBox';
 import shortid from 'shortid';
 
+function clamp_left(a, b) {
+  return a < b ? b : a;
+}
+
+function clamp_right(a, b) {
+  return a > b ? b : a;
+}
+
+function clamp(a, b) {
+  return clamp_right(a, clamp_left(a, b));
+}
+
+function checkLeft(userValue, i, handle) {
+  if (i < 0) return;
+  if (userValue <= handle[i]) {
+    handle[i] = userValue;
+    checkLeft(userValue, --i, handle);
+  }
+}
+
+function checkRight(userValue, i, handle) {
+  if (i >= handle.length) return;
+  if (userValue >= handle[i]) {
+    handle[i] = userValue;
+    checkRight(userValue, ++i, handle);
+  }
+}
+
 /*Pencil*/
 class Markov extends BoxGroup {
 
   constructor(props) {
     super(props);
     this.className += " " + Markov.className;
-    this.proba = [];
+    // this.state.proba = [];
+    this.state.proba = [];
     this.elementsLength = this.state.children.length;
     this.currentState = parseInt(Math.random() * (this.elementsLength));
     this.idElement = [];
@@ -36,7 +65,7 @@ class Markov extends BoxGroup {
     let i;
 
     for(i = 0; i < length && rand >= proba; ++i) {
-      proba = this.proba[this.currentState][i];
+      proba = this.state.proba[this.currentState][i];
     }
 
     this.elements[i - 1].draw(sk);
@@ -49,7 +78,8 @@ class Markov extends BoxGroup {
     let sliders;
 
     for(let i = 1; i <= length - 1; ++i) {
-      defaultValues.push((100 / length) * i);
+      if (i == length-1) defaultValues.push(Math.floor(100/length/10)*10*i+100%(length*10));
+      else defaultValues.push(Math.floor(100/length/10)*10*i);
     }
 
     if(length - 1 > 0) {
@@ -64,13 +94,71 @@ class Markov extends BoxGroup {
       };
 
       sliders = this.state.children.map((child, index) => {
+        let inputs = [];
+
           if(this.elementsLength !== length) {
-            this.proba[index] = defaultValues;
+            this.state.proba[index] = defaultValues;
             this.idElement[index] = shortid.generate();
           }
           propsRange.key = this.idElement[index];
-          propsRange.onChange = (value) => {this.proba[index] = value; Workspace.forceUpdate();}
-          return <RangeBox {...propsRange}/>;
+          propsRange.onChange = (value) => {this.state.proba[index] = value; Workspace.forceUpdate();}
+          
+          for (let i = 0; i < length; i++) {
+            if (i == 0) {
+              inputs.push(<input key={shortid.generate()} type="number" min={0} max={100} step={10} value={ this.state.proba[index][i] } onChange={(event) => {
+                let proba = this.state.proba;
+                checkRight(event.target.value, i, proba[index]);
+                this.setState({proba:proba});
+              }
+            }/>);  
+            } else if (i == length-1) {
+              inputs.push(<input key={shortid.generate()} type="number" min={0} max={100} step={10} value={ 100-this.state.proba[index][i-1] } onChange={(event) => {
+                let proba = this.state.proba;
+                checkLeft(100-event.target.value, i-1, proba[index]);
+                this.setState({proba:proba});
+                }
+              }/>);
+            } else {
+              inputs.push(<input key={shortid.generate()} type="number" min={0} max={100} step={10} value={ this.state.proba[index][i]-this.state.proba[index][i-1] } onChange={(event) => {
+                let proba = this.state.proba;
+                checkLeft(parseInt(event.target.value)+this.state.proba[index][i-1], i, proba[index]);
+                checkRight(parseInt(event.target.value)+this.state.proba[index][i-1], i, proba[index]);
+                this.setState({proba:proba});
+              }
+            }/>);
+            }
+          }
+
+          // for (let i = 0; i < length; i++) {
+          //   if (i == 0) {
+          //     inputs.push(<input key={shortid.generate()} type="number" min={0} max={100} step={10} value={this.state.proba[index][i]} onChange={(event) => {
+          //       let proba = this.state.proba;
+          //       proba[index][i] = event.target.value;
+          //       this.setState({proba:proba});
+          //     }
+          //     }/>);
+          //   } else if (i == length-1) {
+          //     inputs.push(<input key={shortid.generate()} type="number" min={0} max={100} step={10} value={ 100-this.state.proba[index][i-1] } onChange={(event) => {
+          //       let proba = this.state.proba;
+          //       proba[index][i-1] = 100-this.state.proba[index][i-1] >= 0 && 100-event.target.value;
+          //       this.setState({proba:proba});
+          //     }
+          //     }/>);
+          //   } else {
+          //     inputs.push(<input key={shortid.generate()} type="number" min={0} max={100} step={10} value={ this.state.proba[index][i]-this.state.proba[index][i-1] } onChange={(event) => {
+          //       let proba = this.state.proba;
+          //       proba[index][i-1] = this.state.proba[index][i]-this.state.proba[index][i-1] >= 0 && this.state.proba[index][i]-event.target.value;
+          //       this.setState({proba:proba});
+          //     }
+          //     }/>);
+          //   }
+          // }
+          return (
+            <>
+              <RangeBox {...propsRange}/>
+              {inputs}
+            </>
+            );
         }
       );
     }
