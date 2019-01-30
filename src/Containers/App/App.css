@@ -75,6 +75,7 @@ input[type=radio] {
   text-align: center;
   background-color: white;
   color: black;
+  overflow: hidden;
 }
 
 .App-logo {
@@ -85,19 +86,20 @@ input[type=radio] {
 }
 
 .App-header {
+  min-height: 60px;
   height: 60px;
   width: 100%;
   display: flex;
   flex-direction: row;
   align-items: center;
-  justify-content: flex-start;
+  justify-content: space-between;
   font-size: 24px;
 }
 
 main {
   display: flex;
   flex-direction: row;
-  height: 100%;
+  height: calc(100% + -60px);
 }
 
 .button {
@@ -132,8 +134,18 @@ input:checked+label {
 	display: flex;
 	align-items: flex-start;
 }
+.leftSide {
+    width: 50%;
+    height: 100%;
+    display: flex;
+    flex-direction: row;
+    align-items: baseline;
+    position: relative;
+    overflow-y: auto;
+    overflow-x: hidden;
+}
 
-.render {
+.rightSide {
   width: 50%;
   display: flex;
   flex-direction: column;
@@ -151,7 +163,6 @@ input:checked+label {
 
 .save {
   display: flex;
-
   height: 100%;
   flex: 1;
 }
@@ -175,5 +186,37 @@ input:checked+label {
 }
 
 .displayCode {
+  width: 60px;
+}
+
+.aboutContainerBackground {
+  background-color: rgba(0, 0, 0, 0.1);
+  position: absolute;
+  top: 0px;
+  left: 0px;
+  width: 100%;
+  height: 100%;
+  z-index: 998;
+}
+.aboutContainer {
+  display: none;
+  align-items: center;
+  justify-content: center;
+  background-color: white;
+  position: absolute;
+  top: 0px;
+  left: 0px;
+  width: 100%;
+  height: 100%;
+  z-index: 999;
+
+}
+
+.about {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 100%;
+  cursor: pointer;
   width: 60px;
 }

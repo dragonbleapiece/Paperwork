@@ -82,7 +82,7 @@ class Canvas extends Component {
 
   setup(sk) {
     const {width, height} = this.state;
-    sk.createCanvas(width, height);
+    sk.createCanvas(width, height /*, sk.SGV*/);
     sk.noLoop();
   }
 

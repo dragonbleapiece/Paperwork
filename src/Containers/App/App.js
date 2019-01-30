@@ -5,6 +5,7 @@ import Canvas from '../../Components/Canvas/Canvas';
 import SVG from 'react-svg'
 import icon_save_alt from '../../Icons/save_alt.svg';
 import icon_code from '../../Icons/code.svg';
+import icon_info from '../../Icons/info.svg';
 // import Components
 import Workspace from '../../Components/Workspace/Workspace';
 // import Boxes
@@ -54,6 +55,8 @@ window.isAuthorized = function(type, unauthorized) {
   return r;
 }
 
+let toggle = false;
+
 class App extends Component {
   state = {
     DownloadName: "Untitled",
@@ -70,18 +73,39 @@ class App extends Component {
     Canvas.savePaper(this.state.DownloadName, this.state.DownloadFormat);
   }
 
+  aboutClick() {
+    let aboutDisplay;
+    if(!toggle) {
+      toggle = !toggle;
+      aboutDisplay = {display: 'flex'};
+     } else {
+      toggle = !toggle;
+      aboutDisplay = {display: 'none'};
+     };
+    this.setState({aboutDisplay: aboutDisplay});
+  }
+
   render() {
 
     return (
       <div className="App">
         <header className="App-header border-bottom">
-          <div className="App-logo">Paper&#123; &#125;</div>
+          <div className="App-logo">Paper&nbsp;&#123;&nbsp;&nbsp;&nbsp;&#125;</div>
+          <div className="about" onClick={this.aboutClick.bind(this)}>
+            <SVG src={icon_info}/>
+          </div>
+          {/* <div className="aboutContainerBackground"></div> */}
         </header>
         <main>
-            <Workspace>
+            <div className="leftSide">
+              <div className="aboutContainer" style={this.state.aboutDisplay}>
+                <span>Blablabla</span>
+              </div>
+              <Workspace>
 
-            </Workspace>
-            <div className="render border-left">
+              </Workspace>
+          </div>
+            <div className="rightSide border-left">
               <div className="editionMenu border-bottom">
                 <div className="save">
                   <a className="button save__button border-right" onClick={(event) => this.downloadImage(event.target)}>

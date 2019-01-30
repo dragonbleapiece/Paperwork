@@ -1,31 +1,84 @@
+.Markov__Parameters {
+    padding: 10px;
+}
+
 .Markov__Containers {
     display: flex;
     flex-direction: column;
     align-items: center;
     justify-content: center;
-    border-bottom: 1px dashed grey;
 }
 
 .Markov__RangeIcon {
     display: flex;
     align-items: center;
     padding: 0 20px;
-    border-right: 1px dashed grey;
 
+}
+
+.Markov__RangeIcon svg {
+    fill: black;
 }
 
 .Markov__RangeContainer {
     display: flex;
     width: 100%;
     height: 60px;
-    border-bottom: 1px dashed grey;
 }
 
 .Markov__InputsContainer {
     display: flex;
     flex-direction: row;
+    align-items: stretch;
+    justify-content: space-between;
+    height: 20px;
+    margin-left: 113px;
+    padding: 0 20px;
+}
+.Markov__InputContainer {
+    display: flex;
+}
+.Markov__InputContainer:not(:last-child) {
+    margin-right: 20px;
+}
+.Markov__InputIcon {
+    width: 40px;
+    display: flex;
     align-items: center;
     justify-content: center;
-    height: 40px;
-    margin-left: 113px;
+}
+
+.Markov__InputIcon svg {
+    fill: darkgray;
+
+}
+
+.Markov__Input {
+    width: 30px;
+    color: darkgray;
+}
+
+
+/* .Markov__Input {
+    width: 60px;
+    padding-left: 20px;
+} */
+
+/* Firefox */
+input[type=number] {
+    -moz-appearance: textfield;
+}
+
+/* Chrome */
+input::-webkit-inner-spin-button,
+input::-webkit-outer-spin-button { 
+	-webkit-appearance: none;
+	margin:0;
+}
+
+/* Opéra*/
+input::-o-inner-spin-button,
+input::-o-outer-spin-button { 
+	-o-appearance: none;
+	margin:0
 }

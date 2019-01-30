@@ -45,7 +45,6 @@ class Markov extends BoxGroup {
   constructor(props) {
     super(props);
     this.className += " " + Markov.className;
-    // this.state.proba = [];
     this.state.proba = [];
     this.elementsLength = this.state.children.length;
     this.currentState = parseInt(Math.random() * (this.elementsLength));
@@ -92,8 +91,8 @@ class Markov extends BoxGroup {
         min: 0,
         max: 100,
         defaultValue: defaultValues,
-        marks: {0:0, 100:1},
-        step: 10,
+        marks: {0:0, 100:100},
+        step: 5,
         count: length - 1,
         pushable: 0
       };
@@ -122,7 +121,7 @@ class Markov extends BoxGroup {
               key: this.idElement[index]+i,
               min: 0,
               max: 100,
-              step: 10,
+              step: 5,
             };
             if (i == 0) {
               propsInput.value = this.state.proba[index][i];
@@ -153,15 +152,17 @@ class Markov extends BoxGroup {
                 this.setState({proba:proba});
               };
             }
-            inputs.push(<><span className="Markov__InputIcon">
-            <SVG src={this.state.children[i].type.icon}/>
-          </span><input {...propsInput}/></>);
-            //console.log(this.state.children[i].type.icon);
+            inputs.push(<div className="Markov__InputContainer">
+              <span className="Markov__InputIcon">
+                <SVG src={this.state.children[i].type.icon}/>
+              </span>
+              <input className="Markov__Input" {...propsInput}/>
+            </div>);
           }
 
           return (
-            <>
-            <div className="Markov__Containers">
+
+              <div className="Markov__Containers">
                 <div className="Markov__RangeContainer">
                   {RangeIcon}
                   <RangeBox {...propsRange}/>
@@ -170,7 +171,6 @@ class Markov extends BoxGroup {
                   {inputs}
                 </div>
               </div>
-            </>
             );
         }
       );
@@ -179,7 +179,7 @@ class Markov extends BoxGroup {
 
     this.elementsLength = length;
 
-    return sliders;
+    return <div className="Markov__Parameters">{sliders}</div>;
   }
 
 }
