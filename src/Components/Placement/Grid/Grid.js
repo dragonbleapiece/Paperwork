@@ -45,8 +45,10 @@ class Grid extends Placement {
             sk.noStroke();
             sk.push();
               sk.translate(column / 2, row / 2);
-              sk.scale(column / 2, row / 2);
+              sk.scale(column, row);
+              sk.strokeWeight(1/column);
               elem.draw(sk);
+              sk.strokeWeight(1);
             sk.pop();
           }
         }

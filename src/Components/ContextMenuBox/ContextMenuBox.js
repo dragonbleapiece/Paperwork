@@ -19,6 +19,10 @@ const menu = [
       {type: 'Rectangle'},
       {type: 'Triangle'},
       {type: 'Ellipse'},
+      {type: 'HHatching'},
+      {type: 'VHatching'},
+      {type: 'LOHatching'},
+      {type: 'ROHatching'},
       {type: 'Void'}
     ]
   },
@@ -38,7 +42,8 @@ const menu = [
     type: 'Transform',
     elements: [
       {type: 'Translate'},
-      {type: 'Rotate'}
+      {type: 'Rotate'},
+      {type: 'Scale'}
     ]
   }
 ];

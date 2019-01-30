@@ -15,7 +15,7 @@ class Rotate extends Transform {
   draw(sk) {
     sk.push();
       sk.rotate(sk.radians(this.rotate));
-      if(this.next !== undefined) {
+      if(this.next) {
         this.next.draw(sk);
       }
     sk.pop();

@@ -28,6 +28,7 @@ class Canvas extends Component {
       return Canvas._instance;
     }
     super(props);
+    this.strokeWeight = 1;
 
     Canvas._instance = this;
   }
@@ -51,6 +52,7 @@ class Canvas extends Component {
       sk.draw = self.draw.bind(self, sk);
       sk.windowResized = self.windowResized.bind(self, sk);
       sk.savePaper = self.savePaper.bind(self, sk);
+      sk.strokeScale = self.strokeScale.bind(self, sk);
 
     }
 
@@ -84,6 +86,11 @@ class Canvas extends Component {
     const {width, height} = this.state;
     sk.createCanvas(width, height /*, sk.SGV*/);
     sk.noLoop();
+  }
+
+  strokeScale(sk, scale) {
+    this.strokeWeight *= scale;
+    sk.strokeWeight(this.strokeWeight);
   }
 
   draw(sk) {
