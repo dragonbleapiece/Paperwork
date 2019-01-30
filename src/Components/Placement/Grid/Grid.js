@@ -58,9 +58,9 @@ class Grid extends Placement {
       <>
         <SliderBox
         min={1}
-        max={20}
+        max={50}
         defaultValue={this.state.columns}
-        marks={{1: 1, 20: 20}}
+        marks={{1: 1, 50: 50}}
         step={1}
         onChange={(value) => {this.setState({columns: value, rows: value});}}
         />
