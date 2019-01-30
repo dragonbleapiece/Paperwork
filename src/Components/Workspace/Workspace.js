@@ -14,17 +14,6 @@ import ContextMenuBox from '../ContextMenuBox/ContextMenuBox';
 class Workspace extends BoxGroup {
 
   static _instance;
-  static setElements(elmnts) {
-    if(Workspace._instance !== undefined) {
-      Workspace._instance.setElements(elmnts);
-    }
-  }
-
-  static addElement(elmnt) {
-    if(Workspace._instance !== undefined) {
-      Workspace._instance.addElement(elmnt);
-    }
-  }
 
   static addChild(box) {
     if(Workspace._instance !== undefined) {
@@ -50,11 +39,16 @@ class Workspace extends BoxGroup {
     Workspace._instance = this;
   }
 
+  draw(sk) {
+    sk.background(0);
+    super.draw(sk);
+  }
+
   componentDidUpdate() {
     let canvas = new Canvas();
     let firstBox = this.elements[0];
     if(firstBox) {
-      canvas.sendDraw(firstBox.draw.bind(firstBox));
+      canvas.sendDraw(this.draw.bind(this));
     } else {
       Canvas._P5.clear();
     }

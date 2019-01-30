@@ -25,7 +25,6 @@ class Grid extends Placement {
   	var row = sk.height/this.state.rows;
     var elem = this.next;
 
-  	sk.background(0);
   	if(!elem) sk.stroke(255);
   	for(var i = 0; i < this.state.columns; i++) {
       sk.push();

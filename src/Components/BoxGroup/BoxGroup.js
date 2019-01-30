@@ -37,9 +37,10 @@ class BoxGroup extends Box {
   }
 
   draw(sk) {
-    for(let i = 0; i < this.elements.length; ++i) {
-       let element = this.elements[i];
-       element.draw(sk);
+    let el = this.elements;
+    for(let i = 0; i <el.length; ++i) {
+       let element = el[i];
+       if(element) element.draw(sk);
     }
   }
 
