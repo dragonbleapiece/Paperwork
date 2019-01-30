@@ -11,17 +11,17 @@ import SVG from 'react-svg';
 import next from '../../Icons/next.svg';
 import unknown from '../../Icons/unknown.svg';
 
-// function clamp_left(a, b) {
-//   return a < b ? b : a;
-// }
+function clamp_left(a, b) {
+   return a < b ? b : a;
+}
 
-// function clamp_right(a, b) {
-//   return a > b ? b : a;
-// }
+function clamp_right(a, b) {
+   return a > b ? b : a;
+}
 
-// function clamp(a, b) {
-//   return clamp_right(a, clamp_left(a, b));
-// }
+function clamp(a, b, c) {
+  return clamp_left(clamp_right(a, c), b);
+}
 
 function checkLeft(userValue, i, handle) {
   if (i < 0) return;
@@ -100,7 +100,7 @@ class Markov extends BoxGroup {
 
       sliders = this.state.children.map((child, index) => {
         let inputs = [], RangeIcon;
-        
+
         RangeIcon = <span className="Markov__RangeIcon">
           <SVG src={child.type.icon}/>
           <SVG src={next}/>
@@ -128,7 +128,7 @@ class Markov extends BoxGroup {
               propsInput.value = this.state.proba[index][i];
               propsInput.onChange = (event) => {
                 let proba = this.state.proba;
-                let value = parseInt(event.target.value);
+                let value = clamp(parseInt(event.target.value), propsInput.min, propsInput.max);
                 checkLeft(value, i, proba[index]);
                 checkRight(value, i, proba[index]);
                 this.setState({proba:proba});
@@ -137,16 +137,17 @@ class Markov extends BoxGroup {
               propsInput.value = 100-this.state.proba[index][i-1];
               propsInput.onChange = (event) => {
                 let proba = this.state.proba;
-                let value = parseInt(event.target.value);
+                let value = clamp(parseInt(event.target.value), propsInput.min, propsInput.max);
                 checkLeft(100-value, i-1, proba[index]);
                 checkRight(100-value, i-1, proba[index]);
                 this.setState({proba:proba});
               };
             } else {
+              propsInput.max = 100 - this.state.proba[index][i-1];
               propsInput.value = this.state.proba[index][i]-this.state.proba[index][i-1];
               propsInput.onChange = (event) => {
                 let proba = this.state.proba;
-                let value = parseInt(event.target.value);
+                let value = clamp(parseInt(event.target.value), propsInput.min, propsInput.max);
                 checkLeft(value+this.state.proba[index][i-1], i, proba[index]);
                 checkRight(value+this.state.proba[index][i-1], i, proba[index]);
                 this.setState({proba:proba});

@@ -76,13 +76,13 @@ class Canvas extends Component {
 
   savePaper(sk, filename, extension) {
     if(filename !== undefined || extension !== undefined) {
-      sk.save(filename + "." + extension); 
+      sk.save(filename + "." + extension);
     }
   }
 
   setup(sk) {
     const {width, height} = this.state;
-    sk.createCanvas(width, height, sk.SVG);
+    sk.createCanvas(width, height);
     sk.noLoop();
   }
 

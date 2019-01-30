@@ -8,6 +8,13 @@ import ContextMenuBox from '../../ContextMenuBox/ContextMenuBox';
 import SliderBox from '../../Input/SliderBox/SliderBox';
 import grid_on from '../../../Icons/grid_on.svg';
 
+import LinearY from '../../Modes/GridMode/LinearY/LinearY';
+import LinearX from '../../Modes/GridMode/LinearX/LinearX';
+import DiagonalLeft from '../../Modes/GridMode/DiagonalLeft/DiagonalLeft';
+import DiagonalRight from '../../Modes/GridMode/DiagonalRight/DiagonalRight';
+import Orthogonal from '../../Modes/GridMode/Orthogonal/Orthogonal';
+import SnailRight from '../../Modes/GridMode/SnailRight/SnailRight';
+
 /*Pencil*/
 class Grid extends Placement {
 
@@ -17,6 +24,7 @@ class Grid extends Placement {
     //const {columns, rows} = this.props;
     this.state.columns = 8;
     this.state.rows = 8;
+    this.state.currentMode = undefined;
   }
 
   draw(sk) {
@@ -24,30 +32,26 @@ class Grid extends Placement {
     var column = sk.width/this.state.columns;
   	var row = sk.height/this.state.rows;
     var elem = this.next;
+    var currentMode = this.state.currentMode;
 
   	if(!elem) sk.stroke(255);
-  	for(var i = 0; i < this.state.columns; i++) {
-      sk.push();
-        sk.translate(column * i, 0);
-        if(!elem) sk.line(0, 0, 0, sk.height);
-    		for(var j = 0; j < this.state.rows; j++) {
-          sk.push();
-            sk.translate(0, j * row);
-            if(!elem) sk.line(0, 0, sk.width, 0);
-            if(elem) {
-              sk.noStroke();
-              sk.push();
-                sk.translate(column / 2, row / 2);
-                sk.scale(row / 2, column / 2);
-                elem.draw(sk);
-              sk.pop();
-              /*elem.x = i * column + x;
-              elem.y = j * row + y;*/
-            }
-          sk.pop();
-    		}
-      sk.pop();
-  	}
+
+    if(currentMode) {
+      currentMode.mode(sk, {
+        columns: this.state.columns,
+        rows: this.state.rows,
+        callback: function() {
+          if(elem) {
+            sk.noStroke();
+            sk.push();
+              sk.translate(column / 2, row / 2);
+              sk.scale(column / 2, row / 2);
+              elem.draw(sk);
+            sk.pop();
+          }
+        }
+      });
+    }
 
   }
 
@@ -63,6 +67,7 @@ class Grid extends Placement {
         step={1}
         onChange={(value) => {this.setState({columns: value, rows: value});}}
         />
+        <DiagonalLeft ref={el => {this.state.currentMode = el}} />
       </>
     );
   }
