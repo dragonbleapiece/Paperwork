@@ -18,7 +18,8 @@ const menu = [
     elements: [
       {type: 'Rectangle'},
       {type: 'Triangle'},
-      {type: 'Ellipse'}
+      {type: 'Ellipse'},
+      {type: 'Void'}
     ]
   },
   {

@@ -9,7 +9,7 @@ import Transform from './Transforms/Transform';
 import Translate from './Transforms/Translate/Translate';
 import Rotate from './Transforms/Rotate/Rotate';
 import Color from './Transforms/Colors/Color';
-
+import Void from './Void/Void';
 import Blue from './Transforms/Colors/Blue';
 import Cyan from './Transforms/Colors/Cyan';
 
@@ -42,6 +42,8 @@ export function getClassFromName(name) {
       return Translate;
     case('Rotate'):
       return Rotate;
+    case('Void'):
+      return Void;
     default:
       return null;
   }
