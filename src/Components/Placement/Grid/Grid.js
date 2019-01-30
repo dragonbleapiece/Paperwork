@@ -67,7 +67,7 @@ class Grid extends Placement {
         step={1}
         onChange={(value) => {this.setState({columns: value, rows: value});}}
         />
-        <DiagonalLeft ref={el => {this.state.currentMode = el}} />
+        <SnailRight ref={el => {this.state.currentMode = el}} />
       </>
     );
   }
