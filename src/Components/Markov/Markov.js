@@ -154,6 +154,7 @@ class Markov extends BoxGroup {
                 this.setState({proba:proba});
               };
             }
+            propsInput.onKeyDown = propsInput.onChange; 
             inputs.push(<div className="Markov__InputContainer">
               <span className="Markov__InputIcon">
                 <SVG src={this.state.children[i].type.icon}/>
