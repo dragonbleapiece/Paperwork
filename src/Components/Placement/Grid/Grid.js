@@ -53,6 +53,7 @@ class Grid extends Placement {
       currentMode.mode(sk, {
         columns: this.state.columns,
         rows: this.state.rows,
+        lines: elem ? false : true,
         callback: function() {
           if(elem) {
             sk.noStroke();

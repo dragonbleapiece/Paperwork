@@ -14,7 +14,7 @@ class LinearX extends GridMode {
   }
 
   mode(sk, data) {
-    const {rows, columns, callback} = data;
+    const {rows, columns, callback, lines} = data;
 
     var column = sk.width/columns;
     var row = sk.height/rows;
@@ -22,9 +22,11 @@ class LinearX extends GridMode {
     for(var i = 0; i < rows; i++) {
       sk.push();
         sk.translate(0, row * i);
+        if(lines) sk.line(0, 0, sk.width, 0);
     		for(var j = 0; j < columns; j++) {
           sk.push();
             sk.translate(j * column, 0);
+            if(lines) sk.line(0, 0, 0, sk.height);
             if(callback) callback();
           sk.pop();
     		}
