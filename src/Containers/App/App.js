@@ -15,7 +15,6 @@ window.getClassFromName = getClassFromName;
 
 window.updateWorkspace = Workspace.forceUpdate;
 
-
 window.addClassToElement = function(name, target) {
   let cl = getClassFromName(name);
   target.addChild(cl);
