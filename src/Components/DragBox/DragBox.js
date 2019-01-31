@@ -77,8 +77,8 @@ class DragBox extends Component {
             <SVG src={cancel}/>
         </span>
         {connectDragSource(<span className="Box__title">
-          {this.props.icon && <SVG className="Box__titleIcon" src={this.props.icon}/>}
-          <span className="Box__titleText">{this.props.name}</span>
+          {this.props.icon && <SVG className="Box__titleIcon" src={this.props.icon} style={{fill: this.props.color}}/>}
+          <span className="Box__titleText" style={{color: this.props.color}}>{this.props.name}</span>
         </span>)}
         {this.props.children}
       </div>

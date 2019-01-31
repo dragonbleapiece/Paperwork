@@ -55,6 +55,7 @@ class Box extends Component {
       }
     }];
     this.state.color = new Color(255, 255, 255);
+
   }
 
   addDrawBeforeType(type, f) {
@@ -139,10 +140,14 @@ class Box extends Component {
   }
 
   render() {
+    let c = this.state.color;
+    let formatedColor = (c.r+c.g+c.b !== 0) ? "rgba("+c.r+", "+c.g+", "+c.b+", "+c.a/255+")" : "rgba(255, 255, 255, 1)";
+
+    console.log(this.state.color);
     return (
       <div className={this.className} style={this.state.style}>
         <ContextMenuBox id={this.constructor.className + this.props.id} unauthorized={this.unauthorized} suppMenu={this.suppMenu} el={this}>
-          <DragBox icon={this.constructor.icon} name={this.constructor.className} onClose={this.removeFromParent.bind(this)} el={this}>
+          <DragBox icon={this.constructor.icon} color={formatedColor} name={this.constructor.className} onClose={this.removeFromParent.bind(this)} el={this}>
             <span className="Box__content">
               <ContextMenuTrigger id={""}>
                 {this.renderBox()}
