@@ -18,7 +18,7 @@ class Mode extends Component {
   }
 
   render() {
-    return null;
+    return <span>Test</span>;
   }
 }
 
