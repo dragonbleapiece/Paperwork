@@ -25,6 +25,7 @@ class Box extends Component {
     this.next = undefined;
     this.nextType = undefined;
     this.unauthorized = [];
+    this.suppMenu = {menu: undefined, handleClick: undefined};
   }
 
   addChild(child) {
@@ -91,7 +92,7 @@ class Box extends Component {
             <span className="Box__content">
               {this.renderBox()}
               <DropBox>
-              {this.unauthorized.indexOf("*") === -1 && <ContextMenuBox id={this.constructor.className + this.props.id} unauthorized={this.unauthorized} el={this}>
+              {this.unauthorized.indexOf("*") === -1 && <ContextMenuBox id={this.constructor.className + this.props.id} unauthorized={this.unauthorized} suppMenu={this.suppMenu} el={this}>
                 <div className="Box__container">
                   {!this.state.children.length && <span className="Box__placeholder">Right click to add</span>}
                   {this.getChildren()}

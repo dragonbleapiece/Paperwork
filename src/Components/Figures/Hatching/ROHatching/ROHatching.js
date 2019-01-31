@@ -18,8 +18,8 @@ class ROHatching extends Hatching {
     sk.stroke(255);
     let i = this.x + this.width;
     let j = this.y + this.height;
-    let gapX = (this.width / this.density) * 2;
-    let gapY = (this.height / this.density) * 2;
+    let gapX = (this.width / this.density);
+    let gapY = (this.height / this.density);
     while(j > this.y){
       sk.line(this.x, j, i, this.y);
       i -= gapX;

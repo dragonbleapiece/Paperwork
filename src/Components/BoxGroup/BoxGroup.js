@@ -83,7 +83,7 @@ class BoxGroup extends Box {
               <span className="Box__content">
                 {this.renderBox()}
                 <DropBox>
-                  {this.unauthorized.indexOf("*") === -1 && <ContextMenuBox id={this.constructor.className + this.props.id} unauthorized={this.unauthorized} el={this}>
+                  {this.unauthorized.indexOf("*") === -1 && <ContextMenuBox id={this.constructor.className + this.props.id} suppMenu={this.suppMenu} unauthorized={this.unauthorized} el={this}>
                     <div className="Box__container">
                       {!this.state.children.length && <span className="Box__placeholder">Right click to add</span>}
                       {this.getChildren()}

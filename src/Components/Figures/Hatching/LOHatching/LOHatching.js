@@ -18,8 +18,8 @@ class LOHatching extends Hatching {
     sk.stroke(255);
     let i = this.x;
     let j = this.y + this.height;
-    let gapX = (this.width / this.density) * 2;
-    let gapY = (this.height / this.density) * 2;
+    let gapX = (this.width / this.density);
+    let gapY = (this.height / this.density);
     while(i < this.x + this.width){
       sk.line(i, this.y, this.x+this.width, j);
       i += gapX;

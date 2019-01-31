@@ -15,6 +15,18 @@ import DiagonalRight from '../../Modes/GridMode/DiagonalRight/DiagonalRight';
 import Orthogonal from '../../Modes/GridMode/Orthogonal/Orthogonal';
 import SnailRight from '../../Modes/GridMode/SnailRight/SnailRight';
 
+const menu = [{
+  type: 'Modes',
+  elements: [
+    {type: 'DiagonalLeft'},
+    {type: 'DiagonalRight'},
+    {type: 'LinearX'},
+    {type: 'LinearY'},
+    {type: 'Orthogonal'},
+    {type: 'SnailRight'}
+  ]
+}];
+
 /*Pencil*/
 class Grid extends Placement {
 
@@ -24,7 +36,8 @@ class Grid extends Placement {
     //const {columns, rows} = this.props;
     this.state.columns = 8;
     this.state.rows = 8;
-    this.state.currentMode = undefined;
+    this.suppMenu.menu = menu;
+    this.state.mode = LinearX;
   }
 
   draw(sk) {
@@ -69,7 +82,7 @@ class Grid extends Placement {
         step={1}
         onChange={(value) => {this.setState({columns: value, rows: value});}}
         />
-        <SnailRight ref={el => {this.state.currentMode = el}} />
+        {this.renderMode()}
       </>
     );
   }

@@ -18,6 +18,13 @@ import Void from './Void/Void';
 import Blue from './Transforms/Colors/Blue';
 import Cyan from './Transforms/Colors/Cyan';
 
+//GridModes
+import LinearY from './Modes/GridMode/LinearY/LinearY';
+import LinearX from './Modes/GridMode/LinearX/LinearX';
+import DiagonalLeft from './Modes/GridMode/DiagonalLeft/DiagonalLeft';
+import DiagonalRight from './Modes/GridMode/DiagonalRight/DiagonalRight';
+import Orthogonal from './Modes/GridMode/Orthogonal/Orthogonal';
+import SnailRight from './Modes/GridMode/SnailRight/SnailRight';
 
 export function getClassFromName(name) {
   switch(name) {
@@ -59,6 +66,18 @@ export function getClassFromName(name) {
       return Rotate;
     case('Void'):
       return Void;
+    case('LinearX'):
+      return LinearX;
+    case('LinearY'):
+      return LinearY;
+    case('DiagonalLeft'):
+      return DiagonalLeft;
+    case('DiagonalRight'):
+      return DiagonalRight;
+    case('Orthogonal'):
+      return Orthogonal;
+    case('SnailRight'):
+      return SnailRight;
     default:
       return null;
   }
