@@ -40,7 +40,6 @@ class Workspace extends BoxGroup {
     this.elements = []; //no this.state.elements
     this.unauthorized = ["Markov"];
     this.addDrawBeforeType("Figure", function(sk) {
-      console.log("oui");
       sk.translate(sk.width / 2, sk.height / 2)
       sk.scale(sk.width, sk.height);
       sk.strokeWeight(1 / sk.width);
@@ -50,17 +49,15 @@ class Workspace extends BoxGroup {
 
   draw(sk) {
     sk.background(this.state.color.getP5Color(sk));
+    sk.noStroke();
     super.draw(sk);
   }
 
   componentDidUpdate() {
     let canvas = new Canvas();
     let firstBox = this.elements[0];
-    if(firstBox) {
-      canvas.sendDraw(this.draw.bind(this));
-    } else {
-      Canvas._P5.clear();
-    }
+    canvas.sendDraw(this.draw.bind(this));
+
   }
 
   //dead code
