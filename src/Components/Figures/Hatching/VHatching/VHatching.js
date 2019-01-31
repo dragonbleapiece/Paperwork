@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import './VHatching.css';
 import Hatching from '../Hatching';
+import VHatchingIcon from '../../../../Icons/VHatching.svg';
 
 /*Pencil*/
 class VHatching extends Hatching {
@@ -26,6 +27,6 @@ class VHatching extends Hatching {
 }
 
 VHatching.className = "VHatching";
-VHatching.icon = undefined;
+VHatching.icon = VHatchingIcon;
 
 export default VHatching;
