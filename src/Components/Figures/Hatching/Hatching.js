@@ -12,7 +12,7 @@ class Hatching extends Figure {
   }
 
   draw(sk) {
-    sk.stroke(255);
+    sk.stroke(this.state.color.getP5Color(sk));
     super.draw(sk);
     sk.noStroke();
   }

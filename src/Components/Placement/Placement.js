@@ -27,7 +27,6 @@ class Placement extends Box {
 
   renderMode() {
     if(!this.state.mode) return null;
-    console.log(this.state.mode);
     return (<this.state.mode key={this.constructor.className + this.state.mode.className} ref={el => {this.state.currentMode = el}} />);
   }
 

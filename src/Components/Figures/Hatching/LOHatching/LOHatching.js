@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import './LOHatching.css';
 import Hatching from '../Hatching';
-import LOHatchingIcon from '../../../../Icons/LOHatching.svg';  
+import LOHatchingIcon from '../../../../Icons/LOHatching.svg';
 
 /*Pencil*/
 class LOHatching extends Hatching {
@@ -16,7 +16,6 @@ class LOHatching extends Hatching {
   }
 
   drawFigure(sk) {
-    sk.stroke(255);
     let i = this.x;
     let j = this.y + this.height;
     let gapX = (this.width / this.density);
@@ -34,7 +33,6 @@ class LOHatching extends Hatching {
       i -= gapX;
       j += gapY;
     }
-    sk.noStroke();
   }
 
 }

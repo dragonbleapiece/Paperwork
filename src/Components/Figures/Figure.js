@@ -21,6 +21,8 @@ class Figure extends Box {
 
   draw(sk) {
     sk.push();
+      sk.fill(this.state.color.getP5Color(sk));
+      sk.scale(this.state.scale.x, this.state.scale.y);
       sk.translate(-this.width / 2, -this.height / 2);
       this.drawFigure(sk);
     sk.pop();

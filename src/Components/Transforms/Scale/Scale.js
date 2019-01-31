@@ -2,15 +2,16 @@ import React, { Component } from 'react';
 import Transform from '../Transform';
 import './Scale.css';
 import scaleIcon from '../../../Icons/scale.svg';
+import SliderBox from '../../Input/SliderBox/SliderBox';
 
 /*Attribute*/
 class Scale extends Transform {
 
+
   constructor(props) {
     super(props);
     this.className += " " + Scale.className;
-    this.scaleX = 1/2;
-    this.scaleY = 1/2;
+    this.state.scale = {x: 1, y: 1};
   }
 
   /*draw(sk) {
@@ -24,6 +25,17 @@ class Scale extends Transform {
       sk.strokeWeight(1);
     sk.pop();
   }*/
+
+  render() {
+    return (
+      <SliderBox min={1} max={50} defaultValue={10} marks={{1:0.1, 50:5}} step={1} onChange={(value) => {
+        this.setState({
+          scale: {x: value / 10, y: value / 10}
+        });
+        if(this.props.onChange) this.props.onChange(this.state.scale);
+      }} />
+    );
+  }
 }
 
 Scale.className = "Scale";

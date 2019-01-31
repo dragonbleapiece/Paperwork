@@ -6,6 +6,7 @@ import DragBox from '../DragBox/DragBox';
 import ContextMenuBox from '../ContextMenuBox/ContextMenuBox';
 import { ContextMenuTrigger } from "react-contextmenu";
 import Color from '../Colors/Color';
+import Scale from '../Transforms/Scale/Scale';
 
 const menuColor = [
   {
@@ -41,6 +42,7 @@ class Box extends Component {
     this.next = undefined;
     this.nextType = undefined;
     this.unauthorized = [];
+    this.state.scale = {x: 1, y: 1};
     this.suppMenu = [{
       menu: menuColor,
       handleClick: (event, data) => {
@@ -113,21 +115,24 @@ class Box extends Component {
   render() {
     return (
       <div className={this.className} style={this.state.style}>
-        <ContextMenuTrigger>
+        <ContextMenuBox id={this.constructor.className + this.props.id} unauthorized={this.unauthorized} suppMenu={this.suppMenu} el={this}>
           <DragBox icon={this.constructor.icon} name={this.constructor.className} onClose={this.removeFromParent.bind(this)} el={this}>
             <span className="Box__content">
-              {this.renderBox()}
+              <ContextMenuTrigger id={"0"}>
+                {this.renderBox()}
+                <Scale onChange={(scale) => {this.setState({scale: scale});}}/>
+              </ContextMenuTrigger>
               <DropBox>
-              {this.unauthorized.indexOf("*") === -1 && <ContextMenuBox id={this.constructor.className + this.props.id} unauthorized={this.unauthorized} suppMenu={this.suppMenu} el={this}>
-                <div className="Box__container">
-                  {!this.state.children.length && <span className="Box__placeholder">Right click to add</span>}
-                  {this.getChildren()}
-                </div>
-              </ContextMenuBox>}
+                <ContextMenuTrigger id={this.constructor.className + this.props.id}>
+                  {this.unauthorized.indexOf("*") === -1 && <div className="Box__container">
+                    {!this.state.children.length && <span className="Box__placeholder">Right click to add</span>}
+                    {this.getChildren()}
+                  </div>}
+                </ContextMenuTrigger>
               </DropBox>
             </span>
           </DragBox>
-        </ContextMenuTrigger>
+        </ContextMenuBox>
       </div>
     );
   }

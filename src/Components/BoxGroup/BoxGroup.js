@@ -78,21 +78,23 @@ class BoxGroup extends Box {
 
     return (
       <div className={this.className} style={this.state.style}>
-          <ContextMenuTrigger>
-            <DragBox icon={this.constructor.icon} name={this.constructor.className} onClose={this.removeFromParent.bind(this)} className={this.className} el={this}>
-              <span className="Box__content">
+        <ContextMenuBox id={this.constructor.className + this.props.id} suppMenu={this.suppMenu} unauthorized={this.unauthorized} el={this}>
+          <DragBox icon={this.constructor.icon} name={this.constructor.className} onClose={this.removeFromParent.bind(this)} className={this.className} el={this}>
+            <span className="Box__content">
+              <ContextMenuTrigger id={"0"}>
                 {this.renderBox()}
-                <DropBox>
-                  {this.unauthorized.indexOf("*") === -1 && <ContextMenuBox id={this.constructor.className + this.props.id} suppMenu={this.suppMenu} unauthorized={this.unauthorized} el={this}>
-                    <div className="Box__container">
-                      {!this.state.children.length && <span className="Box__placeholder">Right click to add</span>}
-                      {this.getChildren()}
-                    </div>
-                  </ContextMenuBox>}
-                </DropBox>
-              </span>
-            </DragBox>
-          </ContextMenuTrigger>
+              </ContextMenuTrigger>
+              <DropBox>
+                <ContextMenuTrigger id={this.constructor.className + this.props.id}>
+                  {this.unauthorized.indexOf("*") === -1 && <div className="Box__container">
+                    {!this.state.children.length && <span className="Box__placeholder">Right click to add</span>}
+                    {this.getChildren()}
+                  </div>}
+                </ContextMenuTrigger>
+              </DropBox>
+            </span>
+          </DragBox>
+        </ContextMenuBox>
       </div>
     );
   }

@@ -16,12 +16,10 @@ class VHatching extends Hatching {
   }
 
   drawFigure(sk) {
-    sk.stroke(255);
     let gapX = this.width / this.density;
     for(var i = 0; i <= this.density ; i++){
       sk.line(this.x + i * gapX, this.y, this.x + i * gapX, this.y + this.height);
     }
-    sk.noStroke();
   }
 
 }

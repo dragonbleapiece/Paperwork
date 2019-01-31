@@ -88,24 +88,19 @@ class ContextMenuBox extends Component {
       }
     }
 
-    if(menuItems.length > 0) {
-      return (
-        <>
-          <ContextMenuTrigger id={this.props.id} holdToDisplay={-1}>
-              {this.props.children}
-          </ContextMenuTrigger>
-          <ContextMenu id={this.props.id}>
-              {menuItems}
-          </ContextMenu>
-        </>
-      );
-    } else {
-      return (
+    console.log(this.props.el.constructor.className, menuItems, menuItems.length);
+
+    return (
+      <>
         <ContextMenuTrigger id={this.props.id} holdToDisplay={-1}>
             {this.props.children}
         </ContextMenuTrigger>
-      );
-    }
+        {(menuItems.length > 0) && <ContextMenu id={this.props.id}>
+            {menuItems}
+        </ContextMenu>}
+      </>
+    );
+
 
 
   }

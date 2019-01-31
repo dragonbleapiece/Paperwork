@@ -16,7 +16,6 @@ class ROHatching extends Hatching {
   }
 
   drawFigure(sk) {
-    sk.stroke(255);
     let i = this.x + this.width;
     let j = this.y + this.height;
     let gapX = (this.width / this.density);
@@ -34,7 +33,6 @@ class ROHatching extends Hatching {
       i += gapX;
       j += gapY;
     }
-    sk.noStroke();
   }
 
 }
