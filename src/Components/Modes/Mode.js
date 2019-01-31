@@ -18,7 +18,12 @@ class Mode extends Component {
   }
 
   render() {
-    return null;
+    return (
+      <div className="gridMode">
+        <span className="gridMode__label">Grid Distribution </span>
+        <span className="gridMode__text">{this.constructor.className}</span>
+      </div>
+      );
   }
 }
 
