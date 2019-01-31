@@ -29,8 +29,6 @@ class Canvas extends Component {
     }
     super(props);
     this.strokeWeight = 1;
-    this.fixScale = 1;
-    this.mounted = false;
 
     Canvas._instance = this;
   }
@@ -87,7 +85,6 @@ class Canvas extends Component {
   setup(sk) {
     const {width, height} = this.state;
     sk.createCanvas(width, height, sk.SVG);
-    console.log(width, height);
     sk.noLoop();
     window.updateWorkspace();
   }
