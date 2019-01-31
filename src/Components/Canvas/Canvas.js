@@ -29,6 +29,8 @@ class Canvas extends Component {
     }
     super(props);
     this.strokeWeight = 1;
+    this.fixScale = 1;
+    this.mounted = false;
 
     Canvas._instance = this;
   }
@@ -78,13 +80,14 @@ class Canvas extends Component {
 
   savePaper(sk, filename, extension) {
     if(filename !== undefined || extension !== undefined) {
-      sk.save(filename + "." + extension);
+      sk.saveSVG(filename + "." + extension);
     }
   }
 
   setup(sk) {
     const {width, height} = this.state;
     sk.createCanvas(width, height, sk.SVG);
+    console.log(width, height);
     sk.noLoop();
     window.updateWorkspace();
   }
@@ -95,6 +98,7 @@ class Canvas extends Component {
   }
 
   draw(sk) {
+    sk.pixelDensity(1); //fix svg
     let f = this.state.function;
     if(f !== undefined) {
       f(sk);
