@@ -30,6 +30,7 @@ body {
     sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+  overflow: hidden;
 /* Prevent text selection */
   -webkit-touch-callout: none;
   -webkit-user-select: none;
