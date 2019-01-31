@@ -26,6 +26,10 @@ class Placement extends Box {
     this.unauthorized.push("Placement");
   }
 
+  getTransforms() {
+    return null;
+  }
+
   renderMode() {
     if(!this.state.mode) return null;
     return (<this.state.mode key={this.constructor.className + this.state.mode.className} ref={el => {this.state.currentMode = el}} />);

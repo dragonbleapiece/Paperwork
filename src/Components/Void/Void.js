@@ -13,6 +13,10 @@ class Void extends Box {
     this.suppMenu = [];
   }
 
+  getTransforms() {
+    return null;
+  }
+
 }
 
 Void.className = "Void";

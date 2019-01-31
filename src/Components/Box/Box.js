@@ -139,6 +139,12 @@ class Box extends Component {
     return null;
   }
 
+  getTransforms() {
+    return (
+      <Scale onChange={(scale) => {this.setState({scale: scale});}}/>
+    );
+  }
+
   render() {
     let c = this.state.color;
     let formatedColor = (c.r+c.g+c.b !== 0) ? "rgba("+c.r+", "+c.g+", "+c.b+", "+c.a/255+")" : "rgba(255, 255, 255, 1)";
@@ -151,7 +157,7 @@ class Box extends Component {
             <span className="Box__content">
               <ContextMenuTrigger id={""}>
                 {this.renderBox()}
-                <Scale onChange={(scale) => {this.setState({scale: scale});}}/>
+                {this.getTransforms()}
               </ContextMenuTrigger>
               <DropBox>
                 <ContextMenuTrigger id={this.constructor.className + this.props.id}>
