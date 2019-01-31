@@ -23,6 +23,7 @@ class Placement extends Box {
       }
     });
     this.suppMenu[this.suppMenu.length - 1].handleClick.bind(this);
+    this.unauthorized.push("Placement");
   }
 
   renderMode() {

@@ -39,6 +39,12 @@ class Workspace extends BoxGroup {
     this.state.color = new Black();
     this.elements = []; //no this.state.elements
     this.unauthorized = ["Markov"];
+    this.addDrawBeforeType("Figure", function(sk) {
+      console.log("oui");
+      sk.translate(sk.width / 2, sk.height / 2)
+      sk.scale(sk.width, sk.height);
+      sk.strokeWeight(1 / sk.width);
+    });
     Workspace._instance = this;
   }
 

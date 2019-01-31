@@ -11,7 +11,7 @@ class Scale extends Transform {
   constructor(props) {
     super(props);
     this.className += " " + Scale.className;
-    this.state.scale = {x: 1, y: 1};
+    this.scale = {x: 1, y: 1};
   }
 
   /*draw(sk) {
@@ -29,10 +29,8 @@ class Scale extends Transform {
   render() {
     return (
       <SliderBox min={1} max={50} defaultValue={10} marks={{1:0.1, 50:5}} step={1} onChange={(value) => {
-        this.setState({
-          scale: {x: value / 10, y: value / 10}
-        });
-        if(this.props.onChange) this.props.onChange(this.state.scale);
+        this.scale = {x: value / 10, y: value / 10};
+        if(this.props.onChange) this.props.onChange(this.scale);
       }} />
     );
   }

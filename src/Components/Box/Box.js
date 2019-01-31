@@ -43,6 +43,7 @@ class Box extends Component {
     this.nextType = undefined;
     this.unauthorized = [];
     this.state.scale = {x: 1, y: 1};
+    this.drawBeforeType = {};
     this.suppMenu = [{
       menu: menuColor,
       handleClick: (event, data) => {
@@ -54,6 +55,21 @@ class Box extends Component {
       }
     }];
     this.state.color = new Color(255, 255, 255);
+  }
+
+  addDrawBeforeType(type, f) {
+    if(!(f instanceof Function)) return;
+    if(!this.drawBeforeType[type]) {
+      this.drawBeforeType[type] = [f];
+    } else {
+      this.drawBeforeType[type].push(f);
+    }
+  }
+
+  callDrawBeforeType(sk, type) {
+    for(let i = 0; i < this.drawBeforeType[type].length; ++i) {
+      this.drawBeforeType[type][i](sk);
+    }
   }
 
   addChild(child) {
@@ -91,6 +107,16 @@ class Box extends Component {
     this.setState({
       style: style
     });
+  }
+
+  drawBeforeChild(sk, child) {
+    if(!child) return;
+    for(let key in this.drawBeforeType) {
+      console.log(key);
+      if(child instanceof window.getClassFromName(key)) {
+        this.callDrawBeforeType(sk, key);
+      }
+    }
   }
 
   draw(sk) {
