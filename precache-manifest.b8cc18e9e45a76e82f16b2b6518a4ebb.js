@@ -4,8 +4,8 @@ self.__precacheManifest = [
     "url": "/PAPER/static/media/triangle.3963bd74.svg"
   },
   {
-    "revision": "7bd9928f97eb6ea5cb80",
-    "url": "/PAPER/static/css/main.4dad1901.chunk.css"
+    "revision": "dd82c187f8779739cc19",
+    "url": "/PAPER/static/css/main.9e13e00e.chunk.css"
   },
   {
     "revision": "a2a55d7be479b8d287e4b00dac57c612",
@@ -48,8 +48,8 @@ self.__precacheManifest = [
     "url": "/PAPER/static/media/square.5b5b5ce7.svg"
   },
   {
-    "revision": "7bd9928f97eb6ea5cb80",
-    "url": "/PAPER/static/js/main.7bd9928f.chunk.js"
+    "revision": "dd82c187f8779739cc19",
+    "url": "/PAPER/static/js/main.dd82c187.chunk.js"
   },
   {
     "revision": "37dda89eb9a55d4dab0b338abf20ba89",
@@ -96,7 +96,7 @@ self.__precacheManifest = [
     "url": "/PAPER/static/css/1.28fe1060.chunk.css"
   },
   {
-    "revision": "f8eff60e6e9060a4c5eeb8d7eac661d2",
+    "revision": "3a2b9d351955b30040aa04117449bbb6",
     "url": "/PAPER/index.html"
   }
 ];

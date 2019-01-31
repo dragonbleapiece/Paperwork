@@ -1,7 +1,7 @@
 {
-  "main.css": "/PAPER/static/css/main.4dad1901.chunk.css",
-  "main.js": "/PAPER/static/js/main.7bd9928f.chunk.js",
-  "main.js.map": "/PAPER/static/js/main.7bd9928f.chunk.js.map",
+  "main.css": "/PAPER/static/css/main.9e13e00e.chunk.css",
+  "main.js": "/PAPER/static/js/main.dd82c187.chunk.js",
+  "main.js.map": "/PAPER/static/js/main.dd82c187.chunk.js.map",
   "static/css/1.28fe1060.chunk.css": "/PAPER/static/css/1.28fe1060.chunk.css",
   "static/js/1.bcb38c1c.chunk.js": "/PAPER/static/js/1.bcb38c1c.chunk.js",
   "static/js/1.bcb38c1c.chunk.js.map": "/PAPER/static/js/1.bcb38c1c.chunk.js.map",
@@ -26,9 +26,9 @@
   "static/media/code.svg": "/PAPER/static/media/code.74f0e940.svg",
   "static/media/rotate.svg": "/PAPER/static/media/rotate.5d1fc53d.svg",
   "static/media/void.svg": "/PAPER/static/media/void.a2a55d7b.svg",
-  "static/css/main.4dad1901.chunk.css.map": "/PAPER/static/css/main.4dad1901.chunk.css.map",
+  "static/css/main.9e13e00e.chunk.css.map": "/PAPER/static/css/main.9e13e00e.chunk.css.map",
   "static/css/1.28fe1060.chunk.css.map": "/PAPER/static/css/1.28fe1060.chunk.css.map",
   "index.html": "/PAPER/index.html",
-  "precache-manifest.b28c5a86ff9f2dbf0799484e8b819698.js": "/PAPER/precache-manifest.b28c5a86ff9f2dbf0799484e8b819698.js",
+  "precache-manifest.b8cc18e9e45a76e82f16b2b6518a4ebb.js": "/PAPER/precache-manifest.b8cc18e9e45a76e82f16b2b6518a4ebb.js",
   "service-worker.js": "/PAPER/service-worker.js"
 }
