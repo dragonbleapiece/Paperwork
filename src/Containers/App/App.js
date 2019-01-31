@@ -111,10 +111,10 @@ class App extends Component {
           </div>
             <div className="rightSide border-left">
               <div className="editionMenu border-bottom">
+                <div className="button displayCode border-right">
+                  <SVG src={icon_code}/>
+                </div>
                 <div className="save">
-                  <a className="button save__button border-right" onClick={(event) => this.downloadImage(event.target)}>
-                    <SVG src={icon_save_alt}/>
-                  </a>
                   <input className="save__name" type="text" value={this.state.DownloadName} onChange={(event) => {this.setState({DownloadName: event.target.value})}}/>
                   <div className="save__format">
                     <input id="save__svg" type="radio" value="svg" name="saveFormat" defaultChecked onChange={(event) => {if(event.target.checked) {this.setState({DownloadFormat: event.target.value})}}}/>
@@ -122,9 +122,9 @@ class App extends Component {
                     <input id="save__jpg" type="radio" value="jpg" name="saveFormat" onChange={(event) => {if(event.target.checked) {this.setState({DownloadFormat: event.target.value})}}}/>
                     <label htmlFor="save__jpg" className="save__formatItem button border-left">.jpg</label>
                   </div>
-                </div>
-                <div className="button displayCode border-left">
-                  <SVG src={icon_code}/>
+                  <a className="button save__button border-left" onClick={(event) => this.downloadImage(event.target)}>
+                    <SVG src={icon_save_alt}/>
+                  </a>
                 </div>
               </div>
                 <Canvas/>
