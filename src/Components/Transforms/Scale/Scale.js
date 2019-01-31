@@ -3,8 +3,7 @@ import Transform from '../Transform';
 import './Scale.css';
 import scaleIcon from '../../../Icons/scale.svg';
 
-
-/*Pencil*/
+/*Attribute*/
 class Scale extends Transform {
 
   constructor(props) {
@@ -14,7 +13,7 @@ class Scale extends Transform {
     this.scaleY = 1/2;
   }
 
-  draw(sk) {
+  /*draw(sk) {
     sk.push();
       sk.scale(this.scaleX, this.scaleY);
       let max = Math.max(this.scaleX, this.scaleY);
@@ -24,7 +23,7 @@ class Scale extends Transform {
       }
       sk.strokeWeight(1);
     sk.pop();
-  }
+  }*/
 }
 
 Scale.className = "Scale";

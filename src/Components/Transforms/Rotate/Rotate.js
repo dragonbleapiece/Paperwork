@@ -3,7 +3,7 @@ import Transform from '../Transform';
 import './Rotate.css';
 import rotate from '../../../Icons/rotate.svg';
 
-/*Pencil*/
+/*Attribute*/
 class Rotate extends Transform {
 
   constructor(props) {
@@ -12,14 +12,14 @@ class Rotate extends Transform {
     this.rotate = 20;
   }
 
-  draw(sk) {
+  /*draw(sk) {
     sk.push();
       sk.rotate(sk.radians(this.rotate));
       if(this.next) {
         this.next.draw(sk);
       }
     sk.pop();
-  }
+  }*/
 }
 
 Rotate.className = "Rotate";

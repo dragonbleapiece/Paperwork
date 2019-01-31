@@ -13,10 +13,14 @@ import Transform from './Transforms/Transform';
 import Translate from './Transforms/Translate/Translate';
 import Scale from './Transforms/Scale/Scale';
 import Rotate from './Transforms/Rotate/Rotate';
-import Color from './Transforms/Colors/Color';
+import Color from './Colors/Color';
 import Void from './Void/Void';
-import Blue from './Transforms/Colors/Blue';
-import Cyan from './Transforms/Colors/Cyan';
+import Blue from './Colors/Blue';
+import Cyan from './Colors/Cyan';
+import Magenta from './Colors/Magenta';
+import Yellow from './Colors/Yellow';
+import Black from './Colors/Black';
+import White from './Colors/White';
 
 //GridModes
 import LinearY from './Modes/GridMode/LinearY/LinearY';
@@ -58,6 +62,14 @@ export function getClassFromName(name) {
       return Blue;
     case('Cyan'):
       return Cyan;
+    case('Magenta'):
+      return Magenta;
+    case('Black'):
+      return Black;
+    case('Yellow'):
+      return Yellow;
+    case('White'):
+      return White;
     case('Translate'):
       return Translate;
     case('Scale'):

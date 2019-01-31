@@ -2,6 +2,8 @@ import React, { Component } from 'react';
 import Box from '../Box/Box';
 import './Placement.css';
 import shortid from 'shortid';
+import Workspace from '../Workspace/Workspace';
+
 
 /*Pencil*/
 class Placement extends Box {
@@ -11,14 +13,16 @@ class Placement extends Box {
     this.className += " " + Placement.className;
     this.state.currentMode = undefined;
     this.state.mode = null;
-    this.suppMenu.handleClick = (event, data) => {
-      console.log(data);
-      if(data.type) {
-        this.setState({mode: window.getClassFromName(data.type)})
-        console.log(this.state.mode);
+    this.suppMenu.push({
+      menu: undefined,
+      handleClick: (event, data) => {
+        if(data.type) {
+          this.setState({mode: window.getClassFromName(data.type)})
+          Workspace.forceUpdate();
+        }
       }
-    };
-    this.suppMenu.handleClick.bind(this);
+    });
+    this.suppMenu[this.suppMenu.length - 1].handleClick.bind(this);
   }
 
   renderMode() {

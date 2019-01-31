@@ -3,16 +3,12 @@ import Box from '../Box/Box';
 import './Transform.css';
 import p5 from 'p5';
 
-/*Pencil*/
-class Transform extends Box {
+/*Attribute*/
+class Transform extends Component {
 
   constructor(props) {
     super(props);
-    this.className += " " + Transform.className;
-  }
-
-  draw(sk) {
-
+    this.className = Transform.className;
   }
 }
 

@@ -5,6 +5,22 @@ import DropBox from '../DropBox/DropBox';
 import DragBox from '../DragBox/DragBox';
 import ContextMenuBox from '../ContextMenuBox/ContextMenuBox';
 import { ContextMenuTrigger } from "react-contextmenu";
+import Color from '../Colors/Color';
+
+const menuColor = [
+  {
+    type: 'Color',
+    elements: [
+      {type: 'Blue'},
+      {type: 'Cyan'},
+      {type: 'Magenta'},
+      {type: 'Yellow'},
+      {type: 'Black'},
+      {type: 'White'}
+    ]
+  }
+];
+
 
 /*Pencil*/
 class Box extends Component {
@@ -25,7 +41,17 @@ class Box extends Component {
     this.next = undefined;
     this.nextType = undefined;
     this.unauthorized = [];
-    this.suppMenu = {menu: undefined, handleClick: undefined};
+    this.suppMenu = [{
+      menu: menuColor,
+      handleClick: (event, data) => {
+       if(data.type) {
+         let color = window.getClassFromName(data.type);
+         if(color) this.setState({color: new color()});
+         window.updateWorkspace();
+       }
+      }
+    }];
+    this.state.color = new Color(255, 255, 255);
   }
 
   addChild(child) {

@@ -36,7 +36,7 @@ class Grid extends Placement {
     //const {columns, rows} = this.props;
     this.state.columns = 8;
     this.state.rows = 8;
-    this.suppMenu.menu = menu;
+    this.suppMenu[this.suppMenu.length - 1].menu = menu;
     this.state.mode = LinearX;
   }
 
@@ -47,7 +47,7 @@ class Grid extends Placement {
     var elem = this.next;
     var currentMode = this.state.currentMode;
 
-  	if(!elem) sk.stroke(255);
+  	if(!elem) sk.stroke(this.state.color.getP5Color(sk));
 
     if(currentMode) {
       currentMode.mode(sk, {

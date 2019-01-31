@@ -3,7 +3,7 @@ import Transform from '../Transform';
 import './Translate.css';
 import translate from '../../../Icons/translate.svg';
 
-/*Pencil*/
+/*Attribute*/
 class Translate extends Transform {
 
   constructor(props) {
@@ -11,15 +11,6 @@ class Translate extends Transform {
     this.className += " " + Translate.className;
     this.destX = 10;
     this.destY = 10;
-  }
-
-  draw(sk) {
-    sk.push();
-      sk.translate(this.destX, this.destY);
-      if(this.next) {
-        this.next.draw(sk);
-      }
-    sk.pop();
   }
 }
 

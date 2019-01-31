@@ -10,6 +10,8 @@ import ItemTypes from '../../Constants.js';
 import DropBox from '../DropBox/DropBox';
 import DragBox from '../DragBox/DragBox';
 import ContextMenuBox from '../ContextMenuBox/ContextMenuBox';
+import Black from '../Colors/Black';
+
 
 class Workspace extends BoxGroup {
 
@@ -34,13 +36,14 @@ class Workspace extends BoxGroup {
     super(props);
     this.className = this.constructor.className;
     this.state.children = [];
+    this.state.color = new Black();
     this.elements = []; //no this.state.elements
     this.unauthorized = ["Markov"];
     Workspace._instance = this;
   }
 
   draw(sk) {
-    sk.background(0);
+    sk.background(this.state.color.getP5Color(sk));
     super.draw(sk);
   }
 
@@ -87,7 +90,7 @@ class Workspace extends BoxGroup {
   render() {
     return (
       <div className={this.className}>
-        <ContextMenuBox id={this.constructor.className} unauthorized={this.unauthorized} el={this}>
+        <ContextMenuBox id={this.constructor.className} unauthorized={this.unauthorized} suppMenu={this.suppMenu} el={this}>
           <DropBox>
             {!this.state.children.length && <span className="Workspace__placeholder">Right click here</span>}
             {this.getChildren()}

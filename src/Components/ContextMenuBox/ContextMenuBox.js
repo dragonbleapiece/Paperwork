@@ -28,24 +28,7 @@ const menu = [
     ]
   },
   {
-    type: 'Color',
-    elements: [
-      {type: 'Blue'},
-      {type: 'Cyan'},
-      {type: 'Magenta'},
-      {type: 'Yellow'}
-    ]
-  },
-  {
     type: 'Markov'
-  },
-  {
-    type: 'Transform',
-    elements: [
-      {type: 'Translate'},
-      {type: 'Rotate'},
-      {type: 'Scale'}
-    ]
   }
 ];
 
@@ -93,7 +76,30 @@ class ContextMenuBox extends Component {
 
   render() {
 
-    if(this.props.el.unauthorized.indexOf("*") !== -1) {
+    let menuItems = [];
+    if(this.props.el.unauthorized.indexOf("*") === -1) {
+      menuItems = this.getMenu(menu, this.handleClick.bind(this));
+    }
+
+    for(let key in this.props.suppMenu) {
+      let suppMenu = this.props.suppMenu[key];
+      if( suppMenu.menu && suppMenu.handleClick ) {
+        menuItems = menuItems.concat(this.getMenu(suppMenu.menu, suppMenu.handleClick));
+      }
+    }
+
+    if(menuItems.length > 0) {
+      return (
+        <>
+          <ContextMenuTrigger id={this.props.id} holdToDisplay={-1}>
+              {this.props.children}
+          </ContextMenuTrigger>
+          <ContextMenu id={this.props.id}>
+              {menuItems}
+          </ContextMenu>
+        </>
+      );
+    } else {
       return (
         <ContextMenuTrigger id={this.props.id} holdToDisplay={-1}>
             {this.props.children}
@@ -101,21 +107,7 @@ class ContextMenuBox extends Component {
       );
     }
 
-    let menuItems = this.getMenu(menu, this.handleClick.bind(this));
-    if(this.props.suppMenu && this.props.suppMenu.menu && this.props.suppMenu.handleClick) {
-      menuItems = menuItems.concat(this.getMenu(this.props.suppMenu.menu, this.props.suppMenu.handleClick));
-    }
 
-    return (
-      <>
-        <ContextMenuTrigger id={this.props.id} holdToDisplay={-1}>
-            {this.props.children}
-        </ContextMenuTrigger>
-        <ContextMenu id={this.props.id}>
-            {menuItems}
-        </ContextMenu>
-      </>
-    );
   }
 }
 
