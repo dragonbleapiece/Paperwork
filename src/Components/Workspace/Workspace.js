@@ -55,9 +55,7 @@ class Workspace extends BoxGroup {
 
   componentDidUpdate() {
     let canvas = new Canvas();
-    let firstBox = this.elements[0];
     canvas.sendDraw(this.draw.bind(this));
-
   }
 
   //dead code

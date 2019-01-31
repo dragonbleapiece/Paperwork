@@ -10,6 +10,7 @@ class Void extends Box {
     super(props);
     this.className += " " + Void.className;
     this.unauthorized = ["*"];
+    this.suppMenu = [];
   }
 
 }

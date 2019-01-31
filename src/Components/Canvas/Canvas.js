@@ -84,8 +84,9 @@ class Canvas extends Component {
 
   setup(sk) {
     const {width, height} = this.state;
-    sk.createCanvas(width, height /*, sk.SGV*/);
+    sk.createCanvas(width, height, sk.SVG);
     sk.noLoop();
+    window.updateWorkspace();
   }
 
   strokeScale(sk, scale) {
