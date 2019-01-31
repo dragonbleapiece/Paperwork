@@ -118,7 +118,7 @@ class Box extends Component {
         <ContextMenuBox id={this.constructor.className + this.props.id} unauthorized={this.unauthorized} suppMenu={this.suppMenu} el={this}>
           <DragBox icon={this.constructor.icon} name={this.constructor.className} onClose={this.removeFromParent.bind(this)} el={this}>
             <span className="Box__content">
-              <ContextMenuTrigger id={"0"}>
+              <ContextMenuTrigger id={""}>
                 {this.renderBox()}
                 <Scale onChange={(scale) => {this.setState({scale: scale});}}/>
               </ContextMenuTrigger>

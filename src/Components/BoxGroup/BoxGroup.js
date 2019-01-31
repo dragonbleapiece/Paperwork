@@ -81,7 +81,7 @@ class BoxGroup extends Box {
         <ContextMenuBox id={this.constructor.className + this.props.id} suppMenu={this.suppMenu} unauthorized={this.unauthorized} el={this}>
           <DragBox icon={this.constructor.icon} name={this.constructor.className} onClose={this.removeFromParent.bind(this)} className={this.className} el={this}>
             <span className="Box__content">
-              <ContextMenuTrigger id={"0"}>
+              <ContextMenuTrigger id={""}>
                 {this.renderBox()}
               </ContextMenuTrigger>
               <DropBox>
