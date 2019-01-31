@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import './LOHatching.css';
 import Hatching from '../Hatching';
+import LOHatchingIcon from '../../../../Icons/LOHatching.svg';  
 
 /*Pencil*/
 class LOHatching extends Hatching {
@@ -39,6 +40,6 @@ class LOHatching extends Hatching {
 }
 
 LOHatching.className = "LOHatching";
-LOHatching.icon = undefined;
+LOHatching.icon = LOHatchingIcon;
 
 export default LOHatching;

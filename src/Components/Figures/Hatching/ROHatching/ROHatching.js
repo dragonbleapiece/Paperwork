@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import './ROHatching.css';
 import Hatching from '../Hatching';
+import ROHatchingIcon from '../../../../Icons/ROHatching.svg';
 
 /*Pencil*/
 class ROHatching extends Hatching {
@@ -39,6 +40,6 @@ class ROHatching extends Hatching {
 }
 
 ROHatching.className = "ROHatching";
-ROHatching.icon = undefined;
+ROHatching.icon = ROHatchingIcon;
 
 export default ROHatching;

@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import Box from '../Box/Box';
 import './Void.css';
+import voidIcon from '../../Icons/void.svg';
 
 /*Pencil*/
 class Void extends Box {
@@ -14,6 +15,6 @@ class Void extends Box {
 }
 
 Void.className = "Void";
-Void.icon = undefined;
+Void.icon = voidIcon;
 
 export default Void;

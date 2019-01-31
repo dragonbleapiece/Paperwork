@@ -1,6 +1,8 @@
 import React, { Component } from 'react';
 import Transform from '../Transform';
 import './Scale.css';
+import scaleIcon from '../../../Icons/scale.svg';
+
 
 /*Pencil*/
 class Scale extends Transform {
@@ -26,6 +28,6 @@ class Scale extends Transform {
 }
 
 Scale.className = "Scale";
-Scale.icon = undefined;
+Scale.icon = scaleIcon;
 
 export default Scale;

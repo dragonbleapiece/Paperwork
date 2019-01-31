@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import './HHatching.css';
 import Hatching from '../Hatching';
+import HHatchingIcon from '../../../../Icons/HHatching.svg';
 
 /*Pencil*/
 class HHatching extends Hatching {
@@ -26,6 +27,6 @@ class HHatching extends Hatching {
 }
 
 HHatching.className = "HHatching";
-HHatching.icon = undefined;
+HHatching.icon = HHatchingIcon;
 
 export default HHatching;
