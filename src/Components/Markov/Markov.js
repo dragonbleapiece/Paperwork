@@ -50,6 +50,7 @@ class Markov extends BoxGroup {
     this.elementsLength = this.state.children.length;
     this.currentState = parseInt(Math.random() * (this.elementsLength));
     this.idElement = [];
+    this.unauthorized.push("Placement");
   }
 
   setChildren(children) {
