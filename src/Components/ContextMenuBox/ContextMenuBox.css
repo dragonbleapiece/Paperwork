@@ -13,6 +13,8 @@ div+.DropBox>.react-contextmenu-wrapper {
   position: absolute;
   background-color: white;
   border: black 1px solid;
+  border-bottom: none;
+  z-index: 999;
 }
 
 .react-contextmenu-item {
@@ -62,7 +64,7 @@ div+.DropBox>.react-contextmenu-wrapper {
   fill: white;
 }
 
-.react-contextmenu-item:not(:last-child) {
+.react-contextmenu-item {
   border-bottom: black 1px solid;
 }
 
