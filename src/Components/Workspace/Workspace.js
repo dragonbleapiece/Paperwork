@@ -35,8 +35,6 @@ class Workspace extends BoxGroup {
     }
     super(props);
     this.className = this.constructor.className;
-    this.state.children = [];
-    this.state.color = new Black();
     this.elements = []; //no this.state.elements
     this.unauthorized = ["Markov"];
     this.addDrawBeforeType("Figure", function(sk) {
@@ -45,6 +43,12 @@ class Workspace extends BoxGroup {
       sk.strokeWeight(1 / sk.width);
     });
     Workspace._instance = this;
+  }
+
+  initState() {
+    super.initState();
+    this.state.children = [];
+    this.state.color = new Black();
   }
 
   draw(sk) {
@@ -92,7 +96,7 @@ class Workspace extends BoxGroup {
     return (
       <div className={this.className}>
         <ContextMenuBox id={this.constructor.className} unauthorized={this.unauthorized} suppMenu={this.suppMenu} el={this}>
-          <DropBox>
+          <DropBox el={this}>
             {!this.state.children.length && <span className="Workspace__placeholder">Right click here</span>}
             {this.getChildren()}
           </DropBox>

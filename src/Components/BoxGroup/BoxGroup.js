@@ -31,6 +31,19 @@ class BoxGroup extends Box {
     }
   }
 
+  pushChild(child) {
+    if(!child || !("type" in child) || !("id" in child)) return;
+    let obj = new child.type(); //tricky
+    if(window.isAuthorized(child.type, this.unauthorized) && obj instanceof Box) {
+      let children = this.state.children;
+      children.push(child);
+      console.log(child);
+      this.setState({
+        children: children
+      });
+    }
+  }
+
   setChildren(children) {
     this.elements = [];
     super.setChildren(children);
@@ -66,7 +79,7 @@ class BoxGroup extends Box {
   getChildren() {
     this.elements = [];
     let children = this.state.children.map((child, index) =>
-      <child.type key={child.id} id={child.id} parent={this} ref={el => this.elements[index] = el}/>
+      <child.type key={child.id} id={child.id} parent={this} ref={el => this.elements[index] = el} saveState={(state) => {child.state = state}} state={child.state}/>
     );
 
 
@@ -87,7 +100,7 @@ class BoxGroup extends Box {
               <ContextMenuTrigger id={""}>
                 {this.renderBox()}
               </ContextMenuTrigger>
-              <DropBox>
+              <DropBox el={this}>
                 <ContextMenuTrigger id={this.constructor.className + this.props.id}>
                   {this.unauthorized.indexOf("*") === -1 && <div className="Box__container">
                     {!this.state.children.length && <span className="Box__placeholder">Right click to add</span>}

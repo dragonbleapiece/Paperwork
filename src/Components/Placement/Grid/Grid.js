@@ -34,9 +34,13 @@ class Grid extends Placement {
     super(props);
     this.className += " " + Grid.className;
     //const {columns, rows} = this.props;
+    this.suppMenu[this.suppMenu.length - 1].menu = menu;
+  }
+
+  initState() {
+    super.initState();
     this.state.columns = 8;
     this.state.rows = 8;
-    this.suppMenu[this.suppMenu.length - 1].menu = menu;
     this.state.mode = LinearX;
   }
 

@@ -32,7 +32,9 @@ const boxTarget = {
     // here—if you need them, put monitor.isOver() into collect() so you
     // can just use componentDidUpdate() to handle enter/leave.
 
-    return;
+    //return;
+
+    const item = monitor.getItem();
 
     // You can access the coordinates if you need them
 
@@ -41,6 +43,9 @@ const boxTarget = {
 
     // You will receive hover() even for items for which canDrop() is false
     const canDrop = monitor.canDrop();
+
+    item.hovered = props.el;
+
   },
 
   drop(props, monitor, component) {
@@ -67,7 +72,6 @@ const boxTarget = {
     // You give to the currently moving item the new positions
     item.x = clientOffset.x - item.x;
     item.y = clientOffset.y - item.y;
-
 
     // You can also do nothing and return a drop result,
     // which will be available as monitor.getDropResult()

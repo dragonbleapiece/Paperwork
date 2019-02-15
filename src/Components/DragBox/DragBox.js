@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import { findDOMNode } from 'react-dom';
 import {ItemTypes} from '../../Constants.js';
 import {DragSource} from 'react-dnd';
+import { getEmptyImage } from 'react-dnd-html5-backend';
 import Workspace from '../Workspace/Workspace';
 
 //import Icons
@@ -19,8 +20,11 @@ const boxSource = {
   endDrag(props, monitor, component) {
     const item = monitor.getItem();
     const result = monitor.getDropResult();
+    console.log(item.hovered);
     if(result !== null && result.moved) {
-      component.setPosition(item);
+      props.el.removeFromParent();
+      item.hovered.pushChild({type: props.el.constructor, id: props.el.props.id, state: props.el.state});
+      //component.setPosition(item);
     }
     return {};
   }
@@ -44,17 +48,20 @@ class DragBox extends Component {
 
   setPosition(d) {
     if(!d) return;
+    const left = parseInt(this.props.el.state.style.left);
+    const top = parseInt(this.props.el.state.style.top);
+
     const coord = {
-      x: !Number.isNaN(parseInt(this.props.el.state.style.left)) ? parseInt(this.props.el.state.style.left) : 0,
-      y: !Number.isNaN(parseInt(this.props.el.state.style.top)) ? parseInt(this.props.el.state.style.top) : 0
+      x: !Number.isNaN(left) ? left : 0,
+      y: !Number.isNaN(top) ? top : 0
     };
 
-    console.log(coord);
     const style = {
       "position": "absolute",
       "top": d.y + coord.y + "px",
       "left": d.x + coord.x + "px"
     };
+    console.log(coord);
     this.props.el.setStyle(style);
   }
 
@@ -69,9 +76,11 @@ class DragBox extends Component {
   render() {
     const { isDragging, connectDragSource, connectDragPreview } = this.props;
 
+    if(isDragging) {
+      return null;
+    }
 
-
-    return connectDragPreview(
+    return(
       <div className="Box__wrapper">
         <span className="Box__titleClose" onClick={this.onClose.bind(this)}>
             <SVG src={cancel}/>

@@ -28,7 +28,7 @@ class Scale extends Transform {
 
   render() {
     return (
-      <SliderBox min={1} max={50} defaultValue={10} marks={{1:0.1, 50:5}} step={1} onChange={(value) => {
+      <SliderBox min={1} max={20} defaultValue={10} marks={{1:0.1, 10:1, 20:2}} step={1} onChange={(value) => {
         this.scale = {x: value / 10, y: value / 10};
         if(this.props.onChange) this.props.onChange(this.scale);
       }} />

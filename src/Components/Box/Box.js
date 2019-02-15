@@ -37,12 +37,18 @@ class Box extends Component {
 
   constructor(props) {
     super(props);
+
+    if(props && this.props.state) {
+      this.state = this.props.state;
+    } else {
+      this.initState();
+    }
+
     this.className = Box.className;
     this.name = Box.className;
     this.next = undefined;
     this.nextType = undefined;
     this.unauthorized = [];
-    this.state.scale = {x: 1, y: 1};
     this.drawBeforeType = {};
     this.suppMenu = [{
       menu: menuColor,
@@ -54,8 +60,13 @@ class Box extends Component {
        }
       }
     }];
-    this.state.color = new Color(255, 255, 255);
 
+
+  }
+
+  initState() {
+    this.state.color = new Color(255, 255, 255);
+    this.state.scale = {x: 1, y: 1};
   }
 
   addDrawBeforeType(type, f) {
@@ -79,6 +90,16 @@ class Box extends Component {
     if(window.isAuthorized(child, this.unauthorized) && obj instanceof Box) {
       this.setState({
         children: [{type:child, id:Box.id}]
+      });
+    }
+  }
+
+  pushChild(child) {
+    if(!child || !child.type || !child.id) return;
+    let obj = new child.type(); //tricky
+    if(window.isAuthorized(child.type, this.unauthorized) && obj instanceof Box) {
+      this.setState({
+        children: [child]
       });
     }
   }
@@ -130,7 +151,7 @@ class Box extends Component {
 
     if(this.state.children.length > 0) {
       let child = this.state.children[0];
-      children.push(<child.type key={child.id} parent={this} id={child.id} ref={el => {this.next = el}}/>);
+      children.push(<child.type key={child.id} parent={this} id={child.id} ref={el => {this.next = el}} saveState={(state) => {child.state = state}} state={child.state}/>);
     }
     return children;
   }
@@ -145,11 +166,17 @@ class Box extends Component {
     );
   }
 
+  componentDidUpdate() {
+    const {saveState} = this.props;
+    if(saveState) {
+      saveState(this.state);
+    }
+  }
+
   render() {
     let c = this.state.color;
     let formatedColor = (c.r+c.g+c.b !== 0) ? "rgba("+c.r+", "+c.g+", "+c.b+", "+c.a/255+")" : "rgba(255, 255, 255, 1)";
 
-    console.log(this.state.color);
     return (
       <div className={this.className} style={this.state.style}>
         <ContextMenuBox id={this.constructor.className + this.props.id} unauthorized={this.unauthorized} suppMenu={this.suppMenu} el={this}>
@@ -159,7 +186,7 @@ class Box extends Component {
                 {this.renderBox()}
                 {this.getTransforms()}
               </ContextMenuTrigger>
-              <DropBox>
+              <DropBox el={this}>
                 <ContextMenuTrigger id={this.constructor.className + this.props.id}>
                   {this.unauthorized.indexOf("*") === -1 && <div className="Box__container">
                     {!this.state.children.length && <span className="Box__placeholder">Right click to add</span>}

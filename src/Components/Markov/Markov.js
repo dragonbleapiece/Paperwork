@@ -46,11 +46,15 @@ class Markov extends BoxGroup {
     super(props);
     this.className += " " + Markov.className;
     this.suppMenu = [];
-    this.state.proba = [];
     this.elementsLength = this.state.children.length;
     this.currentState = parseInt(Math.random() * (this.elementsLength));
     this.idElement = [];
     this.unauthorized.push("Placement");
+  }
+
+  initState() {
+    super.initState();
+    this.state.proba = [];
   }
 
   setChildren(children) {
@@ -154,7 +158,7 @@ class Markov extends BoxGroup {
                 this.setState({proba:proba});
               };
             }
-            propsInput.onKeyDown = propsInput.onChange; 
+            propsInput.onKeyDown = propsInput.onChange;
             inputs.push(<div className="Markov__InputContainer">
               <span className="Markov__InputIcon">
                 <SVG src={this.state.children[i].type.icon}/>

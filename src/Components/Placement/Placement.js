@@ -11,8 +11,6 @@ class Placement extends Box {
   constructor(props) {
     super(props);
     this.className += " " + Placement.className;
-    this.state.currentMode = undefined;
-    this.state.mode = null;
     this.suppMenu.push({
       menu: undefined,
       handleClick: (event, data) => {
@@ -24,6 +22,12 @@ class Placement extends Box {
     });
     this.suppMenu[this.suppMenu.length - 1].handleClick.bind(this);
     this.unauthorized.push("Placement");
+  }
+
+  initState() {
+    super.initState();
+    this.state.currentMode = undefined;
+    this.state.mode = null;
   }
 
   getTransforms() {
