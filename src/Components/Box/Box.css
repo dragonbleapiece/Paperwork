@@ -26,7 +26,10 @@
   display: flex;
   justify-content: center;
   align-items: center;
-  width: 60px;
+  width: 44px;
+  margin: 8px;
+  height: 44px;
+  border-radius: 50%;
 }
 
 .Box__titleText {

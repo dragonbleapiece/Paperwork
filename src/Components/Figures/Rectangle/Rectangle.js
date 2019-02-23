@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import './Rectangle.css';
 import Figure from '../Figure';
-import square from '../../../Icons/square.svg';
+import square from '../../../Icons/full_square.svg';
 
 /*Pencil*/
 class Rectangle extends Figure {

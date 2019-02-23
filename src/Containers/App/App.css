@@ -144,7 +144,7 @@ input:checked+label {
     align-items: baseline;
     position: relative;
     overflow-y: auto;
-    overflow-x: hidden;
+    overflow-x: auto;
 }
 
 .rightSide {

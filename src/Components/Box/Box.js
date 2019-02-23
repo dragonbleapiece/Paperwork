@@ -175,12 +175,15 @@ class Box extends Component {
 
   render() {
     let c = this.state.color;
-    let formatedColor = (c.r+c.g+c.b !== 0) ? "rgba("+c.r+", "+c.g+", "+c.b+", "+c.a/255+")" : "rgba(255, 255, 255, 1)";
+    let isNotBlack = (c.r+c.g+c.b !== 0);
+    let formatedColor = "rgba("+c.r+", "+c.g+", "+c.b+", "+c.a/255+")";
+    let formatedTextColor = (isNotBlack) ? formatedColor : "rgba(255, 255, 255, 1)";
+    let formatedBackgroundColor = (isNotBlack) ? "rgba(0, 0, 0, 1)" : "rgba(255, 255, 255, 1)" ;
 
     return (
       <div className={this.className} style={this.state.style}>
         <ContextMenuBox id={this.constructor.className + this.props.id} unauthorized={this.unauthorized} suppMenu={this.suppMenu} el={this}>
-          <DragBox icon={this.constructor.icon} color={formatedColor} name={this.constructor.className} onClose={this.removeFromParent.bind(this)} el={this}>
+          <DragBox icon={this.constructor.icon} color={formatedColor} textColor={formatedTextColor} backgroundColor={formatedBackgroundColor} name={this.constructor.className} onClose={this.removeFromParent.bind(this)} el={this}>
             <span className="Box__content">
               <ContextMenuTrigger id={""}>
                 {this.renderBox()}
