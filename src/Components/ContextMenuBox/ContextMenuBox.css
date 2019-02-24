@@ -1,6 +1,7 @@
 .react-contextmenu-wrapper {
   width: 100%;
   height: 100%;
+  font-size: 16px;
 }
 
 div+.DropBox>.react-contextmenu-wrapper {
@@ -23,6 +24,10 @@ div+.DropBox>.react-contextmenu-wrapper {
   width: 100%;
   height: 40px;
   cursor: pointer;
+}
+
+.react-contextmenu-item+.react-contextmenu {
+  top: -1px !important;
 }
 
 .react-contextmenu-submenu>.react-contextmenu-item {

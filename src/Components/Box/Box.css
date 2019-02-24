@@ -1,23 +1,25 @@
 .Box, .BoxGroup {
   display: flex;
   flex-direction: column;
-  margin: 20px;
+  margin: 10px;
   border: black solid 1px;
   background-color: white;
 }
 
 .Box__wrapper {
   position: relative;
+  font-size: 12px;
 }
 
 .Box__title {
   display: flex;
   justify-content: flex-start;
   align-items: stretch;
-  height: 60px;
+  height: 40px;
   color: white;
   fill: white;
   background-color: black;
+  border-bottom: 1px solid black;
   cursor: move;
   cursor: grab;
 }
@@ -26,10 +28,15 @@
   display: flex;
   justify-content: center;
   align-items: center;
-  width: 44px;
-  margin: 8px;
-  height: 44px;
+  width: 30px;
+  height: 30px;
+  margin: 5px;
   border-radius: 50%;
+}
+
+.Box__titleIcon svg {
+  width: 20px;
+  height: 20px;
 }
 
 .Box__titleText {
@@ -37,11 +44,13 @@
   justify-content: center;
   align-items: center;
   flex: 1;
+  font-size: 16px;
   font-weight: bold;
 }
 
 .Box__titleIcon+.Box__titleText {
-  padding-right: 60px;
+  padding-left: 15px;
+  padding-right:  20px;
 }
 
 .Box__titleClose {
@@ -60,18 +69,19 @@
 .Box__content {
   display: flex;
   flex-direction: column;
-  min-width: 100px;
+  min-width: 80px;
 }
 
 .Box .Box__content .Box__slider {
   width: 100px;
   width: calc(100% + -40px);
-  min-width: 100px;
+  min-width: 80px;
   margin: 20px;
 } 
 
 .Box__container {
-  padding: 20px;
+  padding: 10px;
+  border-top: 1px solid black;
 }
 
 .Box__placeholder {
