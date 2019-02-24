@@ -4,10 +4,6 @@
   font-size: 16px;
 }
 
-div+.DropBox>.react-contextmenu-wrapper {
-  border-top: 1px solid black;
-}
-
 .react-contextmenu {
   display: flex;
   flex-direction: column;
