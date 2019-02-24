@@ -7,6 +7,7 @@
     position: relative;
     overflow-y: auto;
     overflow-x: auto;
+    padding: 20px;
 }
 .Workspace__placeholder {
     position: relative;
