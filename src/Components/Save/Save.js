@@ -9,16 +9,31 @@ import icon_save_alt from '../../Icons/save_alt.svg';
 class Save extends Component {
   state = {
     DownloadName: "Untitled",
+    DownloadNameSaved: "Untitled",
+    DownloadSuffixNumber: 2,
+    DownloadSuffix: "",
     DownloadFormat: "svg"
   }
   downloadImage = function(el) {
-    Canvas.savePaper(this.state.DownloadName, this.state.DownloadFormat);
+    if(this.state.DownloadName == this.state.DownloadNameSaved) {
+      if (this.state.DownloadSuffixNumber == 2) {
+        Canvas.savePaper(this.state.DownloadName, this.state.DownloadFormat);     
+      } else {
+        Canvas.savePaper(this.state.DownloadName + this.state.DownloadSuffix, this.state.DownloadFormat);
+      }
+    } else {
+      this.setState({DownloadNameSaved: this.state.DownloadName});
+      Canvas.savePaper(this.state.DownloadName, this.state.DownloadFormat);
+    }
+    this.setState({DownloadSuffixNumber: this.state.DownloadSuffixNumber+1});
+    this.setState({DownloadSuffix: "-" + this.state.DownloadSuffixNumber});
   }
 
     render() {
         return(
             <div className="save">
-              <input className="save__name" type="text" value={this.state.DownloadName} onChange={(event) => {this.setState({DownloadName: event.target.value})}}/>
+              <input className="save__name" type="text" value={this.state.DownloadName} onChange={(event) => {this.setState({DownloadSuffixNumber: 2, DownloadSuffix: "", DownloadName: event.target.value})}}/>
+              <span className="save__nameSuffixe">{this.state.DownloadSuffix}</span>
               <div className="save__format">
                 <input id="save__svg" type="radio" value="svg" name="saveFormat" defaultChecked onChange={(event) => {if(event.target.checked) {this.setState({DownloadFormat: event.target.value})}}}/>
                 <label htmlFor="save__svg" className="save__formatItem button border-left">.svg</label>
