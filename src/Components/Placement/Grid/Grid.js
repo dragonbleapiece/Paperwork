@@ -7,6 +7,8 @@ import DragBox from '../../DragBox/DragBox';
 import ContextMenuBox from '../../ContextMenuBox/ContextMenuBox';
 import SliderBox from '../../Input/SliderBox/SliderBox';
 import grid_on from '../../../Icons/grid_on.svg';
+import InBox from '../../InBox/InBox';
+import Series from '../../Series/Series';
 
 import LinearY from '../../Modes/GridMode/LinearY/LinearY';
 import LinearX from '../../Modes/GridMode/LinearX/LinearX';
@@ -28,7 +30,12 @@ const menu = [{
 }];
 
 const className = "Grid";
-const unauthorized = [];
+const unauthorized = ["Placement"];
+const doBeforeAddChild = {
+  Figure: (child) => {
+    return InBox(Series, child);
+  }
+}
 
 /*Pencil*/
 class Grid extends Placement {
@@ -48,6 +55,7 @@ class Grid extends Placement {
   constructor(props) {
     super(props);
     this.className += " " + Grid.className;
+    this.doBeforeAddChild = doBeforeAddChild;
     //const {columns, rows} = this.props;
     this.suppMenu[this.suppMenu.length - 1].menu = menu;
   }

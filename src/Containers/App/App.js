@@ -47,7 +47,6 @@ window.isAuthorized = function(type, unauthorized) {
     }
 
     for(let i = 0; i < unauthorized.length && r; ++i) {
-      console.log(unauthorized);
       let unauthorizedClass = getClassFromName(unauthorized[i]);
       if(unauthorizedClass === null) {
         console.error(unauthorized[i] + " : Invalid unauthorized Class");
@@ -55,6 +54,8 @@ window.isAuthorized = function(type, unauthorized) {
       }
       r = r && !(obj instanceof unauthorizedClass);
     }
+  } else {
+    return false;
   }
 
   return r;

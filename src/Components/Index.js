@@ -21,6 +21,7 @@ import Magenta from './Colors/Magenta';
 import Yellow from './Colors/Yellow';
 import Black from './Colors/Black';
 import White from './Colors/White';
+import Series from './Series/Series';
 
 //GridModes
 import LinearY from './Modes/GridMode/LinearY/LinearY';
@@ -90,6 +91,8 @@ export function getClassFromName(name) {
       return Orthogonal;
     case('SnailRight'):
       return SnailRight;
+    case('Series'):
+      return Series;
     default:
       return null;
   }

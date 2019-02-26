@@ -36,11 +36,10 @@ class BoxGroup extends Box {
 
     if(!child) return;
     let obj = new child(); //tricky
-    if(this.constructor.unauthorized.indexOf(child.name) === -1 && obj instanceof Box) {
-      let children = this.state.children;
-      children.push({type: child, id: Box.id});
+    let children = this.state.children;
+    if(obj instanceof Box && this.isAuthorized(child)) {
       this.setState({
-        children: children
+        children: [...this.state.children, {type:this.beforeAddChild(child), id:Box.id}]
       });
     }
   }
@@ -48,7 +47,7 @@ class BoxGroup extends Box {
   pushChild(child) {
     if(!child || !("type" in child) || !("id" in child)) return;
     let obj = new child.type(); //tricky
-    if(window.isAuthorized(child.type, this.constructor.unauthorized) && obj instanceof Box) {
+    if(this.isAuthorized(child.type) && obj instanceof Box) {
       let children = this.state.children;
       children.push(child);
       console.log(child);
@@ -93,7 +92,7 @@ class BoxGroup extends Box {
   getChildren() {
     this.elements = [];
     let children = this.state.children.map((child, index) =>
-      <child.type key={child.id} id={child.id} parent={this} ref={el => this.elements[index] = el} saveState={(state) => {child.state = state}} state={child.state}/>
+      <child.type key={child.id} id={child.id} parent={this} ref={el => {if(el) this.elements[index] = el.ref;}} saveState={(state) => {child.state = state}} state={child.state}/>
     );
 
 
@@ -101,19 +100,21 @@ class BoxGroup extends Box {
   }
 
   renderBox() {
-    return;
+    return null;
   }
 
   render() {
+
+    const renderBox = this.renderBox() ? true : false;
 
     return (
       <div className={this.className} style={this.state.style}>
         <ContextMenuBox id={this.constructor.className + this.props.id} suppMenu={this.suppMenu} unauthorized={this.constructor.unauthorized} el={this}>
           <DragBox icon={this.constructor.icon} name={this.constructor.className} onClose={this.removeFromParent.bind(this)} className={this.className} el={this}>
             <span className="Box__content">
-              <ContextMenuTrigger id={""}>
+              {renderBox && <ContextMenuTrigger id={""}>
                 {this.renderBox()}
-              </ContextMenuTrigger>
+              </ContextMenuTrigger>}
               <DropBox el={this}>
                 <ContextMenuTrigger id={this.constructor.className + this.props.id} holdToDisplay={-1}>
                   {this.constructor.unauthorized.indexOf("*") === -1 && <div className="Box__container">

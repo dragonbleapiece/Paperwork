@@ -92,7 +92,7 @@ class Markov extends BoxGroup {
       proba = this.state.proba[this.currentState][i];
     }
 
-    this.elements[i - 1].draw(sk);
+    if(this.elements[i - 1]) this.elements[i - 1].draw(sk);
     this.currentState = i - 1;
   }
 

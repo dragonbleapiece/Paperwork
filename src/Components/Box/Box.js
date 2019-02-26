@@ -25,6 +25,16 @@ const menuColor = [
 const className = "Box";
 const unauthorized = [];
 
+function getFunctionClass(child, object) {
+  for(let key in object) {
+    const cl = window.getClassFromName(key);
+    if(!cl) return undefined;
+    const instanceOfChild = new child();
+    if(instanceOfChild instanceof cl) {
+      return object[key];
+    }
+  }
+}
 
 /*Pencil*/
 class Box extends Component {
@@ -59,10 +69,10 @@ class Box extends Component {
       this.initState();
     }
 
+    this.ref = this;
     this.className = Box.className;
     this.name = Box.className;
     this.next = undefined;
-    this.nextType = undefined;
     this.drawBeforeType = {};
     this.suppMenu = [{
       menu: menuColor,
@@ -74,7 +84,7 @@ class Box extends Component {
        }
       }
     }];
-
+    this.doBeforeAddChild = {};
 
   }
 
@@ -98,12 +108,24 @@ class Box extends Component {
     }
   }
 
+  beforeAddChild(child) {
+    const functionToCall = getFunctionClass(child, this.doBeforeAddChild);
+
+    console.log(functionToCall);
+
+    if(functionToCall instanceof Function) {
+      return functionToCall(child);
+    } else {
+      return child;
+    }
+  }
+
   addChild(child) {
     if(!child) return;
     let obj = new child(); //tricky
-    if(window.isAuthorized(child, this.constructor.unauthorized) && obj instanceof Box) {
+    if(obj instanceof Box && this.isAuthorized(child)) {
       this.setState({
-        children: [{type:child, id:Box.id}]
+        children: [{type:this.beforeAddChild(child), id:Box.id}]
       });
     }
   }
@@ -111,7 +133,7 @@ class Box extends Component {
   pushChild(child) {
     if(!child || !child.type || !child.id) return;
     let obj = new child.type(); //tricky
-    if(window.isAuthorized(child.type, this.constructor.unauthorized) && obj instanceof Box) {
+    if(this.isAuthorized(child.type) && obj instanceof Box) {
       this.setState({
         children: [child]
       });
@@ -124,14 +146,16 @@ class Box extends Component {
     })
   }
 
-  isAuthorized(className) {
+  isAuthorized(cl) {
     const unauthorized = this.constructor.unauthorized;
-    return unauthorized.indexOf("*") === -1 && unauthorized.indexOf(className) === -1;
+    return window.isAuthorized(cl, unauthorized);
   }
 
   removeFromParent() {
     let children = this.props.parent.state.children;
+    console.log(children.length);
     children = children.filter(el => el.id !== this.props.id);
+    console.log(children.length);
     this.props.parent.setChildren(children);
   }
 
@@ -170,7 +194,7 @@ class Box extends Component {
 
     if(this.state.children.length > 0) {
       let child = this.state.children[0];
-      children.push(<child.type key={child.id} parent={this} id={child.id} ref={el => {this.next = el}} saveState={(state) => {child.state = state}} state={child.state}/>);
+      children.push(<child.type key={child.id} parent={this} id={child.id} ref={el => {this.next = el ? el.ref : null;}} saveState={(state) => {child.state = state}} state={child.state}/>);
     }
     return children;
   }
