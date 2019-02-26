@@ -3,8 +3,23 @@ import './Ellipse.css';
 import Figure from '../Figure';
 import ellipse from '../../../Icons/full_ellipse.svg';
 
+const className = "Ellipse";
+const unauthorized = [];
+
 /*Pencil*/
 class Ellipse extends Figure {
+
+  static get className() {
+    return className;
+  }
+
+  static get icon() {
+    return ellipse;
+  }
+
+  static get unauthorized() {
+    return [...super.unauthorized, ...unauthorized];
+  }
 
   constructor(props) {
     super(props);
@@ -20,8 +35,5 @@ class Ellipse extends Figure {
   }
 
 }
-
-Ellipse.className = "Ellipse";
-Ellipse.icon = ellipse;
 
 export default Ellipse;

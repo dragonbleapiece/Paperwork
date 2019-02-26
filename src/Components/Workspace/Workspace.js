@@ -13,9 +13,24 @@ import ContextMenuBox from '../ContextMenuBox/ContextMenuBox';
 import Black from '../Colors/Black';
 
 
+const className = "Workspace";
+const unauthorized = ["Markov"];
+
 class Workspace extends BoxGroup {
 
   static _instance;
+
+  static get className() {
+    return className;
+  }
+
+  static get icon() {
+    return undefined;
+  }
+
+  static get unauthorized() {
+    return unauthorized;
+  }
 
   static addChild(box) {
     if(Workspace._instance !== undefined) {
@@ -36,7 +51,6 @@ class Workspace extends BoxGroup {
     super(props);
     this.className = this.constructor.className;
     this.elements = []; //no this.state.elements
-    this.unauthorized = ["Markov"];
     this.addDrawBeforeType("Figure", function(sk) {
       sk.translate(sk.width / 2, sk.height / 2)
       sk.scale(sk.width, sk.height);
@@ -105,8 +119,5 @@ class Workspace extends BoxGroup {
     );
   }
 }
-
-Workspace.className = "Workspace";
-Workspace._instance = undefined;
 
 export default DragDropContext(HTML5Backend)(Workspace);

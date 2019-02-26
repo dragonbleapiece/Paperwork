@@ -39,8 +39,23 @@ function checkRight(userValue, i, handle) {
   }
 }
 
+const className = "Markov";
+const unauthorized = ["Placement"];
+
 /*Pencil*/
 class Markov extends BoxGroup {
+
+  static get className() {
+    return className;
+  }
+
+  static get icon() {
+    return undefined;
+  }
+
+  static get unauthorized() {
+    return [...super.unauthorized, ...unauthorized];
+  }
 
   constructor(props) {
     super(props);
@@ -49,7 +64,6 @@ class Markov extends BoxGroup {
     this.elementsLength = this.state.children.length;
     this.currentState = parseInt(Math.random() * (this.elementsLength));
     this.idElement = [];
-    this.unauthorized.push("Placement");
   }
 
   initState() {
@@ -190,8 +204,5 @@ class Markov extends BoxGroup {
   }
 
 }
-
-Markov.className = "Markov";
-Markov.icon = undefined;
 
 export default Markov;

@@ -4,9 +4,23 @@ import './Placement.css';
 import shortid from 'shortid';
 import Workspace from '../Workspace/Workspace';
 
+const className = "Placement";
+const unauthorized = ["Placement"];
 
 /*Pencil*/
 class Placement extends Box {
+
+  static get className() {
+    return className;
+  }
+
+  static get icon() {
+    return undefined;
+  }
+
+  static get unauthorized() {
+    return [...super.unauthorized, ...unauthorized];
+  }
 
   constructor(props) {
     super(props);
@@ -21,7 +35,6 @@ class Placement extends Box {
       }
     });
     this.suppMenu[this.suppMenu.length - 1].handleClick.bind(this);
-    this.unauthorized.push("Placement");
   }
 
   initState() {
@@ -43,8 +56,5 @@ class Placement extends Box {
 
   }
 }
-
-Placement.className = "Placement";
-Placement.icon = undefined;
 
 export default Placement;

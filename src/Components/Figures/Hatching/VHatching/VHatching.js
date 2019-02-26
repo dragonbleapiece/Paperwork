@@ -3,8 +3,23 @@ import './VHatching.css';
 import Hatching from '../Hatching';
 import VHatchingIcon from '../../../../Icons/VHatching.svg';
 
+const className = "VHatching";
+const unauthorized = [];
+
 /*Pencil*/
 class VHatching extends Hatching {
+
+  static get className() {
+    return className;
+  }
+
+  static get icon() {
+    return VHatchingIcon;
+  }
+
+  static get unauthorized() {
+    return [...super.unauthorized, ...unauthorized];
+  }
 
   constructor(props) {
     super(props);
@@ -23,8 +38,5 @@ class VHatching extends Hatching {
   }
 
 }
-
-VHatching.className = "VHatching";
-VHatching.icon = VHatchingIcon;
 
 export default VHatching;

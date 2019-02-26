@@ -49,7 +49,7 @@ class ContextMenuBox extends Component {
   getMenu(m, handleClick) {
     return m.map(
       (item, index) => {
-        if(this.props.el.unauthorized.indexOf(item.type) === -1) {
+        if(this.props.el.constructor.unauthorized.indexOf(item.type) === -1) {
           let icon = window.getIconClassFromName(item.type);
           if (!item.elements) {
             return (<MenuItem onClick={handleClick} data={{ type: item.type, el: this.props.el }} key={shortid.generate()}>
@@ -77,7 +77,7 @@ class ContextMenuBox extends Component {
   render() {
 
     let menuItems = [];
-    if(this.props.el.unauthorized.indexOf("*") === -1) {
+    if(this.props.el.constructor.unauthorized.indexOf("*") === -1) {
       menuItems = this.getMenu(menu, this.handleClick.bind(this));
     }
 

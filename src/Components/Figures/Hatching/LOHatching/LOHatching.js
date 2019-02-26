@@ -3,8 +3,23 @@ import './LOHatching.css';
 import Hatching from '../Hatching';
 import LOHatchingIcon from '../../../../Icons/LOHatching.svg';
 
+const className = "LOHatching";
+const unauthorized = [];
+
 /*Pencil*/
 class LOHatching extends Hatching {
+
+  static get className() {
+    return className;
+  }
+
+  static get icon() {
+    return LOHatchingIcon;
+  }
+
+  static get unauthorized() {
+    return [...super.unauthorized, ...unauthorized];
+  }
 
   constructor(props) {
     super(props);
@@ -36,8 +51,5 @@ class LOHatching extends Hatching {
   }
 
 }
-
-LOHatching.className = "LOHatching";
-LOHatching.icon = LOHatchingIcon;
 
 export default LOHatching;
