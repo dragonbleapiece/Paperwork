@@ -2,8 +2,23 @@ import React, { Component } from 'react';
 import Box from '../Box/Box';
 import './Loop.css';
 
+const className = "Loop";
+const unauthorized = [];
+
 /*Pencil*/
 class Loop extends Box {
+
+  static get className() {
+    return className;
+  }
+
+  static get icon() {
+    return undefined;
+  }
+
+  static get unauthorized() {
+    return [...super.unauthorized, ...unauthorized];
+  }
 
   constructor(props) {
     super(props);
@@ -19,8 +34,5 @@ class Loop extends Box {
     }
   }
 }
-
-Loop.className = "Loop";
-Loop.icon = undefined;
 
 export default Loop;

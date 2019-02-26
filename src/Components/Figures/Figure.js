@@ -2,8 +2,23 @@ import React, { Component } from 'react';
 import Box from '../Box/Box';
 import './Figure.css';
 
+const className = "Figure";
+const unauthorized = ["*"];
+
 /*Pencil*/
 class Figure extends Box {
+
+  static get className() {
+    return className;
+  }
+
+  static get icon() {
+    return undefined;
+  }
+
+  static get unauthorized() {
+    return [...super.unauthorized, ...unauthorized];
+  }
 
   constructor(props) {
     super(props);
@@ -12,7 +27,6 @@ class Figure extends Box {
     this.y = 0;
     this.width = 0;
     this.height = 0;
-    this.unauthorized = ["*"];
   }
 
   drawFigure(sk) {
@@ -28,8 +42,5 @@ class Figure extends Box {
     sk.pop();
   }
 }
-
-Figure.className = "Figure";
-Figure.icon = undefined;
 
 export default Figure;

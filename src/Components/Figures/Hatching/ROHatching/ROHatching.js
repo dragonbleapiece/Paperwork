@@ -3,8 +3,23 @@ import './ROHatching.css';
 import Hatching from '../Hatching';
 import ROHatchingIcon from '../../../../Icons/ROHatching.svg';
 
+const className = "ROHatching";
+const unauthorized = [];
+
 /*Pencil*/
 class ROHatching extends Hatching {
+
+  static get className() {
+    return className;
+  }
+
+  static get icon() {
+    return ROHatchingIcon;
+  }
+
+  static get unauthorized() {
+    return [...super.unauthorized, ...unauthorized];
+  }
 
   constructor(props) {
     super(props);
@@ -36,8 +51,5 @@ class ROHatching extends Hatching {
   }
 
 }
-
-ROHatching.className = "ROHatching";
-ROHatching.icon = ROHatchingIcon;
 
 export default ROHatching;

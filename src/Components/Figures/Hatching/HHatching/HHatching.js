@@ -3,8 +3,23 @@ import './HHatching.css';
 import Hatching from '../Hatching';
 import HHatchingIcon from '../../../../Icons/HHatching.svg';
 
+const className = "HHatching";
+const unauthorized = [];
+
 /*Pencil*/
 class HHatching extends Hatching {
+
+  static get className() {
+    return className;
+  }
+
+  static get icon() {
+    return HHatchingIcon;
+  }
+
+  static get unauthorized() {
+    return [...super.unauthorized, ...unauthorized];
+  }
 
   constructor(props) {
     super(props);
@@ -23,8 +38,5 @@ class HHatching extends Hatching {
   }
 
 }
-
-HHatching.className = "HHatching";
-HHatching.icon = HHatchingIcon;
 
 export default HHatching;

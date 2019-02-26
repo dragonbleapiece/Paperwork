@@ -8,9 +8,23 @@ import DragBox from '../DragBox/DragBox';
 import ContextMenuBox from '../ContextMenuBox/ContextMenuBox';
 import { ContextMenuTrigger } from "react-contextmenu";
 
+const className = "BoxGroup";
+const unauthorized = [];
 
 /*Pencil*/
 class BoxGroup extends Box {
+
+  static get className() {
+    return className;
+  }
+
+  static get icon() {
+    return undefined;
+  }
+
+  static get unauthorized() {
+    return [...super.unauthorized, ...unauthorized];
+  }
 
   constructor(props) {
     super(props);
@@ -22,7 +36,7 @@ class BoxGroup extends Box {
 
     if(!child) return;
     let obj = new child(); //tricky
-    if(this.unauthorized.indexOf(child.name) === -1 && obj instanceof Box) {
+    if(this.constructor.unauthorized.indexOf(child.name) === -1 && obj instanceof Box) {
       let children = this.state.children;
       children.push({type: child, id: Box.id});
       this.setState({
@@ -34,7 +48,7 @@ class BoxGroup extends Box {
   pushChild(child) {
     if(!child || !("type" in child) || !("id" in child)) return;
     let obj = new child.type(); //tricky
-    if(window.isAuthorized(child.type, this.unauthorized) && obj instanceof Box) {
+    if(window.isAuthorized(child.type, this.constructor.unauthorized) && obj instanceof Box) {
       let children = this.state.children;
       children.push(child);
       console.log(child);
@@ -94,15 +108,15 @@ class BoxGroup extends Box {
 
     return (
       <div className={this.className} style={this.state.style}>
-        <ContextMenuBox id={this.constructor.className + this.props.id} suppMenu={this.suppMenu} unauthorized={this.unauthorized} el={this}>
+        <ContextMenuBox id={this.constructor.className + this.props.id} suppMenu={this.suppMenu} unauthorized={this.constructor.unauthorized} el={this}>
           <DragBox icon={this.constructor.icon} name={this.constructor.className} onClose={this.removeFromParent.bind(this)} className={this.className} el={this}>
             <span className="Box__content">
               <ContextMenuTrigger id={""}>
                 {this.renderBox()}
               </ContextMenuTrigger>
               <DropBox el={this}>
-                <ContextMenuTrigger id={this.constructor.className + this.props.id}>
-                  {this.unauthorized.indexOf("*") === -1 && <div className="Box__container">
+                <ContextMenuTrigger id={this.constructor.className + this.props.id} holdToDisplay={-1}>
+                  {this.constructor.unauthorized.indexOf("*") === -1 && <div className="Box__container">
                     {!this.state.children.length && <span className="Box__placeholder">Right click to add</span>}
                     {this.getChildren()}
                   </div>}
@@ -115,8 +129,5 @@ class BoxGroup extends Box {
     );
   }
 }
-
-BoxGroup.className = "BoxGroup";
-BoxGroup.icon = undefined;
 
 export default BoxGroup;

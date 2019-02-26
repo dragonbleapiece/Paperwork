@@ -22,12 +22,27 @@ const menuColor = [
   }
 ];
 
+const className = "Box";
+const unauthorized = [];
+
 
 /*Pencil*/
 class Box extends Component {
 
   static get id() {
     return Box._id++;
+  }
+
+  static get className() {
+    return className;
+  }
+
+  static get icon() {
+    return undefined;
+  }
+
+  static get unauthorized() {
+    return unauthorized;
   }
 
   state = {
@@ -48,7 +63,6 @@ class Box extends Component {
     this.name = Box.className;
     this.next = undefined;
     this.nextType = undefined;
-    this.unauthorized = [];
     this.drawBeforeType = {};
     this.suppMenu = [{
       menu: menuColor,
@@ -87,7 +101,7 @@ class Box extends Component {
   addChild(child) {
     if(!child) return;
     let obj = new child(); //tricky
-    if(window.isAuthorized(child, this.unauthorized) && obj instanceof Box) {
+    if(window.isAuthorized(child, this.constructor.unauthorized) && obj instanceof Box) {
       this.setState({
         children: [{type:child, id:Box.id}]
       });
@@ -97,7 +111,7 @@ class Box extends Component {
   pushChild(child) {
     if(!child || !child.type || !child.id) return;
     let obj = new child.type(); //tricky
-    if(window.isAuthorized(child.type, this.unauthorized) && obj instanceof Box) {
+    if(window.isAuthorized(child.type, this.constructor.unauthorized) && obj instanceof Box) {
       this.setState({
         children: [child]
       });
@@ -108,6 +122,11 @@ class Box extends Component {
     this.setState({
       children: children
     })
+  }
+
+  isAuthorized(className) {
+    const unauthorized = this.constructor.unauthorized;
+    return unauthorized.indexOf("*") === -1 && unauthorized.indexOf(className) === -1;
   }
 
   removeFromParent() {
@@ -182,7 +201,7 @@ class Box extends Component {
 
     return (
       <div className={this.className} style={this.state.style}>
-        <ContextMenuBox id={this.constructor.className + this.props.id} unauthorized={this.unauthorized} suppMenu={this.suppMenu} el={this}>
+        <ContextMenuBox id={this.constructor.className + this.props.id} unauthorized={this.constructor.unauthorized} suppMenu={this.suppMenu} el={this}>
           <DragBox icon={this.constructor.icon} color={formatedColor} textColor={formatedTextColor} backgroundColor={formatedBackgroundColor} name={this.constructor.className} onClose={this.removeFromParent.bind(this)} el={this}>
             <span className="Box__content">
               <ContextMenuTrigger id={""}>
@@ -190,8 +209,8 @@ class Box extends Component {
                 {this.getTransforms()}
               </ContextMenuTrigger>
               <DropBox el={this}>
-                <ContextMenuTrigger id={this.constructor.className + this.props.id}>
-                  {this.unauthorized.indexOf("*") === -1 && <div className="Box__container">
+                <ContextMenuTrigger id={this.constructor.className + this.props.id} holdToDisplay={-1}>
+                  {this.constructor.unauthorized.indexOf("*") === -1 && <div className="Box__container">
                     {!this.state.children.length && <span className="Box__placeholder">Right click to add</span>}
                     {this.getChildren()}
                   </div>}
@@ -206,7 +225,5 @@ class Box extends Component {
 }
 
 Box._id = 0; //or use shortid ?
-Box.className = "Box";
-Box.icon = undefined;
 
 export default Box;

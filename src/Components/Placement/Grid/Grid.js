@@ -27,8 +27,23 @@ const menu = [{
   ]
 }];
 
+const className = "Grid";
+const unauthorized = [];
+
 /*Pencil*/
 class Grid extends Placement {
+
+  static get className() {
+    return className;
+  }
+
+  static get icon() {
+    return grid_on;
+  }
+
+  static get unauthorized() {
+    return [...super.unauthorized, ...unauthorized];
+  }
 
   constructor(props) {
     super(props);
@@ -93,8 +108,5 @@ class Grid extends Placement {
   }
 
 }
-
-Grid.className = "Grid";
-Grid.icon = grid_on;
 
 export default Grid;

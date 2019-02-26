@@ -3,8 +3,23 @@ import './Triangle.css';
 import Figure from '../Figure';
 import triangle from '../../../Icons/full_triangle.svg';
 
+const className = "Triangle";
+const unauthorized = [];
+
 /*Pencil*/
 class Triangle extends Figure {
+
+  static get className() {
+    return className;
+  }
+
+  static get icon() {
+    return triangle;
+  }
+
+  static get unauthorized() {
+    return [...super.unauthorized, ...unauthorized];
+  }
 
   constructor(props) {
     super(props);
@@ -20,7 +35,5 @@ class Triangle extends Figure {
   }
 }
 
-Triangle.className = "Triangle";
-Triangle.icon = triangle;
 
 export default Triangle;

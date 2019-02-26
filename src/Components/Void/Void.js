@@ -3,13 +3,27 @@ import Box from '../Box/Box';
 import './Void.css';
 import voidIcon from '../../Icons/void.svg';
 
+const className = "Void";
+const unauthorized = ["*"];
+
 /*Pencil*/
 class Void extends Box {
+
+  static get className() {
+    return className;
+  }
+
+  static get icon() {
+    return voidIcon;
+  }
+
+  static get unauthorized() {
+    return [...super.unauthorized, ...unauthorized];
+  }
 
   constructor(props) {
     super(props);
     this.className += " " + Void.className;
-    this.unauthorized = ["*"];
     this.suppMenu = [];
   }
 
@@ -18,8 +32,5 @@ class Void extends Box {
   }
 
 }
-
-Void.className = "Void";
-Void.icon = voidIcon;
 
 export default Void;
