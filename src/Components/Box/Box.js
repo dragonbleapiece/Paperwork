@@ -12,12 +12,12 @@ const menuColor = [
   {
     type: 'Color',
     elements: [
+      {type: 'Black'},
+      {type: 'White'},
       {type: 'Blue'},
       {type: 'Cyan'},
       {type: 'Magenta'},
-      {type: 'Yellow'},
-      {type: 'Black'},
-      {type: 'White'}
+      {type: 'Yellow'}
     ]
   }
 ];

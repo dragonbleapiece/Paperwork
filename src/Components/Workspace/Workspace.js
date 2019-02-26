@@ -12,6 +12,19 @@ import DragBox from '../DragBox/DragBox';
 import ContextMenuBox from '../ContextMenuBox/ContextMenuBox';
 import Black from '../Colors/Black';
 
+const menuColor = [
+  {
+    type: 'Background Color',
+    elements: [
+      {type: 'Black'},
+      {type: 'White'},
+      {type: 'Blue'},
+      {type: 'Cyan'},
+      {type: 'Magenta'},
+      {type: 'Yellow'}
+    ]
+  }
+];
 
 const className = "Workspace";
 const unauthorized = ["Markov"];
@@ -57,6 +70,17 @@ class Workspace extends BoxGroup {
       sk.strokeWeight(1 / sk.width);
     });
     Workspace._instance = this;
+    // Redefinition of Menu Colors
+    this.suppMenu = [{
+      menu: menuColor,
+      handleClick: (event, data) => {
+       if(data.type) {
+         let color = window.getClassFromName(data.type);
+         if(color) this.setState({color: new color()});
+         window.updateWorkspace();
+       }
+      }
+    }];
   }
 
   initState() {
