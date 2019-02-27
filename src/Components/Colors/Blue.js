@@ -3,7 +3,7 @@ import Color from './Color';
 class Blue extends Color {
 
   constructor() {
-    super(0, 0, 255, 255);
+    super(67, 85, 219, 255);
   }
 
 }

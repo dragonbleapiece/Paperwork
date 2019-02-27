@@ -15,10 +15,12 @@ import Scale from './Transforms/Scale/Scale';
 import Rotate from './Transforms/Rotate/Rotate';
 import Color from './Colors/Color';
 import Void from './Void/Void';
-import Blue from './Colors/Blue';
-import Cyan from './Colors/Cyan';
-import Magenta from './Colors/Magenta';
+import Red from './Colors/Red';
+import Orange from './Colors/Orange';
 import Yellow from './Colors/Yellow';
+import Green from './Colors/Green';
+import LightBlue from './Colors/LightBlue';
+import Blue from './Colors/Blue';
 import Black from './Colors/Black';
 import White from './Colors/White';
 import Series from './Series/Series';
@@ -59,16 +61,20 @@ export function getClassFromName(name) {
       return Transform;
     case('Color'):
       return Color;
-    case('Blue'):
-      return Blue;
-    case('Cyan'):
-      return Cyan;
-    case('Magenta'):
-      return Magenta;
-    case('Black'):
-      return Black;
+    case('Red'):
+      return Red;
+    case('Orange'):
+      return Orange;
     case('Yellow'):
       return Yellow;
+    case('Green'):
+      return Green;
+    case('LightBlue'):
+      return LightBlue;
+    case('Blue'):
+      return Blue;
+    case('Black'):
+      return Black;
     case('White'):
       return White;
     case('Translate'):

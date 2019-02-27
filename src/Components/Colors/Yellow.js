@@ -3,7 +3,7 @@ import Color from './Color';
 class Yellow extends Color {
 
   constructor() {
-    super(255, 255, 0, 255);
+    super(247, 208, 56, 255);
   }
 
 }

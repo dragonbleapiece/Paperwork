@@ -14,10 +14,12 @@ const menuColor = [
     elements: [
       {type: 'Black'},
       {type: 'White'},
-      {type: 'Blue'},
-      {type: 'Cyan'},
-      {type: 'Magenta'},
-      {type: 'Yellow'}
+      {type: 'Red'},
+      {type: 'Orange'},
+      {type: 'Yellow'},
+      {type: 'Green'},
+      {type: 'LightBlue'},
+      {type: 'Blue'}
     ]
   }
 ];
