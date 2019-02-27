@@ -87,7 +87,7 @@ class App extends Component {
     return (
       <div className="App">
         <header className="App-header border-bottom">
-          <div className="App-logo">Paper&nbsp;&#123;&nbsp;&nbsp;&nbsp;&#125;</div>
+          <div className="App-logo">P&nbsp;p&nbsp;r&nbsp;w&nbsp;rk</div>
           <div className="about" onClick={this.aboutClick.bind(this)}>
             <SVG src={icon_info}/>
           </div>
@@ -95,15 +95,15 @@ class App extends Component {
         <main>
           <div className="leftSide">
               <div className="aboutContainer" ref="aboutContainer">
-                <span className="aboutTitle">What is Paper?<br/><br/><br/><br/></span>
+                <span className="aboutTitle">What is Paperwork?<br/><br/><br/><br/></span>
                 <span>
-    Paper is a sandbox for researching algorithmic processes in art. It should help producing drawings in the philosophy of generative processes.<br/>
+    Paperwork is a sandbox for researching algorithmic processes in art. It should help producing drawings in the philosophy of generative processes.<br/>
     Our effort takes place in a dialectic with connectionism which currently has an upperhand in the sciences.<br/><br/><br/>
-    Paper is a process developped by a group of people : ingineers, artists, students, researchers, ...<br/>
-    Paper is based on the Experiment Generic Images 2018.<br/><br/>
-    Paper is research. Paper enables creating new artworks.<br/><br/>
-    Paper is algorithmic. Paper is intuitive. Paper works as an archive.<br/><br/>
-    Papers' first algorithm is Markov Chain, an algorithm that was used in early computer art and now heavily used in our digital environment.<br/><br/><br/><br/>
+    Paperwork is a process developped by a group of people : ingineers, artists, students, researchers, ...<br/>
+    Paperwork is based on the Experiment Generic Images 2018.<br/><br/>
+    Paperwork is research. Paperwork enables creating new artworks.<br/><br/>
+    Paperwork is algorithmic. Paperwork is intuitive. Paperwork works as an archive.<br/><br/>
+    Paperworks' first algorithm is Markov Chain, an algorithm that was used in early computer art and now heavily used in our digital environment.<br/><br/><br/><br/>
     Gaëtan Robillard with Nicolas Cusumano, Cécile Rousset, Vincent Schmid, Quentin Sedmi.
                 </span>
               </div>

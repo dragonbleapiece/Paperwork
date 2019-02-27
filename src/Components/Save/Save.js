@@ -10,29 +10,45 @@ class Save extends Component {
   state = {
     DownloadName: "Untitled",
     DownloadNameSaved: "Untitled",
-    DownloadSuffixNumber: 2,
+    DownloadSuffixNumber: {
+      svg: 0,
+      jpg: 0
+    },
     DownloadSuffix: "",
     DownloadFormat: "svg"
   }
   downloadImage = function(el) {
-    if(this.state.DownloadName == this.state.DownloadNameSaved) {
-      if (this.state.DownloadSuffixNumber == 2) {
-        Canvas.savePaper(this.state.DownloadName, this.state.DownloadFormat);     
-      } else {
-        Canvas.savePaper(this.state.DownloadName + this.state.DownloadSuffix, this.state.DownloadFormat);
-      }
+
+    let nb = this.state.DownloadSuffixNumber;
+    let dname = this.state.DownloadName;
+    nb[this.state.DownloadFormat] = nb[this.state.DownloadFormat]+1;
+    this.setState({DownloadSuffixNumber: nb});
+    this.setState({DownloadSuffix: "-" + (nb[this.state.DownloadFormat]+1)});
+
+    if (this.state.DownloadName == this.state.DownloadNameSaved) {
+      dname = (nb[this.state.DownloadFormat] == 1) ? this.state.DownloadName : this.state.DownloadName + "-" + nb[this.state.DownloadFormat];
+      Canvas.savePaper(dname, this.state.DownloadFormat);     
     } else {
       this.setState({DownloadNameSaved: this.state.DownloadName});
-      Canvas.savePaper(this.state.DownloadName, this.state.DownloadFormat);
+      Canvas.savePaper(dname, this.state.DownloadFormat);
     }
-    this.setState({DownloadSuffixNumber: this.state.DownloadSuffixNumber+1});
-    this.setState({DownloadSuffix: "-" + this.state.DownloadSuffixNumber});
+    console.log("SUFFIX", nb[this.state.DownloadFormat], "NAME + FORMAT", dname + "." + this.state.DownloadFormat);
   }
-
     render() {
         return(
             <div className="save">
-              <input className="save__name" type="text" value={this.state.DownloadName} onChange={(event) => {this.setState({DownloadSuffixNumber: 2, DownloadSuffix: "", DownloadName: event.target.value})}}/>
+              <input
+              className="save__name"
+              type="text"
+              value={this.state.DownloadName}
+              onChange={(event) => {
+                this.setState({DownloadSuffixNumber: {svg: 0, jpg: 0}, DownloadSuffix: "", DownloadName: event.target.value})
+              }}
+              onBlur={(event) => {
+                let dname = (event.target.value == "") ? "Untitled" : event.target.value;
+                this.setState({DownloadName: dname});
+              }}
+              />
               <span className="save__nameSuffixe">{this.state.DownloadSuffix}</span>
               <div className="save__format">
                 <input id="save__svg" type="radio" value="svg" name="saveFormat" defaultChecked onChange={(event) => {if(event.target.checked) {this.setState({DownloadFormat: event.target.value})}}}/>
