@@ -19,7 +19,8 @@ class RangeBox extends Input {
         railStyle={{height: '8px', backgroundColor: 'black', borderRadius: 'unset' }}
         handleStyle={handleStyleArray}
         dotStyle={{bottom: '-4px', borderColor: 'black' }}
-        onChange={(value) => {this.props.onChange(value); Workspace.forceUpdate();}}
+        onChange={(value) => {this.props.onChange(value);}}
+        onAfterChange={() => Workspace.forceUpdate()}
         ref={el => {if(this.props.innerRef) this.props.innerRef(el);}}
         />
         );

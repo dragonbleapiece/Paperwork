@@ -133,7 +133,7 @@ class Markov extends BoxGroup {
             propsRange.innerRef.bind(this);
           }
           propsRange.key = this.idElement[index];
-          propsRange.onChange = (value) => {this.state.proba[index] = value; Workspace.forceUpdate();}
+          propsRange.onChange = (value) => {this.state.proba[index] = value;}
 
           for (let i = 0; i < length; i++) {
             let propsInput = {

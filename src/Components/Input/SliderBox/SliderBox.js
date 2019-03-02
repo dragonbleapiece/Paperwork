@@ -23,7 +23,8 @@ class SliderBox extends Input {
         railStyle={{height: '8px', backgroundColor: 'black', borderRadius: 'unset' }}
         handleStyle={{marginTop: '-3px', borderColor: 'black' }}
         dotStyle={{bottom: '-4px', borderColor: 'black' }}
-        onChange={(value) => {if(this.props.onChange) {this.props.onChange(value); Workspace.forceUpdate();}}}
+        onChange={(value) => {if(this.props.onChange) {this.props.onChange(value);}}}
+        onAfterChange={() => Workspace.forceUpdate()}
         />
         );
     }
