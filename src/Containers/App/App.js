@@ -87,7 +87,7 @@ class App extends Component {
     return (
       <div className="App">
         <header className="App-header border-bottom">
-          <div className="App-logo">P&nbsp;p&nbsp;r&nbsp;w&nbsp;rk</div>
+          <div className="App-logo">Paperwork</div>
           <div className="about" onClick={this.aboutClick.bind(this)}>
             <SVG src={icon_info}/>
           </div>
@@ -97,14 +97,11 @@ class App extends Component {
               <div className="aboutContainer" ref="aboutContainer">
                 <span className="aboutTitle">What is Paperwork?<br/><br/><br/><br/></span>
                 <span>
-    Paperwork is a sandbox for researching algorithmic processes in art. It should help producing drawings in the philosophy of generative processes.<br/>
-    Our effort takes place in a dialectic with connectionism which currently has an upperhand in the sciences.<br/><br/><br/>
-    Paperwork is a process developped by a group of people : ingineers, artists, students, researchers, ...<br/>
-    Paperwork is based on the Experiment Generic Images 2018.<br/><br/>
-    Paperwork is research. Paperwork enables creating new artworks.<br/><br/>
-    Paperwork is algorithmic. Paperwork is intuitive. Paperwork works as an archive.<br/><br/>
-    Paperworks' first algorithm is Markov Chain, an algorithm that was used in early computer art and now heavily used in our digital environment.<br/><br/><br/><br/>
-    Gaëtan Robillard with Nicolas Cusumano, Cécile Rousset, Vincent Schmid, Quentin Sedmi.
+                Paperwork is an online software for research in art and in the field of computer and visual research. It is developped in the perspective of computer art practice in the context of art schools, colleges, high schools and so on.<br/><br/>
+                The application helps producing drawings in the philosophy of generative processes. It is concerned with patterns, polygons, repertories and grammars. Moreover, the interface enables the learning and the editing of algorithms and therefore the construction of simple computational processes. It also offers to export formats svg format that makes it compatible with the traditionnal vector work area as well as digital tooling and 3D environements (pen plotter, laser cutting, ...).<br/><br/>
+                Paperwork's first algorithm will be Markov Chain, an algorithm that was used in early computer art and now heavily used in our digital environment.<br/><br/>
+                Paperwork is based on the previsous Experiment Generic Images 2018.<br/><br/>
+                Paperwork is a process developped by a group of people : ingineers, artists, students, researchers, ... 
                 </span>
               </div>
               <Workspace>

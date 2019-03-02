@@ -177,7 +177,13 @@ input:checked+label {
   z-index: 999;
   padding: 0 120px;
   text-align: left;
-
+/* Prevent text selection */
+  -webkit-touch-callout: auto;
+  -webkit-user-select: auto;
+  -khtml-user-select: auto;
+  -moz-user-select: auto;
+  -ms-user-select: auto;
+  user-select: auto;
 }
 
 .aboutTitle {
