@@ -186,12 +186,6 @@ input:checked+label {
   user-select: auto;
 }
 
-.aboutTitle {
-  width: 100%;
-  font-size: 24px;
-  font-weight: bold;
-}
-
 .about {
   display: flex;
   align-items: center;
@@ -199,4 +193,14 @@ input:checked+label {
   height: 100%;
   cursor: pointer;
   width: 60px;
+}
+
+.aboutTitle {
+  width: 100%;
+  font-size: 24px;
+  font-weight: bold;
+}
+
+.aboutCredits {
+  color: grey;
 }

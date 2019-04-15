@@ -103,6 +103,11 @@ class App extends Component {
                 Paperwork is based on the previsous Experiment Generic Images 2018.<br/><br/>
                 Paperwork is a process developped by a group of people : ingineers, artists, students, researchers, ... 
                 </span>
+                <span className="aboutCredits">
+                Gaëtan Robillard<br/>
+                Avec Nicolas Cusumano, Cécile Rousset, Vincent Schmid, Quentin Sedmi<br/><br/>
+                Le laboratoire des Intuitions (ESAD TALM-Tours), et la formation ingénieur IMAC (ESIPE – UPEM)
+                </span>
               </div>
               <Workspace>
 
