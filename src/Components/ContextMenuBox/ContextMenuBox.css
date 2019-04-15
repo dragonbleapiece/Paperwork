@@ -10,8 +10,18 @@
   background-color: white;
   border: black 1px solid;
   border-bottom: none;
+  border-top: none;
   z-index: 999;
   font-size: 16px;
+}
+
+.react-contextmenu-borderTop {
+  width: 100%;
+  height: 1px;
+  position: absolute;
+  top: 0px;
+  left: 0px;
+  background-color: black;
 }
 
 .react-contextmenu-item {
@@ -22,34 +32,16 @@
   cursor: pointer;
 }
 
-.react-contextmenu-item+.react-contextmenu {
-  top: -1px !important;
-}
-
 .react-contextmenu-submenu>.react-contextmenu-item {
   cursor: auto;
 }
 
-.react-contextmenu .react-contextmenu-item:hover {
+.react-contextmenu-item--selected {
   color: white;
   background-color: black;
 }
 
-.react-contextmenu .react-contextmenu .react-contextmenu-item {
-  color: black;
-  background-color: white;
-}
-
-.react-contextmenu .react-contextmenu .react-contextmenu-item svg {
-  fill: black;
-}
-
-.react-contextmenu .react-contextmenu .react-contextmenu-item:hover {
-  color: white;
-  background-color: black;
-}
-
-.react-contextmenu .react-contextmenu .react-contextmenu-item:hover svg {
+.react-contextmenu-item--selected>span svg {
   fill: white;
 }
 
@@ -59,10 +51,6 @@
 
 .react-contextmenu-item:hover>.react-contextmenu {
   display: flex;
-}
-
-.react-contextmenu-item:hover svg {
-  fill: white;
 }
 
 .react-contextmenu-item {
