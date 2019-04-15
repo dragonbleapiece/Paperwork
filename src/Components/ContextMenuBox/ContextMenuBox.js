@@ -11,20 +11,54 @@ const menu = [
   {
     type: 'Placement',
     elements: [
-      {type: 'Grid'}
+      {
+        type: 'Grid'
+      }
     ]
   },
   {
     type: 'Elements',
     elements: [
-      {type: 'Rectangle'},
-      {type: 'Triangle'},
-      {type: 'Ellipse'},
-      {type: 'HHatching'},
-      {type: 'VHatching'},
-      {type: 'LOHatching'},
-      {type: 'ROHatching'},
-      {type: 'Void'}
+      {
+        name: 'Basic Shapes',
+        type: 'Rectangle',
+        elements: [
+          {
+            type: 'Rectangle'
+          },
+          {
+            type: 'Triangle'
+          },
+          {
+            type: 'Ellipse'
+          }
+        ]
+      },
+      {
+        type: 'HHatching',
+        name: 'Hatching',
+        elements: [
+          {
+            type: 'HHatching',
+            name: 'Horizontal'
+          },
+          {
+            type: 'VHatching',
+            name: 'Vertical'
+          },
+          {
+            type: 'LOHatching',
+            name: 'Left Oblique'
+          },
+          {
+            type: 'ROHatching',
+            name: 'Right Oblique'
+          }
+        ]
+      },
+      {
+        type: 'Void'
+      }
     ]
   },
   {
@@ -54,14 +88,14 @@ class ContextMenuBox extends Component {
           if (!item.elements) {
             return (<MenuItem onClick={handleClick} data={{ type: item.type, el: this.props.el }} key={shortid.generate()}>
               {icon && <span className="react-contextmenu-itemIcon"><SVG src={icon}/></span>}
-              <span className="react-contextmenu-itemText">{item.type}</span>
+              <span className="react-contextmenu-itemText">{item.name ? item.name : item.type}</span>
             </MenuItem>);
           } else {
             return (<SubMenu key={shortid.generate()} title={
               <>
                 <span  className="react-contextmenu-itemLabel">
                 {icon && <span className="react-contextmenu-itemIcon"><SVG src={icon}/></span>}
-                <span className="react-contextmenu-itemText">{item.type}</span>
+                <span className="react-contextmenu-itemText">{item.name ? item.name : item.type}</span>
                 </span>
                 <span className="react-contextmenu-itemIcon"><SVG src={arrow_right}/></span>
               </>
