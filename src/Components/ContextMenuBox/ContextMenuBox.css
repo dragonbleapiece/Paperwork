@@ -73,6 +73,7 @@
 
 .react-contextmenu-itemText {
   padding: 10px;
+  white-space: nowrap;
 }
 
 .react-contextmenu-itemIcon+.react-contextmenu-itemText {
