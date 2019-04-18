@@ -1,4 +1,3 @@
-import React, { Component } from 'react';
 import './Triangle.css';
 import Figure from '../Figure';
 import triangle from '../../../Icons/full_triangle.svg';

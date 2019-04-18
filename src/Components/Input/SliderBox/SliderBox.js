@@ -1,7 +1,7 @@
 import React from 'react';
 import Workspace from '../../Workspace/Workspace';
 import Input from '../Input';
-import Slider, { Range } from 'rc-slider';
+import Slider from 'rc-slider';
 import './SliderBox.css';
 
 class SliderBox extends Input {

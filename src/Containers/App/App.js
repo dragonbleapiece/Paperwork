@@ -1,5 +1,4 @@
 import React, { Component } from 'react';
-import ReactDOM from 'react-dom';
 import './App.css';
 //import Icons
 import SVG from 'react-svg'
@@ -77,19 +76,6 @@ class App extends Component {
     };
   }
 
-  aboutClick() {
-    if (!this.state.aboutVisible) {
-      // attach/remove event handler
-      document.addEventListener('click', this.handleOutsideClick, false);
-    } else {
-      document.removeEventListener('click', this.handleOutsideClick, false);
-    }
-
-    this.setState(prevState => ({
-      aboutVisible: !prevState.aboutVisible,
-    }));
-  }
-
   handleOutsideClick(e) {
     // ignore clicks on the component itself
     if (this.aboutContainer.contains(e.target)) {
@@ -137,25 +123,12 @@ class App extends Component {
           <div className="leftSide">
               <div className="aboutContainer" ref={aboutContainer => { this.aboutContainer = aboutContainer; }} style={{display: this.state.aboutVisible}}>
                 <h2 className="aboutTitle">PaperWork <sup className="textExponent">2019</sup></h2>
-                <a className="aboutLink" href="http://mobitool.free.fr/paper/ea" target="_blank">State of the arts online</a>
-                <p>Paperwork is an online software for research in art and in the field of computer
-                and visual research. It is developped in the perspective of computer art practice in
-                the context of art schools, colleges, high schools and so on. The application helps
-                producing drawings in the philosophy of generative processes. It is concerned with
-                patterns, polygons, repertories and grammars. Moreover, the interface enables
-                the learning and the editing of algorithms and therefore the construction of simple
-                computational processes. It also offers to export svg format that makes it compatible
-                with the traditionnal vector work area (graphic design, pen plotter, laser cutting, ...).</p>
-                <p>Paperwork’s main algorithm is based on Markov chain, an algorithm that was used
-                by artists such as Frieder Nake, Hiroshi Kawano, Hervé Huitric and Monique Nahas
-                in early computer art. It is now heavily used in our digital environment (google page
-                ranking, chatbots, physical phenomenom modeling, ...). It is also classified in the
-                machine learning area of the computational field.</p>
-                <p>The Paperwork web application is based on the previsous software experiment
-                Generic Images (2018). Paperwork’s project is developped thanks to IMACESIPE
-                Training program in the University Paris-Est Marne-la-Vallée.</p>
+                <a className="aboutLink" href="http://mobitool.free.fr/paper/ea" target="_blank" rel="noopener noreferrer">State of the arts online</a>
+                <p>Paperwork is an online software for research in art and in the field of computer and visual research. It is developed in the perspective of computer art practice in the context of art schools, colleges, high schools and so on. The application helps producing drawings in the philosophy of generative processes. It is concerned with patterns, polygons, repertories and grammars. Moreover, the interface enables the learning and the editing of algorithms and therefore the construction of simple computational processes. It also offers to export svg format that makes it compatible with the traditional vector work area (graphic design, pen plotter, laser cutting, ...).</p>
+                <p>Paperwork’s main algorithm is based on Markov chain, an algorithm that was used by artists such as Frieder Nake (Germany), Hiroshi Kawano (Japan), Hervé Huitric and Monique Nahas (France) in early Computer Art. It is now heavily used in our digital environment (google page ranking, chatbots, physical phenomenon modeling, ...). It is also classified in the machine learning area of the computational field.</p>
+                <p>The Paperwork web application is based on the previous software experiment Generic Images (2018). Paperwork’s project is developed thanks to IMAC-ESIPE training program in the University Paris-Est Marne-la-Vallée.</p>
                 <div className="aboutCredits">
-                <p>Software design team :</p>
+                <p>Software design team:</p>
                 <p>Gaëtan Robillard with Nicolas Cusumano, Cécile Rousset, Vincent Schmid, Quentin Sedmi.</p>
                 </div>
               </div>

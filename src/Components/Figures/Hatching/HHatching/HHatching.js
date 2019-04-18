@@ -1,4 +1,3 @@
-import React, { Component } from 'react';
 import './HHatching.css';
 import Hatching from '../Hatching';
 import HHatchingIcon from '../../../../Icons/HHatching.svg';

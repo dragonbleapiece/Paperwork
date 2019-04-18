@@ -1,8 +1,6 @@
-import React, { Component } from 'react';
+import React from 'react';
 import './BoxGroup.css';
 import Box from '../Box/Box';
-import {shallow, instance} from 'enzyme';
-import p5 from 'p5';
 import DropBox from '../DropBox/DropBox';
 import DragBox from '../DragBox/DragBox';
 import ContextMenuBox from '../ContextMenuBox/ContextMenuBox';

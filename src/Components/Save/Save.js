@@ -25,8 +25,8 @@ class Save extends Component {
     this.setState({DownloadSuffixNumber: nb});
     this.setState({DownloadSuffix: "-" + (nb[this.state.DownloadFormat]+1)});
 
-    if (this.state.DownloadName == this.state.DownloadNameSaved) {
-      dname = (nb[this.state.DownloadFormat] == 1) ? this.state.DownloadName : this.state.DownloadName + "-" + nb[this.state.DownloadFormat];
+    if (this.state.DownloadName === this.state.DownloadNameSaved) {
+      dname = (nb[this.state.DownloadFormat] === 1) ? this.state.DownloadName : this.state.DownloadName + "-" + nb[this.state.DownloadFormat];
       Canvas.savePaper(dname, this.state.DownloadFormat);     
     } else {
       this.setState({DownloadNameSaved: this.state.DownloadName});
@@ -45,7 +45,7 @@ class Save extends Component {
                 this.setState({DownloadSuffixNumber: {svg: 0, jpg: 0}, DownloadSuffix: "", DownloadName: event.target.value})
               }}
               onBlur={(event) => {
-                let dname = (event.target.value == "") ? "Untitled" : event.target.value;
+                let dname = (event.target.value === "") ? "Untitled" : event.target.value;
                 this.setState({DownloadName: dname});
               }}
               />

@@ -1,4 +1,3 @@
-import React, { Component } from 'react';
 import './Ellipse.css';
 import Figure from '../Figure';
 import ellipse from '../../../Icons/full_ellipse.svg';
