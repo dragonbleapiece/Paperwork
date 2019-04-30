@@ -16,6 +16,17 @@ class Canvas extends Component {
     }
   }
 
+  static getImageData() {
+    if(Canvas._P5 !== undefined) {
+      return Canvas._P5.getImageData();
+    }
+  }
+
+  static draw() {
+    if(Canvas._P5 !== undefined) {
+      Canvas._P5.draw();
+    }
+  }
 
   state = {
     function: undefined,
@@ -54,6 +65,7 @@ class Canvas extends Component {
       sk.windowResized = self.windowResized.bind(self, sk);
       sk.savePaper = self.savePaper.bind(self, sk);
       sk.strokeScale = self.strokeScale.bind(self, sk);
+      sk.getImageData = self.getImageData.bind(self, sk)
 
     }
 
@@ -79,13 +91,13 @@ class Canvas extends Component {
 
   savePaper(sk, filename, extension) {
     if(filename !== undefined || extension !== undefined) {
-      sk.saveSVG(filename + "." + extension);
+      sk.save(filename + "." + extension);
     }
   }
 
   setup(sk) {
     const {width, height} = this.state;
-    sk.createCanvas(width, height, sk.SVG);
+    sk.createCanvas(width, height);
     sk.noLoop();
     window.updateWorkspace();
   }
@@ -110,6 +122,12 @@ class Canvas extends Component {
 
   componentDidUpdate() {
     Canvas._P5.draw();
+  }
+
+  getImageData(sk) {
+    let image = sk.get();
+    image.loadPixels();
+    return image.canvas.toDataURL('image/png').replace(/^data:image\/(png|jpg);base64,/, '');
   }
 
 

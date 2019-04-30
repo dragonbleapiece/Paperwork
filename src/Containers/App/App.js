@@ -2,7 +2,6 @@ import React, { Component } from 'react';
 import './App.css';
 //import Icons
 import SVG from 'react-svg'
-import icon_code from '../../Icons/code.svg';
 import icon_info from '../../Icons/info.svg';
 // import Components
 import Workspace from '../../Components/Workspace/Workspace';
@@ -138,9 +137,6 @@ class App extends Component {
           </div>
             <div className="rightSide border-left">
               <div className="editionMenu border-bottom">
-                <div className="button displayCode border-right">
-                  <SVG src={icon_code}/>
-                </div>
                 <Save/>
               </div>
                 <Canvas/>
