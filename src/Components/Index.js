@@ -24,6 +24,9 @@ import Blue from './Colors/Blue';
 import Black from './Colors/Black';
 import White from './Colors/White';
 import Series from './Series/Series';
+import Symbol from './Figures/Symbols/Symbol';
+import Arrow from './Figures/Symbols/Arrow/Arrow';
+
 
 //GridModes
 import LinearY from './Modes/GridMode/LinearY/LinearY';
@@ -99,6 +102,10 @@ export function getClassFromName(name) {
       return SnailRight;
     case('Series'):
       return Series;
+    case('Arrow'):
+      return Arrow;
+    case('Symbol'):
+      return Symbol;
     default:
       return null;
   }

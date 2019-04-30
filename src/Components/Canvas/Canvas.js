@@ -48,6 +48,7 @@ class Canvas extends Component {
   initP5() {
     let self = this;
     let s = (sk) => {
+    //  sk.preload = self.preload.bind(self, sk);
       sk.setup = self.setup.bind(self, sk);
       sk.draw = self.draw.bind(self, sk);
       sk.windowResized = self.windowResized.bind(self, sk);

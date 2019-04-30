@@ -57,6 +57,9 @@ const menu = [
         ]
       },
       {
+        type: 'Arrow'
+      },
+      {
         type: 'Void'
       }
     ]
