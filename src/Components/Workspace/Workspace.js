@@ -1,14 +1,10 @@
-import React, { Component } from 'react';
+import React from 'react';
 import './Workspace.css';
 import Canvas from '../Canvas/Canvas';
-import Box from '../Box/Box';
 import BoxGroup from '../BoxGroup/BoxGroup';
-import {shallow, instance} from 'enzyme';
 import { DragDropContext } from 'react-dnd';
 import HTML5Backend from 'react-dnd-html5-backend';
-import ItemTypes from '../../Constants.js';
 import DropBox from '../DropBox/DropBox';
-import DragBox from '../DragBox/DragBox';
 import ContextMenuBox from '../ContextMenuBox/ContextMenuBox';
 import Black from '../Colors/Black';
 
@@ -22,7 +18,8 @@ const menuColor = [
       {type: 'Orange'},
       {type: 'Yellow'},
       {type: 'Green'},
-      {type: 'LightBlue'},
+      {type: 'LightBlue',
+      name: 'Light Blue'},
       {type: 'Blue'}
     ]
   }

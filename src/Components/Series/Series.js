@@ -1,7 +1,5 @@
-import React, { Component } from 'react';
 import BoxGroup from '../BoxGroup/BoxGroup';
 import './Series.css';
-import shortid from 'shortid';
 
 const className = "Series";
 const unauthorized = ["Placement", "Series", "Markov"];

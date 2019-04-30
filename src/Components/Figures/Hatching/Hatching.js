@@ -1,4 +1,3 @@
-import React, { Component } from 'react';
 import Figure from '../Figure';
 import './Hatching.css';
 

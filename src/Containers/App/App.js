@@ -1,5 +1,4 @@
 import React, { Component } from 'react';
-import ReactDOM from 'react-dom';
 import './App.css';
 //import Icons
 import SVG from 'react-svg'
@@ -68,41 +67,70 @@ class App extends Component {
   }
   constructor(props){
     super(props);
+
+    this.aboutClick = this.aboutClick.bind(this);
+    this.handleOutsideClick = this.handleOutsideClick.bind(this);
+
+    this.state = {
+      aboutVisible: 'none'
+    };
   }
 
+  handleOutsideClick(e) {
+    // ignore clicks on the component itself
+    if (this.aboutContainer.contains(e.target)) {
+      return;
+    }
+    if (this.aboutButton.contains(e.target)) {
+      this.aboutClick()
+      return;
+    }
+    toggle = false
+    this.setState ({
+      aboutVisible: 'none'
+    })
+  }
+
+
   aboutClick() {
-    let aboutDisplay = 'none';
+    //console.log(this.state.aboutVisible)
+    let aboutVisible = 'none'
     if(!toggle) {
-      toggle = !toggle;
-      aboutDisplay = 'flex';
-     } else {
-      toggle = !toggle;
-      aboutDisplay = 'none';
-     };
-    ReactDOM.findDOMNode(this.refs["aboutContainer"]).style.display = aboutDisplay ;
+      toggle = !toggle
+      aboutVisible = 'flex'
+    } else {
+      toggle = !toggle
+      aboutVisible = 'none'
+    }
+    console.log(aboutVisible)
+    this.setState ({
+       aboutVisible: aboutVisible
+    })
+
   }
 
   render() {
-
+    //console.log(this.state.aboutVisible)
     return (
-      <div className="App">
+      <div className="App" onClick={(e) => this.handleOutsideClick(e)}>
         <header className="App-header border-bottom">
-          <div className="App-logo">Paperwork</div>
-          <div className="about" onClick={this.aboutClick.bind(this)}>
+          <h1 className="App-logo">Paperwork&nbsp;<sup className="textExponent">2019</sup></h1>
+          <div className="about" ref={aboutButton => { this.aboutButton = aboutButton; }}>
             <SVG src={icon_info}/>
           </div>
         </header>
         <main>
           <div className="leftSide">
-              <div className="aboutContainer" ref="aboutContainer">
-                <span className="aboutTitle">What is Paperwork?<br/><br/><br/><br/></span>
-                <span>
-                Paperwork is an online software for research in art and in the field of computer and visual research. It is developped in the perspective of computer art practice in the context of art schools, colleges, high schools and so on.<br/><br/>
-                The application helps producing drawings in the philosophy of generative processes. It is concerned with patterns, polygons, repertories and grammars. Moreover, the interface enables the learning and the editing of algorithms and therefore the construction of simple computational processes. It also offers to export formats svg format that makes it compatible with the traditionnal vector work area as well as digital tooling and 3D environements (pen plotter, laser cutting, ...).<br/><br/>
-                Paperwork's first algorithm will be Markov Chain, an algorithm that was used in early computer art and now heavily used in our digital environment.<br/><br/>
-                Paperwork is based on the previsous Experiment Generic Images 2018.<br/><br/>
-                Paperwork is a process developped by a group of people : ingineers, artists, students, researchers, ... 
-                </span>
+              <div className="aboutContainer" ref={aboutContainer => { this.aboutContainer = aboutContainer; }} style={{display: this.state.aboutVisible}}>
+                <h2 className="aboutTitle">PaperWork <sup className="textExponent">2019</sup></h2>
+                <a className="aboutLink" href="http://mobitool.free.fr/paper/ea" target="_blank" rel="noopener noreferrer">State of the arts online</a>
+                <p>Paperwork is an online software for research in art and in the field of computer and visual research. It is developed in the perspective of computer art practice in the context of art schools, colleges, high schools and so on. The application helps producing drawings in the philosophy of generative processes. It is concerned with patterns, polygons, repertories and grammars. Moreover, the interface enables the learning and the editing of algorithms and therefore the construction of simple computational processes. It also offers to export svg format that makes it compatible with the traditional vector work area (graphic design, pen plotter, laser cutting, ...).</p>
+                <p>Paperwork’s main algorithm is based on Markov chain, an algorithm that was used by artists such as Frieder Nake (Germany), Hiroshi Kawano (Japan), Hervé Huitric and Monique Nahas (France) in early Computer Art. It is now heavily used in our digital environment (google page ranking, chatbots, physical phenomenon modeling, ...). It is also classified in the machine learning area of the computational field.</p>
+                <p>The Paperwork web application is based on the previous software experiment Generic Images (2018). Paperwork’s project is developed thanks to IMAC-ESIPE training program in the University Paris-Est Marne-la-Vallée.</p>
+                <div className="aboutCredits">
+                <p>Software design team:</p>
+                <p>Gaëtan Robillard with Nicolas Cusumano, Cécile Rousset, Vincent Schmid, Quentin Sedmi.</p>
+                </div>
               </div>
               <Workspace>
 

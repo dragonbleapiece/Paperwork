@@ -104,6 +104,7 @@ class ContextMenuBox extends Component {
               </>
             }>
                 {this.getMenu(item.elements, handleClick)}
+                <span className='react-contextmenu-borderTop'></span>
             </SubMenu>);
           }
         }
@@ -125,7 +126,7 @@ class ContextMenuBox extends Component {
       }
     }
 
-    console.log(this.props.el.constructor.className, menuItems, menuItems.length);
+    //console.log(this.props.el.constructor.className, menuItems, menuItems.length);
 
     return (
       <>
@@ -133,7 +134,9 @@ class ContextMenuBox extends Component {
             {this.props.children}
         </ContextMenuTrigger>
         {(menuItems.length > 0) && <ContextMenu id={this.props.id}>
+
             {menuItems}
+          <span className='react-contextmenu-borderTop'></span>
         </ContextMenu>}
       </>
     );

@@ -24,7 +24,7 @@ class Canvas extends Component {
   };
 
   constructor(props) {
-    if(Canvas._instance != undefined) {
+    if(Canvas._instance !== undefined) {
       return Canvas._instance;
     }
     super(props);

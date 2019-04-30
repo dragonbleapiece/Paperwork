@@ -1,7 +1,6 @@
-import React, { Component } from 'react';
+import React from 'react';
 import Box from '../Box/Box';
 import './Placement.css';
-import shortid from 'shortid';
 import Workspace from '../Workspace/Workspace';
 
 const className = "Placement";

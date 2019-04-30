@@ -15,7 +15,7 @@ class Save extends Component {
       jpg: 0
     },
     DownloadSuffix: "",
-    DownloadFormat: "svg"
+    DownloadFormat: "jpg"
   }
   downloadImage = function(el) {
 
@@ -25,8 +25,8 @@ class Save extends Component {
     this.setState({DownloadSuffixNumber: nb});
     this.setState({DownloadSuffix: "-" + (nb[this.state.DownloadFormat]+1)});
 
-    if (this.state.DownloadName == this.state.DownloadNameSaved) {
-      dname = (nb[this.state.DownloadFormat] == 1) ? this.state.DownloadName : this.state.DownloadName + "-" + nb[this.state.DownloadFormat];
+    if (this.state.DownloadName === this.state.DownloadNameSaved) {
+      dname = (nb[this.state.DownloadFormat] === 1) ? this.state.DownloadName : this.state.DownloadName + "-" + nb[this.state.DownloadFormat];
       Canvas.savePaper(dname, this.state.DownloadFormat);     
     } else {
       this.setState({DownloadNameSaved: this.state.DownloadName});
@@ -45,16 +45,16 @@ class Save extends Component {
                 this.setState({DownloadSuffixNumber: {svg: 0, jpg: 0}, DownloadSuffix: "", DownloadName: event.target.value})
               }}
               onBlur={(event) => {
-                let dname = (event.target.value == "") ? "Untitled" : event.target.value;
+                let dname = (event.target.value === "") ? "Untitled" : event.target.value;
                 this.setState({DownloadName: dname});
               }}
               />
               <span className="save__nameSuffixe">{this.state.DownloadSuffix}</span>
               <div className="save__format">
-                <input id="save__svg" type="radio" value="svg" name="saveFormat" defaultChecked onChange={(event) => {if(event.target.checked) {this.setState({DownloadFormat: event.target.value})}}}/>
-                <label htmlFor="save__svg" className="save__formatItem button border-left">.svg</label>
-                <input id="save__jpg" type="radio" value="jpg" name="saveFormat" onChange={(event) => {if(event.target.checked) {this.setState({DownloadFormat: event.target.value})}}}/>
+                <input id="save__jpg" type="radio" value="jpg" name="saveFormat" defaultChecked onChange={(event) => {if(event.target.checked) {this.setState({DownloadFormat: event.target.value})}}}/>
                 <label htmlFor="save__jpg" className="save__formatItem button border-left">.jpg</label>
+                <input id="save__svg" type="radio" value="svg" name="saveFormat" onChange={(event) => {if(event.target.checked) {this.setState({DownloadFormat: event.target.value})}}}/>
+                <label htmlFor="save__svg" className="save__formatItem button border-left">.svg</label>
               </div>
               <a className="button save__button border-left" onClick={(event) => this.downloadImage(event.target)}>
                 <SVG src={icon_save_alt}/>

@@ -1,4 +1,3 @@
-import React, { Component } from 'react';
 import Box from '../Box/Box';
 import './Void.css';
 import voidIcon from '../../Icons/void.svg';

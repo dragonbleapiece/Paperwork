@@ -1,31 +1,41 @@
-import React, { Component } from 'react';
+import React from 'react';
 import Placement from '../Placement';
 import './Grid.css';
 import 'rc-slider/assets/index.css';
-import Canvas from '../../Canvas/Canvas';
-import DragBox from '../../DragBox/DragBox';
-import ContextMenuBox from '../../ContextMenuBox/ContextMenuBox';
 import SliderBox from '../../Input/SliderBox/SliderBox';
 import grid_on from '../../../Icons/grid_on.svg';
 import InBox from '../../InBox/InBox';
 import Series from '../../Series/Series';
 
-import LinearY from '../../Modes/GridMode/LinearY/LinearY';
 import LinearX from '../../Modes/GridMode/LinearX/LinearX';
-import DiagonalLeft from '../../Modes/GridMode/DiagonalLeft/DiagonalLeft';
-import DiagonalRight from '../../Modes/GridMode/DiagonalRight/DiagonalRight';
-import Orthogonal from '../../Modes/GridMode/Orthogonal/Orthogonal';
-import SnailRight from '../../Modes/GridMode/SnailRight/SnailRight';
+
 
 const menu = [{
   type: 'Modes',
   elements: [
-    {type: 'DiagonalLeft'},
-    {type: 'DiagonalRight'},
-    {type: 'LinearX'},
-    {type: 'LinearY'},
-    {type: 'Orthogonal'},
-    {type: 'SnailRight'}
+    {
+      type: 'DiagonalLeft',
+      name: 'Diagonal Left'
+    },
+    {
+      type: 'DiagonalRight',
+      name: 'Diagonal Right'
+    },
+    {
+      type: 'LinearX',
+      name: 'Linear X'
+    },
+    {
+      type: 'LinearY',
+      name: 'Linear Y'
+    },
+    {
+      type: 'Orthogonal'
+    },
+    {
+      type: 'SnailRight',
+      name: 'Snail Right'
+    }
   ]
 }];
 

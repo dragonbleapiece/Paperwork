@@ -69,6 +69,12 @@ input[type=radio] {
 }
 /* App */
 
+.textExponent {
+  font-size: .75em;
+  vertical-align: text-top;
+  font-weight: normal;
+}
+
 .App {
   display: flex;
   flex-direction: column;
@@ -154,19 +160,10 @@ input:checked+label {
   align-items: center;
 }
 
-.aboutContainerBackground {
-  background-color: rgba(0, 0, 0, 0.1);
-  position: absolute;
-  top: 0px;
-  left: 0px;
-  width: 100%;
-  height: 100%;
-  z-index: 998;
-}
 .aboutContainer {
   display: none;
   flex-direction: column;
-  align-items: center;
+  align-items: start;
   justify-content: center;
   background-color: white;
   position: absolute;
@@ -175,7 +172,7 @@ input:checked+label {
   width: 100%;
   height: 100%;
   z-index: 999;
-  padding: 0 120px;
+  padding: 0 5vw;
   text-align: left;
 /* Prevent text selection */
   -webkit-touch-callout: auto;
@@ -186,10 +183,8 @@ input:checked+label {
   user-select: auto;
 }
 
-.aboutTitle {
-  width: 100%;
-  font-size: 24px;
-  font-weight: bold;
+.aboutContainer p {
+  margin: 10px 0px;
 }
 
 .about {
@@ -199,4 +194,29 @@ input:checked+label {
   height: 100%;
   cursor: pointer;
   width: 60px;
+}
+
+.aboutTitle {
+  width: 100%;
+  font-size: 24px;
+  font-weight: bold;
+}
+
+.aboutLink {
+  color: black;
+  text-decoration: none;
+  padding: 10px;
+  margin-top: 20px;
+  margin-bottom: 10px;
+  border: 1px solid black;
+}
+
+.aboutLink:hover {
+  cursor: pointer;
+  color: white;
+  background-color: black;
+}
+
+.aboutCredits {
+  color: grey;
 }

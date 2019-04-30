@@ -1,4 +1,3 @@
-import React, { Component } from 'react';
 import './GridMode.css';
 import Mode from "../Mode";
 

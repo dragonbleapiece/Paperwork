@@ -1,8 +1,7 @@
-import React, { Component } from 'react';
+import React from 'react';
 import BoxGroup from '../BoxGroup/BoxGroup';
 import 'rc-slider/assets/index.css';
 import './Markov.css';
-import Workspace from '../Workspace/Workspace';
 import RangeBox from '../Input/RangeBox/RangeBox';
 import shortid from 'shortid';
 
@@ -102,7 +101,7 @@ class Markov extends BoxGroup {
     let sliders;
 
     for(let i = 1; i <= length - 1; ++i) {
-      if (i == length-1) defaultValues.push(Math.floor(100/length/10)*10*i+100%(length*10));
+      if (i === length-1) defaultValues.push(Math.floor(100/length/10)*10*i+100%(length*10));
       else defaultValues.push(Math.floor(100/length/10)*10*i);
     }
 
@@ -143,7 +142,7 @@ class Markov extends BoxGroup {
               max: 100,
               step: 5,
             };
-            if (i == 0) {
+            if (i === 0) {
               propsInput.value = this.state.proba[index][i];
               propsInput.onChange = (event) => {
                 let proba = this.state.proba;
@@ -152,7 +151,7 @@ class Markov extends BoxGroup {
                 checkRight(value, i, proba[index]);
                 this.setState({proba:proba});
               };
-            } else if (i == length-1) {
+            } else if (i === length-1) {
               propsInput.value = 100-this.state.proba[index][i-1];
               propsInput.onChange = (event) => {
                 let proba = this.state.proba;

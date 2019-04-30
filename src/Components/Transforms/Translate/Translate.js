@@ -1,4 +1,3 @@
-import React, { Component } from 'react';
 import Transform from '../Transform';
 import './Translate.css';
 import translate from '../../../Icons/translate.svg';
