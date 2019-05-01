@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import ReactDOM from 'react-dom';
 import './App.css';
 //import Icons
 import SVG from 'react-svg'
@@ -62,54 +63,37 @@ window.isAuthorized = function(type, unauthorized) {
 let toggle = false;
 
 class App extends Component {
-  state = {
-  }
+
   constructor(props){
     super(props);
-
     this.aboutClick = this.aboutClick.bind(this);
     this.handleOutsideClick = this.handleOutsideClick.bind(this);
-
-    this.state = {
-      aboutVisible: 'none'
-    };
   }
 
   handleOutsideClick(e) {
     // ignore clicks on the component itself
     if (this.aboutContainer.contains(e.target)) {
-      return;
+      return
     }
     if (this.aboutButton.contains(e.target)) {
       this.aboutClick()
-      return;
+      return
     }
     toggle = false
-    this.setState ({
-      aboutVisible: 'none'
-    })
+    this.aboutContainer.style.display = 'none'
   }
 
-
   aboutClick() {
-    //console.log(this.state.aboutVisible)
-    let aboutVisible = 'none'
     if(!toggle) {
       toggle = !toggle
-      aboutVisible = 'flex'
+      this.aboutContainer.style.display = 'flex'
     } else {
       toggle = !toggle
-      aboutVisible = 'none'
+      this.aboutContainer.style.display = 'none'
     }
-    console.log(aboutVisible)
-    this.setState ({
-       aboutVisible: aboutVisible
-    })
-
   }
 
   render() {
-    //console.log(this.state.aboutVisible)
     return (
       <div className="App" onClick={(e) => this.handleOutsideClick(e)}>
         <header className="App-header border-bottom">
@@ -120,7 +104,7 @@ class App extends Component {
         </header>
         <main>
           <div className="leftSide">
-              <div className="aboutContainer" ref={aboutContainer => { this.aboutContainer = aboutContainer; }} style={{display: this.state.aboutVisible}}>
+              <div className="aboutContainer" ref={aboutContainer => { this.aboutContainer = aboutContainer; }}>
                 <h2 className="aboutTitle">PaperWork <sup className="textExponent">2019</sup></h2>
                 <a className="aboutLink" href="http://mobitool.free.fr/paper/ea" target="_blank" rel="noopener noreferrer">State of the arts online</a>
                 <p>Paperwork is an online software for research in art and in the field of computer and visual research. It is developed in the perspective of computer art practice in the context of art schools, colleges, high schools and so on. The application helps producing drawings in the philosophy of generative processes. It is concerned with patterns, polygons, repertories and grammars. Moreover, the interface enables the learning and the editing of algorithms and therefore the construction of simple computational processes. It also offers to export svg format that makes it compatible with the traditional vector work area (graphic design, pen plotter, laser cutting, ...).</p>
