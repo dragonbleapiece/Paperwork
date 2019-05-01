@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import './Arrow.css';
 import Symbol from '../Symbol';
-import arrow from '../../../../Assets/arrow.svg';
+import arrow_right from '../../../../Icons/arrow_right.svg';
 
 const className = "Arrow";
 const unauthorized = [];
@@ -14,7 +14,7 @@ class Arrow extends Symbol {
   }
 
   static get icon() {
-    return arrow;
+    return arrow_right;
   }
 
   static get unauthorized() {

@@ -9,8 +9,8 @@ import Canvas from '../../Components/Canvas/Canvas';
 import SVG from 'react-svg';
 import icon_save_alt from '../../Icons/save_alt.svg';
 import burst_mode from '../../Icons/burst_mode.svg';
-import arrow_up from '../../Icons/arrow_up.svg';
-import arrow_down from '../../Icons/arrow_down.svg';
+import arrow_up from '../../Icons/arrow_upUI.svg';
+import arrow_down from '../../Icons/arrow_downUI.svg';
 
 function dataURItoBlob(dataURI) {
   // convert base64 to raw binary data held in a string

@@ -5,7 +5,7 @@ import shortid from 'shortid';
 
 //import Icons
 import SVG from 'react-svg';
-import arrow_right from '../../Icons/arrow_right.svg';
+import arrow_right from '../../Icons/arrow_rightUI.svg';
 
 const menu = [
   {
