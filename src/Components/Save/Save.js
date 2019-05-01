@@ -8,7 +8,9 @@ import Canvas from '../../Components/Canvas/Canvas';
 //import Icons
 import SVG from 'react-svg';
 import icon_save_alt from '../../Icons/save_alt.svg';
-import icon_code from '../../Icons/code.svg';
+import burst_mode from '../../Icons/burst_mode.svg';
+import arrow_up from '../../Icons/arrow_up.svg';
+import arrow_down from '../../Icons/arrow_down.svg';
 
 function dataURItoBlob(dataURI) {
   // convert base64 to raw binary data held in a string
@@ -80,11 +82,40 @@ class Save extends Component {
     });
   }
 
+  checkZipNumber = function(value) {
+    return (value === "" || value === parseInt(value, 10) || value >= 1000 || value <= 1) ? 10 : value;
+  }
+
+  incrementZipNumber = function() {
+    this.setState({zipNumber: (this.state.zipNumber === 1000) ? this.state.zipNumber : parseInt(this.state.zipNumber)+1})
+  }
+
+  decrementZipNumber = function() {
+    this.setState({zipNumber: (this.state.zipNumber === 1) ? this.state.zipNumber : parseInt(this.state.zipNumber)-1})
+  }
+
     render() {
         return(
             <div className="save">
-              <div className="button displayCode border-right" onClick={this.downloadZip.bind(this)}>
-                <SVG src={icon_code}/>
+              <div className="button burstMode border-right" onClick={this.downloadZip.bind(this)}>
+                <SVG src={burst_mode}/>
+              </div>
+              <div className="save__zipNumber border-right">
+                <input
+                className="save__zipNumberInput"
+                type="number"
+                value={this.state.zipNumber}
+                onChange={(event) => {
+                  this.setState({zipNumber: event.target.value})
+                }}
+                onBlur={(event) => {
+                  this.setState({zipNumber: this.checkZipNumber(event.target.value)})
+                }}
+                />
+                <div className="save__zipNumberArrows border-left">
+                  <div className="button border-bottom" onClick={(event) => this.incrementZipNumber()}><SVG src={arrow_up}/></div>
+                  <div className="button" onClick={(event) => this.decrementZipNumber()}><SVG src={arrow_down}/></div>
+                </div>
               </div>
               <input
               className="save__name"
@@ -94,7 +125,7 @@ class Save extends Component {
                 this.setState({DownloadSuffixNumber: {svg: 0, jpg: 0}, DownloadSuffix: "", DownloadName: event.target.value})
               }}
               onBlur={(event) => {
-                let dname = (event.target.value === "") ? "Untitled" : event.target.value;
+                const dname = (event.target.value === "") ? "Untitled" : event.target.value;
                 this.setState({DownloadName: dname});
               }}
               />

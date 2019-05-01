@@ -37,6 +37,25 @@
     width: 60px;
   }
   
-  .displayCode {
+  .burstMode {
     width: 60px;
+  }
+
+  .save__zipNumber {
+    display: flex;
+    width: 90px;
+  }
+
+  .save__zipNumber input {
+    width: 60px;
+    text-align: center;
+  }
+
+  .save__zipNumberArrows div {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    width: 30px;
+    height: 30px;
   }
