@@ -30,7 +30,6 @@ class Character extends Figure {
   }
 
   drawText(sk) {
-    sk.textSize(this.height);
     sk.text(this.text, this.x, this.y);
   }
 
