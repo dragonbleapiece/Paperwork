@@ -57,6 +57,18 @@ const menu = [
         ]
       },
       {
+        name: 'Characters',
+        type: 'Character',
+        elements: [
+          {
+            type: 'Number0'
+          },
+          {
+            type: 'Number1'
+          }
+        ]
+      },
+      {
         type: 'Arrow'
       },
       {

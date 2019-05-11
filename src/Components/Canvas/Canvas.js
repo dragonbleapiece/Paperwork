@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import './Canvas.css';
 import PropTypes from 'prop-types';
+import SpaceGrotesk from '../../Assets/SpaceGrotesk-Regular.ttf'
 
 var p5 = require('p5');
 require('p5.js-svg')(p5);
@@ -40,6 +41,7 @@ class Canvas extends Component {
     }
     super(props);
     this.strokeWeight = 1;
+    this.currentFont = null;
 
     Canvas._instance = this;
   }
@@ -62,14 +64,18 @@ class Canvas extends Component {
     //  sk.preload = self.preload.bind(self, sk);
       sk.setup = self.setup.bind(self, sk);
       sk.draw = self.draw.bind(self, sk);
+      sk.preload = self.preload.bind(self, sk);
       sk.windowResized = self.windowResized.bind(self, sk);
       sk.savePaper = self.savePaper.bind(self, sk);
       sk.strokeScale = self.strokeScale.bind(self, sk);
       sk.getImageData = self.getImageData.bind(self, sk)
-
     }
 
     Canvas._P5 = new p5(s, 'renderer');
+  }
+
+  preload(sk) {
+    sk.currentFont = sk.loadFont(SpaceGrotesk);
   }
 
   sendDraw(f) {
