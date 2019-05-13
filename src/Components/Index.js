@@ -111,9 +111,9 @@ export function getClassFromName(name) {
       return Symbol;
     case('Character'):
       return Character;
-    case('Number0'):
+    case('0'):
       return Number0;
-    case('Number1'):
+    case('1'):
       return Number1
     default:
       return null;

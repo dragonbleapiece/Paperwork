@@ -37,6 +37,7 @@ class Character extends Figure {
     const bbox = sk.currentFont.textBounds(this.text, this.x, this.y, this.height);
     sk.push();
       sk.fill(this.state.color.getP5Color(sk));
+      sk.scale(this.state.scale.x, this.state.scale.y);
       sk.textSize(this.height);
       sk.translate(-sk.textWidth(this.text) / 2, bbox.h / 2);
       this.drawText(sk);

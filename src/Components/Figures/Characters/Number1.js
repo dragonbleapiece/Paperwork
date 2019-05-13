@@ -1,6 +1,6 @@
 import Character from './Character';
 
-const className = "Number1";
+const className = "1";
 const unauthorized = ["*"];
 
 /*Pencil*/
