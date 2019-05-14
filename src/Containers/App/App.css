@@ -103,6 +103,25 @@ input[type=radio] {
   font-size: 24px;
 }
 
+.App-links {
+  display: flex;
+  justify-content: space-between;
+  width: 500px;
+}
+
+.App-links a {
+  text-decoration: none;
+  color: black;
+}
+
+.App-links a:first-child {
+  margin-right: 10px;
+}
+
+.App-links a:hover {
+  font-weight: bold;
+}
+
 main {
   display: flex;
   flex-direction: row;
@@ -193,7 +212,7 @@ input:checked+label {
   justify-content: center;
   height: 100%;
   cursor: pointer;
-  width: 60px;
+  min-width: 60px;
 }
 
 .aboutTitle {
