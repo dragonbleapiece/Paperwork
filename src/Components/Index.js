@@ -26,6 +26,9 @@ import White from './Colors/White';
 import Series from './Series/Series';
 import Symbol from './Figures/Symbols/Symbol';
 import Arrow from './Figures/Symbols/Arrow/Arrow';
+import Character from './Figures/Characters/Character';
+import Number0 from './Figures/Characters/Number0';
+import Number1 from './Figures/Characters/Number1';
 
 
 //GridModes
@@ -106,6 +109,12 @@ export function getClassFromName(name) {
       return Arrow;
     case('Symbol'):
       return Symbol;
+    case('Character'):
+      return Character;
+    case('0'):
+      return Number0;
+    case('1'):
+      return Number1
     default:
       return null;
   }
