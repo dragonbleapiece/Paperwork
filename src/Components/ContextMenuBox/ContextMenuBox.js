@@ -61,10 +61,12 @@ const menu = [
         type: 'Character',
         elements: [
           {
-            type: '0'
+            type: '0',
+            name: 'Zero'
           },
           {
-            type: '1'
+            type: '1',
+            name: 'One'
           }
         ]
       },

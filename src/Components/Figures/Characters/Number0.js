@@ -1,6 +1,7 @@
 import Character from './Character';
+import zero from '../../../Icons/zero.svg';
 
-const className = "0";
+const className = "Zero";
 const unauthorized = ["*"];
 
 /*Pencil*/
@@ -10,7 +11,7 @@ class Number0 extends Character {
   }
 
   static get icon() {
-    return undefined;
+    return zero;
   }
 
   static get unauthorized() {
