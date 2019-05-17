@@ -1,18 +1,18 @@
 {
   "files": {
-    "main.css": "/PAPER/static/css/main.eafbe46c.chunk.css",
-    "main.js": "/PAPER/static/js/main.3cc4ddf8.chunk.js",
-    "main.js.map": "/PAPER/static/js/main.3cc4ddf8.chunk.js.map",
+    "main.css": "/PAPER/static/css/main.b26eae24.chunk.css",
+    "main.js": "/PAPER/static/js/main.dbf07688.chunk.js",
+    "main.js.map": "/PAPER/static/js/main.dbf07688.chunk.js.map",
     "runtime~main.js": "/PAPER/static/js/runtime~main.d46c468a.js",
     "runtime~main.js.map": "/PAPER/static/js/runtime~main.d46c468a.js.map",
     "static/css/2.509658c0.chunk.css": "/PAPER/static/css/2.509658c0.chunk.css",
-    "static/js/2.f7d7cc8b.chunk.js": "/PAPER/static/js/2.f7d7cc8b.chunk.js",
-    "static/js/2.f7d7cc8b.chunk.js.map": "/PAPER/static/js/2.f7d7cc8b.chunk.js.map",
+    "static/js/2.7240684f.chunk.js": "/PAPER/static/js/2.7240684f.chunk.js",
+    "static/js/2.7240684f.chunk.js.map": "/PAPER/static/js/2.7240684f.chunk.js.map",
     "index.html": "/PAPER/index.html",
-    "precache-manifest.aba9864055d148feb976f6ac1b2f3001.js": "/PAPER/precache-manifest.aba9864055d148feb976f6ac1b2f3001.js",
+    "precache-manifest.c41014d706cda17ff9a6bd3352cbc4d6.js": "/PAPER/precache-manifest.c41014d706cda17ff9a6bd3352cbc4d6.js",
     "service-worker.js": "/PAPER/service-worker.js",
     "static/css/2.509658c0.chunk.css.map": "/PAPER/static/css/2.509658c0.chunk.css.map",
-    "static/css/main.eafbe46c.chunk.css.map": "/PAPER/static/css/main.eafbe46c.chunk.css.map",
+    "static/css/main.b26eae24.chunk.css.map": "/PAPER/static/css/main.b26eae24.chunk.css.map",
     "static/media/HHatching.svg": "/PAPER/static/media/HHatching.f3da2da9.svg",
     "static/media/LOHatching.svg": "/PAPER/static/media/LOHatching.186b393d.svg",
     "static/media/ROHatching.svg": "/PAPER/static/media/ROHatching.8c0092fd.svg",
@@ -30,11 +30,13 @@
     "static/media/grid_on.svg": "/PAPER/static/media/grid_on.8ace643b.svg",
     "static/media/info.svg": "/PAPER/static/media/info.b08ccdbe.svg",
     "static/media/next.svg": "/PAPER/static/media/next.0f510805.svg",
+    "static/media/one.svg": "/PAPER/static/media/one.73ed8e62.svg",
     "static/media/rotate.svg": "/PAPER/static/media/rotate.5d1fc53d.svg",
     "static/media/save_alt.svg": "/PAPER/static/media/save_alt.3ccde972.svg",
     "static/media/scale.svg": "/PAPER/static/media/scale.08ae3836.svg",
     "static/media/translate.svg": "/PAPER/static/media/translate.aaf3d874.svg",
     "static/media/unknown.svg": "/PAPER/static/media/unknown.3f5bae44.svg",
-    "static/media/void.svg": "/PAPER/static/media/void.a2a55d7b.svg"
+    "static/media/void.svg": "/PAPER/static/media/void.a2a55d7b.svg",
+    "static/media/zero.svg": "/PAPER/static/media/zero.691bc513.svg"
   }
 }
