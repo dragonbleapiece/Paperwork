@@ -206,9 +206,9 @@ class Box extends Component {
   }
 
   getTransforms() {
-    return (
-      <Scale onChange={(scale) => {this.setState({scale: scale});}}/>
-    );
+    let Transforms = new Array();
+    Transforms.push(<Scale onChange={(scale) => {this.setState({scale: scale});}}/>);
+    return Transforms;
   }
 
   componentDidUpdate() {

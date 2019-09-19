@@ -32,8 +32,9 @@ class ROHatching extends Hatching {
   drawFigure(sk) {
     let i = this.x + this.width;
     let j = this.y + this.height;
-    let gapX = (this.width / this.density);
-    let gapY = (this.height / this.density);
+    const density = this.state.density;
+    let gapX = (this.width / density);
+    let gapY = (this.height / density);
     while(j > this.y){
       sk.line(this.x, j, i, this.y);
       i -= gapX;

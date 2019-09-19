@@ -30,8 +30,9 @@ class HHatching extends Hatching {
   }
 
   drawFigure(sk) {
-    let gapY = this.height / this.density;
-    for(var j = 0; j <= this.density ; j++){
+    const density = this.state.density;
+    let gapY = this.height / density;
+    for(var j = 0; j <= density ; j++){
       sk.line(this.x, this.y + j * gapY, this.x + this.width, this.y + j * gapY);
     }
   }

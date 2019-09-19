@@ -32,8 +32,9 @@ class LOHatching extends Hatching {
   drawFigure(sk) {
     let i = this.x;
     let j = this.y + this.height;
-    let gapX = (this.width / this.density);
-    let gapY = (this.height / this.density);
+    const density = this.state.density;
+    let gapX = (this.width / density);
+    let gapY = (this.height / density);
     while(i < this.x + this.width){
       sk.line(i, this.y, this.x+this.width, j);
       i += gapX;
