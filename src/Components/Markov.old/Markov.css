@@ -1,6 +1,5 @@
 .Markov__Parameters {
     padding: 10px;
-    position: relative;
 }
 
 .Markov__Containers {
@@ -13,13 +12,8 @@
 .Markov__RangeIcon {
     display: flex;
     align-items: center;
-    padding: 0 10px;
-    position: absolute;
-    top: 0;
-    right: 0;
-    border-color: black;
-    border-width: 0 0 1px 1px;
-    border-style: solid;
+    padding: 0 20px;
+
 }
 
 .Markov__RangeIcon svg {
@@ -43,11 +37,9 @@
 }
 .Markov__InputContainer {
     display: flex;
-    position: absolute;
-    transform: translate(-50%, -50%);
 }
 .Markov__InputContainer:not(:last-child) {
-    /*margin-right: 20px;*/
+    margin-right: 20px;
 }
 .Markov__InputIcon {
     width: 40px;
@@ -58,54 +50,14 @@
 
 .Markov__InputIcon svg {
     fill: darkgray;
-    cursor: pointer;
+
 }
 
 .Markov__Input {
     width: 30px;
     color: darkgray;
-    background-color: transparent;
 }
 
-.Markov__Radar {
-  margin: 30px;
-  width: 50%;
-}
-
-.Markov__Radar .Radar__Outline {
-  stroke: #000000;
-  fill: transparent;
-  stroke-linecap: round;
-  /*stroke-alignment: outer;*/
-}
-
-.Markov__Radar .Radar__Shape {
-  fill: #000000;
-}
-
-.Markov__Radar .Radar__Line {
-  stroke: #FFFFFF;
-  stroke-width: 1;
-  stroke-linecap: round;
-  mix-blend-mode: difference;
-}
-
-.Markov__Radar .Radar__Point {
-  fill: #FFFFFF;
-  stroke: #000000;
-  stroke-width: 1;
-}
-
-.Markov__Radar .Radar__Draggable {
-  fill: #FFFFFF;
-  stroke: #000000;
-  stroke-width: 2;
-  cursor: grab;
-}
-
-.Markov__Radar .Radar__Draggable.isDragging:active {
-  cursor: grabbing;
-}
 
 /* .Markov__Input {
     width: 60px;
@@ -119,14 +71,14 @@ input[type=number] {
 
 /* Chrome */
 input::-webkit-inner-spin-button,
-input::-webkit-outer-spin-button {
+input::-webkit-outer-spin-button { 
 	-webkit-appearance: none;
 	margin:0;
 }
 
 /* Opéra*/
 input::-o-inner-spin-button,
-input::-o-outer-spin-button {
+input::-o-outer-spin-button { 
 	-o-appearance: none;
-	margin:0;
+	margin:0
 }

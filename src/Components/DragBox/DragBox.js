@@ -8,6 +8,7 @@ import Workspace from '../Workspace/Workspace';
 //import Icons
 import SVG from 'react-svg';
 import cancel from '../../Icons/cancel.svg';
+import minimize from '../../Icons/minimize.svg';
 
 //Functions for dragging the box
 const boxSource = {
@@ -72,6 +73,13 @@ class DragBox extends Component {
       Workspace.forceUpdate();
   }
 
+  onMinimize() {
+    if(this.props.onMinimize !== undefined) {
+      this.props.onMinimize();
+    }
+    Workspace.forceUpdate();
+  }
+
 
   render() {
     const { isDragging, connectDragSource, connectDragPreview } = this.props;
@@ -82,9 +90,14 @@ class DragBox extends Component {
 
     return(
       <div className="Box__wrapper">
-        <span className="Box__titleClose" onClick={this.onClose.bind(this)}>
-            <SVG src={cancel}/>
-        </span>
+        <div className="Box_titleOptions">
+          <span className="Box__titleOption" onClick={this.onMinimize.bind(this)}>
+              <SVG src={minimize}/>
+          </span>
+          <span className="Box__titleOption" onClick={this.onClose.bind(this)}>
+              <SVG src={cancel}/>
+          </span>
+        </div>
         {connectDragSource(<span className="Box__title">
           {this.props.icon && <SVG className="Box__titleIcon" src={this.props.icon} style={{fill: this.props.color, backgroundColor: this.props.backgroundColor}}/>}
           <span className="Box__titleText" style={{color: this.props.textColor}}>{this.props.name}</span>

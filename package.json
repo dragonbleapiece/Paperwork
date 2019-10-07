@@ -1,24 +1,23 @@
 {
-  "name": "paper",
+  "name": "paperwork",
   "version": "0.1.0",
   "private": true,
   "dependencies": {
-    "enzyme": "^3.9.0",
-    "enzyme-adapter-react-16": "^1.12.1",
-    "file-saver": "^2.0.1",
-    "jszip": "^3.2.1",
-    "p5": "^0.7.3",
-    "p5.js-svg": "^0.5.2",
-    "rc-slider": "^8.6.9",
-    "react": "^16.8.6",
-    "react-ace": "^6.5.0",
+    "enzyme": "^3.10.0",
+    "enzyme-adapter-react-16": "^1.14.0",
+    "file-saver": "^2.0.2",
+    "jszip": "^3.2.2",
+    "paper": "^0.12.3",
+    "rc-slider": "^8.7.1",
+    "react": "^16.9.0",
+    "react-ace": "^6.6.0",
     "react-contextmenu": "^2.11.0",
-    "react-dnd": "^7.4.5",
-    "react-dnd-html5-backend": "^7.4.4",
-    "react-dom": "^16.8.6",
-    "react-scripts": "^3.0.0",
+    "react-dnd": "^7.7.0",
+    "react-dnd-html5-backend": "^7.7.0",
+    "react-dom": "^16.9.0",
+    "react-scripts": "^3.1.2",
     "react-svg": "^7.2.14",
-    "shortid": "^2.2.14"
+    "shortid": "^2.2.15"
   },
   "scripts": {
     "start": "react-scripts start",
@@ -38,7 +37,7 @@
     "not op_mini all"
   ],
   "devDependencies": {
-    "gh-pages": "^2.0.1"
+    "gh-pages": "^2.1.1"
   },
   "homepage": "https://dragonbleapiece.github.io/PAPER/",
   "_comment": "."

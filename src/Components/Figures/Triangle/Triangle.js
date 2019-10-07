@@ -30,7 +30,8 @@ class Triangle extends Figure {
   }
 
   drawFigure(sk) {
-    sk.triangle(this.x, this.y + this.height, this.x + this.width, this.y + this.height, (this.x + this.width) / 2, this.y);
+    let triangle = sk.triangle(this.x, this.y, this.width);
+    sk.setPathTransform(triangle);
   }
 }
 

@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import './Arrow.css';
 import Symbol from '../Symbol';
 import arrow_right from '../../../../Icons/arrow_right.svg';
+import Paper from 'paper'
 
 const className = "Arrow";
 const unauthorized = [];
@@ -28,22 +29,35 @@ class Arrow extends Symbol {
     this.y = 0;
     this.width = 1;
     this.height = 1;
+    this.headLength = 0.20;
+    this.tailLength = 0.09;
+    this.headAngle = 35;
+    this.tailAngle = 110;
   }
 
   drawFigure(sk) {
-    /*const x = this.x;
-    const y = this.y;
-    const width = this.width;
-    const height = this.height;
 
-    sk.loadSVG(arrow, img =>
-      sk.image(img, x, y, width, height)
-    );*/
-    sk.stroke(this.state.color.getP5Color(sk));
-    sk.line(this.x, this.y + 1/2 * this.height, this.x + this.width, this.y + 1/2 * this.height);
-    sk.line(this.x + 3/4 * this.width, this.y + 3/4 * this.height, this.x + this.width, this.y + 1/2 * this.height);
-    sk.line(this.x + this.width, this.y + 1/2 * this.height, this.x + 3/4 * this.width, this.y + 1/4 * this.height);
-    sk.noStroke();
+    const end = new Paper.Point(this.width, this.height / 2);
+    const start = new Paper.Point(0, this.height / 2);
+    const arrowVec = start.subtract(end);
+
+    // parameterize {headLength: 20, tailLength: 6, headAngle: 35, tailAngle: 110}
+    // construct the arrow
+    const arrowHead = arrowVec.normalize(this.headLength);
+    const arrowTail = arrowHead.normalize(this.tailLength);
+
+    const p3 = end;                  // arrow point
+
+    const p2 = end.add(arrowHead.rotate(-this.headAngle));   // leading arrow edge angle
+    const p4 = end.add(arrowHead.rotate(this.headAngle));    // ditto, other side
+
+    const p1 = p2.add(arrowTail.rotate(this.tailAngle));     // trailing arrow edge angle
+    const p5 = p4.add(arrowTail.rotate(-this.tailAngle));    // ditto
+
+    // specify all but the last segment, closed does that
+    let path = sk.path([start, p1, p2, p3, p4, p5]);
+    path.closed = true;
+    sk.setPathTransform(path);
   }
 }
 

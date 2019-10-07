@@ -32,9 +32,12 @@ class HHatching extends Hatching {
   drawFigure(sk) {
     const density = this.state.density;
     let gapY = this.height / density;
-    for(var j = 0; j <= density ; j++){
-      sk.line(this.x, this.y + j * gapY, this.x + this.width, this.y + j * gapY);
+    let parent = sk.group();
+    for(var j = 0; j <= density ; j++) {
+      let line = sk.line(this.x, this.y + j * gapY, this.x + this.width, this.y + j * gapY);
+      parent.addChild(line);
     }
+    sk.setPathTransform(parent);
   }
 
 }

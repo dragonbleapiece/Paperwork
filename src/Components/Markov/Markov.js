@@ -3,12 +3,16 @@ import BoxGroup from '../BoxGroup/BoxGroup';
 import 'rc-slider/assets/index.css';
 import './Markov.css';
 import RangeBox from '../Input/RangeBox/RangeBox';
+import Radar from './Radar';
 import shortid from 'shortid';
 
 //import Icons
 import SVG from 'react-svg';
 import next from '../../Icons/next.svg';
 import unknown from '../../Icons/unknown.svg';
+
+const CENT = 100;
+const ROUND = 10;
 
 function clamp_left(a, b) {
    return a < b ? b : a;
@@ -60,19 +64,35 @@ class Markov extends BoxGroup {
     super(props);
     this.className += " " + Markov.className;
     this.suppMenu = [];
-    this.elementsLength = this.state.children.length;
-    this.currentState = parseInt(Math.random() * (this.elementsLength));
+    this.currentState = parseInt(Math.random() * (this.state.children.length));
     this.idElement = [];
   }
 
   initState() {
     super.initState();
-    this.state.proba = [];
+    this.state.proba = this.initProba();
+    this.state.index = 0;
   }
 
-  setChildren(children) {
-    super.setChildren(children);
-    this.currentState = parseInt(Math.random() * (this.elementsLength));
+  initProba() {
+    const length = this.state.children.length;
+    if(length <= 1) return [[CENT]];
+    const defaultValue = Math.floor(CENT / ROUND / length) * ROUND;
+    let proba = new Array(length).fill(new Array(length).fill(defaultValue));
+    proba.forEach((_, index) => {
+      proba[index][length - 1] = 100 - defaultValue * (length - 1);
+    });
+    return proba;
+  }
+
+  componentDidUpdate(prevProps, prevState) {
+    super.componentDidUpdate();
+    if(prevState.children.length !== this.state.children.length) {
+      this.currentState = parseInt(Math.random() * (this.state.children.length));
+      const newProba = this.initProba();
+      console.log('here', newProba)
+      this.setState({proba: newProba});
+    }
   }
 
   draw(sk) {
@@ -84,122 +104,93 @@ class Markov extends BoxGroup {
       return;
     }
     let proba = 0;
-    let rand = parseInt(Math.random() * (100));
+    let rand = parseInt(Math.random() * (CENT));
     let i;
 
     for(i = 0; i < length && rand >= proba; ++i) {
-      proba = this.state.proba[this.currentState][i];
+      proba += this.state.proba[this.currentState][i];
     }
 
     if(this.elements[i - 1]) this.elements[i - 1].draw(sk);
     this.currentState = i - 1;
   }
 
-  renderBox() {
-    const length = this.state.children.length;
-    let defaultValues = [];
-    let sliders;
-
-    for(let i = 1; i <= length - 1; ++i) {
-      if (i === length-1) defaultValues.push(Math.floor(100/length/10)*10*i+100%(length*10));
-      else defaultValues.push(Math.floor(100/length/10)*10*i);
+  getProbas(index) {
+    if(index < 0 || index >= this.state.children.length) {
+      return [];
     }
 
-    if(length - 1 > 0) {
-      let propsRange = {
-        min: 0,
-        max: 100,
-        defaultValue: defaultValues,
-        marks: {0:0, 100:100},
-        step: 5,
-        count: length - 1,
-        pushable: 0
-      };
+    return [...this.state.proba[index]];
+  }
 
-      sliders = this.state.children.map((child, index) => {
-        let inputs = [], RangeIcon;
+  checkProba(proba, probaIndex) {
+    const length = this.state.children.length;
+    const index = this.state.index;
+    let newProba = [...this.state.proba];
+    newProba[index] = Array.from(this.state.proba[index]);
+    newProba[index][probaIndex] = proba;
+    const sum = newProba[index].reduce((acc, p) => acc + p, 0);
+    let remaining = sum - 100;
+    let i = (probaIndex + 1) % length;
+    while(i !== probaIndex && Math.abs(remaining) > 0) {
+      const p = newProba[index][i];
+      let r = clamp(p - remaining, 0, 100);
+      newProba[index][i] = r;
+      remaining -= p - r;
+      i = (i + 1) % length;
+    }
+    this.setState({proba: newProba});
+  }
 
-        RangeIcon = <span className="Markov__RangeIcon">
-          <SVG src={child.type.icon}/>
+  renderBox() {
+    let sliders;
+    let radar = null;
+    const index = this.state.index;
+    const length = this.state.children.length;
+    let header = null;
+    let inputs = [];
+
+    if(length > 1 && this.state.proba.length > 1) {
+
+        for(let i = 0; i < length; ++i) {
+          const angle = i * 2 * Math.PI / length - Math.PI / 2;
+          const x = 50 + 40 * Math.cos(angle);
+          const y = 50 + 40 * Math.sin(angle);
+          inputs.push(<div className="Markov__InputContainer" style={{left: x + '%', top: y + '%'}}>
+            <span className="Markov__InputIcon">
+              <SVG src={this.state.children[i].type.icon} onClick={() => {this.setState({index: i})}}/>
+            </span>
+            <input className="Markov__Input"
+              min={0}
+              max={100}
+              value={this.state.proba[index][i]}
+              onChange={(e) => {
+                const target = e.target;
+                const intValue = parseInt(target.value, 10);
+                const value = Number.isInteger(intValue) ? intValue : 0;
+                if(target.min > value || target.max < value) return;
+                this.checkProba(value, i);
+              }}
+            />
+          </div>);
+        }
+
+        radar = <Radar points={this.getProbas(index)} callback={this.checkProba.bind(this)} />;
+
+
+        header = <span className="Markov__RangeIcon">
+          <SVG src={this.state.children[index].type.icon}/>
           <SVG src={next}/>
           <SVG src={unknown}/>
-        </span>;
+        </span>
 
-          if(this.elementsLength !== length) {
-            this.state.proba[index] = [...defaultValues]; //remove reference
-            this.idElement[index] = shortid.generate();
-            propsRange.innerRef = (el) => {if(el) this.state.proba[index] = el.state.bounds};
-            propsRange.innerRef.bind(this);
-          }
-          propsRange.key = this.idElement[index];
-          propsRange.onChange = (value) => {this.state.proba[index] = value;}
+      }
 
-          for (let i = 0; i < length; i++) {
-            let propsInput = {
-              type: "number",
-              key: this.idElement[index]+i,
-              min: 0,
-              max: 100,
-              step: 5,
-            };
-            if (i === 0) {
-              propsInput.value = this.state.proba[index][i];
-              propsInput.onChange = (event) => {
-                let proba = this.state.proba;
-                let value = clamp(parseInt(event.target.value), propsInput.min, propsInput.max);
-                checkLeft(value, i, proba[index]);
-                checkRight(value, i, proba[index]);
-                this.setState({proba:proba});
-              };
-            } else if (i === length-1) {
-              propsInput.value = 100-this.state.proba[index][i-1];
-              propsInput.onChange = (event) => {
-                let proba = this.state.proba;
-                let value = clamp(parseInt(event.target.value), propsInput.min, propsInput.max);
-                checkLeft(100-value, i-1, proba[index]);
-                checkRight(100-value, i-1, proba[index]);
-                this.setState({proba:proba});
-              };
-            } else {
-              propsInput.max = 100 - this.state.proba[index][i-1];
-              propsInput.value = this.state.proba[index][i]-this.state.proba[index][i-1];
-              propsInput.onChange = (event) => {
-                let proba = this.state.proba;
-                let value = clamp(parseInt(event.target.value), propsInput.min, propsInput.max);
-                checkLeft(value+this.state.proba[index][i-1], i, proba[index]);
-                checkRight(value+this.state.proba[index][i-1], i, proba[index]);
-                this.setState({proba:proba});
-              };
-            }
-            propsInput.onKeyDown = propsInput.onChange;
-            inputs.push(<div className="Markov__InputContainer">
-              <span className="Markov__InputIcon">
-                <SVG src={this.state.children[i].type.icon}/>
-              </span>
-              <input className="Markov__Input" {...propsInput}/>
-            </div>);
-          }
-
-          return (
-
-              <div className="Markov__Containers">
-                <div className="Markov__RangeContainer">
-                  {RangeIcon}
-                  <RangeBox {...propsRange}/>
-                </div>
-                <div className="Markov__InputsContainer">
-                  {inputs}
-                </div>
-              </div>
-            );
-        }
-      );
-    }
-
-
-    this.elementsLength = length;
-
-    return <div className="Markov__Parameters">{sliders}</div>;
+    return <div className="Markov__Parameters">
+      {header}
+      {radar}
+      {inputs}
+    </div>;
   }
 
 }

@@ -66,7 +66,7 @@ class Workspace extends BoxGroup {
     this.addDrawBeforeType("Figure", function(sk) {
       sk.translate(sk.width / 2, sk.height / 2)
       sk.scale(sk.width, sk.height);
-      sk.strokeWeight(1 / sk.width);
+      //sk.strokeWeight(1 / sk.width);
     });
     Workspace._instance = this;
     // Redefinition of Menu Colors
@@ -89,8 +89,9 @@ class Workspace extends BoxGroup {
   }
 
   draw(sk) {
-    sk.background(this.state.color.getP5Color(sk));
-    sk.noStroke();
+    sk.fill(this.state.color.getColor(sk));
+    sk.rect(0, 0, sk.width, sk.height);
+    //background.sendToBack();
     super.draw(sk);
   }
 

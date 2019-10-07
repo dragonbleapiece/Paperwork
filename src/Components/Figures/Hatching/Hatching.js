@@ -33,12 +33,12 @@ class Hatching extends Figure {
 
   getTransforms() {
     let Transforms = new Array();
-    Transforms.push(<Density onChange={(density) => {this.setState({density: density});}}/>);
+    Transforms.push(<Density key={0} onChange={(density) => {this.setState({density: density});}}/>);
     return Transforms;
   }
 
   draw(sk) {
-    sk.stroke(this.state.color.getP5Color(sk));
+    sk.stroke(this.state.color.getColor(sk));
     super.draw(sk);
     sk.noStroke();
   }

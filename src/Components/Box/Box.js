@@ -1,12 +1,12 @@
 import React, { Component } from 'react';
 import './Box.css';
-import p5 from 'p5';
 import DropBox from '../DropBox/DropBox';
 import DragBox from '../DragBox/DragBox';
 import ContextMenuBox from '../ContextMenuBox/ContextMenuBox';
 import { ContextMenuTrigger } from "react-contextmenu";
 import Color from '../Colors/Color';
 import Scale from '../Transforms/Scale/Scale';
+import Paper from 'paper'
 
 const menuColor = [
   {
@@ -87,7 +87,7 @@ class Box extends Component {
       }
     }];
     this.doBeforeAddChild = {};
-
+    this.isMinimized = false;
   }
 
   initState() {
@@ -126,9 +126,7 @@ class Box extends Component {
     if(!child) return;
     let obj = new child(); //tricky
     if(obj instanceof Box && this.isAuthorized(child)) {
-      this.setState({
-        children: [{type:this.beforeAddChild(child), id:Box.id}]
-      });
+      this.setChildren([{type:this.beforeAddChild(child), id:Box.id}]);
     }
   }
 
@@ -136,9 +134,7 @@ class Box extends Component {
     if(!child || !child.type || !child.id) return;
     let obj = new child.type(); //tricky
     if(this.isAuthorized(child.type) && obj instanceof Box) {
-      this.setState({
-        children: [child]
-      });
+      this.setChildren([child]);
     }
   }
 
@@ -155,9 +151,7 @@ class Box extends Component {
 
   removeFromParent() {
     let children = this.props.parent.state.children;
-    console.log(children.length);
     children = children.filter(el => el.id !== this.props.id);
-    console.log(children.length);
     this.props.parent.setChildren(children);
   }
 
@@ -207,7 +201,7 @@ class Box extends Component {
 
   getTransforms() {
     let Transforms = new Array();
-    Transforms.push(<Scale onChange={(scale) => {this.setState({scale: scale});}}/>);
+    Transforms.push(<Scale key={0} onChange={(scale) => {this.setState({scale: scale});}}/>);
     return Transforms;
   }
 
@@ -225,11 +219,13 @@ class Box extends Component {
     let formatedTextColor = (isNotBlack) ? formatedColor : "rgba(255, 255, 255, 1)";
     let formatedBackgroundColor = (isNotBlack) ? "rgba(0, 0, 0, 1)" : "rgba(255, 255, 255, 1)" ;
 
+    const boxContentStyle = this.isMinimized ? {display: 'none'} : {};
+
     return (
       <div className={this.className} style={this.state.style}>
         <ContextMenuBox id={this.constructor.className + this.props.id} unauthorized={this.constructor.unauthorized} suppMenu={this.suppMenu} el={this}>
-          <DragBox icon={this.constructor.icon} color={formatedColor} textColor={formatedTextColor} backgroundColor={formatedBackgroundColor} name={this.constructor.className} onClose={this.removeFromParent.bind(this)} el={this}>
-            <span className="Box__content">
+          <DragBox icon={this.constructor.icon} color={formatedColor} textColor={formatedTextColor} backgroundColor={formatedBackgroundColor} name={this.constructor.className} onClose={this.removeFromParent.bind(this)} onMinimize={() => this.isMinimized = !this.isMinimized} el={this}>
+            <span className="Box__content" style={boxContentStyle}>
               <ContextMenuTrigger id={""}>
                 {this.renderBox()}
                 {this.getTransforms()}

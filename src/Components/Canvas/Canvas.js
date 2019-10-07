@@ -1,31 +1,37 @@
 import React, { Component } from 'react';
 import './Canvas.css';
 import PropTypes from 'prop-types';
-import SpaceGrotesk from '../../Assets/SpaceGrotesk-Regular.ttf'
+import Paper from 'paper';
 
-var p5 = require('p5');
-require('p5.js-svg')(p5);
+const DEFAULTSTYLE = {
+  fillColor: new Paper.Color(0, 0, 0, 1),
+  strokeColor: new Paper.Color(0, 0, 0, 1),
+  strokeWidth: 0,
+  scale: new Paper.Size(1, 1),
+  translate: new Paper.Point(0, 0)
+}
 
 class Canvas extends Component {
 
   /*Singleton*/
   static _instance;
-  static _P5;
-  static savePaper(filename, extension) {
-    if(Canvas._P5 !== undefined) {
-      Canvas._P5.savePaper(filename, extension);
+  static _PaperScope;
+
+  static getImageData(svg = false) {
+    if(Canvas._instance !== undefined) {
+      return Canvas._instance.getImageData(svg);
     }
   }
 
-  static getImageData() {
-    if(Canvas._P5 !== undefined) {
-      return Canvas._P5.getImageData();
+  static toBlob(callback, mimeType = 'image/png', qualityArgument = 0.80) {
+    if(Canvas._instance !== undefined) {
+      return Canvas._instance.toBlob(callback, mimeType, qualityArgument);
     }
   }
 
   static draw() {
-    if(Canvas._P5 !== undefined) {
-      Canvas._P5.draw();
+    if(Canvas._instance !== undefined) {
+      Canvas._instance.draw();
     }
   }
 
@@ -40,10 +46,56 @@ class Canvas extends Component {
       return Canvas._instance;
     }
     super(props);
-    this.strokeWeight = 1;
     this.currentFont = null;
+    this.reset();
 
     Canvas._instance = this;
+  }
+
+  get lastStyle() {
+    return this._styles[this._styles.length - 1];
+  }
+
+  get fillColor() {
+    return this.lastStyle.fillColor;
+  }
+
+  get strokeColor() {
+    return this.lastStyle.strokeColor;
+  }
+
+  get strokeWidth() {
+    return this.lastStyle.strokeWidth;
+  }
+
+  get scaleValue() {
+    return this._styles.reduce((acc, {scale}) => acc.multiply(scale), new Paper.Size(1, 1));
+  }
+
+  get translateValue() {
+    return this._styles.reduce((acc, {translate}) => acc.add(translate), new Paper.Point(0, 0));
+  }
+
+  get width() {
+    return this.state.width;
+  }
+
+  get height() {
+    return this.state.height;
+  }
+
+  pop() {
+    this._styles = this._styles.slice(0, -1);
+  }
+
+  push() {
+    const last = this._styles[this._styles.length - 1];
+    this._styles = [...this._styles, {
+      ...DEFAULTSTYLE,
+      strokeWidth: last.strokeWidth,
+      strokeColor: last.strokeColor,
+      fillColor: last.fillColor
+    }];
   }
 
   setfilename(filename, ext = undefined) {
@@ -58,24 +110,110 @@ class Canvas extends Component {
     this.setState({width: CanvasSize, height: CanvasSize});
   }
 
-  initP5() {
+  init() {
     let self = this;
-    let s = (sk) => {
-    //  sk.preload = self.preload.bind(self, sk);
-      sk.setup = self.setup.bind(self, sk);
-      sk.draw = self.draw.bind(self, sk);
-      sk.preload = self.preload.bind(self, sk);
-      sk.windowResized = self.windowResized.bind(self, sk);
-      sk.savePaper = self.savePaper.bind(self, sk);
-      sk.strokeScale = self.strokeScale.bind(self, sk);
-      sk.getImageData = self.getImageData.bind(self, sk)
-    }
 
-    Canvas._P5 = new p5(s, 'renderer');
+    let canvas = document.getElementById('canvas');
+    Canvas._PaperScope = Paper.setup(canvas);
+    console.log(Canvas._PaperScope)
+    Paper.view.onResize = (e) => {
+      this.windowResized(canvas);
+      this.componentDidUpdate()
+    }
+    Paper.view.autoUpdate = false;
+    window.updateWorkspace();
   }
 
-  preload(sk) {
-    sk.currentFont = sk.loadFont(SpaceGrotesk);
+  fill(color) {
+    this.lastStyle.fillColor = color;
+  }
+
+  rect(x, y, width, height) {
+    let rect = new Paper.Path.Rectangle(new Paper.Point(x, y), new Paper.Size(width, height));
+    this.setPathStyle(rect);
+    return rect;
+  }
+
+  ellipse(x, y, width, height) {
+    let ellipse = new Paper.Path.Ellipse({
+      point: new Paper.Point(x, y),
+      size: new Paper.Size(width, height)
+    });
+    this.setPathStyle(ellipse);
+    return ellipse;
+  }
+
+  line(x1, y1, x2, y2) {
+    let line = new Paper.Path.Line(new Paper.Point(x1, y1), new Paper.Point(x2, y2));
+    this.setPathStyle(line);
+    return line;
+  }
+
+  triangle(x, y, width) {
+    let triangle = new Paper.Path.RegularPolygon(new Paper.Point(x + width / 2, y + width / 2), 3, width / 2);
+    this.setPathStyle(triangle);
+    return triangle;
+  }
+
+  translate(x, y = x) {
+    this.lastStyle.translate = new Paper.Point(x, y)
+  }
+
+  scale(x, y = x) {
+    this.lastStyle.scale = new Paper.Size(x, y)
+  }
+
+  noStroke() {
+    this.strokeWeight(0);
+  }
+
+  strokeWeight(weight) {
+    this.lastStyle.strokeWidth = weight;
+  }
+
+  stroke(color) {
+    if(this.lastStyle.strokeWidth === 0) this.strokeWeight(1);
+    this.lastStyle.strokeColor = color;
+  }
+
+  text(text, x, y) {
+    let textObject = new Paper.PointText(new Paper.Point(x, y));
+    textObject.fontFamily = 'Space Grotesk';
+    textObject.content = text;
+    textObject.justification = 'center';
+    this.setPathStyle(textObject);
+    return textObject;
+  }
+
+  textSize(size) {
+
+  }
+
+  group() {
+    return new Paper.Group();
+  }
+
+  path(segments) {
+    let path = new Paper.Path(segments);
+    this.setPathStyle(path);
+    return path;
+  }
+
+  setPathStyle(path) {
+    path.style = {
+      fillColor: this.fillColor,
+      strokeWidth: this.strokeWidth,
+      strokeColor: this.strokeColor
+    };
+  }
+
+  setPathTransform(path) {
+    path.scale(this.scaleValue.width, this.scaleValue.height);
+    path.translate(this.translateValue);
+  }
+
+  color(r, g, b, a) {
+    return new Paper.Color(r, g, b, a);
   }
 
   sendDraw(f) {
@@ -92,48 +230,53 @@ class Canvas extends Component {
 
   windowResized(sk) {
     this.CalcCanvasSize();
-    sk.resizeCanvas(this.state.width, this.state.height);
+    this.resizeCanvas(sk);
   }
 
-  savePaper(sk, filename, extension) {
-    if(filename !== undefined || extension !== undefined) {
-      sk.save(filename + "." + extension);
-    }
+  resizeCanvas(sk) {
+    sk.width = this.state.width
+    sk.height = this.state.height
   }
 
-  setup(sk) {
-    const {width, height} = this.state;
-    sk.createCanvas(width, height);
-    sk.noLoop();
-    window.updateWorkspace();
-  }
-
-  strokeScale(sk, scale) {
-    this.strokeWeight *= scale;
-    sk.strokeWeight(this.strokeWeight);
-  }
-
-  draw(sk) {
-    sk.pixelDensity(1); //fix svg
+  draw() {
+    Paper.project.clear();
+    this.reset();
     let f = this.state.function;
     if(f !== undefined) {
-      f(sk);
+      f(this);
     }
+    Paper.view.draw();
   }
 
   componentDidMount() {
     this.CalcCanvasSize();
-    this.initP5();
+    this.init();
+  }
+
+  reset() {
+    this._styles = [{...DEFAULTSTYLE}]
   }
 
   componentDidUpdate() {
-    Canvas._P5.draw();
+    this.draw();
   }
 
-  getImageData(sk) {
-    let image = sk.get();
-    image.loadPixels();
-    return image.canvas.toDataURL('image/png').replace(/^data:image\/(png|jpg);base64,/, '');
+  getImageData(svg = false) {
+    if(svg) {
+      return Canvas._PaperScope.project.exportSVG({
+        asString: true,
+        matchShapes: true,
+        bounds: new Paper.Rectangle(new Paper.Point(0, 0), new Paper.Size(this.width, this.height))
+      });
+    } else {
+      const canvas = Canvas._PaperScope.project.view.element;
+      return canvas.toDataURL('image/png').replace(/^data:image\/(png|jpg);base64,/, '');
+    }
+  }
+
+  toBlob(callback, mimeType = 'image/png', qualityArgument = 0.80) {
+    const canvas = Canvas._PaperScope.project.view.element;
+    canvas.toBlob(callback, mimeType, qualityArgument);
   }
 
 
@@ -141,6 +284,7 @@ class Canvas extends Component {
     return (
       <div className="canvasContainer">
         <div id="renderer">
+          <canvas id="canvas" width={this.state.width} height={this.state.height} resize="true"/>
         </div>
       </div>
     );
@@ -148,7 +292,7 @@ class Canvas extends Component {
 }
 
 Canvas._instance = undefined;
-Canvas._P5 = undefined;
+Canvas._PaperScope = undefined;
 
 /*PropTypes*/
 Canvas.propTypes = {

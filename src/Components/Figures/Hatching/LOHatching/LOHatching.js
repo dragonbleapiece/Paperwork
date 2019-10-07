@@ -35,8 +35,12 @@ class LOHatching extends Hatching {
     const density = this.state.density;
     let gapX = (this.width / density);
     let gapY = (this.height / density);
+
+    let parent = sk.group();
+
     while(i < this.x + this.width){
-      sk.line(i, this.y, this.x+this.width, j);
+      let line = sk.line(i, this.y, this.x+this.width, j);
+      parent.addChild(line);
       i += gapX;
       j -= gapY;
     }
@@ -44,10 +48,13 @@ class LOHatching extends Hatching {
     i = this.x + this.width;
     j = this.y;
     while(j < this.y + this.height){
-      sk.line(this.x, j, i, this.y+this.height);
+      let line = sk.line(this.x, j, i, this.y+this.height);
+      parent.addChild(line);
       i -= gapX;
       j += gapY;
     }
+
+    sk.setPathTransform(parent);
   }
 
 }

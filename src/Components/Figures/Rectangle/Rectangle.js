@@ -30,7 +30,8 @@ class Rectangle extends Figure {
   }
 
   drawFigure(sk) {
-    sk.rect(this.x, this.y, this.width, this.height);
+    let rect = sk.rect(this.x, this.y, this.width, this.height);
+    sk.setPathTransform(rect);
   }
 
 }

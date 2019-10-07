@@ -35,10 +35,15 @@ class Save extends Component {
 
     if (this.state.DownloadName === this.state.DownloadNameSaved) {
       dname = (nb[this.state.DownloadFormat] === 1) ? this.state.DownloadName : this.state.DownloadName + "-" + nb[this.state.DownloadFormat];
-      Canvas.savePaper(dname, this.state.DownloadFormat);
     } else {
       this.setState({DownloadNameSaved: this.state.DownloadName});
-      Canvas.savePaper(dname, this.state.DownloadFormat);
+    }
+
+    if(this.state.DownloadFormat === 'svg') {
+      const blob = new Blob([Canvas.getImageData(true)], {type : 'image/svg+xml'});
+      saveAs(blob, this.state.DownloadName+'.svg');
+    } else {
+      Canvas.toBlob((blob) => saveAs(blob, this.state.DownloadName+'.jpg'), 'image/jpeg');
     }
     console.log("SUFFIX", nb[this.state.DownloadFormat], "NAME + FORMAT", dname + "." + this.state.DownloadFormat);
   }
@@ -47,8 +52,10 @@ class Save extends Component {
     let zip = new JSZip();
     zip.file(this.state.DownloadName + ".txt", "By Paperwork\n");
     let img = zip.folder(this.state.DownloadName);
+    const isSVG = this.state.DownloadFormat === 'svg';
     for(let i = 0; i < this.state.zipNumber; ++i) {
-      img.file(`${this.state.DownloadName}-${i}.${this.state.DownloadFormat}`, Canvas.getImageData(), {base64: true});
+      const imageData = isSVG ? btoa(Canvas.getImageData(true)) : Canvas.getImageData(false);
+      img.file(`${this.state.DownloadName}-${i}.${this.state.DownloadFormat}`, imageData, {base64: true});
       Canvas.draw();
     }
     const self = this;

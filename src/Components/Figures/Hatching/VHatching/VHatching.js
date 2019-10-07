@@ -32,9 +32,15 @@ class VHatching extends Hatching {
   drawFigure(sk) {
     const density = this.state.density;
     let gapX = this.width / density;
+
+    let parent = sk.group();
+
     for(var i = 0; i <= density ; i++){
-      sk.line(this.x + i * gapX, this.y, this.x + i * gapX, this.y + this.height);
+      let line = sk.line(this.x + i * gapX, this.y, this.x + i * gapX, this.y + this.height);
+      parent.addChild(line);
     }
+
+    sk.setPathTransform(parent);
   }
 
 }

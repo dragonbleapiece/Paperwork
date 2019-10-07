@@ -36,9 +36,7 @@ class BoxGroup extends Box {
     let obj = new child(); //tricky
     let children = this.state.children;
     if(obj instanceof Box && this.isAuthorized(child)) {
-      this.setState({
-        children: [...this.state.children, {type:this.beforeAddChild(child), id:Box.id}]
-      });
+      this.setChildren([...this.state.children, {type:this.beforeAddChild(child), id:Box.id}]);
     }
   }
 
@@ -48,10 +46,7 @@ class BoxGroup extends Box {
     if(this.isAuthorized(child.type) && obj instanceof Box) {
       let children = this.state.children;
       children.push(child);
-      console.log(child);
-      this.setState({
-        children: children
-      });
+      this.setChildren(children);
     }
   }
 
@@ -62,12 +57,12 @@ class BoxGroup extends Box {
 
   draw(sk) {
     let el = this.elements;
-    for(let i = 0; i <el.length; ++i) {
+    for(let i = 0; i < el.length; ++i) {
        let element = el[i];
        sk.push();
          this.drawBeforeChild(sk, element);
          if(element) element.draw(sk);
-        sk.pop();
+       sk.pop();
     }
   }
 
@@ -105,11 +100,13 @@ class BoxGroup extends Box {
 
     const renderBox = this.renderBox() ? true : false;
 
+    const boxContentStyle = this.isMinimized ? {display: 'none'} : {};
+
     return (
       <div className={this.className} style={this.state.style}>
         <ContextMenuBox id={this.constructor.className + this.props.id} suppMenu={this.suppMenu} unauthorized={this.constructor.unauthorized} el={this}>
-          <DragBox icon={this.constructor.icon} name={this.constructor.className} onClose={this.removeFromParent.bind(this)} className={this.className} el={this}>
-            <span className="Box__content">
+          <DragBox icon={this.constructor.icon} name={this.constructor.className} onClose={this.removeFromParent.bind(this)} onMinimize={() => this.isMinimized = !this.isMinimized} className={this.className} el={this}>
+            <span className="Box__content" style={boxContentStyle}>
               {renderBox && <ContextMenuTrigger id={""}>
                 {this.renderBox()}
               </ContextMenuTrigger>}

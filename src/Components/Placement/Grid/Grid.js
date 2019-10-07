@@ -84,7 +84,7 @@ class Grid extends Placement {
     var elem = this.next;
     var currentMode = this.state.currentMode;
 
-  	if(!elem) sk.stroke(this.state.color.getP5Color(sk));
+  	if(!elem) sk.stroke(this.state.color.getColor(sk));
 
     if(currentMode) {
       currentMode.mode(sk, {
@@ -97,9 +97,7 @@ class Grid extends Placement {
             sk.push();
               sk.translate(column / 2, row / 2);
               sk.scale(column, row);
-              sk.strokeWeight(1/column);
               elem.draw(sk);
-              sk.strokeWeight(1);
             sk.pop();
           }
         }
