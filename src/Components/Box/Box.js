@@ -95,6 +95,10 @@ class Box extends Component {
     this.state.scale = {x: 1, y: 1};
   }
 
+  doBeforeSetChildren(children) {
+    return {children};
+  }
+
   addDrawBeforeType(type, f) {
     if(!(f instanceof Function)) return;
     if(!this.drawBeforeType[type]) {
@@ -139,9 +143,7 @@ class Box extends Component {
   }
 
   setChildren(children) {
-    this.setState({
-      children: children
-    })
+    this.setState(this.doBeforeSetChildren(children));
   }
 
   isAuthorized(cl) {

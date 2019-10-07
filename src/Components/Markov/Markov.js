@@ -74,8 +74,7 @@ class Markov extends BoxGroup {
     this.state.index = 0;
   }
 
-  initProba() {
-    const length = this.state.children.length;
+  initProba(length = this.state.children.length) {
     if(length <= 1) return [[CENT]];
     const defaultValue = Math.floor(CENT / ROUND / length) * ROUND;
     let proba = new Array(length).fill(new Array(length).fill(defaultValue));
@@ -85,14 +84,14 @@ class Markov extends BoxGroup {
     return proba;
   }
 
-  componentDidUpdate(prevProps, prevState) {
-    super.componentDidUpdate();
-    if(prevState.children.length !== this.state.children.length) {
-      this.currentState = parseInt(Math.random() * (this.state.children.length));
-      const newProba = this.initProba();
-      console.log('here', newProba)
-      this.setState({proba: newProba});
+  doBeforeSetChildren(children) {
+    const result = super.doBeforeSetChildren(children);
+    if(children.length !== this.state.children.length) {
+      this.currentState = parseInt(Math.random() * (children.length));
+      const newProba = this.initProba(children.length);
+      return {...result, proba: newProba, index: 0};
     }
+    return result;
   }
 
   draw(sk) {
@@ -156,13 +155,15 @@ class Markov extends BoxGroup {
           const angle = i * 2 * Math.PI / length - Math.PI / 2;
           const x = 50 + 40 * Math.cos(angle);
           const y = 50 + 40 * Math.sin(angle);
-          inputs.push(<div className="Markov__InputContainer" style={{left: x + '%', top: y + '%'}}>
-            <span className="Markov__InputIcon">
+          const iconSelected = (i === index) ? ' selected' : '';
+          inputs.push(<div className="Markov__InputContainer" key={i} style={{left: x + '%', top: y + '%'}}>
+            <span className={"Markov__InputIcon" + iconSelected}>
               <SVG src={this.state.children[i].type.icon} onClick={() => {this.setState({index: i})}}/>
             </span>
             <input className="Markov__Input"
               min={0}
               max={100}
+              type='number'
               value={this.state.proba[index][i]}
               onChange={(e) => {
                 const target = e.target;

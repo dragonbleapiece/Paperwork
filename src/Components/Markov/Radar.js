@@ -37,6 +37,7 @@ class Radar extends Component {
     const maxRadius = RADIUS;
     const center = {x: WIDTH / 2, y: HEIGHT / 2};
     const points = getCirclePoints(center, probas, elNumber);
+    const pins = getCirclePoints(center, new Array(elNumber).fill(maxRadius), elNumber);
     const outerPoints = getCirclePoints(center, new Array(elNumber).fill(maxRadius + 1), elNumber);
     const d = points.reduce((acc, point, index) => `${acc} ${index > 0 ? 'L ' : ''}${point.x} ${point.y}`, 'M') + 'Z';
     const outerD = outerPoints.reduce((acc, point, index) => `${acc} ${index > 0 ? 'L ' : ''}${point.x} ${point.y}`, 'M') + 'Z';
@@ -70,12 +71,25 @@ class Radar extends Component {
       )
     });
 
+    const landmarks = pins.map((point, index) => (
+      <circle key={index} cx={point.x} cy={point.y} r={2} className='Radar__Point' onClick={() => {
+        callback(0, index);
+      }}>
+        <title>0</title>
+      </circle>
+      /*<text x={point.x} y={point.y + 12} className='Radar__Text'>0</text>*/
+    ));
+
     return (
       <svg version="1.1" xmlns="http://www.w3.org/2000/svg" viewBox={`0 0 ${WIDTH} ${HEIGHT}`} className='Markov__Radar'>
-        <path d={d} className='Radar__Shape'/>
         <path d={outerD} className='Radar__Outline'/>
+        <path d={d} className='Radar__Shape'/>
         {lines}
-        <circle cx={center.x} cy={center.y} r={2} className='Radar__Point Radar__Center'/>
+        <circle cx={center.x} cy={center.y} r={2} className='Radar__Point Radar__Center'>
+          <title>100</title>
+        </circle>
+        <text x={center.x} y={center.y + 12} className='Radar__Text'>100</text>
+        {landmarks}
         {cursor}
       </svg>
     );
