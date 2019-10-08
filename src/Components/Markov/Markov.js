@@ -139,6 +139,7 @@ class Markov extends BoxGroup {
       i = (i + 1) % length;
     }
     this.setState({proba: newProba});
+    window.updateWorkspace();
   }
 
   renderBox() {
