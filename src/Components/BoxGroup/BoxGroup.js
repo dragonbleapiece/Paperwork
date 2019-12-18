@@ -1,8 +1,6 @@
 import React from 'react';
 import './BoxGroup.css';
 import Box from '../Box/Box';
-import DropBox from '../DropBox/DropBox';
-import DragBox from '../DragBox/DragBox';
 import ContextMenuBox from '../ContextMenuBox/ContextMenuBox';
 import { ContextMenuTrigger } from "react-contextmenu";
 
@@ -92,37 +90,12 @@ class BoxGroup extends Box {
     return children;
   }
 
-  renderBox() {
+  getTransforms() {
     return null;
   }
 
-  render() {
-
-    const renderBox = this.renderBox() ? true : false;
-
-    const boxContentStyle = this.isMinimized ? {display: 'none'} : {};
-
-    return (
-      <div className={this.className} style={this.state.style}>
-        <ContextMenuBox id={this.constructor.className + this.props.id} suppMenu={this.suppMenu} unauthorized={this.constructor.unauthorized} el={this}>
-          <DragBox icon={this.constructor.icon} name={this.constructor.className} onClose={this.removeFromParent.bind(this)} onMinimize={() => this.isMinimized = !this.isMinimized} className={this.className} el={this}>
-            <span className="Box__content" style={boxContentStyle}>
-              {renderBox && <ContextMenuTrigger id={""}>
-                {this.renderBox()}
-              </ContextMenuTrigger>}
-              <DropBox el={this}>
-                <ContextMenuTrigger id={this.constructor.className + this.props.id} holdToDisplay={-1}>
-                  {this.constructor.unauthorized.indexOf("*") === -1 && <div className="Box__container">
-                    {!this.state.children.length && <span className="Box__placeholder">Right click to add</span>}
-                    {this.getChildren()}
-                  </div>}
-                </ContextMenuTrigger>
-              </DropBox>
-            </span>
-          </DragBox>
-        </ContextMenuBox>
-      </div>
-    );
+  renderBox() {
+    return null;
   }
 }
 

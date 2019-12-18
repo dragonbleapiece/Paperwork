@@ -40,82 +40,84 @@ import Orthogonal from './Modes/GridMode/Orthogonal/Orthogonal';
 import SnailRight from './Modes/GridMode/SnailRight/SnailRight';
 
 export function getClassFromName(name) {
-  switch(name) {
-    case('Figure'):
+  const lname = name.toLowerCase();
+  switch(lname) {
+    case('figure'):
       return Figure;
-    case('Rectangle'):
+    case('rectangle'):
       return Rectangle;
-    case('Triangle'):
+    case('triangle'):
       return Triangle;
-    case('Ellipse'):
+    case('ellipse'):
       return Ellipse;
-    case('HHatching'):
+    case('hhatching'):
       return HHatching;
-    case('VHatching'):
+    case('vhatching'):
       return VHatching;
-    case('LOHatching'):
+    case('lohatching'):
       return LOHatching;
-    case('ROHatching'):
+    case('rohatching'):
       return ROHatching;
-    case('Placement'):
+    case('placement'):
       return Placement;
-    case('Grid'):
+    case('grid'):
       return Grid;
-    case('Markov'):
+    case('markov'):
       return Markov;
-    case('Transform'):
+    case('transform'):
       return Transform;
-    case('Color'):
+    case('color'):
       return Color;
-    case('Red'):
+    case('red'):
       return Red;
-    case('Orange'):
+    case('orange'):
       return Orange;
-    case('Yellow'):
+    case('yellow'):
       return Yellow;
-    case('Green'):
+    case('green'):
       return Green;
-    case('LightBlue'):
+    case('lightblue'):
       return LightBlue;
-    case('Blue'):
+    case('blue'):
       return Blue;
-    case('Black'):
+    case('black'):
       return Black;
-    case('White'):
+    case('white'):
       return White;
-    case('Translate'):
+    case('translate'):
       return Translate;
-    case('Scale'):
+    case('scale'):
       return Scale;
-    case('Rotate'):
+    case('rotate'):
       return Rotate;
-    case('Void'):
+    case('void'):
       return Void;
-    case('LinearX'):
+    case('linearx'):
       return LinearX;
-    case('LinearY'):
+    case('lineary'):
       return LinearY;
-    case('DiagonalLeft'):
+    case('diagonalleft'):
       return DiagonalLeft;
-    case('DiagonalRight'):
+    case('diagonalright'):
       return DiagonalRight;
-    case('Orthogonal'):
+    case('orthogonal'):
       return Orthogonal;
-    case('SnailRight'):
+    case('snailright'):
       return SnailRight;
-    case('Series'):
+    case('series'):
       return Series;
-    case('Arrow'):
+    case('arrow'):
       return Arrow;
-    case('Symbol'):
+    case('symbol'):
       return Symbol;
-    case('Character'):
+    case('character'):
       return Character;
     case('0'):
       return Number0;
     case('1'):
       return Number1
     default:
+      console.warn(lname);
       return null;
   }
 }

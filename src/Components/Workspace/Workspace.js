@@ -2,9 +2,6 @@ import React from 'react';
 import './Workspace.css';
 import Canvas from '../Canvas/Canvas';
 import BoxGroup from '../BoxGroup/BoxGroup';
-import { DragDropContext } from 'react-dnd';
-import HTML5Backend from 'react-dnd-html5-backend';
-import DropBox from '../DropBox/DropBox';
 import ContextMenuBox from '../ContextMenuBox/ContextMenuBox';
 import Black from '../Colors/Black';
 
@@ -104,14 +101,14 @@ class Workspace extends BoxGroup {
     return (
       <div className={this.className}>
         <ContextMenuBox id={this.constructor.className} unauthorized={this.unauthorized} suppMenu={this.suppMenu} el={this}>
-          <DropBox el={this}>
+          <div className='DropBox' onDrop={this.onDrop.bind(this)} onDragEnter={this.onDragEnter.bind(this)} onDragOver={this.onDragOver.bind(this)} onDragLeave={this.onDragLeave.bind(this)}>
             {!this.state.children.length && <span className="Workspace__placeholder">Right click here</span>}
             {this.getChildren()}
-          </DropBox>
+          </div>
         </ContextMenuBox>
       </div>
     );
   }
 }
 
-export default DragDropContext(HTML5Backend)(Workspace);
+export default Workspace;

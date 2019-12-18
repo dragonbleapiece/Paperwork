@@ -27,10 +27,8 @@ class Series extends BoxGroup {
   }
 
   setChildren(children) {
-    console.log(this.state.children.length);
     super.setChildren(children);
     this.currentState = 0;
-    console.log(this.state.children.length);
   }
 
   draw(sk) {

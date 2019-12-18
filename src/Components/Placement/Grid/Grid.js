@@ -40,7 +40,7 @@ const menu = [{
 }];
 
 const className = "Grid";
-const unauthorized = ["Placement"];
+const unauthorized = [];
 const doBeforeAddChild = {
   Figure: (child) => {
     return InBox(Series, child);

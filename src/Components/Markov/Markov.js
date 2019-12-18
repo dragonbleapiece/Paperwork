@@ -142,12 +142,13 @@ class Markov extends BoxGroup {
     window.updateWorkspace();
   }
 
+  
   renderBox() {
-    let sliders;
     let radar = null;
     const index = this.state.index;
     const length = this.state.children.length;
     let header = null;
+    let info = null;
     let inputs = [];
 
     if(length > 1 && this.state.proba.length > 1) {
@@ -160,6 +161,7 @@ class Markov extends BoxGroup {
           inputs.push(<div className="Markov__InputContainer" key={i} style={{left: x + '%', top: y + '%'}}>
             <span className={"Markov__InputIcon" + iconSelected}>
               <SVG src={this.state.children[i].type.icon} onClick={() => {this.setState({index: i})}}/>
+              {iconSelected && <SVG src={next} className="exponent" />}
             </span>
             <input className="Markov__Input"
               min={0}
@@ -184,14 +186,16 @@ class Markov extends BoxGroup {
           <SVG src={this.state.children[index].type.icon}/>
           <SVG src={next}/>
           <SVG src={unknown}/>
-        </span>
+        </span>;
 
+        info = <span className="Markov__Info">sum = 100</span>;
       }
 
     return <div className="Markov__Parameters">
       {header}
       {radar}
       {inputs}
+      {info}
     </div>;
   }
 

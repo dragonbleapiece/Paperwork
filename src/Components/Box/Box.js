@@ -1,12 +1,15 @@
 import React, { Component } from 'react';
 import './Box.css';
-import DropBox from '../DropBox/DropBox';
-import DragBox from '../DragBox/DragBox';
 import ContextMenuBox from '../ContextMenuBox/ContextMenuBox';
 import { ContextMenuTrigger } from "react-contextmenu";
 import Color from '../Colors/Color';
 import Scale from '../Transforms/Scale/Scale';
 import Paper from 'paper'
+
+//import Icons
+import SVG from 'react-svg';
+import cancel from '../../Icons/cancel.svg';
+import minimize from '../../Icons/minimize.svg';
 
 const menuColor = [
   {
@@ -67,6 +70,7 @@ class Box extends Component {
 
     if(props && this.props.state) {
       this.state = this.props.state;
+      this.initStateFromSavedState();
     } else {
       this.initState();
     }
@@ -88,6 +92,29 @@ class Box extends Component {
     }];
     this.doBeforeAddChild = {};
     this.isMinimized = false;
+  }
+
+  initStateFromSavedState() {
+    const {r, g, b, a} = this.state.color;
+    this.state.color = new Color(r, g, b, a);
+    this.state = Box.checkChildrenFromSavedState(this.state);
+  }
+
+  static checkChildrenFromSavedState(state) {
+    if(state === undefined) return state;
+    if(state.children !== undefined && state.children.length > 0) {
+      return {
+        ...state,
+        children: state.children.map(({type, id, state}) => {
+          if(typeof type === 'string') {
+            return {type: window.getClassFromName(type), id, state: Box.checkChildrenFromSavedState(state)};
+          } else {
+            return {type, id, state};
+          }
+        })
+      }
+    }
+    return {...state};
   }
 
   initState() {
@@ -116,8 +143,6 @@ class Box extends Component {
 
   beforeAddChild(child) {
     const functionToCall = getFunctionClass(child, this.doBeforeAddChild);
-
-    console.log(functionToCall);
 
     if(functionToCall instanceof Function) {
       return functionToCall(child);
@@ -175,7 +200,6 @@ class Box extends Component {
   drawBeforeChild(sk, child) {
     if(!child) return;
     for(let key in this.drawBeforeType) {
-      console.log(key);
       if(child instanceof window.getClassFromName(key)) {
         this.callDrawBeforeType(sk, key);
       }
@@ -201,6 +225,22 @@ class Box extends Component {
     return null;
   }
 
+  static boxToJSON(constructor, state, id = Box.id) {
+    return {type: constructor.className, id: id, state: Box.stateToJSON(state)};
+  }
+
+  toJSON() {
+    return this.constructor.boxToJSON(this.constructor, this.state);
+  }
+
+  static stateToJSON(state) {
+    if(state === undefined) return state;
+    if(state.children !== undefined && state.children.length > 0) {
+      return {...state, children: state.children.map(({type, id, state}) => type.boxToJSON(type, state, id))};
+    }
+    return {...state};
+  }
+
   getTransforms() {
     let Transforms = new Array();
     Transforms.push(<Scale key={0} onChange={(scale) => {this.setState({scale: scale});}}/>);
@@ -214,6 +254,63 @@ class Box extends Component {
     }
   }
 
+  onDragStart(e) {
+    const json = this.toJSON();
+    e.dataTransfer.setData(this.constructor.className, JSON.stringify(json));
+    e.dataTransfer.effectAllowed = 'move';
+  }
+
+  onDragEnd(e) {
+    if(e.dataTransfer.dropEffect === 'move') {
+      this.removeFromParent();
+    }
+    e.dataTransfer.clearData();
+  }
+
+  onDragEnter(e) {
+    const last = e.dataTransfer.types.length - 1;
+    if(last >= 0 && this.isAuthorized(e.dataTransfer.types[last])) {
+      e.preventDefault();
+      e.dataTransfer.dropEffect = "move";
+    } else {
+      e.dataTransfer.dropEffect = "none";
+    }
+    e.stopPropagation();
+  }
+
+  onDrag(e) {
+
+  }
+
+  onDragLeave(e) {
+    e.stopPropagation();
+  }
+
+  onDragOver(e) {
+    this.onDragEnter(e);
+  }
+
+  onDrop(e) {
+
+    console.log(this.constructor.className);
+    const last = e.dataTransfer.types.length - 1;
+    if(last < 0) return false;
+
+    const json = JSON.parse(e.dataTransfer.getData(e.dataTransfer.types[last]));
+    this.pushChild({type: window.getClassFromName(json.type), id: json.id, state: json.state});
+    e.stopPropagation();
+  }
+
+  onClose() {
+    this.removeFromParent();
+    window.updateWorkspace();
+  }
+
+  onMinimize() {
+    this.isMinimized = !this.isMinimized
+    window.updateWorkspace();
+  }
+
   render() {
     let c = this.state.color;
     let isNotBlack = (c.r+c.g+c.b !== 0);
@@ -221,27 +318,42 @@ class Box extends Component {
     let formatedTextColor = (isNotBlack) ? formatedColor : "rgba(255, 255, 255, 1)";
     let formatedBackgroundColor = (isNotBlack) ? "rgba(0, 0, 0, 1)" : "rgba(255, 255, 255, 1)" ;
 
+    const renderBox = this.renderBox();
     const boxContentStyle = this.isMinimized ? {display: 'none'} : {};
 
+    const icon = this.constructor.icon;
+
     return (
-      <div className={this.className} style={this.state.style}>
+      <div className={this.className} style={this.state.style} onDragOver={(e) => {e.stopPropagation()}} onDragEnter={(e) => {e.stopPropagation()}}>
         <ContextMenuBox id={this.constructor.className + this.props.id} unauthorized={this.constructor.unauthorized} suppMenu={this.suppMenu} el={this}>
-          <DragBox icon={this.constructor.icon} color={formatedColor} textColor={formatedTextColor} backgroundColor={formatedBackgroundColor} name={this.constructor.className} onClose={this.removeFromParent.bind(this)} onMinimize={() => this.isMinimized = !this.isMinimized} el={this}>
+          <div className="Box__wrapper">
+            <div className="Box_titleOptions">
+              <span className="Box__titleOption" onClick={this.onMinimize.bind(this)}>
+                  <SVG src={minimize}/>
+              </span>
+              <span className="Box__titleOption" onClick={this.onClose.bind(this)}>
+                  <SVG src={cancel}/>
+              </span>
+            </div>
+            <span draggable="true" className="Box__title" onDragStart={this.onDragStart.bind(this)} onDragEnd={this.onDragEnd.bind(this)} onDrag={this.onDrag.bind(this)}>
+              {icon && <SVG className="Box__titleIcon" src={icon} style={{fill: formatedColor, backgroundColor: formatedBackgroundColor}}/>}
+              <span className="Box__titleText" style={{color: formatedTextColor}}>{this.constructor.className}</span>
+            </span>
             <span className="Box__content" style={boxContentStyle}>
               <ContextMenuTrigger id={""}>
                 {this.renderBox()}
                 {this.getTransforms()}
               </ContextMenuTrigger>
-              <DropBox el={this}>
+              <div className='DropBox'>
                 <ContextMenuTrigger id={this.constructor.className + this.props.id} holdToDisplay={-1}>
-                  {this.constructor.unauthorized.indexOf("*") === -1 && <div className="Box__container">
+                  {this.constructor.unauthorized.indexOf("*") === -1 && <div className="Box__container" onDrop={this.onDrop.bind(this)} onDragEnter={this.onDragEnter.bind(this)} onDragOver={this.onDragOver.bind(this)} onDragLeave={this.onDragLeave.bind(this)}>
                     {!this.state.children.length && <span className="Box__placeholder">Right click to add</span>}
                     {this.getChildren()}
                   </div>}
                 </ContextMenuTrigger>
-              </DropBox>
+              </div>
             </span>
-          </DragBox>
+          </div>
         </ContextMenuBox>
       </div>
     );

@@ -36,6 +36,18 @@ class Placement extends Box {
     this.suppMenu[this.suppMenu.length - 1].handleClick.bind(this);
   }
 
+  initStateFromSavedState() {
+    super.initStateFromSavedState();
+    if(typeof this.state.mode === 'string') {
+      this.state.mode = window.getClassFromName(this.state.mode);
+    }
+  }
+
+  static boxToJSON(constructor, state) {
+    const superJSON = super.boxToJSON(constructor, state);
+    return {...superJSON, state: {...superJSON.state, currentMode: undefined, mode: state.mode.className}};
+  }
+
   initState() {
     super.initState();
     this.state.currentMode = undefined;

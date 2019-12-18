@@ -102,7 +102,7 @@ class ContextMenuBox extends Component {
       (item, index) => {
         if(this.props.el.constructor.unauthorized.indexOf(item.type) === -1) {
           let icon = window.getIconClassFromName(item.type);
-          if (!item.elements) {
+          if (item.elements === undefined || item.elements.length === 0) {
             return (<MenuItem onClick={handleClick} data={{ type: item.type, el: this.props.el }} key={shortid.generate()}>
               {icon && <span className="react-contextmenu-itemIcon"><SVG src={icon}/></span>}
               <span className="react-contextmenu-itemText">{item.name ? item.name : item.type}</span>
