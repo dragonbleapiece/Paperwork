@@ -117,7 +117,7 @@ export function getClassFromName(name) {
     case('1'):
       return Number1
     default:
-      console.warn(lname);
+      //console.warn(lname);
       return null;
   }
 }

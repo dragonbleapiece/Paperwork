@@ -60,6 +60,7 @@ class Workspace extends BoxGroup {
     super(props);
     this.className = this.constructor.className;
     this.elements = []; //no this.state.elements
+    this.isFlexVertical = false;
     this.addDrawBeforeType("Figure", function(sk) {
       sk.translate(sk.width / 2, sk.height / 2)
       sk.scale(sk.width, sk.height);
@@ -101,7 +102,7 @@ class Workspace extends BoxGroup {
     return (
       <div className={this.className}>
         <ContextMenuBox id={this.constructor.className} unauthorized={this.unauthorized} suppMenu={this.suppMenu} el={this}>
-          <div className='DropBox' onDrop={this.onDrop.bind(this)} onDragEnter={this.onDragEnter.bind(this)} onDragOver={this.onDragOver.bind(this)} onDragLeave={this.onDragLeave.bind(this)}>
+          <div className='DropBox' ref='container' onDrop={this.onDrop.bind(this)} onDragEnter={this.onDragEnter.bind(this)} onDragOver={this.onDragOver.bind(this)} onDragLeave={this.onDragLeave.bind(this)}>
             {!this.state.children.length && <span className="Workspace__placeholder">Right click here</span>}
             {this.getChildren()}
           </div>

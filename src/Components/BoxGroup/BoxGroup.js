@@ -64,7 +64,7 @@ class BoxGroup extends Box {
     }
   }
 
-  initElements(instance = Box, callback = function() {}) {
+  initElements() {
 
     let elements = [];
 
@@ -86,8 +86,25 @@ class BoxGroup extends Box {
       <child.type key={child.id} id={child.id} parent={this} ref={el => {if(el) this.elements[index] = el.ref;}} saveState={(state) => {child.state = state}} state={child.state}/>
     );
 
+    if(this.state.dragEnter >= 0) {
+      children.splice(this.state.dragEnter, 0, this.getBoxPlaceHolder());
+    }
 
     return children;
+  }
+
+  insertChild(child, index = 0) {
+    if(!child || !("type" in child) || !("id" in child) || index > this.state.children.length) return;
+    if(index === this.state.children.length) {
+      this.pushChild(child);
+      return;
+    }
+    let obj = new child.type(); //tricky
+    if(this.isAuthorized(child.type) && obj instanceof Box) {
+      let children = this.state.children;
+      children.splice(index, 0, child);
+      this.setChildren(children);
+    }
   }
 
   getTransforms() {

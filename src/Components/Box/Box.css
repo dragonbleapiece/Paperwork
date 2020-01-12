@@ -4,6 +4,7 @@
   margin: 10px;
   border: black solid 1px;
   background-color: white;
+  transition: all 2s;
 }
 
 .Box__wrapper {
@@ -90,6 +91,21 @@
 
 .Box__placeholder {
   color: grey;
+}
+
+.BoxPlaceHolder {
+  border: dotted 2px grey;
+  color: grey;
+  height: 40px;
+  margin: 10px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+.BoxPlaceHolder p {
+  text-align: center;
 }
 
 /* Overwrite rc-slider style */

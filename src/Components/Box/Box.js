@@ -1,9 +1,11 @@
 import React, { Component } from 'react';
+import ReactDOM from 'react-dom';
 import './Box.css';
 import ContextMenuBox from '../ContextMenuBox/ContextMenuBox';
 import { ContextMenuTrigger } from "react-contextmenu";
 import Color from '../Colors/Color';
 import Scale from '../Transforms/Scale/Scale';
+import DragManager from '../../DragManager';
 import Paper from 'paper'
 
 //import Icons
@@ -62,7 +64,8 @@ class Box extends Component {
 
   state = {
     children: [],
-    style: {}
+    style: {},
+    dragEnter: -1
   };
 
   constructor(props) {
@@ -92,6 +95,8 @@ class Box extends Component {
     }];
     this.doBeforeAddChild = {};
     this.isMinimized = false;
+    this.isFlexVertical = true;
+    this.lastEnter = null;
   }
 
   initStateFromSavedState() {
@@ -167,6 +172,10 @@ class Box extends Component {
     }
   }
 
+  insertChild(child, index = 0) {
+    this.pushChild(child);
+  }
+
   setChildren(children) {
     this.setState(this.doBeforeSetChildren(children));
   }
@@ -193,7 +202,7 @@ class Box extends Component {
 
   setStyle(style) {
     this.setState({
-      style: style
+      style: {...this.state.style, ...style}
     });
   }
 
@@ -218,6 +227,11 @@ class Box extends Component {
       let child = this.state.children[0];
       children.push(<child.type key={child.id} parent={this} id={child.id} ref={el => {this.next = el ? el.ref : null;}} saveState={(state) => {child.state = state}} state={child.state}/>);
     }
+
+    if(this.state.dragEnter >= 0) {
+      children.splice(this.state.dragEnter, 0, this.getBoxPlaceHolder());
+    }
+
     return children;
   }
 
@@ -247,6 +261,10 @@ class Box extends Component {
     return Transforms;
   }
 
+  getBoxPlaceHolder() {
+    return <div className="BoxPlaceHolder" key='ph20'><p>The Box will appear here</p></div>;
+  }
+
   componentDidUpdate() {
     const {saveState} = this.props;
     if(saveState) {
@@ -258,6 +276,7 @@ class Box extends Component {
     const json = this.toJSON();
     e.dataTransfer.setData(this.constructor.className, JSON.stringify(json));
     e.dataTransfer.effectAllowed = 'move';
+    DragManager.instance.draggable = this;
   }
 
   onDragEnd(e) {
@@ -265,6 +284,7 @@ class Box extends Component {
       this.removeFromParent();
     }
     e.dataTransfer.clearData();
+    DragManager.instance.clear();
   }
 
   onDragEnter(e) {
@@ -272,6 +292,12 @@ class Box extends Component {
     if(last >= 0 && this.isAuthorized(e.dataTransfer.types[last])) {
       e.preventDefault();
       e.dataTransfer.dropEffect = "move";
+      const index = this.getDragItemIndex(e.screenX, e.screenY);
+      if(index !== this.state.dragEnter) {
+        this.setState({dragEnter: index});
+      }
+      this.lastEnter = e.target;
+      DragManager.instance.addDroppable(this);
     } else {
       e.dataTransfer.dropEffect = "none";
     }
@@ -283,6 +309,11 @@ class Box extends Component {
   }
 
   onDragLeave(e) {
+    if(e.target === this.lastEnter && this.state.dragEnter >= 0) {
+      this.setState({dragEnter: -1});
+      this.lastEnter = null;
+    }
+
     e.stopPropagation();
   }
 
@@ -292,13 +323,39 @@ class Box extends Component {
 
   onDrop(e) {
 
-    console.log(this.constructor.className);
     const last = e.dataTransfer.types.length - 1;
     if(last < 0) return false;
 
     const json = JSON.parse(e.dataTransfer.getData(e.dataTransfer.types[last]));
-    this.pushChild({type: window.getClassFromName(json.type), id: json.id, state: json.state});
+    this.insertChild({type: window.getClassFromName(json.type), id: json.id, state: json.state}, this.state.dragEnter);
+    this.setState({dragEnter: -1});
     e.stopPropagation();
+  }
+
+  getDragItemIndex(x, y) {
+    const container = ReactDOM.findDOMNode(this.refs.container);
+    let index = 0;
+    const dragManager = DragManager.instance;
+
+    let children = Array.from(container.children).filter((child) => child.className !== 'BoxPlaceHolder');
+
+    for(let child of children) {
+      if(child.nodeType === 1) {
+        const box = child.getBoundingClientRect();
+        const isx = ( x < ( box.left + box.width / 2 ) );
+        const isy = ( y < ( box.top + box.height ) );
+        if((!this.isFlexVertical && isx) || (this.isFlexVertical && isy)) {
+          break;
+        }
+        index++;
+      }
+    }
+
+    if(dragManager.draggableParent === this && index === dragManager.draggableIndex) {
+      index = (index + 1) % children.length;
+    }
+
+    return index;
   }
 
   onClose() {
@@ -318,13 +375,14 @@ class Box extends Component {
     let formatedTextColor = (isNotBlack) ? formatedColor : "rgba(255, 255, 255, 1)";
     let formatedBackgroundColor = (isNotBlack) ? "rgba(0, 0, 0, 1)" : "rgba(255, 255, 255, 1)" ;
 
-    const renderBox = this.renderBox();
     const boxContentStyle = this.isMinimized ? {display: 'none'} : {};
 
     const icon = this.constructor.icon;
 
+    const children = this.getChildren();
+
     return (
-      <div className={this.className} style={this.state.style} onDragOver={(e) => {e.stopPropagation()}} onDragEnter={(e) => {e.stopPropagation()}}>
+      <div className={this.className} style={this.state.style} ref='box'>
         <ContextMenuBox id={this.constructor.className + this.props.id} unauthorized={this.constructor.unauthorized} suppMenu={this.suppMenu} el={this}>
           <div className="Box__wrapper">
             <div className="Box_titleOptions">
@@ -346,9 +404,9 @@ class Box extends Component {
               </ContextMenuTrigger>
               <div className='DropBox'>
                 <ContextMenuTrigger id={this.constructor.className + this.props.id} holdToDisplay={-1}>
-                  {this.constructor.unauthorized.indexOf("*") === -1 && <div className="Box__container" onDrop={this.onDrop.bind(this)} onDragEnter={this.onDragEnter.bind(this)} onDragOver={this.onDragOver.bind(this)} onDragLeave={this.onDragLeave.bind(this)}>
-                    {!this.state.children.length && <span className="Box__placeholder">Right click to add</span>}
-                    {this.getChildren()}
+                  {this.constructor.unauthorized.indexOf("*") === -1 && <div className="Box__container" ref='container' onDrop={this.onDrop.bind(this)} onDragEnter={this.onDragEnter.bind(this)} onDragOver={this.onDragOver.bind(this)} onDragLeave={this.onDragLeave.bind(this)}>
+                    {!children.length && <span className="Box__placeholder">Right click to add</span>}
+                    {children}
                   </div>}
                 </ContextMenuTrigger>
               </div>
