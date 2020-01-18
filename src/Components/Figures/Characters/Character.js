@@ -29,18 +29,10 @@ class Character extends Figure {
     this._height = 1;
   }
 
-  drawText(sk) {
+  drawFigure(sk) {
     let text = sk.text(this.text, this.x, this.y);
     text.fontSize = this.height;
     sk.setPathTransform(text);
-  }
-
-  draw(sk) {
-    sk.push();
-      sk.fill(this.state.color.getColor(sk));
-      sk.scale(this.state.scale.x, this.state.scale.y);
-      this.drawText(sk);
-    sk.pop();
   }
 }
 
