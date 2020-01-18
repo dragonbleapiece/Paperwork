@@ -1,6 +1,6 @@
 import React from 'react';
 import Figure from '../Figure';
-import Density from '../../Transforms/Density/Density'
+import Transform from '../../Transforms/Transform'
 import './Hatching.css';
 
 const className = "Hatching";
@@ -33,7 +33,7 @@ class Hatching extends Figure {
 
   getTransforms() {
     let Transforms = new Array();
-    Transforms.push(<Density key={0} onChange={(density) => {this.setState({density: density});}}/>);
+    Transforms.push(<Transform min={2} max={20} defaultValue={11} marks={{2:1, 11:10, 20:19}} step={1} key={0} onChange={(density) => {this.setState({density: density});}}/>);
     return Transforms;
   }
 

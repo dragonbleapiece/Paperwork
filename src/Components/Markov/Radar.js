@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import shortid from 'shortid';
-import DraggableCursor from './DraggableCursor'
+import DraggableCursor from './DraggableCursor';
+import Paper from 'paper';
 
 //import Icons
 import SVG from 'react-svg';
@@ -11,11 +12,11 @@ const WIDTH = 220;
 const HEIGHT = 220;
 const RADIUS = 100;
 
-const getCirclePoint = (center = {x: 0, y: 0}, r = 1, elNumber = 3, index = 0) => {
-  return {x: center.x + r * Math.cos(index * 2 * Math.PI / elNumber - Math.PI / 2), y: center.y + r * Math.sin(index * 2 * Math.PI / elNumber - Math.PI / 2)};
+const getCirclePoint = (center = new Paper.Point(0, 0), r = 1, elNumber = 3, index = 0) => {
+  return new Paper.Point(center.x + r * Math.cos(index * 2 * Math.PI / elNumber - Math.PI / 2), center.y + r * Math.sin(index * 2 * Math.PI / elNumber - Math.PI / 2));
 }
 
-const getCirclePoints = (center = {x: 0, y: 0}, r = new Array(elNumber).fill(1), elNumber = 3) => {
+const getCirclePoints = (center = new Paper.Point(0, 0), r = new Array(elNumber).fill(1), elNumber = 3) => {
   let points = [];
   for(let i = 0; i < elNumber; ++i) {
     points.push( getCirclePoint(center, r[i], elNumber, i) );
@@ -35,7 +36,7 @@ class Radar extends Component {
 
     const elNumber = this.props.points.length;
     const maxRadius = RADIUS;
-    const center = {x: WIDTH / 2, y: HEIGHT / 2};
+    const center = new Paper.Point(WIDTH / 2, HEIGHT / 2);
     const points = getCirclePoints(center, probas, elNumber);
     const pins = getCirclePoints(center, new Array(elNumber).fill(maxRadius), elNumber);
     const outerPoints = getCirclePoints(center, new Array(elNumber).fill(maxRadius + 1), elNumber);
@@ -48,10 +49,9 @@ class Radar extends Component {
       const radius = probas[index];
       const x = center.x + radius * Math.cos(angle);
       const y = center.y + radius * Math.sin(angle);
-      const vertex = {x: center.x + maxRadius * Math.cos(angle), y: center.y + maxRadius * Math.sin(angle)};
-      let vector = {x: center.x - vertex.x, y: center.y - vertex.y};
-      vector.x = vector.x !== 0 || vector.y !== 0 ? vector.x / Math.max(Math.abs(vector.x), Math.abs(vector.y)) : vector.x;
-      vector.y = vector.x !== 0 || vector.y !== 0 ? vector.y / Math.max(Math.abs(vector.x), Math.abs(vector.y)) : vector.y;
+      const vertex = new Paper.Point(center.x + maxRadius * Math.cos(angle), center.y + maxRadius * Math.sin(angle));
+      const vector = new Paper.Point(center.x - vertex.x, center.y - vertex.y).normalize();
+
       return (
         <DraggableCursor
           cx={x}

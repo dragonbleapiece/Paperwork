@@ -4,7 +4,6 @@ import './Box.css';
 import ContextMenuBox from '../ContextMenuBox/ContextMenuBox';
 import { ContextMenuTrigger } from "react-contextmenu";
 import Color from '../Colors/Color';
-import Scale from '../Transforms/Scale/Scale';
 import DragManager from '../../DragManager';
 import Paper from 'paper'
 
@@ -12,6 +11,83 @@ import Paper from 'paper'
 import SVG from 'react-svg';
 import cancel from '../../Icons/cancel.svg';
 import minimize from '../../Icons/minimize.svg';
+import info from '../../Icons/info.svg';
+
+const menu = [
+  {
+    type: 'Placement',
+    elements: [
+      {
+        type: 'Grid'
+      }
+    ]
+  },
+  {
+    type: 'Elements',
+    elements: [
+      {
+        name: 'Basic Shapes',
+        type: 'Rectangle',
+        elements: [
+          {
+            type: 'Rectangle'
+          },
+          {
+            type: 'Triangle'
+          },
+          {
+            type: 'Ellipse'
+          }
+        ]
+      },
+      {
+        type: 'HHatching',
+        name: 'Hatching',
+        elements: [
+          {
+            type: 'HHatching',
+            name: 'Horizontal'
+          },
+          {
+            type: 'VHatching',
+            name: 'Vertical'
+          },
+          {
+            type: 'LOHatching',
+            name: 'Left Oblique'
+          },
+          {
+            type: 'ROHatching',
+            name: 'Right Oblique'
+          }
+        ]
+      },
+      {
+        name: 'Characters',
+        type: 'Character',
+        elements: [
+          {
+            type: '0',
+            name: 'Zero'
+          },
+          {
+            type: '1',
+            name: 'One'
+          }
+        ]
+      },
+      {
+        type: 'Arrow'
+      },
+      {
+        type: 'Void'
+      }
+    ]
+  },
+  {
+    type: 'Markov'
+  }
+];
 
 const menuColor = [
   {
@@ -65,7 +141,9 @@ class Box extends Component {
   state = {
     children: [],
     style: {},
-    dragEnter: -1
+    dragEnter: -1,
+    isMinimized: false,
+    isInfo: false
   };
 
   constructor(props) {
@@ -79,24 +157,38 @@ class Box extends Component {
     }
 
     this.ref = this;
+    this.transforms = {};
     this.className = Box.className;
     this.name = Box.className;
     this.next = undefined;
     this.drawBeforeType = {};
-    this.suppMenu = [{
-      menu: menuColor,
-      handleClick: (event, data) => {
-       if(data.type) {
-         let color = window.getClassFromName(data.type);
-         if(color) this.setState({color: new color()});
-         window.updateWorkspace();
-       }
+    this.menu = [
+      {
+        menu: this.filterUnauthorized(menu),
+        handleClick: (event, data) =>  {
+          if(data.type !== undefined) {
+            window.addClassToElement(data.type, this);
+          }
+        }
       }
-    }];
+    ];
+    this.suppMenu = [
+      {
+        menu: menuColor,
+        handleClick: (event, data) => {
+          if(data.type) {
+            let color = window.getClassFromName(data.type);
+            if(color) this.setState({color: new color()});
+            window.updateWorkspace();
+          }
+        }
+      }
+    ];
     this.doBeforeAddChild = {};
-    this.isMinimized = false;
     this.isFlexVertical = true;
     this.lastEnter = null;
+    this.contentRect = {width: 0, height: 0};
+    this.hasInfo = false;
   }
 
   initStateFromSavedState() {
@@ -120,6 +212,10 @@ class Box extends Component {
       }
     }
     return {...state};
+  }
+
+  filterUnauthorized(menu) {
+    return menu.filter((item) => this.constructor.unauthorized.indexOf(item.type) === -1);
   }
 
   initState() {
@@ -189,6 +285,7 @@ class Box extends Component {
     let children = this.props.parent.state.children;
     children = children.filter(el => el.id !== this.props.id);
     this.props.parent.setChildren(children);
+    window.updateWorkspace();
   }
 
   addNext(elmnt) {
@@ -256,9 +353,7 @@ class Box extends Component {
   }
 
   getTransforms() {
-    let Transforms = new Array();
-    Transforms.push(<Scale key={0} onChange={(scale) => {this.setState({scale: scale});}}/>);
-    return Transforms;
+    return null;
   }
 
   getBoxPlaceHolder() {
@@ -364,8 +459,18 @@ class Box extends Component {
   }
 
   onMinimize() {
-    this.isMinimized = !this.isMinimized
-    window.updateWorkspace();
+    this.setState({isMinimized: !this.state.isMinimized});
+  }
+
+  onInfo() {
+    this.setState({isInfo: !this.state.isInfo});
+    if(this.refs.content) {
+      this.contentRect = this.refs.content.getBoundingClientRect();
+    }
+  }
+
+  getInfo() {
+    return null;
   }
 
   render() {
@@ -375,17 +480,21 @@ class Box extends Component {
     let formatedTextColor = (isNotBlack) ? formatedColor : "rgba(255, 255, 255, 1)";
     let formatedBackgroundColor = (isNotBlack) ? "rgba(0, 0, 0, 1)" : "rgba(255, 255, 255, 1)" ;
 
-    const boxContentStyle = this.isMinimized ? {display: 'none'} : {};
-
     const icon = this.constructor.icon;
 
     const children = this.getChildren();
+    const transforms = this.getTransforms();
+    const box = this.renderBox();
+    const infoBox = this.getInfo();
 
     return (
       <div className={this.className} style={this.state.style} ref='box'>
-        <ContextMenuBox id={this.constructor.className + this.props.id} unauthorized={this.constructor.unauthorized} suppMenu={this.suppMenu} el={this}>
+        <ContextMenuBox id={this.constructor.className + this.props.id} menu={[...this.menu, ...this.suppMenu]}>
           <div className="Box__wrapper">
             <div className="Box_titleOptions">
+              {this.hasInfo && !this.state.isMinimized && <span className="Box__titleOption" onClick={this.onInfo.bind(this)}>
+                <SVG src={info}/>
+              </span>}
               <span className="Box__titleOption" onClick={this.onMinimize.bind(this)}>
                   <SVG src={minimize}/>
               </span>
@@ -397,10 +506,11 @@ class Box extends Component {
               {icon && <SVG className="Box__titleIcon" src={icon} style={{fill: formatedColor, backgroundColor: formatedBackgroundColor}}/>}
               <span className="Box__titleText" style={{color: formatedTextColor}}>{this.constructor.className}</span>
             </span>
-            <span className="Box__content" style={boxContentStyle}>
+            {this.state.isInfo && <div className="Box__info" style={{minHeight: this.contentRect.height ? this.contentRect.height : '', maxWidth: this.contentRect.width ? this.contentRect.width : ''}}>{infoBox}</div>}
+            {!this.state.isMinimized && !this.state.isInfo && <span ref='content' className="Box__content">
               <ContextMenuTrigger id={""}>
-                {this.renderBox()}
-                {this.getTransforms()}
+                {box}
+                {transforms !== null && <div className='TransformBox'>{transforms}</div>}
               </ContextMenuTrigger>
               <div className='DropBox'>
                 <ContextMenuTrigger id={this.constructor.className + this.props.id} holdToDisplay={-1}>
@@ -410,7 +520,7 @@ class Box extends Component {
                   </div>}
                 </ContextMenuTrigger>
               </div>
-            </span>
+            </span>}
           </div>
         </ContextMenuBox>
       </div>

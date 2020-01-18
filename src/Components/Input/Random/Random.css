@@ -1,0 +1,21 @@
+.Input.Random {
+    display:flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-between;
+    border-bottom: solid 1px black;
+}
+
+.Input.Random input {
+    text-align: center;
+    z-index: 2;
+}
+
+.Random__icon svg {
+    width: 30px;
+    height: 30px;
+}
+
+.Random__arrow {
+    margin: 0 -6px;
+}

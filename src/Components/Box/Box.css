@@ -21,6 +21,7 @@
   fill: white;
   background-color: black;
   border-bottom: 1px solid black;
+  min-width: 180px;
   cursor: move;
   cursor: grab;
 }
@@ -46,7 +47,7 @@
   align-items: center;
   flex: 1;
   font-size: 16px;
-  font-weight: bold;
+  font-weight: 600;
 }
 
 .Box__titleIcon+.Box__titleText {
@@ -71,6 +72,12 @@
   border-radius: 50%;
 }
 
+.Box_titleOption span {
+  color: white;
+  background-color: white;
+  border-radius: 50%;
+}
+
 .Box__content {
   display: flex;
   flex-direction: column;
@@ -78,10 +85,24 @@
 }
 
 .Box .Box__content .Box__slider {
-  width: 100px;
-  width: calc(100% + -40px);
+  width: 100%;
+  /*width: calc(100% + -40px);*/
   min-width: 80px;
-  margin: 20px;
+  margin: 0;
+}
+
+.Box__info {
+  z-index: 998;
+  padding: 10px 5%;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  justify-content: center;
+  text-align: left;
+}
+
+.Box__info p {
+  margin: 5px 0;
 }
 
 .Box__container {

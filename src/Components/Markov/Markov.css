@@ -54,12 +54,14 @@
   color: grey;
 }
 
-.Markov__InputContainer:not(:last-child) {
-    /*margin-right: 20px;*/
-}
+/*.Markov__InputContainer:not(:last-child) {
+    margin-right: 20px;
+}*/
+
 .Markov__InputIcon {
     width: 40px;
     display: flex;
+    flex-direction: column;
     align-items: center;
     justify-content: center;
 }
@@ -128,10 +130,10 @@
 
 .Markov__InputIcon .exponent svg {
   height: 15px;
-  vertical-align: super;
-  position: relative;
-  right: 8px;
-  bottom: 2px;
+  position: absolute;
+  top: -16px;
+  left: 7px;
+  transform: rotate(-15deg) translateY(6px);
 }
 
 /* .Markov__Input {

@@ -23,8 +23,8 @@ class Ellipse extends Figure {
   constructor(props) {
     super(props);
     this.className += " " + Ellipse.className;
-    this.width = 1;
-    this.height = 1;
+    this._width = 1;
+    this._height = 1;
     this.x = this.width / 2;
     this.y = this.height / 2;
   }

@@ -1,4 +1,5 @@
 import BoxGroup from '../BoxGroup/BoxGroup';
+import Canvas from '../Canvas/Canvas';
 import './Series.css';
 
 const className = "Series";
@@ -24,6 +25,15 @@ class Series extends BoxGroup {
     this.className += " " + Series.className;
     this.suppMenu = [];
     this.currentState = 0;
+    Canvas.attach(this);
+  }
+
+  receiveNotification() {
+    this.currentState = 0;
+  }
+
+  componentWillUnmount() {
+    Canvas.detach(this);
   }
 
   setChildren(children) {

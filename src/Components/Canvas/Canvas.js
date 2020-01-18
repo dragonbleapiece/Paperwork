@@ -35,6 +35,18 @@ class Canvas extends Component {
     }
   }
 
+  static attach(obj) {
+    if(Canvas._instance !== undefined) {
+      Canvas._instance.attach(obj);
+    }
+  }
+
+  static detach(obj) {
+    if(Canvas._instance !== undefined) {
+      Canvas._instance.detach(obj);
+    }
+  }
+
   state = {
     function: undefined,
     width: 0,
@@ -47,6 +59,7 @@ class Canvas extends Component {
     }
     super(props);
     this.currentFont = null;
+    this.observers = [];
     this.reset();
 
     Canvas._instance = this;
@@ -118,8 +131,12 @@ class Canvas extends Component {
     console.log(Canvas._PaperScope)
     Paper.view.onResize = (e) => {
       this.windowResized(canvas);
-      this.componentDidUpdate()
+      this.componentDidUpdate();
     }
+    window.addEventListener('resize', (e) => {
+      this.windowResized(canvas);
+      this.componentDidUpdate();
+    });
     Paper.view.autoUpdate = false;
     window.updateWorkspace();
   }
@@ -254,7 +271,22 @@ class Canvas extends Component {
   }
 
   reset() {
-    this._styles = [{...DEFAULTSTYLE}]
+    this._styles = [{...DEFAULTSTYLE}];
+    this.notifyAll();
+  }
+
+  attach(obj) {
+    this.observers.push(obj);
+  }
+
+  detach(obj) {
+    this.observers = this.observers.filter((observer) => observer !== obj);
+  }
+
+  notifyAll() {
+    this.observers.forEach((observer) => {
+      observer.receiveNotification();
+    });
   }
 
   componentDidUpdate() {

@@ -51,4 +51,5 @@ class SnailRight extends GridMode {
 
 SnailRight.className = "SnailRight";
 
+
 export default SnailRight;

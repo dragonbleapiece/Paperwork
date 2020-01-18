@@ -24,16 +24,13 @@ class Placement extends Box {
   constructor(props) {
     super(props);
     this.className += " " + Placement.className;
-    this.suppMenu.push({
-      menu: undefined,
-      handleClick: (event, data) => {
-        if(data.type) {
-          this.setState({mode: window.getClassFromName(data.type)})
-          Workspace.forceUpdate();
-        }
-      }
-    });
-    this.suppMenu[this.suppMenu.length - 1].handleClick.bind(this);
+  }
+
+  handleClick(event, data) {
+    if(data.type) {
+      this.setState({mode: window.getClassFromName(data.type)})
+      Workspace.forceUpdate();
+    }
   }
 
   initStateFromSavedState() {
@@ -60,7 +57,7 @@ class Placement extends Box {
 
   renderMode() {
     if(!this.state.mode) return null;
-    return (<this.state.mode key={this.constructor.className + this.state.mode.className} ref={el => {this.state.currentMode = el}} />);
+    return (<this.state.mode key={this.constructor.className + this.state.mode.className} handleClick={this.handleClick.bind(this)} ref={el => {this.state.currentMode = el}} />);
   }
 
   draw(sk) {

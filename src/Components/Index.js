@@ -29,6 +29,9 @@ import Arrow from './Figures/Symbols/Arrow/Arrow';
 import Character from './Figures/Characters/Character';
 import Number0 from './Figures/Characters/Number0';
 import Number1 from './Figures/Characters/Number1';
+import Random from './Input/Random/Random';
+import Increment from './Input/Increment/Increment';
+import SliderBox from './Input/SliderBox/SliderBox';
 
 
 //GridModes
@@ -38,6 +41,7 @@ import DiagonalLeft from './Modes/GridMode/DiagonalLeft/DiagonalLeft';
 import DiagonalRight from './Modes/GridMode/DiagonalRight/DiagonalRight';
 import Orthogonal from './Modes/GridMode/Orthogonal/Orthogonal';
 import SnailRight from './Modes/GridMode/SnailRight/SnailRight';
+import Slider from 'rc-slider';
 
 export function getClassFromName(name) {
   const lname = name.toLowerCase();
@@ -116,6 +120,12 @@ export function getClassFromName(name) {
       return Number0;
     case('1'):
       return Number1
+    case('sliderbox'):
+      return SliderBox;
+    case('increment'):
+      return Increment;
+    case('random'):
+      return Random;
     default:
       //console.warn(lname);
       return null;

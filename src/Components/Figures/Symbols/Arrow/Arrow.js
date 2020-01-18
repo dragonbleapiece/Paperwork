@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import './Arrow.css';
 import Symbol from '../Symbol';
 import arrow_right from '../../../../Icons/arrow_right.svg';
-import Paper from 'paper'
+import Paper from 'paper';
 
 const className = "Arrow";
 const unauthorized = [];
@@ -27,8 +27,8 @@ class Arrow extends Symbol {
     this.className += " " + Arrow.className;
     this.x = 0;
     this.y = 0;
-    this.width = 1;
-    this.height = 1;
+    this._width = 1;
+    this._height = 1;
     this.headLength = 0.20;
     this.tailLength = 0.09;
     this.headAngle = 35;

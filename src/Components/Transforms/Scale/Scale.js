@@ -10,15 +10,21 @@ class Scale extends Transform {
 
   constructor(props) {
     super(props);
+    this.state.input = SliderBox;
     this.className += " " + Scale.className;
-    this.scale = {x: 1, y: 1};
+    this.defaultValue = this.props.defaultValue || 1;
   }
 
-  render() {
+  getInputValue() {
+    const value = this.inputElement.getValue();
+    console.log(value);
+    return {x: value / 10, y: value / 10};
+  }
+
+  renderTransform() {
     return (
-      <SliderBox min={1} max={20} defaultValue={10} marks={{1:0.1, 10:1, 20:2}} step={1} onChange={(value) => {
-        this.scale = {x: value / 10, y: value / 10};
-        if(this.props.onChange) this.props.onChange(this.scale);
+      <this.state.input ref={(el) => this.inputElement = el}  onChange={(value, el) => {
+        this.inputElement = el;
       }} />
     );
   }

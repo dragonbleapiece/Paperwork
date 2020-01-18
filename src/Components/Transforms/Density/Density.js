@@ -10,15 +10,16 @@ class Density extends Transform {
 
   constructor(props) {
     super(props);
+    this.state.input = SliderBox;
     this.className += " " + Density.className;
-    this.density = 11;
+    this.value = 11;
   }
 
-  render() {
+  renderTransform() {
     return (
-      <SliderBox min={2} max={20} defaultValue={11} marks={{2:1, 11:10, 20:19}} step={1} onChange={(value) => {
-        this.density = value;
-        if(this.props.onChange) this.props.onChange(this.density);
+      <this.state.input min={2} max={20} defaultValue={11} marks={{2:1, 11:10, 20:19}} step={1} onChange={(value) => {
+        this.value = value;
+        if(this.props.onChange) this.props.onChange(this.value);
       }} />
     );
   }

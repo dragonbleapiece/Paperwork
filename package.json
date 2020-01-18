@@ -5,6 +5,7 @@
   "dependencies": {
     "enzyme": "^3.10.0",
     "enzyme-adapter-react-16": "^1.14.0",
+    "exact-math": "^2.1.2",
     "file-saver": "^2.0.2",
     "jszip": "^3.2.2",
     "paper": "^0.12.3",
@@ -15,7 +16,7 @@
     "react-dnd": "^7.7.0",
     "react-dnd-html5-backend": "^7.7.0",
     "react-dom": "^16.9.0",
-    "react-scripts": "^3.1.2",
+    "react-scripts": "^3.3.0",
     "react-svg": "^7.2.14",
     "shortid": "^2.2.15"
   },

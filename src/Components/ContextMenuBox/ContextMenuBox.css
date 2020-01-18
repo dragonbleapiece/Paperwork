@@ -13,6 +13,7 @@
   border-top: none;
   z-index: 999;
   font-size: 16px;
+  font-weight: 400;
 }
 
 .react-contextmenu-borderTop {

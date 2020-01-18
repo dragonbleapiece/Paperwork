@@ -8,7 +8,7 @@ class Rotate extends Transform {
   constructor(props) {
     super(props);
     this.className += " " + Rotate.className;
-    this.rotate = 20;
+    this.value = 20;
   }
 
   /*draw(sk) {

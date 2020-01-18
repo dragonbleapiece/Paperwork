@@ -1,0 +1,5 @@
+.gridMode__text {
+    border: none;
+    border-bottom: solid 1px black;
+    font: inherit;
+}

@@ -66,6 +66,7 @@ class Markov extends BoxGroup {
     this.suppMenu = [];
     this.currentState = parseInt(Math.random() * (this.state.children.length));
     this.idElement = [];
+    this.hasInfo = true;
   }
 
   initState() {
@@ -142,7 +143,15 @@ class Markov extends BoxGroup {
     window.updateWorkspace();
   }
 
-  
+  getInfo() {
+    return(
+      <>
+        <p>A Markov chain is a stochastic model describing a sequence of possible events in which the probability of each event depends only on the state attained in the previous event.</p>
+        <p>For instance, a state <strong>A</strong> can have a probability <em>p</em> to reach a state <strong>B</strong> and a probability <em>(1 - p)</em> to reach itself</p>
+      </>
+    );
+  }
+
   renderBox() {
     let radar = null;
     const index = this.state.index;
@@ -160,8 +169,8 @@ class Markov extends BoxGroup {
           const iconSelected = (i === index) ? ' selected' : '';
           inputs.push(<div className="Markov__InputContainer" key={i} style={{left: x + '%', top: y + '%'}}>
             <span className={"Markov__InputIcon" + iconSelected}>
-              <SVG src={this.state.children[i].type.icon} onClick={() => {this.setState({index: i})}}/>
               {iconSelected && <SVG src={next} className="exponent" />}
+              <SVG src={this.state.children[i].type.icon} onClick={() => {this.setState({index: i})}}/>
             </span>
             <input className="Markov__Input"
               min={0}
@@ -189,6 +198,8 @@ class Markov extends BoxGroup {
         </span>;
 
         info = <span className="Markov__Info">sum = 100</span>;
+      } else {
+        info = <span>Not enough elements</span>;
       }
 
     return <div className="Markov__Parameters">

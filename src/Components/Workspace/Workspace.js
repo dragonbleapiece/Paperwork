@@ -22,6 +22,12 @@ const menuColor = [
   }
 ];
 
+const menuRefresh = [
+  {
+    type: 'Refresh'
+  }
+];
+
 const className = "Workspace";
 const unauthorized = ["Markov", "Series"];
 
@@ -61,6 +67,7 @@ class Workspace extends BoxGroup {
     this.className = this.constructor.className;
     this.elements = []; //no this.state.elements
     this.isFlexVertical = false;
+    this.startDrag = {x: 0, y: 0};
     this.addDrawBeforeType("Figure", function(sk) {
       sk.translate(sk.width / 2, sk.height / 2)
       sk.scale(sk.width, sk.height);
@@ -68,16 +75,24 @@ class Workspace extends BoxGroup {
     });
     Workspace._instance = this;
     // Redefinition of Menu Colors
-    this.suppMenu = [{
-      menu: menuColor,
-      handleClick: (event, data) => {
-       if(data.type) {
-         let color = window.getClassFromName(data.type);
-         if(color) this.setState({color: new color()});
-         window.updateWorkspace();
-       }
+    this.suppMenu = [
+      {
+        menu: menuColor,
+        handleClick: (event, data) => {
+        if(data.type) {
+          let color = window.getClassFromName(data.type);
+          if(color) this.setState({color: new color()});
+          window.updateWorkspace();
+        }
+        }
+      },
+      {
+        menu: menuRefresh,
+        handleClick: (event, data) => {
+          window.updateWorkspace();
+        }
       }
-    }];
+    ];
   }
 
   initState() {
@@ -98,14 +113,43 @@ class Workspace extends BoxGroup {
     canvas.sendDraw(this.draw.bind(this));
   }
 
+  onDragStart(e) {
+    this.startDrag.x = e.screenX;
+    this.startDrag.y = e.screenY;
+    let img = document.createElement('img');
+    img.src = 'data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7';
+    e.dataTransfer.setDragImage(img, 0, 0);
+    e.dataTransfer.effectAllowed = "all";
+    e.stopPropagation();
+  }
+
+  onDrag(e) {
+    if(this.state.children.length === 0) return;
+    e.preventDefault();
+    if(e.screenX || e.screenY) {
+      let target = e.target;
+      let movX = e.screenX - this.startDrag.x;
+      let movY = e.screenY - this.startDrag.y;
+      this.startDrag.x = e.screenX;
+      this.startDrag.y = e.screenY;
+      target.scrollLeft -= movX;
+      target.scrollTop -= movY;
+      //target.style.left = target.offsetLeft + movX + "px";
+      //target.style.top = target.offsetTop + movY + "px";
+    }
+    e.stopPropagation();
+  }
+
   render() {
     return (
-      <div className={this.className}>
-        <ContextMenuBox id={this.constructor.className} unauthorized={this.unauthorized} suppMenu={this.suppMenu} el={this}>
-          <div className='DropBox' ref='container' onDrop={this.onDrop.bind(this)} onDragEnter={this.onDragEnter.bind(this)} onDragOver={this.onDragOver.bind(this)} onDragLeave={this.onDragLeave.bind(this)}>
-            {!this.state.children.length && <span className="Workspace__placeholder">Right click here</span>}
-            {this.getChildren()}
-          </div>
+      <div draggable={this.state.children.length > 0} className={this.className} onDragStart={this.onDragStart.bind(this)} onDrag={this.onDrag.bind(this)}>
+        <ContextMenuBox id={this.constructor.className} menu={[...this.menu, ...this.suppMenu]}>
+          {this.state.children.length === 0 && <span className="Workspace__placeholder">Right click here</span>}
+          {this.state.children.length > 0 && <div className="Workspace__viewBox">
+            <div className='DropBox' ref='container' onDrop={this.onDrop.bind(this)} onDragEnter={this.onDragEnter.bind(this)} onDragOver={this.onDragOver.bind(this)} onDragLeave={this.onDragLeave.bind(this)}>
+              {this.getChildren()}
+            </div>
+          </div>}
         </ContextMenuBox>
       </div>
     );

@@ -20,7 +20,7 @@ class DraggableCursor extends Component {
     if(e.button !== 0) return;
     window.addEventListener('mousemove', this.onMouseMoveHandler);
     window.addEventListener('mouseup', this.onMouseUpHandler);
-    this.ratio = (this.props.r * 2) / e.target.getBoundingClientRect().width ;
+    this.ratio = e.target.getBoundingClientRect().width / (this.props.r * 2);
     this.onDragStart(e);
   }
 
@@ -53,13 +53,14 @@ class DraggableCursor extends Component {
     const {vector, step, radius, minRadius, maxRadius, callback} = this.props;
 
     const scalar = e.movementX * vector.x  + e.movementY * vector.y;
-    this.movement -= Math.sign(scalar) * Math.sqrt(Math.abs(scalar)) * this.ratio;
-    if(Math.abs(this.movement) < step) return;
-    const movement = Math.sign(this.movement) * Math.floor(Math.abs(this.movement) / step)
-    const newRadius = radius + movement;
-    this.movement -= movement * step;
-    if(minRadius <= newRadius && newRadius <= maxRadius) {
-      callback(newRadius);
+    this.movement -= scalar;
+    if(Math.abs(this.movement) >= step * this.ratio) {
+      const movement = Math.sign(this.movement) * Math.floor(Math.abs(this.movement) / (step * this.ratio));
+      const newRadius = radius + movement;
+      this.movement -= movement * step * this.ratio;
+      if(minRadius <= newRadius && newRadius <= maxRadius) {
+        callback(newRadius);
+      }
     }
     e.stopPropagation();
     e.preventDefault();

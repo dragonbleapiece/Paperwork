@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import ReactDOM from 'react-dom';
+import '../../Assets/font/SpaceGrotesk.css';
 import './App.css';
 //import Icons
 import SVG from 'react-svg'
@@ -97,7 +98,7 @@ class App extends Component {
     return (
       <div className='App' onClick={(e) => this.handleOutsideClick(e)}>
         <header className='App-header border-bottom'>
-          <h1 className='App-logo'>Paperwork&nbsp;<sup className='textExponent'>2019</sup></h1>
+          <h1 className='App-logo'>Paperwork&nbsp;<sup className='textExponent'>2020</sup></h1>
           <div className='App-links'>
           <a className='App-link' href='http://mobitool.free.fr/edu/ma-ex1.html' target='_blank' rel='noopener noreferrer'>Markov Example #1</a>
           <a className='App-link' href='http://mobitool.free.fr/edu/ma-ex2.html' target='_blank' rel='noopener noreferrer'>Markov Example #2</a>
@@ -109,7 +110,7 @@ class App extends Component {
         <main>
           <div className='leftSide'>
               <div className='aboutContainer' ref={aboutContainer => { this.aboutContainer = aboutContainer; }}>
-                <h2 className='aboutTitle'>PaperWork <sup className='textExponent'>2019</sup></h2>
+                <h2 className='aboutTitle'>Paperwork <sup className='textExponent'>2020</sup></h2>
                 <a className='aboutLink' href='http://mobitool.free.fr/paper/ea' target='_blank' rel='noopener noreferrer'>State of the arts online</a>
                 <p>Paperwork is an online software for research in art and in the field of computer and visual research. It is developed in the perspective of computer art practice in the context of art schools, colleges, high schools and so on. The application helps producing drawings in the philosophy of generative processes. It is concerned with patterns, polygons, repertories and grammars. Moreover, the interface enables the learning and the editing of algorithms and therefore the construction of simple computational processes. It also offers to export svg format that makes it compatible with the traditional vector work area (graphic design, pen plotter, laser cutting, ...).</p>
                 <p>Paperwork’s main algorithm is based on Markov chain, an algorithm that was used by artists such as Frieder Nake (Germany), Hiroshi Kawano (Japan), Hervé Huitric and Monique Nahas (France) in early Computer Art. It is now heavily used in our digital environment (google page ranking, chatbots, physical phenomenon modeling, ...). It is also classified in the machine learning area of the computational field.</p>
@@ -119,9 +120,7 @@ class App extends Component {
                 <p>Gaëtan Robillard with Nicolas Cusumano, Cécile Rousset, Vincent Schmid, Quentin Sedmi.</p>
                 </div>
               </div>
-              <Workspace>
-
-              </Workspace>
+              <Workspace/>
           </div>
             <div className='rightSide border-left'>
               <div className='editionMenu border-bottom'>

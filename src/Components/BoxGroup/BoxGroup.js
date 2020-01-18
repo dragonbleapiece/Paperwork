@@ -34,6 +34,7 @@ class BoxGroup extends Box {
     let obj = new child(); //tricky
     let children = this.state.children;
     if(obj instanceof Box && this.isAuthorized(child)) {
+      console.log(this.state);
       this.setChildren([...this.state.children, {type:this.beforeAddChild(child), id:Box.id}]);
     }
   }

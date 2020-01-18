@@ -25,8 +25,8 @@ class Character extends Figure {
     this.x = 0;
     this.y = 0;
     this.text = 'noText'
-    this.width = 1;
-    this.height = 1;
+    this._width = 1;
+    this._height = 1;
   }
 
   drawText(sk) {

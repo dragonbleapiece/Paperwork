@@ -5,14 +5,34 @@
     flex-direction: row;
     align-items: baseline;
     position: relative;
-    overflow-y: auto;
-    overflow-x: auto;
-    padding: 20px;
+    overflow: auto;
 }
+
+.Workspace[draggable='true'] {
+    cursor: move;
+}
+
 .Workspace__placeholder {
     position: relative;
-    left: 50%;
     top: 50%;
-    transform: translate(-50%, -50%);
+    display: block;
     color: grey;
+    text-align: center;
+}
+
+.Workspace__viewBox > * {
+    cursor: initial;
+}
+
+.Workspace__viewBox {
+    padding: 20px;
+    cursor: unset;
+}
+
+.Workspace .DropBox {
+    cursor: unset;
+}
+
+.Workspace .DropBox > * {
+    cursor: initial;
 }

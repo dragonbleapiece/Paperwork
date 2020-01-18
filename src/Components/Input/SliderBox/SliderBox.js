@@ -7,6 +7,11 @@ import './SliderBox.css';
 class SliderBox extends Input {
     constructor(props) {
         super(props);
+        this.value = this.props.defaultValue;
+    }
+
+    getValue() {
+        return this.value;
     }
 
     render() {
@@ -16,14 +21,17 @@ class SliderBox extends Input {
         max={this.props.max}
         defaultValue={this.props.defaultValue}
         marks={this.props.marks}
-        step={this.props.steps}
+        step={this.props.step}
         className="Box__slider"
         style={{padding: '3px 0'}}
         trackStyle={{height: '8px', backgroundColor: 'black', borderRadius: 'unset' }}
         railStyle={{height: '8px', backgroundColor: 'black', borderRadius: 'unset' }}
         handleStyle={{marginTop: '-3px', borderColor: 'black' }}
         dotStyle={{bottom: '-4px', borderColor: 'black' }}
-        onChange={(value) => {if(this.props.onChange) {this.props.onChange(value);}}}
+        onChange={(value) => {if(this.props.onChange) {
+            this.value = value;
+            this.props.onChange(value, this);
+        }}}
         onAfterChange={() => Workspace.forceUpdate()}
         />
         );

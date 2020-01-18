@@ -9,36 +9,6 @@ import Series from '../../Series/Series';
 
 import LinearX from '../../Modes/GridMode/LinearX/LinearX';
 
-
-const menu = [{
-  type: 'Modes',
-  elements: [
-    {
-      type: 'DiagonalLeft',
-      name: 'Diagonal Left'
-    },
-    {
-      type: 'DiagonalRight',
-      name: 'Diagonal Right'
-    },
-    {
-      type: 'LinearX',
-      name: 'Linear X'
-    },
-    {
-      type: 'LinearY',
-      name: 'Linear Y'
-    },
-    {
-      type: 'Orthogonal'
-    },
-    {
-      type: 'SnailRight',
-      name: 'Snail Right'
-    }
-  ]
-}];
-
 const className = "Grid";
 const unauthorized = [];
 const doBeforeAddChild = {
@@ -67,7 +37,6 @@ class Grid extends Placement {
     this.className += " " + Grid.className;
     this.doBeforeAddChild = doBeforeAddChild;
     //const {columns, rows} = this.props;
-    this.suppMenu[this.suppMenu.length - 1].menu = menu;
   }
 
   initState() {
@@ -107,7 +76,7 @@ class Grid extends Placement {
   }
 
 
-  renderBox() {
+  getTransforms() {
     return(
       <>
         <SliderBox

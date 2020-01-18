@@ -1,0 +1,23 @@
+.TransformBox {
+    padding: 20px;
+}
+
+.Transform {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+}
+
+.TransformBox__icon {
+    margin-right: 15px;
+    margin-left: -5px;
+}
+
+.TransformBox__icon svg {
+    width: 24px;
+    height: 24px;
+}
+
+.TransformBox__input {
+    flex-grow: 1;
+}
