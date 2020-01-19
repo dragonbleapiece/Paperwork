@@ -14,6 +14,9 @@ const unauthorized = [];
 const doBeforeAddChild = {
   Figure: (child) => {
     return InBox(Series, child);
+  },
+  Recursion: (child) => {
+    return InBox(Series, child);
   }
 }
 

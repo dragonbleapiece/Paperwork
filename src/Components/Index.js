@@ -26,6 +26,8 @@ import Arrow from './Figures/Symbols/Arrow/Arrow';
 import Character from './Figures/Characters/Character';
 import Number0 from './Figures/Characters/Number0';
 import Number1 from './Figures/Characters/Number1';
+import Recursion from './Recursion/Recursion';
+import ThisBox from './Figures/ThisBox/ThisBox';
 import Random from './Input/Random/Random';
 import Increment from './Input/Increment/Increment';
 import SliderBox from './Input/SliderBox/SliderBox';
@@ -116,6 +118,10 @@ export function getClassFromName(name) {
       return Increment;
     case('random'):
       return Random;
+    case('recursion'):
+      return Recursion;
+    case('thisbox'):
+      return ThisBox;
     default:
       //console.warn(lname);
       return null;

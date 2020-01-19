@@ -69,6 +69,11 @@ class Workspace extends BoxGroup {
     this.isFlexVertical = false;
     this.startDrag = {x: 0, y: 0};
     this.addDrawBeforeType("Figure", function(sk) {
+      sk.translate(sk.width / 2, sk.height / 2);
+      sk.scale(sk.width, sk.height);
+      //sk.strokeWeight(1 / sk.width);
+    });
+    this.addDrawBeforeType("Recursion", function(sk) {
       sk.translate(sk.width / 2, sk.height / 2)
       sk.scale(sk.width, sk.height);
       //sk.strokeWeight(1 / sk.width);

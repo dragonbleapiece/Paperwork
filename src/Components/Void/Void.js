@@ -24,6 +24,7 @@ class Void extends Box {
     super(props);
     this.className += " " + Void.className;
     this.suppMenu = [];
+    this.canMinimize = false;
   }
 
   getTransforms() {

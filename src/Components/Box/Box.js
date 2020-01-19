@@ -86,6 +86,9 @@ const menu = [
   },
   {
     type: 'Markov'
+  },
+  {
+    type: 'Recursion'
   }
 ];
 
@@ -156,11 +159,10 @@ class Box extends Component {
       this.initState();
     }
 
+    this.parentsList = this.props ? {...this.props.parentsList, [this.constructor.className]: true} : {[this.constructor.className]: true};
     this.ref = this;
     this.transforms = {};
     this.className = Box.className;
-    this.name = Box.className;
-    this.next = undefined;
     this.drawBeforeType = {};
     this.menu = [
       {
@@ -172,6 +174,7 @@ class Box extends Component {
         }
       }
     ];
+    
     this.suppMenu = [
       {
         menu: menuColor,
@@ -189,12 +192,17 @@ class Box extends Component {
     this.lastEnter = null;
     this.contentRect = {width: 0, height: 0};
     this.hasInfo = false;
+    this.canMinimize = true;
   }
 
   initStateFromSavedState() {
     const {r, g, b, a} = this.state.color;
     this.state.color = new Color(r, g, b, a);
     this.state = Box.checkChildrenFromSavedState(this.state);
+  }
+
+  hasParent(className) {
+    return this.parentsList[className];
   }
 
   static checkChildrenFromSavedState(state) {
@@ -215,7 +223,14 @@ class Box extends Component {
   }
 
   filterUnauthorized(menu) {
-    return menu.filter((item) => this.constructor.unauthorized.indexOf(item.type) === -1);
+    if(this.constructor.unauthorized.indexOf('*') !== -1) {
+      return [];
+    }
+    let filteredMenu = menu.filter((item) => this.constructor.unauthorized.indexOf(item.type) === -1);
+    if(this.hasParent('Recursion')) {
+      filteredMenu.push({type: 'ThisBox'});
+    }
+    return filteredMenu;
   }
 
   initState() {
@@ -227,18 +242,22 @@ class Box extends Component {
     return {children};
   }
 
-  addDrawBeforeType(type, f) {
+  addDrawBeforeType(type, f, exceptions = []) {
     if(!(f instanceof Function)) return;
     if(!this.drawBeforeType[type]) {
-      this.drawBeforeType[type] = [f];
+      this.drawBeforeType[type] = [{callback: f, exceptions}];
     } else {
-      this.drawBeforeType[type].push(f);
+      this.drawBeforeType[type].push({callback: f, exceptions});
     }
   }
 
-  callDrawBeforeType(sk, type) {
+  callDrawBeforeType(sk, type, child) {
     for(let i = 0; i < this.drawBeforeType[type].length; ++i) {
-      this.drawBeforeType[type][i](sk);
+      const isException = this.drawBeforeType[type][i].exceptions.reduce((acc, exception) => acc || child instanceof window.getClassFromName(exception), false);
+      if(isException) {
+        continue;
+      }
+      this.drawBeforeType[type][i].callback(sk);
     }
   }
 
@@ -307,7 +326,7 @@ class Box extends Component {
     if(!child) return;
     for(let key in this.drawBeforeType) {
       if(child instanceof window.getClassFromName(key)) {
-        this.callDrawBeforeType(sk, key);
+        this.callDrawBeforeType(sk, key, child);
       }
     }
   }
@@ -322,7 +341,7 @@ class Box extends Component {
 
     if(this.state.children.length > 0) {
       let child = this.state.children[0];
-      children.push(<child.type key={child.id} parent={this} id={child.id} ref={el => {this.next = el ? el.ref : null;}} saveState={(state) => {child.state = state}} state={child.state}/>);
+      children.push(<child.type key={child.id} parentsList={this.parentsList} parent={this} id={child.id} ref={el => {this.next = el ? el.ref : null;}} saveState={(state) => {child.state = state}} state={child.state}/>);
     }
 
     if(this.state.dragEnter >= 0) {
@@ -495,9 +514,9 @@ class Box extends Component {
               {this.hasInfo && !this.state.isMinimized && <span className="Box__titleOption" onClick={this.onInfo.bind(this)}>
                 <SVG src={info}/>
               </span>}
-              <span className="Box__titleOption" onClick={this.onMinimize.bind(this)}>
+              {this.canMinimize && <span className="Box__titleOption" onClick={this.onMinimize.bind(this)}>
                   <SVG src={minimize}/>
-              </span>
+              </span>}
               <span className="Box__titleOption" onClick={this.onClose.bind(this)}>
                   <SVG src={cancel}/>
               </span>

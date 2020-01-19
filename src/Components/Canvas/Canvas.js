@@ -234,7 +234,6 @@ class Canvas extends Component {
   }
 
   setPathTransform(path) {
-    console.log(this.rotateValue);
     path.rotate(-this.rotateValue);
     path.scale(this.scaleValue.width, this.scaleValue.height);
     path.translate(this.translateValue);

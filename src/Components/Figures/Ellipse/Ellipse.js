@@ -27,6 +27,10 @@ class Ellipse extends Figure {
     this._y = this.height / 2;
   }
 
+  getTransforms() {
+    return super.getTransforms().slice(0, 1); // Excludes rotation
+  }
+
   drawFigure(sk) {
     let ellipse = sk.ellipse(this.x, this.y, this.width, this.height);
     sk.setPathTransform(ellipse);

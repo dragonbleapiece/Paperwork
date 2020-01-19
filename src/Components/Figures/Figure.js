@@ -3,6 +3,7 @@ import Box from '../Box/Box';
 import Transform from '../Transforms/Transform';
 import scale from '../../Icons/scale.svg';
 import rotate from '../../Icons/rotate_left.svg';
+import move from '../../Icons/move.svg';
 import './Figure.css';
 
 const className = "Figure";
@@ -47,12 +48,28 @@ class Figure extends Box {
     return this._height;
   }
 
+  get position() {
+    if(this.transforms['translate']) {
+      return this.transforms['translate'].getInputValue();
+    } else {
+      return {x: this._x, y: this._y};
+    }
+  }
+
   get x() {
-    return this._x;
+    if(this.transforms['translate']) {
+      return this.transforms['translate'].getInputValue();
+    } else {
+      return this._x;
+    }
   }
 
   get y() {
-    return this._y;
+    if(this.transforms['translate']) {
+      return this.transforms['translate'].getInputValue();
+    } else {
+      return this._y;
+    }
   }
 
   constructor(props) {
@@ -72,14 +89,25 @@ class Figure extends Box {
   
   getTransforms() {
     const Transforms = [
+      // Translation
+      <Transform 
+        min={-1}
+        max={1}
+        defaultValue={this._x}
+        marks={{'-1':-1, 0:0, 1:1}}
+        step={0.1}
+        key={0}
+        ref={(el) => {this.transforms['translate'] = el}}
+        icon={move}
+      />,
       // Scale
       <Transform 
         min={0.1}
-        max={2}
+        max={1.5}
         defaultValue={this._scale}
-        marks={{0.1:0.1, 1:1, 2:2}}
+        marks={{0.1:0.1, 1:1, 1.5:1.5}}
         step={0.1}
-        key={0}
+        key={1}
         ref={(el) => {this.transforms['scale'] = el}}
         returns={(value) => ({x: value, y: value})}
         icon={scale}
@@ -91,7 +119,7 @@ class Figure extends Box {
         defaultValue={this._rotation}
         marks={{0:0, 90:90, 180:180, 270:270, 360:360}}
         step={1}
-        key={1}
+        key={2}
         ref={(el) => {this.transforms['rotation'] = el}}
         icon={rotate}
       />
@@ -104,7 +132,7 @@ class Figure extends Box {
     sk.push();
       sk.fill(this.state.color.getColor(sk));
       sk.scale(scale.x, scale.y);
-      sk.translate(-this.width / 2, -this.height / 2);
+      sk.translate(-this.width / 2 + this.x * sk.scaleValue.width, -this.height / 2 + this.y * sk.scaleValue.height);
       sk.rotate(this.rotation);
       this.drawFigure(sk);
     sk.pop();

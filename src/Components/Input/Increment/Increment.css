@@ -1,0 +1,59 @@
+.Increment__limits, .Increment__options {
+    display:flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.Increment__options {
+    border: solid 1px black;
+    border-width: 1px 0;
+}
+
+.Input.Increment input {
+    text-align: center;
+    z-index: 2;
+}
+
+.Increment__step input {
+    color: gray;
+    font-size: 0.8em;
+    margin-bottom: -2px;
+}
+
+.Increment__step .Increment__icon svg {
+    width: 30px;
+    height: 30px;
+    cursor: pointer;
+}
+
+.Increment__icon svg {
+    width: 15px;
+    height: 15px;
+}
+
+.Increment__step {
+    display: flex;
+    flex-direction: column;
+}
+
+.Input.Increment .selected svg {
+    fill: white;
+}
+
+.Input.Increment .selected {
+    background-color: black;
+}
+
+.Increment__options label {
+    padding: 0 10px;
+    cursor: pointer;
+}
+
+.Input.Increment input[type='radio'] {
+    display: none;
+}
+
+.Random__arrow {
+    margin: 0 -6px;
+}

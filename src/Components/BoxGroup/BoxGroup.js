@@ -84,7 +84,7 @@ class BoxGroup extends Box {
   getChildren() {
     this.elements = [];
     let children = this.state.children.map((child, index) =>
-      <child.type key={child.id} id={child.id} parent={this} ref={el => {if(el) this.elements[index] = el.ref;}} saveState={(state) => {child.state = state}} state={child.state}/>
+      <child.type key={child.id} id={child.id} parentsList={this.parentsList} parent={this} ref={el => {if(el) this.elements[index] = el.ref;}} saveState={(state) => {child.state = state}} state={child.state}/>
     );
 
     if(this.state.dragEnter >= 0) {

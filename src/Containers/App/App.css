@@ -150,7 +150,7 @@ main {
   fill: white;
 }
 
-input:checked+label {
+.save__format input:checked+label {
   background-color: black;
   color: white;
 }

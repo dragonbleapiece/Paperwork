@@ -13,7 +13,8 @@ const inputMenu = [
     type: 'Increment'
   },
   {
-    type: 'SliderBox'
+    type: 'SliderBox',
+    name: 'Value'
   }
 ];
 

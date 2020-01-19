@@ -15,6 +15,7 @@
 
 .TransformBox > *:not(:first-child) .Transform {
     border-top: dashed 1px darkgray;
+    margin-top: 5px;
 }
 
 .TransformBox__icon {
