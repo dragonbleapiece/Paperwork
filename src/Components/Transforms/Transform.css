@@ -1,11 +1,20 @@
 .TransformBox {
-    padding: 20px;
+    padding: 5px 0;
+}
+
+.TransformBox2 {
+    padding: 15px 20px;
 }
 
 .Transform {
     display: flex;
     flex-direction: row;
     align-items: center;
+    padding: 15px 20px;
+}
+
+.TransformBox > *:not(:first-child) .Transform {
+    border-top: dashed 1px darkgray;
 }
 
 .TransformBox__icon {

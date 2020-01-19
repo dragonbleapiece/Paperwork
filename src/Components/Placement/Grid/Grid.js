@@ -78,7 +78,7 @@ class Grid extends Placement {
 
   getTransforms() {
     return(
-      <>
+      <div className="TransformBox2">
         <SliderBox
         min={1}
         max={50}
@@ -88,7 +88,7 @@ class Grid extends Placement {
         onChange={(value) => {this.setState({columns: value, rows: value});}}
         />
         {this.renderMode()}
-      </>
+      </div>
     );
   }
 

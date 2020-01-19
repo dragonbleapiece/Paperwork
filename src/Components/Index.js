@@ -41,7 +41,6 @@ import DiagonalLeft from './Modes/GridMode/DiagonalLeft/DiagonalLeft';
 import DiagonalRight from './Modes/GridMode/DiagonalRight/DiagonalRight';
 import Orthogonal from './Modes/GridMode/Orthogonal/Orthogonal';
 import SnailRight from './Modes/GridMode/SnailRight/SnailRight';
-import Slider from 'rc-slider';
 
 export function getClassFromName(name) {
   const lname = name.toLowerCase();

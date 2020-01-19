@@ -32,8 +32,18 @@ class Hatching extends Figure {
   }
 
   getTransforms() {
-    let Transforms = new Array();
-    Transforms.push(<Transform min={2} max={20} defaultValue={11} marks={{2:1, 11:10, 20:19}} step={1} key={0} onChange={(density) => {this.setState({density: density});}}/>);
+    const Transforms = [
+      // Density
+      <Transform
+        min={2}
+        max={20}
+        defaultValue={11}
+        marks={{2:1, 11:10, 20:19}}
+        step={1}
+        key={0}
+        onChange={(density) => {this.setState({density: density});}}
+      />
+    ];
     return Transforms;
   }
 

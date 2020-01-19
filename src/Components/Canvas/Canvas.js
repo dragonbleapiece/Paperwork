@@ -8,7 +8,8 @@ const DEFAULTSTYLE = {
   strokeColor: new Paper.Color(0, 0, 0, 1),
   strokeWidth: 0,
   scale: new Paper.Size(1, 1),
-  translate: new Paper.Point(0, 0)
+  translate: new Paper.Point(0, 0),
+  rotate: 0
 }
 
 class Canvas extends Component {
@@ -87,6 +88,10 @@ class Canvas extends Component {
 
   get translateValue() {
     return this._styles.reduce((acc, {translate}) => acc.add(translate), new Paper.Point(0, 0));
+  }
+
+  get rotateValue() {
+    return this._styles.reduce((acc, {rotate}) => acc + rotate, 0);
   }
 
   get width() {
@@ -180,6 +185,10 @@ class Canvas extends Component {
     this.lastStyle.scale = new Paper.Size(x, y)
   }
 
+  rotate(angle) {
+    this.lastStyle.rotate = angle;
+  }
+
   noStroke() {
     this.strokeWeight(0);
   }
@@ -225,6 +234,8 @@ class Canvas extends Component {
   }
 
   setPathTransform(path) {
+    console.log(this.rotateValue);
+    path.rotate(-this.rotateValue);
     path.scale(this.scaleValue.width, this.scaleValue.height);
     path.translate(this.translateValue);
   }
