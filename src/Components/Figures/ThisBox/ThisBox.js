@@ -1,4 +1,5 @@
 import Figure from '../Figure';
+import Canvas from '../../Canvas/Canvas';
 import './ThisBox.css';
 import thisIcon from '../../../Icons/my_location.svg';
 
@@ -25,10 +26,20 @@ class ThisBox extends Figure {
     this.className += " " + ThisBox.className;
     this.suppMenu = [];
     this.recursionParent = null;
+    this.recursion = 0;
+    Canvas.attach(this);
+  }
+
+  receiveNotification() {
+    this.recursion = 0;
   }
 
   componentDidMount() {
-    this.getRecursionDraw()
+    this.getRecursionDraw();
+  }
+
+  componentWillUnmount() {
+    Canvas.detach(this);
   }
 
   getRecursionDraw() {
@@ -48,8 +59,9 @@ class ThisBox extends Figure {
   }
 
   drawFigure(sk) {
-    if(this.recursionParent) {
-      this.recursionParent.recursiveDraw(sk);
+    if(this.recursionParent && this.recursion < this.recursionParent.state.recursionMax) {
+      ++this.recursion;
+      this.recursionParent.draw(sk);
     }
   }
 

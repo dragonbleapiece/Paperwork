@@ -1,11 +1,7 @@
 import React from 'react';
 import BoxGroup from '../BoxGroup/BoxGroup';
 import './Recursion.css';
-import Canvas from '../Canvas/Canvas';
-import Transform from '../Transforms/Transform';
 import SVG from 'react-svg';
-import scale from '../../Icons/scale.svg';
-import rotate from '../../Icons/rotate_left.svg';
 import recursion from '../../Icons/filter.svg';
 import recursionOption from '../../Icons/filter_none.svg';
 
@@ -31,18 +27,7 @@ class Recursion extends BoxGroup {
         super(props);
         this.className += " " + Recursion.className;
 
-        this.recursion = 0;
-        Canvas.attach(this);
-
         this.hasInfo = true;
-    }
-
-    receiveNotification() {
-        this.recursion = 0;
-    }
-
-    componentWillUnmount() {
-        Canvas.detach(this);
     }
 
     initState() {
@@ -64,19 +49,6 @@ class Recursion extends BoxGroup {
                 </div>
             </div>
         );
-    }
-
-    recursiveDraw(sk) {
-        if(this.recursion >= this.state.recursionMax) {
-            return;
-        }
-        this.recursion += 1;
-        super.draw(sk);
-    }
-
-    draw(sk) {
-        this.recursion = 0;
-        super.draw(sk);
     }
 }
 
