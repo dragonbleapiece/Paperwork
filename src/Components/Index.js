@@ -10,9 +10,6 @@ import Placement from './Placement/Placement';
 import Grid from './Placement/Grid/Grid';
 import Markov from './Markov/Markov';
 import Transform from './Transforms/Transform';
-import Translate from './Transforms/Translate/Translate';
-import Scale from './Transforms/Scale/Scale';
-import Rotate from './Transforms/Rotate/Rotate';
 import Color from './Colors/Color';
 import Void from './Void/Void';
 import Red from './Colors/Red';
@@ -87,12 +84,6 @@ export function getClassFromName(name) {
       return Black;
     case('white'):
       return White;
-    case('translate'):
-      return Translate;
-    case('scale'):
-      return Scale;
-    case('rotate'):
-      return Rotate;
     case('void'):
       return Void;
     case('linearx'):

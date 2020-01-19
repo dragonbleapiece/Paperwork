@@ -23,16 +23,12 @@ class LOHatching extends Hatching {
   constructor(props) {
     super(props);
     this.className += " " + LOHatching.className;
-    this.x = 0;
-    this.y = 0;
-    this._width = 1;
-    this._height = 1;
   }
 
   drawFigure(sk) {
     let i = this.x;
     let j = this.y + this.height;
-    const density = this.state.density;
+    const density = this.density;
     let gapX = (this.width / density);
     let gapY = (this.height / density);
 

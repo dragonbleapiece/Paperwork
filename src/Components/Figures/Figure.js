@@ -47,6 +47,14 @@ class Figure extends Box {
     return this._height;
   }
 
+  get x() {
+    return this._x;
+  }
+
+  get y() {
+    return this._y;
+  }
+
   constructor(props) {
     super(props);
     this.className += " " + Figure.className;
@@ -55,7 +63,7 @@ class Figure extends Box {
     this._rotation = 0;
     this._height = 1;
     this._width = 1;
-    this._scale = 1;
+    this._scale = {x: 1, y: 1};
   }
 
   drawFigure(sk) {

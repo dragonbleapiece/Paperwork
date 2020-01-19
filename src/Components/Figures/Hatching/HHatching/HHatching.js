@@ -23,17 +23,14 @@ class HHatching extends Hatching {
   constructor(props) {
     super(props);
     this.className += " " + HHatching.className;
-    this.x = 0;
-    this.y = 0;
-    this._width = 1;
-    this._height = 1;
   }
 
   drawFigure(sk) {
-    const density = this.state.density;
+    const density = this.density;
     let gapY = this.height / density;
     let parent = sk.group();
     for(var j = 0; j <= density ; j++) {
+      console.log(this.x, this.y + j * gapY, this.x + this.width, this.y + j * gapY);
       let line = sk.line(this.x, this.y + j * gapY, this.x + this.width, this.y + j * gapY);
       parent.addChild(line);
     }

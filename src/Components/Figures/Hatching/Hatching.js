@@ -21,14 +21,18 @@ class Hatching extends Figure {
     return [...super.unauthorized, ...unauthorized];
   }
 
-  initState() {
-    super.initState();
-    this.state.density = 11;
+  get density() {
+    if(this.transforms['density']) {
+      return this.transforms['density'].getInputValue();
+    } else {
+      return this._density;
+    }
   }
 
   constructor(props) {
     super(props);
     this.className += " " + Hatching.className;
+    this._density = 11;
   }
 
   getTransforms() {
@@ -37,11 +41,11 @@ class Hatching extends Figure {
       <Transform
         min={2}
         max={20}
-        defaultValue={11}
+        defaultValue={this._density}
         marks={{2:1, 11:10, 20:19}}
         step={1}
         key={0}
-        onChange={(density) => {this.setState({density: density});}}
+        ref={(el) => {this.transforms['density'] = el}}
       />
     ];
     return Transforms;
