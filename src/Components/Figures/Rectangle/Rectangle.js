@@ -23,10 +23,6 @@ class Rectangle extends Figure {
   constructor(props) {
     super(props);
     this.className += " " + Rectangle.className;
-    this.x = 0;
-    this.y = 0;
-    this._width = 1;
-    this._height = 1;
     this._scale = 0.9;
   }
 

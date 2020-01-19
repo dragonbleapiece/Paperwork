@@ -27,7 +27,7 @@ class Figure extends Box {
     if(this.transforms['scale']) {
       return this.transforms['scale'].getInputValue();
     } else {
-      return this._scale;
+      return {x: this._scale, y: this._scale};
     }
   }
 
@@ -63,7 +63,7 @@ class Figure extends Box {
     this._rotation = 0;
     this._height = 1;
     this._width = 1;
-    this._scale = {x: 1, y: 1};
+    this._scale = 1;
   }
 
   drawFigure(sk) {

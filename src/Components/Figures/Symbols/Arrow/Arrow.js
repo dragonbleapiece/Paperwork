@@ -25,10 +25,6 @@ class Arrow extends Symbol {
   constructor(props) {
     super(props);
     this.className += " " + Arrow.className;
-    this.x = 0;
-    this.y = 0;
-    this._width = 1;
-    this._height = 1;
     this.headLength = 0.20;
     this.tailLength = 0.09;
     this.headAngle = 35;

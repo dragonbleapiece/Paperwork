@@ -22,11 +22,7 @@ class Character extends Figure {
   constructor(props) {
     super(props);
     this.className += " " + Character.className;
-    this.x = 0;
-    this.y = 0;
-    this.text = 'noText'
-    this._width = 1;
-    this._height = 1;
+    this.text = 'noText';
   }
 
   drawFigure(sk) {
