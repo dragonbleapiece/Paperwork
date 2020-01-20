@@ -26,7 +26,7 @@ class Character extends Figure {
   }
 
   drawFigure(sk) {
-    let text = sk.text(this.text, this.x, this.y);
+    let text = sk.text(this.text, 0.5, 0.85);
     text.fontSize = this.height;
     sk.setPathTransform(text);
   }
