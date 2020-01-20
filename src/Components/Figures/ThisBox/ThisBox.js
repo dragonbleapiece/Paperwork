@@ -62,7 +62,18 @@ class ThisBox extends Figure {
     if(this.recursionParent && this.recursion < this.recursionParent.state.recursionMax) {
       ++this.recursion;
       this.recursionParent.draw(sk);
+      --this.recursion;
     }
+  }
+
+  draw(sk) {
+    const scale = this.scale;
+    sk.push();
+      sk.translate(this.x, this.y);
+      sk.scale(scale.x, scale.y);
+      sk.rotate(this.rotation);
+      this.drawFigure(sk);
+    sk.pop();
   }
 
 }

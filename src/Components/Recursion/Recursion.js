@@ -6,7 +6,7 @@ import recursion from '../../Icons/filter.svg';
 import recursionOption from '../../Icons/filter_none.svg';
 
 const className = "Recursion";
-const unauthorized = ["Placement", "Recursion", "Markov"];
+const unauthorized = ["Placement", "Recursion", "Markov", "Void"];
 
 /*Pencil*/
 class Recursion extends BoxGroup {
@@ -40,7 +40,7 @@ class Recursion extends BoxGroup {
             <div className='Transform'>
                 <SVG src={recursionOption} className='TransformBox__icon'/>
                 <div className='Recursion__options'>
-                    <input type='number' min={1} max={10} value={this.state.recursionMax} onChange={(e) => {
+                    <input type='number' min={1} max={3} value={this.state.recursionMax} onChange={(e) => {
                         const value = parseInt(e.target.value, 10) || 0;
                         if(e.target.min > value || e.target.max < value) return;
                         this.setState({recursionMax: value});

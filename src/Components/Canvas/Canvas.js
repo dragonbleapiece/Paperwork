@@ -7,9 +7,7 @@ const DEFAULTSTYLE = {
   fillColor: new Paper.Color(0, 0, 0, 1),
   strokeColor: new Paper.Color(0, 0, 0, 1),
   strokeWidth: 0,
-  scale: new Paper.Size(1, 1),
-  translate: new Paper.Point(0, 0),
-  rotate: 0
+  transform: new Paper.Matrix()
 }
 
 class Canvas extends Component {
@@ -83,15 +81,19 @@ class Canvas extends Component {
   }
 
   get scaleValue() {
-    return this._styles.reduce((acc, {scale}) => acc.multiply(scale), new Paper.Size(1, 1));
+    return this.transformMatrixValue.scaling;
   }
 
   get translateValue() {
-    return this._styles.reduce((acc, {translate}) => acc.add(translate), new Paper.Point(0, 0));
+    return this.transformMatrixValue.translation;
   }
 
   get rotateValue() {
-    return this._styles.reduce((acc, {rotate}) => acc + rotate, 0);
+    return  this.transformMatrixValue.rotation;
+  }
+
+  get transformMatrixValue() {
+    return this._styles.reduce((acc, {transform}) => acc.appended(transform), new Paper.Matrix());
   }
 
   get width() {
@@ -178,15 +180,18 @@ class Canvas extends Component {
   }
 
   translate(x, y = x) {
-    this.lastStyle.translate = new Paper.Point(x, y)
+    let matrix = new Paper.Matrix();
+    this.lastStyle.transform = this.lastStyle.transform.appended(matrix.translate(x, y));
   }
 
-  scale(x, y = x) {
-    this.lastStyle.scale = new Paper.Size(x, y)
+  scale(x, y = x, cx = 0, cy = cx) {
+    let matrix = new Paper.Matrix();
+    this.lastStyle.transform = this.lastStyle.transform.appended(matrix.scale(x, y, new Paper.Point(cx, cy)));
   }
 
-  rotate(angle) {
-    this.lastStyle.rotate = angle;
+  rotate(angle, cx = 0, cy = cx) {
+    let matrix = new Paper.Matrix();
+    this.lastStyle.transform = this.lastStyle.transform.appended(matrix.rotate(angle, new Paper.Point(cx, cy)));
   }
 
   noStroke() {
@@ -234,9 +239,10 @@ class Canvas extends Component {
   }
 
   setPathTransform(path) {
-    path.rotate(-this.rotateValue);
+    /*path.rotate(-this.rotateValue);
     path.scale(this.scaleValue.width, this.scaleValue.height);
-    path.translate(this.translateValue);
+    path.translate(this.translateValue);*/
+    path.transform(this.transformMatrixValue);
   }
 
   color(r, g, b, a) {

@@ -131,9 +131,10 @@ class Figure extends Box {
     const scale = this.scale;
     sk.push();
       sk.fill(this.state.color.getColor(sk));
-      sk.scale(scale.x, scale.y);
-      sk.translate(-this.width / 2 + this.x * sk.scaleValue.width, -this.height / 2 + this.y * sk.scaleValue.height);
-      sk.rotate(this.rotation);
+      //console.log(-sk.scaleValue.x / 2 + this.x * sk.scaleValue.x, -sk.scaleValue.y / 2 + this.y * sk.scaleValue.y);
+      sk.translate(-0.5 + this.x, -0.5 + this.y);
+      sk.scale(scale.x, scale.y, 0.5, 0.5);
+      sk.rotate(this.rotation, 0.5, 0.5);
       this.drawFigure(sk);
     sk.pop();
   }
