@@ -164,16 +164,7 @@ class Box extends Component {
     this.transforms = {};
     this.className = Box.className;
     this.drawBeforeType = {};
-    this.menu = [
-      {
-        menu: this.filterUnauthorized(menu),
-        handleClick: (event, data) =>  {
-          if(data.type !== undefined) {
-            window.addClassToElement(data.type, this);
-          }
-        }
-      }
-    ];
+    this.reloadMenu();
     
     this.suppMenu = [
       {
@@ -226,11 +217,24 @@ class Box extends Component {
     if(this.constructor.unauthorized.indexOf('*') !== -1) {
       return [];
     }
-    let filteredMenu = menu.filter((item) => this.constructor.unauthorized.indexOf(item.type) === -1);
+    const filteredMenu = menu.filter((item) => this.constructor.unauthorized.indexOf(item.type) === -1);
     if(this.hasParent('Recursion')) {
-      filteredMenu.push({type: 'ThisBox'});
+      return [...filteredMenu, {type: 'ThisBox'}];
     }
     return filteredMenu;
+  }
+
+  reloadMenu() {
+    this.menu = [
+      {
+        menu: this.filterUnauthorized(menu),
+        handleClick: (event, data) =>  {
+          if(data.type !== undefined) {
+            window.addClassToElement(data.type, this);
+          }
+        }
+      }
+    ];
   }
 
   initState() {
@@ -478,7 +482,7 @@ class Box extends Component {
   }
 
   onMinimize() {
-    this.setState({isMinimized: !this.state.isMinimized});
+    this.setState({isMinimized: !this.state.isMinimized, isInfo: false});
   }
 
   onInfo() {
@@ -490,6 +494,10 @@ class Box extends Component {
 
   getInfo() {
     return null;
+  }
+
+  doBeforeRender() {
+    // Void
   }
 
   render() {
@@ -505,6 +513,8 @@ class Box extends Component {
     const transforms = this.getTransforms();
     const box = this.renderBox();
     const infoBox = this.getInfo();
+
+    this.doBeforeRender();
 
     return (
       <div className={this.className} style={this.state.style} ref='box'>

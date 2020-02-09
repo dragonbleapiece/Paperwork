@@ -23,12 +23,10 @@ class Ellipse extends Figure {
   constructor(props) {
     super(props);
     this.className += " " + Ellipse.className;
-    this._x = this.width / 2;
-    this._y = this.height / 2;
   }
 
   getTransforms() {
-    return super.getTransforms().slice(0, 1); // Excludes rotation
+    return super.getTransforms().slice(0, 2); // Excludes rotation
   }
 
   drawFigure(sk) {

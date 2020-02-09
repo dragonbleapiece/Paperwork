@@ -40,7 +40,9 @@ class ThisBox extends Figure {
 
   componentWillUnmount() {
     Canvas.detach(this);
+    this.recursionParent.setState({nbThisBox: this.recursionParent.state.nbThisBox - 1});
   }
+
 
   getRecursionDraw() {
     let parent = this.props.parent;
@@ -51,6 +53,7 @@ class ThisBox extends Figure {
         this.onClose();
     } else {
         this.recursionParent = parent;
+        this.recursionParent.setState({nbThisBox: this.recursionParent.state.nbThisBox + 1});
     }
   }
 
@@ -60,9 +63,11 @@ class ThisBox extends Figure {
 
   drawFigure(sk) {
     if(this.recursionParent && this.recursion < this.recursionParent.state.recursionMax) {
+      ++this.recursionParent.globalRecursion;
       ++this.recursion;
       this.recursionParent.draw(sk);
       --this.recursion;
+      --this.recursionParent.globalRecursion;
     }
   }
 

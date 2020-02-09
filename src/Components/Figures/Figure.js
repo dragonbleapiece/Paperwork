@@ -1,6 +1,7 @@
 import React from 'react';
 import Box from '../Box/Box';
 import Transform from '../Transforms/Transform';
+import Transform2D from '../Transforms/Transform2D';
 import scale from '../../Icons/scale.svg';
 import rotate from '../../Icons/rotate_left.svg';
 import move from '../../Icons/move.svg';
@@ -58,7 +59,7 @@ class Figure extends Box {
 
   get x() {
     if(this.transforms['translate']) {
-      return this.transforms['translate'].getInputValue();
+      return this.transforms['translate'].getInputValue().x;
     } else {
       return this._x;
     }
@@ -66,7 +67,7 @@ class Figure extends Box {
 
   get y() {
     if(this.transforms['translate']) {
-      return this.transforms['translate'].getInputValue();
+      return this.transforms['translate'].getInputValue().y;
     } else {
       return this._y;
     }
@@ -90,7 +91,7 @@ class Figure extends Box {
   getTransforms() {
     const Transforms = [
       // Translation
-      <Transform 
+      <Transform2D 
         min={-1}
         max={1}
         defaultValue={this._x}
@@ -101,7 +102,7 @@ class Figure extends Box {
         icon={move}
       />,
       // Scale
-      <Transform 
+      <Transform2D 
         min={0.1}
         max={1.5}
         defaultValue={this._scale}
@@ -109,7 +110,6 @@ class Figure extends Box {
         step={0.1}
         key={1}
         ref={(el) => {this.transforms['scale'] = el}}
-        returns={(value) => ({x: value, y: value})}
         icon={scale}
       />,
       // Rotation

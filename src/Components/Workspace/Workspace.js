@@ -84,11 +84,11 @@ class Workspace extends BoxGroup {
       {
         menu: menuColor,
         handleClick: (event, data) => {
-        if(data.type) {
-          let color = window.getClassFromName(data.type);
-          if(color) this.setState({color: new color()});
-          window.updateWorkspace();
-        }
+          if(data.type) {
+            let color = window.getClassFromName(data.type);
+            if(color) this.setState({color: new color()});
+            window.updateWorkspace();
+          }
         }
       },
       {

@@ -84,9 +84,9 @@ class Grid extends Placement {
       <div className="TransformBox2">
         <SliderBox
         min={1}
-        max={50}
+        max={30}
         defaultValue={this.state.columns}
-        marks={{1: 1, 50: 50}}
+        marks={{1: 1, 30: 30}}
         step={1}
         onChange={(value) => {this.setState({columns: value, rows: value});}}
         />

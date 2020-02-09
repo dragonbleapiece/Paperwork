@@ -13,7 +13,7 @@
     padding: 15px 20px;
 }
 
-.TransformBox > *:not(:first-child) .Transform {
+.TransformBox > *:not(:first-child) .Transform, .TransformBox > .Transform:not(:first-child) {
     border-top: dashed 1px darkgray;
     margin-top: 5px;
 }
@@ -30,4 +30,22 @@
 
 .TransformBox__input {
     flex-grow: 1;
+}
+
+.Transform2D__inputs {
+    flex-grow: 1;
+    display: flex;
+    flex-direction: column;
+}
+
+.Transform2D__inputs > *:first-child .Box__slider {
+    margin-top: 10px;
+}
+
+.Transform2D__inputs > *:first-child {
+    margin-bottom: 5px;
+}
+
+.Transform2D__inputs > *:first-child .rc-slider-mark {
+    top: -14px;
 }

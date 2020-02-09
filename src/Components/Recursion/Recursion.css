@@ -2,10 +2,56 @@
     width: 100%;
     display: flex;
     justify-content: space-around;
+    align-items: center;
+    /*flex-direction: column;*/
+    position: relative;
 }
 
 .Recursion__options input[type='number'] {
     width: 100%;
     text-align: center;
     border-bottom: solid 1px black;
+}
+
+.Recursion__options input[type='checkbox'] {
+    display: none;
+}
+
+.Recursion__duplicate {
+    display: flex;
+}
+
+/* Create a custom checkbox */
+.checkmark {
+    margin-right: 5px;
+    height: 1em;
+    width: 1em;
+    background-color: white;
+    border: black 1px solid;
+    display: inline-flex;
+    justify-content: space-around;
+}
+
+.Recursion__duplicate:hover input ~ .checkmark {
+    background-color: black;
+}
+
+.Recursion__duplicate input:checked ~ .checkmark {
+    background-color: black;
+}
+
+.checkmark:after {
+    content: "";
+    display: none;
+    width: 25%;
+    height: 50%;
+    border: solid white;
+    border-width: 0 0.1em 0.1em 0;
+    -webkit-transform: rotate(45deg);
+    -ms-transform: rotate(45deg);
+    transform: rotate(45deg);
+}
+
+.Recursion__duplicate input:checked ~ .checkmark:after {
+    display: block;
 }

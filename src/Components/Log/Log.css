@@ -1,0 +1,22 @@
+.Log {
+    display: flex;
+    justify-content: space-around;
+    padding: 5px 10px;
+    background-color: black;
+    color: white;
+    position: absolute;
+    top: calc(100% + 15px);
+    width: 100%; 
+    cursor: pointer;
+    z-index: 998;
+    border-bottom: white 1px solid;
+}
+
+.Log:after {
+    content:""; 
+    border-left: 10px solid transparent;
+    border-right: 10px solid transparent;
+    border-bottom: 10px solid black;
+    position: absolute;
+    top: -10px;
+}
