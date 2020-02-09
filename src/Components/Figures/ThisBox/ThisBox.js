@@ -44,6 +44,10 @@ class ThisBox extends Figure {
   }
 
 
+  getColorMenu() {
+    return [];
+  }
+
   getRecursionDraw() {
     let parent = this.props.parent;
     while(parent && parent.constructor.className !== 'Recursion') {
@@ -73,10 +77,11 @@ class ThisBox extends Figure {
 
   draw(sk) {
     const scale = this.scale;
+    const {x, y} = this.position;
     sk.push();
-      sk.translate(this.x, this.y);
-      sk.scale(scale.x, scale.y);
-      sk.rotate(this.rotation);
+      sk.rotate(this.rotation, x, y);
+      sk.scale(scale.x, scale.y, x, y);
+      sk.translate(x, y);
       this.drawFigure(sk);
     sk.pop();
   }

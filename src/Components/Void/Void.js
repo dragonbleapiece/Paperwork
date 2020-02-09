@@ -27,6 +27,10 @@ class Void extends Box {
     this.canMinimize = false;
   }
 
+  getColorMenu() {
+    return [];
+  }
+
   getTransforms() {
     return null;
   }

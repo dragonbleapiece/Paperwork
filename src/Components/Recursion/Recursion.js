@@ -53,6 +53,10 @@ class Recursion extends BoxGroup {
         return filteredMenu;
     }
 
+    getColorMenu() {
+        return [];
+    }
+
     initState() {
         super.initState();
         this.state.recursionMax = 2;
@@ -79,7 +83,7 @@ class Recursion extends BoxGroup {
         return (
             <>
                 <p>Recursion occurs when a thing is defined in terms of itself or of its type.</p>
-                <p>In other words, it's an object or a process that can <strong>refers to itself</strong>.</p>
+                <p>In other words, it's an object or a process that <strong>refers to itself</strong>.</p>
                 <p>It's a infinite loop and a limit condition is necessary.</p>
             </>
         );
@@ -95,7 +99,7 @@ class Recursion extends BoxGroup {
                 <div className='Transform'>
                     <SVG src={recursionOption} className='TransformBox__icon'/>
                     <div className='Recursion__options'>
-                        <input type='number' min={1} max={3} value={this.state.recursionMax} onChange={(e) => {
+                        <input type='number' min={1} max={4} value={this.state.recursionMax} onChange={(e) => {
                             const value = parseInt(e.target.value, 10) || 0;
                             if(e.target.min > value || e.target.max < value) return;
                             this.setState({recursionMax: value});

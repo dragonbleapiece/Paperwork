@@ -41,9 +41,9 @@ class Save extends Component {
 
     if(this.state.DownloadFormat === 'svg') {
       const blob = new Blob([Canvas.getImageData(true)], {type : 'image/svg+xml'});
-      saveAs(blob, this.state.DownloadName+'.svg');
+      saveAs(blob, dname + '.svg');
     } else {
-      Canvas.toBlob((blob) => saveAs(blob, this.state.DownloadName+'.jpg'), 'image/jpeg');
+      Canvas.toBlob((blob) => saveAs(blob, dname + '.jpg'), 'image/jpeg');
     }
     console.log("SUFFIX", nb[this.state.DownloadFormat], "NAME + FORMAT", dname + "." + this.state.DownloadFormat);
   }

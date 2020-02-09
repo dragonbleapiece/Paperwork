@@ -2,6 +2,7 @@ import React from 'react';
 import Box from '../Box/Box';
 import './Placement.css';
 import Workspace from '../Workspace/Workspace';
+import White from '../Colors/White';
 
 const className = "Placement";
 const unauthorized = ["Placement"];
@@ -28,9 +29,14 @@ class Placement extends Box {
 
   handleClick(event, data) {
     if(data.type) {
-      this.setState({mode: window.getClassFromName(data.type)})
+      this.setState({mode: window.getClassFromName(data.type), color: new White()})
       Workspace.forceUpdate();
     }
+  }
+
+  doBeforeSetChildren(children) {
+    this.state.color = new White(); // reload the state anyway
+    return super.doBeforeSetChildren(children);
   }
 
   initStateFromSavedState() {

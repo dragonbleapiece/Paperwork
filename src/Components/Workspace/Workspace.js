@@ -145,11 +145,27 @@ class Workspace extends BoxGroup {
     e.stopPropagation();
   }
 
+  getInstructions() {
+    return (
+      <div className="Workspace__placeholder">
+        <p className="Workspace__Rightclick">Right click here</p>
+        <div className="Workspace__Instructions">
+          <p>To begin with...</p>
+          <ol>
+            <li>Choose <em>Placement > Grid</em></li>
+            <li>Add in it a Markov</li>
+            <li>Add in Markov some <em>Elements</em></li>
+          </ol>
+        </div>
+      </div>
+    );
+  }
+
   render() {
     return (
       <div draggable={this.state.children.length > 0} className={this.className} onDragStart={this.onDragStart.bind(this)} onDrag={this.onDrag.bind(this)}>
         <ContextMenuBox id={this.constructor.className} menu={[...this.menu, ...this.suppMenu]}>
-          {this.state.children.length === 0 && <span className="Workspace__placeholder">Right click here</span>}
+          {this.state.children.length === 0 && this.getInstructions()}
           {this.state.children.length > 0 && <div className="Workspace__viewBox">
             <div className='DropBox' ref='container' onDrop={this.onDrop.bind(this)} onDragEnter={this.onDragEnter.bind(this)} onDragOver={this.onDragOver.bind(this)} onDragLeave={this.onDragLeave.bind(this)}>
               {this.getChildren()}

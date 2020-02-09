@@ -14,10 +14,35 @@
 
 .Workspace__placeholder {
     position: relative;
-    top: 50%;
-    display: block;
+    top: calc(50% - 2.1em);
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
     color: grey;
+    text-align: left;
+}
+
+.Workspace__Instructions ol, .Workspace__Instructions p {
+    font-size: 0.8em;
+    font-weight: 300;
+}
+
+.Workspace__Instructions li, .Workspace__Instructions p {
+    line-height: 1.2;
+}
+
+.Workspace__Instructions p {
+    margin-left: -1.3em;
+}
+
+.Workspace__Instructions ol {
+    list-style-type: decimal;
+}
+
+.Workspace__Rightclick {
     text-align: center;
+    margin-bottom: 10px;
 }
 
 .Workspace__viewBox > * {

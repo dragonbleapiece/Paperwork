@@ -78,6 +78,13 @@ class Grid extends Placement {
 
   }
 
+  getColorMenu() {
+    if(this.state.mode === LinearX && this.state.children.length === 0) {
+      return super.getColorMenu();
+    } else {
+      return [];
+    }
+  }
 
   getTransforms() {
     return(

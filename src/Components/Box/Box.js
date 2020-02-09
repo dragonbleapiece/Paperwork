@@ -166,18 +166,7 @@ class Box extends Component {
     this.drawBeforeType = {};
     this.reloadMenu();
     
-    this.suppMenu = [
-      {
-        menu: menuColor,
-        handleClick: (event, data) => {
-          if(data.type) {
-            let color = window.getClassFromName(data.type);
-            if(color) this.setState({color: new color()});
-            window.updateWorkspace();
-          }
-        }
-      }
-    ];
+    this.suppMenu = [];
     this.doBeforeAddChild = {};
     this.isFlexVertical = true;
     this.lastEnter = null;
@@ -383,6 +372,23 @@ class Box extends Component {
     return <div className="BoxPlaceHolder" key='ph20'><p>The Box will appear here</p></div>;
   }
 
+  getColorMenu() {
+    const colorMenu = [
+      {
+        menu: menuColor,
+        handleClick: (event, data) => {
+          if(data.type) {
+            let color = window.getClassFromName(data.type);
+            if(color) this.setState({color: new color()});
+            window.updateWorkspace();
+          }
+        }
+      }
+    ];
+
+    return colorMenu;
+  }
+
   componentDidUpdate() {
     const {saveState} = this.props;
     if(saveState) {
@@ -518,7 +524,7 @@ class Box extends Component {
 
     return (
       <div className={this.className} style={this.state.style} ref='box'>
-        <ContextMenuBox id={this.constructor.className + this.props.id} menu={[...this.menu, ...this.suppMenu]}>
+        <ContextMenuBox id={this.constructor.className + this.props.id} menu={[...this.menu, ...this.getColorMenu(), ...this.suppMenu]}>
           <div className="Box__wrapper">
             <div className="Box_titleOptions">
               {this.hasInfo && !this.state.isMinimized && <span className="Box__titleOption" onClick={this.onInfo.bind(this)}>

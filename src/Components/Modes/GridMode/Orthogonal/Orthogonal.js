@@ -18,7 +18,8 @@ class Orthogonal extends GridMode {
     var column = sk.width/columns;
     var row = sk.height/rows;
 
-    for (var compteur = 0; compteur <= columns; compteur++) {
+    // suppose that rows === columns
+    for (var compteur = 0; compteur < columns; compteur++) {
       let i, j;
       for (i = 0; i <= compteur; i++){
         sk.push();
