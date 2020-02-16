@@ -50,8 +50,6 @@ class ContextMenuBox extends Component {
       }
     }
 
-    //console.log(this.props.el.constructor.className, menuItems, menuItems.length);
-
     return (
       <>
         <ContextMenuTrigger id={this.props.id} holdToDisplay={-1}>

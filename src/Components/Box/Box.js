@@ -5,7 +5,6 @@ import ContextMenuBox from '../ContextMenuBox/ContextMenuBox';
 import { ContextMenuTrigger } from "react-contextmenu";
 import Color from '../Colors/Color';
 import DragManager from '../../DragManager';
-import Paper from 'paper'
 
 //import Icons
 import SVG from 'react-svg';
@@ -67,11 +66,11 @@ const menu = [
         type: 'Character',
         elements: [
           {
-            type: '0',
+            type: 'Zero',
             name: 'Zero'
           },
           {
-            type: '1',
+            type: 'One',
             name: 'One'
           }
         ]
@@ -477,6 +476,7 @@ class Box extends Component {
       }
     }
 
+    // No Placeholder if next to the dragged box
     if(dragManager.draggableParent === this && (index === dragManager.draggableIndex || index - 1 === dragManager.draggableIndex)) {
       index = -1;
     }

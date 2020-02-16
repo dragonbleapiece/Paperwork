@@ -1,8 +1,6 @@
 import React from 'react';
 import './BoxGroup.css';
 import Box from '../Box/Box';
-import ContextMenuBox from '../ContextMenuBox/ContextMenuBox';
-import { ContextMenuTrigger } from "react-contextmenu";
 
 const className = "BoxGroup";
 const unauthorized = [];
@@ -34,7 +32,6 @@ class BoxGroup extends Box {
     let obj = new child(); //tricky
     let children = this.state.children;
     if(obj instanceof Box && this.isAuthorized(child)) {
-      console.log(this.state);
       this.setChildren([...this.state.children, {type:this.beforeAddChild(child), id:Box.id}]);
     }
   }

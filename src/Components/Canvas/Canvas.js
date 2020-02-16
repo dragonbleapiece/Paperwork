@@ -135,7 +135,6 @@ class Canvas extends Component {
 
     let canvas = document.getElementById('canvas');
     Canvas._PaperScope = Paper.setup(canvas);
-    console.log(Canvas._PaperScope)
     Paper.view.onResize = (e) => {
       this.windowResized(canvas);
       this.componentDidUpdate();

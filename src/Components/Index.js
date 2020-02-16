@@ -108,9 +108,9 @@ export function getClassFromName(name) {
       return Symbol;
     case('character'):
       return Character;
-    case('0'):
+    case('zero'):
       return Number0;
-    case('1'):
+    case('one'):
       return Number1
     case('sliderbox'):
       return SliderBox;
