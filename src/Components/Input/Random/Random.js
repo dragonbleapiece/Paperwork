@@ -47,14 +47,14 @@ class Random extends Input {
         return {...this.state};
     }
 
+
     render() {
         return (
             <div className='Input Random'>
                 <input type='number' min={this.props.min} max={exactMath.sub(this.state.to, this.step)} step={this.step} value={this.state.from} onChange={(e) => {
                     const value = parseFloat(e.target.value ? e.target.value : 0);
                     if(e.target.min > value || e.target.max < value) return;
-                    this.setState({from: this.fix(value)});
-                    window.updateWorkspace();
+                    this.update({from: this.fix(value)});
                 }}/>
                 <SVG className='Random__arrow' src={arrowLeft}/>
                 <SVG className='Random__icon' src={random} />
@@ -62,8 +62,7 @@ class Random extends Input {
                 <input type='number' min={exactMath.add(this.state.from, this.step)} max={this.props.max} step={this.step} value={this.state.to} onChange={(e) => {
                     const value = parseFloat(e.target.value ? e.target.value : 0);
                     if(e.target.min > value || e.target.max < value) return;
-                    this.setState({to: this.fix(value)});
-                    window.updateWorkspace();
+                    this.update({to: this.fix(value)});
                 }}/>
             </div>
         );

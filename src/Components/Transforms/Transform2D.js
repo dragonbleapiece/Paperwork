@@ -26,7 +26,9 @@ class Transform2D extends Transform {
     super(props);
     this.id = shortid.generate();
     this.className = Transform2D.className;
-    this.inputElements = {x: null, y: null};
+    this.inputElementY = React.createRef();
+    this.wasSolo = false;
+
     const linkMenu = {
         menu: linkMenuTypes,
         handleClick: (event, data) => {
@@ -39,7 +41,7 @@ class Transform2D extends Transform {
     this.menuX = [{...this.menu[0]}, linkMenu];
     this.menuX[0].handleClick = (event, data) => {
         if(data.type) {
-            this.setState({inputX: window.getClassFromName(data.type)}, () => {
+            this.setState({input: window.getClassFromName(data.type)}, () => {
                 window.updateWorkspace();
             });
         }
@@ -59,6 +61,9 @@ class Transform2D extends Transform {
         menu: unlinkMenuTypes,
         handleClick: (event, data) => {
               this.setState({solo: false}, () => {
+                  if(this.props.state) {
+                      this.wasSolo = true;
+                  }
                 window.updateWorkspace();
               });
           }
@@ -67,61 +72,63 @@ class Transform2D extends Transform {
   }
 
   initFromSavedState(state) {
-      if(state.solo) {
-        super.initFromSavedState(state);
-      } else {
-        this.state.inputX = window.getClassFromName(state.inputX.className);
+    super.initFromSavedState(state);
+    if(!state.solo) {
         this.state.inputY = window.getClassFromName(state.inputY.className);
-      }
-
-      this.state.solo = state.solo;
+    } else {
+        this.state.inputY = this.state.input;
+    }
+    this.state.solo = state.solo;
   }
 
   init() {
       super.init();
-      this.state.inputX = SliderBox;
       this.state.inputY = SliderBox;
       this.state.solo = false;
   }
 
   getInputValue() {
       if(this.state.solo) {
-          const value = super.getInputValue()
+          const value = super.getInputValue();
           return {x: value, y: value};
       } else {
-          return this.returns({x: this.inputElements.x.getValue(), y: this.inputElements.y.getValue()});
+          return this.returns({x: this.inputElement.current.getValue(), y: this.inputElementY.current.getValue()});
       }
   }
 
   toJSON() {
-      if(this.state.solo) {
-          return {...super.toJSON(), solo: this.state.solo};
-      } else {
-          return {
-              inputX: {className: this.state.inputX.className, state: this.inputElements.x.toJSON()},
-              inputY: {className: this.state.inputY.className, state: this.inputElements.y.toJSON()},
-              solo: this.state.solo
-            };
-      }
+    let json = {...super.toJSON(), solo: this.state.solo};
+
+    if(!this.state.solo) {
+        json.inputY = {className: this.state.inputY.className, state: this.inputElementY.current.toJSON()};
+    } else {
+        json.inputY = json.input;
+    }
+
+    return json;
   }
 
   render() {
 
-    // onChange not useful
     if(!this.state.solo) {
-        const {inputX, inputY} = this.props.state ? this.props.state : {};
+        const InputX = this.state.input;
+        const InputY = this.wasSolo ? this.state.input : this.state.inputY;
+        const {input, inputY} = this.props.state ? this.props.state : {};
+        const inputYElement = <InputY {...this.props} ref={this.inputElementY} onChange={this.componentDidUpdate.bind(this)} input={this.wasSolo ? input : inputY}/>;
+        
+        this.wasSolo = false;
         return (
             <div className="Transform">
               {this.props.icon && <SVG className='TransformBox__icon' src={this.props.icon}/>}
               <div className="Transform2D__inputs">
-                <ContextMenuBox id={this.constructor.className + this.id + '0'} menu={this.menuX}>
+                <ContextMenuBox id={this.constructor.className + this.id} menu={this.menuX}>
                     <div className='TransformBox__input'>
-                        <this.state.inputX {...this.props} ref={el => this.inputElements.x = el} input={inputX}/>
+                        <InputX {...this.props} ref={this.inputElement} onChange={this.componentDidUpdate.bind(this)} input={input}/>
                     </div>
                 </ContextMenuBox>
                 <ContextMenuBox id={this.constructor.className + this.id + '1'} menu={this.menuY}>
                     <div className='TransformBox__input'>
-                        <this.state.inputY {...this.props} ref={el => this.inputElements.y = el} input={inputY}/>
+                        {inputYElement}
                     </div>
                 </ContextMenuBox>
               </div>

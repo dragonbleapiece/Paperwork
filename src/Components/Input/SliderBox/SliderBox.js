@@ -45,7 +45,7 @@ class SliderBox extends Input {
         onChange={(value) => {
             this.value = value;
             if(this.props.onChange) {
-                this.props.onChange(value, this);
+                this.props.onChange(value);
             }
         }}
         onAfterChange={() => Workspace.forceUpdate()}

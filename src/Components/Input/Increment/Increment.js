@@ -126,8 +126,7 @@ class Increment extends Input {
     }
 
     onChangeOption(e) {
-        this.setState({condition: parseInt(e.target.value, 10)});
-        window.updateWorkspace();
+        this.update({condition: parseInt(e.target.value, 10)});
     }
 
     toJSON() {
@@ -159,8 +158,7 @@ class Increment extends Input {
                     <input type='number' min={this.props.min} max={exactMath.sub(this.state.to, this.step)} step={this.step} value={this.state.from} onChange={(e) => {
                         const value = parseFloat(e.target.value ? e.target.value : 0);
                         if(e.target.min > value || e.target.max < value) return;
-                        this.setState({from: this.fix(value)});
-                        window.updateWorkspace();
+                        this.update({from: this.fix(value)});
                     }}/>
 
                     <SVG className='Random__arrow' src={arrowLeft} style={(this.state.increment === 1) ? ({visibility: 'hidden'}) : {}}/>
@@ -169,12 +167,10 @@ class Increment extends Input {
                         <input title='step' type='number' min={this.step} max={exactMath.sub(this.state.to, this.state.from)} step={this.step} value={this.state.step} onChange={(e) => {
                             const value = parseFloat(e.target.value ? e.target.value : 0);
                             if(e.target.min > value || e.target.max < value) return;
-                            this.setState({step: this.fix(value)});
-                            window.updateWorkspace();
+                            this.update({step: this.fix(value)});
                         }}/>
                         <SVG className='Increment__icon' src={incrementIcon} onClick={(e) => {
-                            this.setState({increment : -this.state.increment});
-                            window.updateWorkspace();
+                            this.update({increment : -this.state.increment});
                         }}/>
                     </div>
                     <SVG className='Random__arrow' src={arrowRight} style={(this.state.increment === -1) ? ({visibility: 'hidden'}) : {}}/>
@@ -182,8 +178,7 @@ class Increment extends Input {
                     <input type='number' min={exactMath.add(this.state.from, this.step)} max={this.props.max} step={this.step} value={this.state.to} onChange={(e) => {
                         const value = parseFloat(e.target.value ? e.target.value : 0);
                         if(e.target.min > value || e.target.max < value) return;
-                        this.setState({to: this.fix(value)});
-                        window.updateWorkspace();
+                        this.update({to: this.fix(value)});
                     }}/>
                 </div>
                 <div className='Increment__options'>

@@ -36,8 +36,13 @@ class Input extends Component {
         return {};
     }
 
-    initState(state) {
-
+    update(state) {
+        this.setState(state, () => {
+            if(this.props.onChange) {
+                this.props.onChange();
+            }
+            window.updateWorkspace();
+        });
     }
 }
 

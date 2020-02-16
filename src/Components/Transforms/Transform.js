@@ -34,7 +34,7 @@ class Transform extends Component {
 
     this.id = shortid.generate();
     this.className = Transform.className;
-    this.inputElement = null;
+    this.inputElement = React.createRef();
     this.returns = this.props.returns || ((value) => value);
     this.menu = [
       {
@@ -51,11 +51,12 @@ class Transform extends Component {
   }
 
   componentDidUpdate() {
+    // is late
     const {saveTransform} = this.props;
     if(saveTransform) {
         saveTransform(this.toJSON());
     }
-}
+  }
 
   initFromSavedState(state) {
     this.state.input = window.getClassFromName(state.input.className);
@@ -66,11 +67,11 @@ class Transform extends Component {
   }
 
   getInputValue() {
-    return this.returns(this.inputElement.getValue());
+    return this.returns(this.inputElement.current.getValue());
   }
 
   toJSON() {
-    return {input: {className: this.state.input.className, state: this.inputElement.toJSON()}};
+    return {input: {className: this.state.input.className, state: this.inputElement.current.toJSON()}};
   }
 
   render() {
@@ -80,7 +81,7 @@ class Transform extends Component {
         <div className="Transform">
           {this.props.icon && <SVG className='TransformBox__icon' src={this.props.icon}/>}
           <div className='TransformBox__input'>
-            <this.state.input {...this.props} ref={el => this.inputElement = el} input={input}/>
+            <this.state.input {...this.props} ref={this.inputElement} onChange={this.componentDidUpdate.bind(this)} input={input}/>
           </div>
         </div>
       </ContextMenuBox>
