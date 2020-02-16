@@ -30,7 +30,7 @@ class Ellipse extends Figure {
   }
 
   drawFigure(sk) {
-    let ellipse = sk.ellipse(this.x, this.y, this.width, this.height);
+    let ellipse = sk.ellipse(0, 0, this.width, this.height);
     sk.setPathTransform(ellipse);
   }
 

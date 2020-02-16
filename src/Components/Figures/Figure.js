@@ -94,10 +94,10 @@ class Figure extends Box {
     const Transforms = [
       // Translation
       <Transform2D 
-        min={-0.5}
-        max={0.5}
+        min={-1}
+        max={1}
         defaultValue={this._x}
-        marks={{'-0.5':-1, 0:0, '0.5':1}}
+        marks={{'-1':-1, 0:0, 1:1}}
         step={0.05}
         key={0}
         ref={(el) => {this.transforms['translate'] = el}}
@@ -142,8 +142,8 @@ class Figure extends Box {
       sk.fill(this.state.color.getColor(sk));
       //console.log(-sk.scaleValue.x / 2 + this.x * sk.scaleValue.x, -sk.scaleValue.y / 2 + this.y * sk.scaleValue.y);
       sk.translate(-0.5 + x, -0.5 + y);
-      sk.rotate(this.rotation, 0.5 + x, 0.5 + y);
-      sk.scale(scale.x, scale.y, 0.5 + x, 0.5 + y);
+      sk.rotate(this.rotation, 0.5, 0.5);
+      sk.scale(scale.x, scale.y, 0.5, 0.5);
       this.drawFigure(sk);
     sk.pop();
   }

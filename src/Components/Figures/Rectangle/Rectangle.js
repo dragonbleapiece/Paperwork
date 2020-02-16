@@ -27,7 +27,7 @@ class Rectangle extends Figure {
   }
 
   drawFigure(sk) {
-    let rect = sk.rect(this.x, this.y, this.width, this.height);
+    let rect = sk.rect(0, 0, this.width, this.height);
     sk.setPathTransform(rect);
   }
 
