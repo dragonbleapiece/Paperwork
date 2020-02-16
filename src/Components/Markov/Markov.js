@@ -2,7 +2,7 @@ import React from 'react';
 import BoxGroup from '../BoxGroup/BoxGroup';
 import 'rc-slider/assets/index.css';
 import './Markov.css';
-import RangeBox from '../Input/RangeBox/RangeBox';
+import markovIcon from '../../Icons/markov.svg';
 import Radar from './Radar';
 import shortid from 'shortid';
 
@@ -53,7 +53,7 @@ class Markov extends BoxGroup {
   }
 
   static get icon() {
-    return undefined;
+    return markovIcon;
   }
 
   static get unauthorized() {
