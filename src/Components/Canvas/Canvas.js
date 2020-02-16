@@ -190,7 +190,7 @@ class Canvas extends Component {
 
   rotate(angle, cx = 0, cy = cx) {
     let matrix = new Paper.Matrix();
-    this.lastStyle.transform = this.lastStyle.transform.appended(matrix.rotate(angle, new Paper.Point(cx, cy)));
+    this.lastStyle.transform = this.lastStyle.transform.appended(matrix.rotate(-angle, new Paper.Point(cx, cy)));
   }
 
   noStroke() {
