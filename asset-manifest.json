@@ -1,19 +1,19 @@
 {
   "files": {
-    "main.css": "/PAPER/static/css/main.586b24dd.chunk.css",
-    "main.js": "/PAPER/static/js/main.bf5a296f.chunk.js",
-    "main.js.map": "/PAPER/static/js/main.bf5a296f.chunk.js.map",
+    "main.css": "/PAPER/static/css/main.49ba6196.chunk.css",
+    "main.js": "/PAPER/static/js/main.c94fa41d.chunk.js",
+    "main.js.map": "/PAPER/static/js/main.c94fa41d.chunk.js.map",
     "runtime-main.js": "/PAPER/static/js/runtime-main.2b2d2b6a.js",
     "runtime-main.js.map": "/PAPER/static/js/runtime-main.2b2d2b6a.js.map",
     "static/css/2.96479aa2.chunk.css": "/PAPER/static/css/2.96479aa2.chunk.css",
-    "static/js/2.48e6cc4d.chunk.js": "/PAPER/static/js/2.48e6cc4d.chunk.js",
-    "static/js/2.48e6cc4d.chunk.js.map": "/PAPER/static/js/2.48e6cc4d.chunk.js.map",
+    "static/js/2.86b5524e.chunk.js": "/PAPER/static/js/2.86b5524e.chunk.js",
+    "static/js/2.86b5524e.chunk.js.map": "/PAPER/static/js/2.86b5524e.chunk.js.map",
     "index.html": "/PAPER/index.html",
-    "precache-manifest.bccfffbe2520be60c0e7f01bf739616c.js": "/PAPER/precache-manifest.bccfffbe2520be60c0e7f01bf739616c.js",
+    "precache-manifest.e8598e63c1a5bf1923c0a05c53af41e4.js": "/PAPER/precache-manifest.e8598e63c1a5bf1923c0a05c53af41e4.js",
     "service-worker.js": "/PAPER/service-worker.js",
     "static/css/2.96479aa2.chunk.css.map": "/PAPER/static/css/2.96479aa2.chunk.css.map",
-    "static/css/main.586b24dd.chunk.css.map": "/PAPER/static/css/main.586b24dd.chunk.css.map",
-    "static/js/2.48e6cc4d.chunk.js.LICENSE": "/PAPER/static/js/2.48e6cc4d.chunk.js.LICENSE",
+    "static/css/main.49ba6196.chunk.css.map": "/PAPER/static/css/main.49ba6196.chunk.css.map",
+    "static/js/2.86b5524e.chunk.js.LICENSE": "/PAPER/static/js/2.86b5524e.chunk.js.LICENSE",
     "static/media/HHatching.svg": "/PAPER/static/media/HHatching.f3da2da9.svg",
     "static/media/LOHatching.svg": "/PAPER/static/media/LOHatching.186b393d.svg",
     "static/media/ROHatching.svg": "/PAPER/static/media/ROHatching.8c0092fd.svg",
@@ -36,6 +36,7 @@
     "static/media/grid_on.svg": "/PAPER/static/media/grid_on.8ace643b.svg",
     "static/media/increment.svg": "/PAPER/static/media/increment.7577ef8f.svg",
     "static/media/info.svg": "/PAPER/static/media/info.b08ccdbe.svg",
+    "static/media/markov.svg": "/PAPER/static/media/markov.fd9fdcc8.svg",
     "static/media/minimize.svg": "/PAPER/static/media/minimize.fef1891a.svg",
     "static/media/move.svg": "/PAPER/static/media/move.a4f49321.svg",
     "static/media/my_location.svg": "/PAPER/static/media/my_location.0347ed20.svg",
@@ -54,8 +55,8 @@
   "entrypoints": [
     "static/js/runtime-main.2b2d2b6a.js",
     "static/css/2.96479aa2.chunk.css",
-    "static/js/2.48e6cc4d.chunk.js",
-    "static/css/main.586b24dd.chunk.css",
-    "static/js/main.bf5a296f.chunk.js"
+    "static/js/2.86b5524e.chunk.js",
+    "static/css/main.49ba6196.chunk.css",
+    "static/js/main.c94fa41d.chunk.js"
   ]
 }
