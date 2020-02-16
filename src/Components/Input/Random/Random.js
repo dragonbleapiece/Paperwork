@@ -1,20 +1,23 @@
 import React from 'react';
 import Input from '../Input';
 import exactMath from 'exact-math';
+import * as Utils from '../../../Utils';
 import SVG from 'react-svg';
 import random from '../../../Icons/dice.svg';
 import arrowLeft from '../../../Icons/arrow_leftUI.svg';
 import arrowRight from '../../../Icons/arrow_rightUI.svg';
 import './Random.css';
 
+const className = "Random";
+
 class Random extends Input {
 
-    state = {};
+    static get className() {
+        return className;
+    }
 
     constructor(props) {
         super(props);
-        this.state.from = this.props.min;
-        this.state.to = this.props.max;
         this.step = (this.props.step || 1);
     }
 
@@ -27,13 +30,21 @@ class Random extends Input {
         return this.fix(rand);
     }
 
-    componentDidUpdate() {
-        this.props.onChange(this.rand(), this);
+    init() {
+        this.state.from = this.props.min;
+        this.state.to = this.props.max;
+    }
+
+    initFromSavedState(state) {
+        this.state = state;
     }
 
     fix(value) {
-        const netValue = exactMath.mul(exactMath.floor(exactMath.div(parseFloat(value), this.step)), this.step);
-        return netValue;
+        return Utils.fix(value, this.step);
+    }
+
+    toJSON() {
+        return {...this.state};
     }
 
     render() {

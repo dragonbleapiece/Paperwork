@@ -66,7 +66,7 @@ class ThisBox extends Figure {
   }
 
   drawFigure(sk) {
-    if(this.recursionParent && this.recursion < this.recursionParent.state.recursionMax) {
+    if(this.recursionParent && this.recursion <= this.recursionParent.state.recursionMax && this.recursionParent.globalRecursion <= this.recursionParent.state.recursionMax) {
       ++this.recursionParent.globalRecursion;
       ++this.recursion;
       this.recursionParent.draw(sk);

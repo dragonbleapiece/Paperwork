@@ -4,9 +4,19 @@ import Input from '../Input';
 import Slider from 'rc-slider';
 import './SliderBox.css';
 
+const className = "SliderBox";
+
 class SliderBox extends Input {
-    constructor(props) {
-        super(props);
+
+    static get className() {
+        return className;
+    }
+
+    initFromSavedState(state) {
+        this.value = state.value;
+    }
+
+    init() {
         this.value = this.props.defaultValue;
     }
 
@@ -14,12 +24,16 @@ class SliderBox extends Input {
         return this.value;
     }
 
+    toJSON() {
+        return {value: this.value};
+    }
+
     render() {
         return(
         <Slider
         min={this.props.min}
         max={this.props.max}
-        defaultValue={this.props.defaultValue}
+        defaultValue={this.value}
         marks={this.props.marks}
         step={this.props.step}
         className="Box__slider"
@@ -28,10 +42,12 @@ class SliderBox extends Input {
         railStyle={{height: '8px', backgroundColor: 'black', borderRadius: 'unset' }}
         handleStyle={{marginTop: '-3px', borderColor: 'black' }}
         dotStyle={{bottom: '-4px', borderColor: 'black' }}
-        onChange={(value) => {if(this.props.onChange) {
+        onChange={(value) => {
             this.value = value;
-            this.props.onChange(value, this);
-        }}}
+            if(this.props.onChange) {
+                this.props.onChange(value, this);
+            }
+        }}
         onAfterChange={() => Workspace.forceUpdate()}
         />
         );

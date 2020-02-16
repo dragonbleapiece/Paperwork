@@ -22,18 +22,10 @@ const unlinkMenuTypes = [
 //need to be refactored
 class Transform2D extends Transform {
 
-  state = {
-    input: SliderBox,
-    inputX: SliderBox,
-    inputY: SliderBox,
-    solo : false
-  };
-
   constructor(props) {
     super(props);
     this.id = shortid.generate();
     this.className = Transform2D.className;
-    this.values = {x: 0, y: 0};
     this.inputElements = {x: null, y: null};
     const linkMenu = {
         menu: linkMenuTypes,
@@ -74,6 +66,24 @@ class Transform2D extends Transform {
     this.menu.push(unlinkMenu);
   }
 
+  initFromSavedState(state) {
+      if(state.solo) {
+        super.initFromSavedState(state);
+      } else {
+        this.state.inputX = window.getClassFromName(state.inputX.className);
+        this.state.inputY = window.getClassFromName(state.inputY.className);
+      }
+
+      this.state.solo = state.solo;
+  }
+
+  init() {
+      super.init();
+      this.state.inputX = SliderBox;
+      this.state.inputY = SliderBox;
+      this.state.solo = false;
+  }
+
   getInputValue() {
       if(this.state.solo) {
           const value = super.getInputValue()
@@ -83,27 +93,35 @@ class Transform2D extends Transform {
       }
   }
 
+  toJSON() {
+      if(this.state.solo) {
+          return {...super.toJSON(), solo: this.state.solo};
+      } else {
+          return {
+              inputX: {className: this.state.inputX.className, state: this.inputElements.x.toJSON()},
+              inputY: {className: this.state.inputY.className, state: this.inputElements.y.toJSON()},
+              solo: this.state.solo
+            };
+      }
+  }
+
   render() {
 
+    // onChange not useful
     if(!this.state.solo) {
+        const {inputX, inputY} = this.props.state ? this.props.state : {};
         return (
             <div className="Transform">
               {this.props.icon && <SVG className='TransformBox__icon' src={this.props.icon}/>}
               <div className="Transform2D__inputs">
                 <ContextMenuBox id={this.constructor.className + this.id + '0'} menu={this.menuX}>
                     <div className='TransformBox__input'>
-                        <this.state.inputX {...this.props} ref={el => this.inputElements.x = el} onChange={(value) => {
-                        this.values.x = value;
-                        if(this.props.onChange) this.props.onChange(this.values.x);
-                        }} />
+                        <this.state.inputX {...this.props} ref={el => this.inputElements.x = el} input={inputX}/>
                     </div>
                 </ContextMenuBox>
                 <ContextMenuBox id={this.constructor.className + this.id + '1'} menu={this.menuY}>
                     <div className='TransformBox__input'>
-                        <this.state.inputY {...this.props} ref={el => this.inputElements.y = el} onChange={(value) => {
-                        this.values.y = value;
-                        if(this.props.onChange) this.props.onChange(this.values.y);
-                        }} />
+                        <this.state.inputY {...this.props} ref={el => this.inputElements.y = el} input={inputY}/>
                     </div>
                 </ContextMenuBox>
               </div>

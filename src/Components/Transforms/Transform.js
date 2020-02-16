@@ -21,15 +21,19 @@ const inputMenu = [
 /*Attribute*/
 class Transform extends Component {
 
-  state = {
-    input: SliderBox
-  };
+  state = {};
 
   constructor(props) {
     super(props);
+
+    if(this.props.state) {
+      this.initFromSavedState(this.props.state);
+    } else {
+      this.init();
+    }
+
     this.id = shortid.generate();
     this.className = Transform.className;
-    this.value = 0;
     this.inputElement = null;
     this.returns = this.props.returns || ((value) => value);
     this.menu = [
@@ -46,20 +50,37 @@ class Transform extends Component {
     ];
   }
 
+  componentDidUpdate() {
+    const {saveTransform} = this.props;
+    if(saveTransform) {
+        saveTransform(this.toJSON());
+    }
+}
+
+  initFromSavedState(state) {
+    this.state.input = window.getClassFromName(state.input.className);
+  }
+
+  init() {
+    this.state.input = SliderBox;
+  }
+
   getInputValue() {
     return this.returns(this.inputElement.getValue());
   }
 
+  toJSON() {
+    return {input: {className: this.state.input.className, state: this.inputElement.toJSON()}};
+  }
+
   render() {
+    const {input} = this.props.state ? this.props.state : {};
     return (
       <ContextMenuBox id={this.constructor.className + this.id} menu={this.menu}>
         <div className="Transform">
           {this.props.icon && <SVG className='TransformBox__icon' src={this.props.icon}/>}
           <div className='TransformBox__input'>
-            <this.state.input {...this.props} ref={el => this.inputElement = el} onChange={(value) => {
-              this.value = value;
-              if(this.props.onChange) this.props.onChange(this.value);
-            }} />
+            <this.state.input {...this.props} ref={el => this.inputElement = el} input={input}/>
           </div>
         </div>
       </ContextMenuBox>

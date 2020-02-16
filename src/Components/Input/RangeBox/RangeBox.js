@@ -4,6 +4,7 @@ import Input from '../Input';
 import { Range } from 'rc-slider';
 import './RangeBox.css';
 
+// not used and not updated
 class RangeBox extends Input {
     render() {
         let trackStyleArray = new Array(this.props.count);

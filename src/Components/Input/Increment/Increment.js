@@ -2,6 +2,7 @@ import React from 'react';
 import Input from '../Input';
 import Canvas from '../../Canvas/Canvas';
 import exactMath from 'exact-math';
+import * as Utils from '../../../Utils';
 import SVG from 'react-svg';
 import increment from '../../../Icons/increment.svg';
 import decrement from '../../../Icons/decrement.svg';
@@ -30,21 +31,18 @@ const inputOptionsIcons = [
     }
 ];
 
+const className = "Increment";
+
 class Increment extends Input {
 
-    state = {
-
-    };
+    static get className() {
+        return className;
+    }
 
     constructor(props) {
         super(props);
-        this.state.from = props.min;
-        this.state.to = props.max;
-        this.state.condition = 0;
-        this.state.increment = 1;
         this.increment = this.state.increment;
         this.step = props.step || 1;
-        this.state.step = this.step;
         this.value = this.state.from;
         this.target = null;
         Canvas.attach(this);
@@ -52,6 +50,18 @@ class Increment extends Input {
 
     componentWillUnmount() {
         Canvas.detach(this);
+    }
+
+    init() {
+        this.state.from = this.props.min;
+        this.state.to = this.props.max;
+        this.state.condition = 0;
+        this.state.increment = 1;
+        this.state.step = this.props.step || 1;
+    }
+
+    initFromSavedState(state) {
+        this.state = state;   
     }
 
     receiveNotification() {
@@ -83,8 +93,7 @@ class Increment extends Input {
     }
 
     fix(value) {
-        const netValue = exactMath.mul(exactMath.floor(exactMath.div(parseFloat(value), this.step)), this.step);
-        return netValue;
+        return Utils.fix(value, this.step);
     }
 
     limited(value) {
@@ -121,13 +130,17 @@ class Increment extends Input {
         window.updateWorkspace();
     }
 
+    toJSON() {
+        return {...this.state};
+    }
+
     render() {
 
         const incrementIcon = (this.state.increment === 1) ? increment : decrement;
         const InputOptions = inputOptionsIcons.map(({icon, id, title}, index) => {
             const selected = (this.state.condition === index) ? 'selected' : ''; 
             return (
-                <label title={title} className={selected}>
+                <label key={id} title={title} className={selected}>
                     <input
                         checked={this.state.condition === index}
                         type='radio'

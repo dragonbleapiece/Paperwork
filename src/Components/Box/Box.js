@@ -146,7 +146,8 @@ class Box extends Component {
     style: {},
     dragEnter: -1,
     isMinimized: false,
-    isInfo: false
+    isInfo: false,
+    transforms: {}
   };
 
   constructor(props) {

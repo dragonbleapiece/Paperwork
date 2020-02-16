@@ -2,9 +2,9 @@ import React from 'react';
 import Box from '../Box/Box';
 import Transform from '../Transforms/Transform';
 import Transform2D from '../Transforms/Transform2D';
-import scale from '../../Icons/scale.svg';
-import rotate from '../../Icons/rotate_left.svg';
-import move from '../../Icons/move.svg';
+import scaleIcon from '../../Icons/scale.svg';
+import rotateIcon from '../../Icons/rotate_left.svg';
+import moveIcon from '../../Icons/move.svg';
 import './Figure.css';
 
 const className = "Figure";
@@ -89,17 +89,21 @@ class Figure extends Box {
   }
   
   getTransforms() {
+    const {translate, scale, rotation} = this.state.transforms;
+
     const Transforms = [
       // Translation
       <Transform2D 
-        min={-1}
-        max={1}
+        min={-0.5}
+        max={0.5}
         defaultValue={this._x}
-        marks={{'-1':-1, 0:0, 1:1}}
+        marks={{'-0.5':-1, 0:0, '0.5':1}}
         step={0.05}
         key={0}
         ref={(el) => {this.transforms['translate'] = el}}
-        icon={move}
+        icon={moveIcon}
+        saveTransform={(state) => this.state.transforms['translate'] = state}
+        state={translate}
       />,
       // Scale
       <Transform2D 
@@ -110,7 +114,9 @@ class Figure extends Box {
         step={0.1}
         key={1}
         ref={(el) => {this.transforms['scale'] = el}}
-        icon={scale}
+        icon={scaleIcon}
+        saveTransform={(state) => this.state.transforms['scale'] = state}
+        state={scale}
       />,
       // Rotation
       <Transform 
@@ -121,7 +127,9 @@ class Figure extends Box {
         step={1}
         key={2}
         ref={(el) => {this.transforms['rotation'] = el}}
-        icon={rotate}
+        icon={rotateIcon}
+        saveTransform={(state) => this.state.transforms['rotation'] = state}
+        state={rotation}
       />
     ];
     return Transforms;
