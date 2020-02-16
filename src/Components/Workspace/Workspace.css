@@ -52,6 +52,7 @@
 .Workspace__viewBox {
     padding: 20px;
     cursor: unset;
+    height: 100%;
 }
 
 .Workspace .DropBox {

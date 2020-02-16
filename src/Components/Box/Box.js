@@ -418,6 +418,7 @@ class Box extends Component {
       e.preventDefault();
       e.dataTransfer.dropEffect = "move";
       const index = this.getDragItemIndex(e.screenX, e.screenY);
+      
       if(index !== this.state.dragEnter) {
         this.setState({dragEnter: index});
       }
@@ -476,8 +477,8 @@ class Box extends Component {
       }
     }
 
-    if(dragManager.draggableParent === this && index === dragManager.draggableIndex) {
-      index = (index + 1) % children.length;
+    if(dragManager.draggableParent === this && (index === dragManager.draggableIndex || index - 1 === dragManager.draggableIndex)) {
+      index = -1;
     }
 
     return index;
