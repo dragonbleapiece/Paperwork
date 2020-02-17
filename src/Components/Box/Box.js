@@ -462,13 +462,17 @@ class Box extends Component {
     let index = 0;
     const dragManager = DragManager.instance;
 
-    let children = Array.from(container.children).filter((child) => child.className !== 'BoxPlaceHolder');
+    let children = Array.from(container.children).filter((child) => {
+      const className = child.className.split(' ');
+      return className.indexOf("Box") !== -1 || className.indexOf("BoxGroup") !== -1;
+    });
 
     for(let child of children) {
       if(child.nodeType === 1) {
         const box = child.getBoundingClientRect();
         const isx = ( x < ( box.left + box.width / 2 ) );
         const isy = ( y < ( box.top + box.height ) );
+        console.log(isy, y, box.top + box.height);
         if((!this.isFlexVertical && isx) || (this.isFlexVertical && isy)) {
           break;
         }
@@ -506,6 +510,10 @@ class Box extends Component {
 
   doBeforeRender() {
     // Void
+  }
+
+  hasReachedLimit() {
+    return !!this.state.children.length;
   }
 
   render() {
@@ -552,8 +560,8 @@ class Box extends Component {
               <div className='DropBox'>
                 <ContextMenuTrigger id={this.constructor.className + this.props.id} holdToDisplay={-1}>
                   {this.constructor.unauthorized.indexOf("*") === -1 && <div className="Box__container" ref='container' onDrop={this.onDrop.bind(this)} onDragEnter={this.onDragEnter.bind(this)} onDragOver={this.onDragOver.bind(this)} onDragLeave={this.onDragLeave.bind(this)}>
-                    {!children.length && <span className="Box__placeholder">Right click to add</span>}
                     {children}
+                    {!this.hasReachedLimit() && <span className="Box__placeholder">Right click to add</span>}
                   </div>}
                 </ContextMenuTrigger>
               </div>

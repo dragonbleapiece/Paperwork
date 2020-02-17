@@ -105,6 +105,10 @@ class BoxGroup extends Box {
     }
   }
 
+  hasReachedLimit() {
+    return false;
+  }
+
   getTransforms() {
     return null;
   }

@@ -95,6 +95,10 @@ class Markov extends BoxGroup {
     return result;
   }
 
+  getColorMenu() {
+    return [];
+  }
+
   draw(sk) {
     let length = this.state.children.length;
     if(length === 0) return;

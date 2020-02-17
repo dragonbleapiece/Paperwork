@@ -71,6 +71,10 @@
     cursor: pointer;
 }
 
+.Markov__InputIcon svg:hover {
+  fill: black;
+}
+
 .Markov__InputIcon.selected svg {
     fill: #000000;
 }
