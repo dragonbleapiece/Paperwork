@@ -10,6 +10,11 @@ import Log from '../Log/Log';
 const className = "Recursion";
 const unauthorized = ["Placement", "Recursion", "Markov", "Void"];
 
+const maxRecursionWhenDuplicate = 2;
+const maxRecursion = 5;
+const maxThisBox = 4;
+const maxThisBoxWhenDuplicate = 3;
+
 /*Pencil*/
 class Recursion extends BoxGroup {
 
@@ -47,7 +52,7 @@ class Recursion extends BoxGroup {
             return [];
         }
         const filteredMenu = menu.filter((item) => this.constructor.unauthorized.indexOf(item.type) === -1);
-        if(this.hasParent('Recursion') && (this.state.nbThisBox < 4 && this.state.ignoreThisBox || this.state.nbThisBox < 2)) {
+        if(this.hasParent('Recursion') && (this.state.nbThisBox < maxThisBox && this.state.ignoreThisBox || this.state.nbThisBox < maxThisBoxWhenDuplicate)) {
             return [...filteredMenu, {type: 'ThisBox'}];
         }
         return filteredMenu;
@@ -99,7 +104,7 @@ class Recursion extends BoxGroup {
                 <div className='Transform'>
                     <SVG src={recursionOption} className='TransformBox__icon'/>
                     <div className='Recursion__options'>
-                        <input type='number' min={1} max={4} value={this.state.recursionMax} onChange={(e) => {
+                        <input type='number' min={1} max={this.state.ignoreThisBox ? maxRecursion : maxRecursionWhenDuplicate} value={this.state.recursionMax} onChange={(e) => {
                             const value = parseInt(e.target.value, 10) || 0;
                             if(e.target.min > value || e.target.max < value) return;
                             this.setState({recursionMax: value});
@@ -111,7 +116,7 @@ class Recursion extends BoxGroup {
                     <div className='Recursion__options'>
                         <label className='Recursion__duplicate'>
                             <input type='checkbox' checked={this.state.ignoreThisBox} onChange={(e) => {
-                                if(this.state.nbThisBox <= 2) {
+                                if(this.state.nbThisBox <= maxThisBoxWhenDuplicate) {
                                     this.setState({ignoreThisBox: !this.state.ignoreThisBox});
                                 } else {
                                     this.setState({log: true});

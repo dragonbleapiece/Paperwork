@@ -472,7 +472,6 @@ class Box extends Component {
         const box = child.getBoundingClientRect();
         const isx = ( x < ( box.left + box.width / 2 ) );
         const isy = ( y < ( box.top + box.height ) );
-        console.log(isy, y, box.top + box.height);
         if((!this.isFlexVertical && isx) || (this.isFlexVertical && isy)) {
           break;
         }

@@ -66,7 +66,7 @@ class ThisBox extends Figure {
   }
 
   drawFigure(sk) {
-    if(this.recursionParent && this.recursion <= this.recursionParent.state.recursionMax && this.recursionParent.globalRecursion <= this.recursionParent.state.recursionMax) {
+    if(this.recursionParent && (this.recursion <= this.recursionParent.state.recursionMax && !this.recursionParent.state.ignoreThisBox || this.recursionParent.globalRecursion <= this.recursionParent.state.recursionMax && this.recursionParent.state.ignoreThisBox)) {
       ++this.recursionParent.globalRecursion;
       ++this.recursion;
       this.recursionParent.draw(sk);
@@ -79,9 +79,9 @@ class ThisBox extends Figure {
     const scale = this.scale;
     const {x, y} = this.position;
     sk.push();
-      sk.rotate(this.rotation, x, y);
-      sk.scale(scale.x, scale.y, x, y);
       sk.translate(x, y);
+      sk.rotate(this.rotation, 0, 0);
+      sk.scale(scale.x, scale.y, 0, 0);
       this.drawFigure(sk);
     sk.pop();
   }
