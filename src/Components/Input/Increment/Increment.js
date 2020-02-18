@@ -159,7 +159,12 @@ class Increment extends Input {
                         const value = parseFloat(e.target.value ? e.target.value : 0);
                         if(e.target.min > value || e.target.max < value) return;
                         this.update({from: this.fix(value)});
-                    }}/>
+                    }}
+                    onMouseUp={(e) => {
+                        const target = e.target;
+                        target.select();
+                      }}
+                    />
 
                     <SVG className='Random__arrow' src={arrowLeft} style={(this.state.increment === 1) ? ({visibility: 'hidden'}) : {}}/>
                     
@@ -168,7 +173,12 @@ class Increment extends Input {
                             const value = parseFloat(e.target.value ? e.target.value : 0);
                             if(e.target.min > value || e.target.max < value) return;
                             this.update({step: this.fix(value)});
-                        }}/>
+                        }}
+                        onMouseUp={(e) => {
+                            const target = e.target;
+                            target.select();
+                          }}
+                        />
                         <SVG className='Increment__icon' src={incrementIcon} onClick={(e) => {
                             this.update({increment : -this.state.increment});
                         }}/>
@@ -179,7 +189,12 @@ class Increment extends Input {
                         const value = parseFloat(e.target.value ? e.target.value : 0);
                         if(e.target.min > value || e.target.max < value) return;
                         this.update({to: this.fix(value)});
-                    }}/>
+                    }}
+                    onMouseUp={(e) => {
+                        const target = e.target;
+                        target.select();
+                      }}
+                    />
                 </div>
                 <div className='Increment__options'>
                     {InputOptions}

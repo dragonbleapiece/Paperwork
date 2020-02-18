@@ -188,6 +188,10 @@ class Markov extends BoxGroup {
                 if(target.min > value || target.max < value) return;
                 this.checkProba(value, i);
               }}
+              onMouseUp={(e) => {
+                const target = e.target;
+                target.select();
+              }}
             />
           </div>);
         }

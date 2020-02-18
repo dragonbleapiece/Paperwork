@@ -55,7 +55,12 @@ class Random extends Input {
                     const value = parseFloat(e.target.value ? e.target.value : 0);
                     if(e.target.min > value || e.target.max < value) return;
                     this.update({from: this.fix(value)});
-                }}/>
+                }}
+                onMouseUp={(e) => {
+                    const target = e.target;
+                    target.select();
+                  }}
+                />
                 <SVG className='Random__arrow' src={arrowLeft}/>
                 <SVG className='Random__icon' src={random} />
                 <SVG className='Random__arrow' src={arrowRight}/>
@@ -63,7 +68,12 @@ class Random extends Input {
                     const value = parseFloat(e.target.value ? e.target.value : 0);
                     if(e.target.min > value || e.target.max < value) return;
                     this.update({to: this.fix(value)});
-                }}/>
+                }}
+                onMouseUp={(e) => {
+                    const target = e.target;
+                    target.select();
+                  }}
+                />
             </div>
         );
     }

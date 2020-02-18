@@ -109,7 +109,12 @@ class Recursion extends BoxGroup {
                             if(e.target.min > value || e.target.max < value) return;
                             this.setState({recursionMax: value});
                             window.updateWorkspace();
-                        }}/>
+                        }}
+                        onMouseUp={(e) => {
+                            const target = e.target;
+                            target.select();
+                          }}
+                        />
                     </div>
                 </div>
                 <div className='Transform'>
