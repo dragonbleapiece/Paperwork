@@ -1,15 +1,15 @@
 {
   "files": {
     "main.css": "/Paperwork/static/css/main.164c4910.chunk.css",
-    "main.js": "/Paperwork/static/js/main.a9eab64c.chunk.js",
-    "main.js.map": "/Paperwork/static/js/main.a9eab64c.chunk.js.map",
+    "main.js": "/Paperwork/static/js/main.271d71e9.chunk.js",
+    "main.js.map": "/Paperwork/static/js/main.271d71e9.chunk.js.map",
     "runtime-main.js": "/Paperwork/static/js/runtime-main.6f2833b6.js",
     "runtime-main.js.map": "/Paperwork/static/js/runtime-main.6f2833b6.js.map",
     "static/css/2.96479aa2.chunk.css": "/Paperwork/static/css/2.96479aa2.chunk.css",
     "static/js/2.119f4052.chunk.js": "/Paperwork/static/js/2.119f4052.chunk.js",
     "static/js/2.119f4052.chunk.js.map": "/Paperwork/static/js/2.119f4052.chunk.js.map",
     "index.html": "/Paperwork/index.html",
-    "precache-manifest.5179226d8eada7cdbb057dcf75bc96a9.js": "/Paperwork/precache-manifest.5179226d8eada7cdbb057dcf75bc96a9.js",
+    "precache-manifest.eaf81954cd548c1f310c08f0e9038124.js": "/Paperwork/precache-manifest.eaf81954cd548c1f310c08f0e9038124.js",
     "service-worker.js": "/Paperwork/service-worker.js",
     "static/css/2.96479aa2.chunk.css.map": "/Paperwork/static/css/2.96479aa2.chunk.css.map",
     "static/css/main.164c4910.chunk.css.map": "/Paperwork/static/css/main.164c4910.chunk.css.map",
@@ -57,6 +57,6 @@
     "static/css/2.96479aa2.chunk.css",
     "static/js/2.119f4052.chunk.js",
     "static/css/main.164c4910.chunk.css",
-    "static/js/main.a9eab64c.chunk.js"
+    "static/js/main.271d71e9.chunk.js"
   ]
 }
