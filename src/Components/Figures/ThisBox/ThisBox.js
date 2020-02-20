@@ -76,6 +76,8 @@ class ThisBox extends Figure {
   }
 
   draw(sk) {
+    // Prevents randomize and increment inputs
+    window.isInThisBoxCall = true;
     const scale = this.scale;
     const {x, y} = this.position;
     sk.push();
@@ -84,6 +86,7 @@ class ThisBox extends Figure {
       sk.translate(x, y);
       this.drawFigure(sk);
     sk.pop();
+    window.isInThisBoxCall = false;
   }
 
 }

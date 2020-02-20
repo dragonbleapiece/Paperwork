@@ -14,6 +14,8 @@ import {getClassFromName} from '../../Components/Index';
 
 window.getClassFromName = getClassFromName;
 
+window.isInThisBoxCall = false;
+
 window.updateWorkspace = Workspace.forceUpdate;
 
 window.addClassToElement = function(name, target) {

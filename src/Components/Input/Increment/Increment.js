@@ -76,8 +76,10 @@ class Increment extends Input {
 
     getValue() {
         const actualValue = this.value;
-        const value = exactMath.add(this.value, exactMath.mul(this.increment, this.state.step));
-        this.value = this.condition(value);
+        if(!window.isInThisBoxCall) {
+            const value = exactMath.add(this.value, exactMath.mul(this.increment, this.state.step));
+            this.value = this.condition(value);
+        }
         return actualValue;
     }
 

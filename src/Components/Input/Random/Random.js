@@ -19,10 +19,14 @@ class Random extends Input {
     constructor(props) {
         super(props);
         this.step = (this.props.step || 1);
+        this.value = this.rand();
     }
 
     getValue() {
-        return this.rand();
+        if(!window.isInThisBoxCall) {
+            this.value = this.rand();
+        }
+        return this.value;
     }
 
     rand() {
