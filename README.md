@@ -1,4 +1,4 @@
-## Paper { }
+## Paperwork
 
 In the project directory, you can run:
 
