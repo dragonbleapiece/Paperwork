@@ -40,6 +40,6 @@
   "devDependencies": {
     "gh-pages": "^2.1.1"
   },
-  "homepage": "https://dragonbleapiece.github.io/PAPER/",
-  "_comment": "."
+  "_comment": "https://dragonbleapiece.github.io/PAPER/",
+  "homepage": "."
 }

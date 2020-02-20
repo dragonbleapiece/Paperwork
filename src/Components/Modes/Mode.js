@@ -23,7 +23,6 @@ class Mode extends Component {
   }
 
   render() {
-    console.log(this.modes);
     return (
       <div className="gridMode">
         <ContextMenuBox id={this.constructor.className + this.id} menu={[{menu: this.modes, handleClick: this.props.handleClick}]}>

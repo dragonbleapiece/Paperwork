@@ -180,17 +180,17 @@ class Canvas extends Component {
 
   translate(x, y = x) {
     let matrix = new Paper.Matrix();
-    this.lastStyle.transform = this.lastStyle.transform.appended(matrix.translate(x, y));
+    this.lastStyle.transform = this.lastStyle.transform.prepended(matrix.translate(x, y));
   }
 
   scale(x, y = x, cx = 0, cy = cx) {
     let matrix = new Paper.Matrix();
-    this.lastStyle.transform = this.lastStyle.transform.appended(matrix.scale(x, y, new Paper.Point(cx, cy)));
+    this.lastStyle.transform = this.lastStyle.transform.prepended(matrix.scale(x, y, new Paper.Point(cx, cy)));
   }
 
   rotate(angle, cx = 0, cy = cx) {
     let matrix = new Paper.Matrix();
-    this.lastStyle.transform = this.lastStyle.transform.appended(matrix.rotate(-angle, new Paper.Point(cx, cy)));
+    this.lastStyle.transform = this.lastStyle.transform.prepended(matrix.rotate(-angle, new Paper.Point(cx, cy)));
   }
 
   noStroke() {

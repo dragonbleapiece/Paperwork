@@ -141,9 +141,9 @@ class Figure extends Box {
     sk.push();
       sk.fill(this.state.color.getColor(sk));
       //console.log(-sk.scaleValue.x / 2 + this.x * sk.scaleValue.x, -sk.scaleValue.y / 2 + this.y * sk.scaleValue.y);
-      sk.translate(-0.5 + x, -0.5 + y);
-      sk.rotate(this.rotation, 0.5, 0.5);
       sk.scale(scale.x, scale.y, 0.5, 0.5);
+      sk.rotate(this.rotation, 0.5, 0.5);
+      sk.translate(-0.5 + x, -0.5 + y);
       this.drawFigure(sk);
     sk.pop();
   }

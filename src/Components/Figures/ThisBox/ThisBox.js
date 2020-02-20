@@ -79,9 +79,9 @@ class ThisBox extends Figure {
     const scale = this.scale;
     const {x, y} = this.position;
     sk.push();
-    sk.translate(x, y);
-      sk.rotate(this.rotation);	
       sk.scale(scale.x, scale.y);	
+      sk.rotate(this.rotation);
+      sk.translate(x, y);
       this.drawFigure(sk);
     sk.pop();
   }

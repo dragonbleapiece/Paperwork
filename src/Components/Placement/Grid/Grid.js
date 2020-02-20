@@ -67,8 +67,8 @@ class Grid extends Placement {
           if(elem) {
             sk.noStroke();
             sk.push();
-              sk.translate(column / 2, row / 2);
               sk.scale(column, row);
+              sk.translate(column / 2, row / 2);
               elem.draw(sk);
             sk.pop();
           }
