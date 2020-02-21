@@ -2,15 +2,6 @@ import React, {Component} from 'react';
 import exactMath from 'exact-math';
 
 
-const isTextSelected = (input) => {
-    if (typeof input.selectionStart == "number") {
-        return input.selectionStart == 0 && input.selectionEnd == input.value.length;
-    } else {
-        return window.getSelection().toString() == input.value;
-    }
-    return false;
-}
-
 class BoxInputNumber extends Component {
 
     onWheel(e) {
