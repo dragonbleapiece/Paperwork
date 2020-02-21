@@ -87,9 +87,12 @@ class Save extends Component {
                 <input
                 className="save__zipNumberInput"
                 type="number"
+                min={0}
                 value={this.state.zipNumber}
-                onChange={(event) => {
-                  this.setState({zipNumber: event.target.value})
+                onChange={(e) => {
+                  const value = parseFloat(e.target.value ? e.target.value : 0);
+                  if(e.target.min > value || e.target.max < value) return;
+                  this.setState({zipNumber: value});
                 }}
                 onBlur={(event) => {
                   this.setState({zipNumber: this.checkZipNumber(event.target.value)})

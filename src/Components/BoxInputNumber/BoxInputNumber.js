@@ -18,6 +18,7 @@ class BoxInputNumber extends Component {
             <input
                 {...this.props}
                 type='number'
+                title='Wheel in to change value'
                 onChange={(e) => {
                     const value = parseFloat(e.target.value ? e.target.value : 0);
                     if(e.target.min > value || e.target.max < value) return;
