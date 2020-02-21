@@ -114,7 +114,11 @@
   color: grey;
 }
 
-.BoxPlaceHolder {
+.DropBox {
+  position: relative;
+}
+
+.PlaceHolder {
   border: dotted 2px grey;
   color: grey;
   height: 40px;
@@ -126,7 +130,20 @@
   min-width: 180px;
 }
 
-.BoxPlaceHolder p {
+
+.BoxPlaceHolder {
+  width: 100%;
+  height: initial;
+  margin: 0;
+  background-color: rgba(255, 255, 255, 0.9);
+  position: absolute;
+  top: 0;
+  left: 0;
+  z-index: 998;
+  pointer-events: none;
+}
+
+.PlaceHolder p {
   text-align: center;
 }
 

@@ -36,6 +36,10 @@ class BoxGroup extends Box {
     }
   }
 
+  getBoxPlaceHolder() {
+    return <div className="PlaceHolder" key='ph20'><p>The Box will appear here</p></div>;
+  }
+
   pushChild(child) {
     if(!child || !("type" in child) || !("id" in child)) return;
     let obj = new child.type(); //tricky

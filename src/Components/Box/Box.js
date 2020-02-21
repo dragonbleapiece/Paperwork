@@ -170,7 +170,9 @@ class Box extends Component {
     this.doBeforeAddChild = {};
     this.isFlexVertical = true;
     this.lastEnter = null;
-    this.contentRect = {width: 0, height: 0};
+    this.content = React.createRef();
+    this.dropbox = React.createRef();
+    this.container = React.createRef();
     this.hasInfo = false;
     this.canMinimize = true;
   }
@@ -369,7 +371,8 @@ class Box extends Component {
   }
 
   getBoxPlaceHolder() {
-    return <div className="BoxPlaceHolder" key='ph20'><p>The Box will appear here</p></div>;
+    const dropboxRect = this.dropbox.current.getBoundingClientRect();
+    return <div className="BoxPlaceHolder PlaceHolder" key='ph20' style={{minHeight: dropboxRect.height ? dropboxRect.height : ''}}><p>The Box will replace the content</p></div>;
   }
 
   getColorMenu() {
@@ -458,7 +461,7 @@ class Box extends Component {
   }
 
   getDragItemIndex(x, y) {
-    const container = ReactDOM.findDOMNode(this.refs.container);
+    const container = this.container.current;
     let index = 0;
     const dragManager = DragManager.instance;
 
@@ -498,9 +501,6 @@ class Box extends Component {
 
   onInfo() {
     this.setState({isInfo: !this.state.isInfo});
-    if(this.refs.content) {
-      this.contentRect = this.refs.content.getBoundingClientRect();
-    }
   }
 
   getInfo() {
@@ -528,6 +528,7 @@ class Box extends Component {
     const transforms = this.getTransforms();
     const box = this.renderBox();
     const infoBox = this.getInfo();
+    const contentRect = this.content.current ? this.content.current.getBoundingClientRect() : {height: 0, width: 0};
 
     this.doBeforeRender();
 
@@ -550,15 +551,15 @@ class Box extends Component {
               {icon && <SVG className="Box__titleIcon" src={icon} style={{fill: formatedColor, backgroundColor: formatedBackgroundColor}}/>}
               <span className="Box__titleText" style={{color: formatedTextColor}}>{this.constructor.className}</span>
             </span>
-            {this.state.isInfo && <div className="Box__info" style={{minHeight: this.contentRect.height ? this.contentRect.height : '', maxWidth: this.contentRect.width ? this.contentRect.width : ''}}>{infoBox}</div>}
-            {!this.state.isMinimized && !this.state.isInfo && <span ref='content' className="Box__content">
+            {this.state.isInfo && <div className="Box__info" style={{minHeight: contentRect.height ? contentRect.height : '', maxWidth: contentRect.width ? contentRect.width : ''}}>{infoBox}</div>}
+            {!this.state.isMinimized && !this.state.isInfo && <span ref={this.content} className="Box__content">
               <ContextMenuTrigger id={""}>
                 {box}
                 {transforms !== null && <div className='TransformBox'>{transforms}</div>}
               </ContextMenuTrigger>
-              <div className='DropBox'>
+              <div className='DropBox' ref={this.dropbox}>
                 <ContextMenuTrigger id={this.constructor.className + this.props.id} holdToDisplay={-1}>
-                  {this.constructor.unauthorized.indexOf("*") === -1 && <div className="Box__container" ref='container' onDrop={this.onDrop.bind(this)} onDragEnter={this.onDragEnter.bind(this)} onDragOver={this.onDragOver.bind(this)} onDragLeave={this.onDragLeave.bind(this)}>
+                  {this.constructor.unauthorized.indexOf("*") === -1 && <div className="Box__container" ref={this.container} onDrop={this.onDrop.bind(this)} onDragEnter={this.onDragEnter.bind(this)} onDragOver={this.onDragOver.bind(this)} onDragLeave={this.onDragLeave.bind(this)}>
                     {children}
                     {!this.hasReachedLimit() && <span className="Box__placeholder">Right click to add</span>}
                   </div>}

@@ -167,7 +167,7 @@ class Workspace extends BoxGroup {
         <ContextMenuBox id={this.constructor.className} menu={[...this.menu, ...this.suppMenu]}>
           {this.state.children.length === 0 && this.getInstructions()}
           {this.state.children.length > 0 && <div className="Workspace__viewBox">
-            <div className='DropBox' ref='container' onDrop={this.onDrop.bind(this)} onDragEnter={this.onDragEnter.bind(this)} onDragOver={this.onDragOver.bind(this)} onDragLeave={this.onDragLeave.bind(this)}>
+            <div className='DropBox' ref={this.container} onDrop={this.onDrop.bind(this)} onDragEnter={this.onDragEnter.bind(this)} onDragOver={this.onDragOver.bind(this)} onDragLeave={this.onDragLeave.bind(this)}>
               {this.getChildren()}
             </div>
           </div>}
