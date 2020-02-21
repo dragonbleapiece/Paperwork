@@ -27,7 +27,6 @@ class Transform2D extends Transform {
     this.id = shortid.generate();
     this.className = Transform2D.className;
     this.inputElementY = React.createRef();
-    this.wasSolo = false;
 
     const linkMenu = {
         menu: linkMenuTypes,
@@ -60,10 +59,7 @@ class Transform2D extends Transform {
     const unlinkMenu = {
         menu: unlinkMenuTypes,
         handleClick: (event, data) => {
-              this.setState({solo: false}, () => {
-                  if(this.props.state) {
-                      this.wasSolo = true;
-                  }
+              this.setState({solo: false, inputY: this.state.input}, () => {
                 window.updateWorkspace();
               });
           }
@@ -111,24 +107,20 @@ class Transform2D extends Transform {
   render() {
 
     if(!this.state.solo) {
-        const InputX = this.state.input;
-        const InputY = this.wasSolo ? this.state.input : this.state.inputY;
         const {input, inputY} = this.props.state ? this.props.state : {};
-        const inputYElement = <InputY {...this.props} ref={this.inputElementY} onChange={this.componentDidUpdate.bind(this)} input={this.wasSolo ? input : inputY}/>;
-        
-        this.wasSolo = false;
+
         return (
             <div className="Transform">
               {this.props.icon && <SVG className='TransformBox__icon' src={this.props.icon}/>}
               <div className="Transform2D__inputs">
                 <ContextMenuBox id={this.constructor.className + this.id} menu={this.menuX}>
                     <div className='TransformBox__input'>
-                        <InputX {...this.props} ref={this.inputElement} onChange={this.componentDidUpdate.bind(this)} input={input}/>
+                        <this.state.input {...this.props} ref={this.inputElement} onChange={this.componentDidUpdate.bind(this)} input={input}/>
                     </div>
                 </ContextMenuBox>
                 <ContextMenuBox id={this.constructor.className + this.id + '1'} menu={this.menuY}>
                     <div className='TransformBox__input'>
-                        {inputYElement}
+                    <this.state.inputY {...this.props} ref={this.inputElementY} onChange={this.componentDidUpdate.bind(this)} input={inputY}/>
                     </div>
                 </ContextMenuBox>
               </div>
