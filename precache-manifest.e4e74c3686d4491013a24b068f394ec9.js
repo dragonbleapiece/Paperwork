@@ -1,6 +1,6 @@
 self.__precacheManifest = (self.__precacheManifest || []).concat([
   {
-    "revision": "3da03b98d31fc68bb481dfccb126ef11",
+    "revision": "76557845061ddcd123e055c3968aa9bf",
     "url": "/Paperwork/index.html"
   },
   {
@@ -8,7 +8,7 @@ self.__precacheManifest = (self.__precacheManifest || []).concat([
     "url": "/Paperwork/static/css/2.96479aa2.chunk.css"
   },
   {
-    "revision": "4805252fbf7c4cee65b6",
+    "revision": "4ebff2e12e9b7b736b57",
     "url": "/Paperwork/static/css/main.03b2ae96.chunk.css"
   },
   {
@@ -20,8 +20,8 @@ self.__precacheManifest = (self.__precacheManifest || []).concat([
     "url": "/Paperwork/static/js/2.83d67ebe.chunk.js.LICENSE"
   },
   {
-    "revision": "4805252fbf7c4cee65b6",
-    "url": "/Paperwork/static/js/main.e1440156.chunk.js"
+    "revision": "4ebff2e12e9b7b736b57",
+    "url": "/Paperwork/static/js/main.b417173c.chunk.js"
   },
   {
     "revision": "c19f3fc7c4e8a1894f18",
