@@ -1,6 +1,6 @@
 {
   "files": {
-    "main.css": "/Paperwork/static/css/main.f66165a6.chunk.css",
+    "main.css": "/Paperwork/static/css/main.03b2ae96.chunk.css",
     "main.js": "/Paperwork/static/js/main.ea469b07.chunk.js",
     "main.js.map": "/Paperwork/static/js/main.ea469b07.chunk.js.map",
     "runtime-main.js": "/Paperwork/static/js/runtime-main.6f2833b6.js",
@@ -9,10 +9,10 @@
     "static/js/2.3e771521.chunk.js": "/Paperwork/static/js/2.3e771521.chunk.js",
     "static/js/2.3e771521.chunk.js.map": "/Paperwork/static/js/2.3e771521.chunk.js.map",
     "index.html": "/Paperwork/index.html",
-    "precache-manifest.fde12c8c8084f824b87b8c9d98a851d9.js": "/Paperwork/precache-manifest.fde12c8c8084f824b87b8c9d98a851d9.js",
+    "precache-manifest.9df88e16a5872e19d23bb40f67a961af.js": "/Paperwork/precache-manifest.9df88e16a5872e19d23bb40f67a961af.js",
     "service-worker.js": "/Paperwork/service-worker.js",
     "static/css/2.96479aa2.chunk.css.map": "/Paperwork/static/css/2.96479aa2.chunk.css.map",
-    "static/css/main.f66165a6.chunk.css.map": "/Paperwork/static/css/main.f66165a6.chunk.css.map",
+    "static/css/main.03b2ae96.chunk.css.map": "/Paperwork/static/css/main.03b2ae96.chunk.css.map",
     "static/js/2.3e771521.chunk.js.LICENSE": "/Paperwork/static/js/2.3e771521.chunk.js.LICENSE",
     "static/media/HHatching.svg": "/Paperwork/static/media/HHatching.f3da2da9.svg",
     "static/media/LOHatching.svg": "/Paperwork/static/media/LOHatching.186b393d.svg",
@@ -56,7 +56,7 @@
     "static/js/runtime-main.6f2833b6.js",
     "static/css/2.96479aa2.chunk.css",
     "static/js/2.3e771521.chunk.js",
-    "static/css/main.f66165a6.chunk.css",
+    "static/css/main.03b2ae96.chunk.css",
     "static/js/main.ea469b07.chunk.js"
   ]
 }
