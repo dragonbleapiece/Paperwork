@@ -43,7 +43,7 @@ class Increment extends Input {
         super(props);
         this.increment = this.state.increment;
         this.step = props.step || 1;
-        this.value = this.state.from;
+        this.value = exactMath.add(this.state.from, exactMath.mul(-this.state.increment, this.state.step));
         this.target = null;
         Canvas.attach(this);
     }
@@ -65,22 +65,21 @@ class Increment extends Input {
     }
 
     receiveNotification() {
-        if(this.state.decrement === -1) {
-            this.value = this.state.to;
+        if(this.state.increment === -1) {
+            this.value = exactMath.add(this.state.to, exactMath.mul(-this.state.increment, this.state.step));
         } else {
-            this.value = this.state.from;
+            this.value = exactMath.add(this.state.from, exactMath.mul(-this.state.increment, this.state.step));
         }
 
         this.increment = this.state.increment;
     }
 
     getValue() {
-        const actualValue = this.value;
         if(!window.isInThisBoxCall) {
             const value = exactMath.add(this.value, exactMath.mul(this.increment, this.state.step));
             this.value = this.condition(value);
         }
-        return actualValue;
+        return this.value;
     }
 
     condition(value) {
