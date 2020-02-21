@@ -197,7 +197,7 @@ class Markov extends BoxGroup {
           <SVG src={unknown}/>
         </span>;
 
-        info = <span className="Markov__Info">sum = 100</span>;
+        info = <span className="Markov__Info">sum = 100%</span>;
       } else {
         info = <span>Not enough elements</span>;
       }
