@@ -5,6 +5,7 @@ import {saveAs} from 'file-saver';
 
 // import Components
 import Canvas from '../../Components/Canvas/Canvas';
+import BoxInputNumber from '../BoxInputNumber/BoxInputNumber';
 //import Icons
 import SVG from 'react-svg';
 import icon_save_alt from '../../Icons/save_alt.svg';
@@ -65,10 +66,6 @@ class Save extends Component {
     });
   }
 
-  checkZipNumber = function(value) {
-    return (value === "" || value === parseInt(value, 10) || value >= 1000 || value <= 1) ? 10 : value;
-  }
-
   incrementZipNumber = function() {
     this.setState({zipNumber: (this.state.zipNumber === 1000) ? this.state.zipNumber : parseInt(this.state.zipNumber)+1})
   }
@@ -84,18 +81,17 @@ class Save extends Component {
                 <SVG src={burst_mode}/>
               </div>
               <div className="save__zipNumber border-right">
-                <input
+                <BoxInputNumber
                 className="save__zipNumberInput"
                 type="number"
-                min={0}
+                min={1}
+                max={100}
                 value={this.state.zipNumber}
-                onChange={(e) => {
-                  const value = parseFloat(e.target.value ? e.target.value : 0);
-                  if(e.target.min > value || e.target.max < value) return;
+                onChange={(value) => {
                   this.setState({zipNumber: value});
                 }}
                 onBlur={(event) => {
-                  this.setState({zipNumber: this.checkZipNumber(event.target.value)})
+                  this.setState({zipNumber: event.target.value})
                 }}
                 />
                 <div className="save__zipNumberArrows border-left">

@@ -18,7 +18,6 @@ class BoxInputNumber extends Component {
             <input
                 {...this.props}
                 type='number'
-                title='Wheel in to change value'
                 onChange={(e) => {
                     const value = parseFloat(e.target.value ? e.target.value : 0);
                     if(e.target.min > value || e.target.max < value) return;
@@ -29,9 +28,15 @@ class BoxInputNumber extends Component {
                 onMouseUp={(e) => {
                     const target = e.target;
                     target.select();
+                    if(this.props.onMouseUp) {
+                        this.props.onMouseUp(e);
+                    }
                 }}
                 onFocus={(e) => {
                     e.target.addEventListener('wheel', this.onWheel.bind(this), false);
+                    if(this.props.onFocus) {
+                        this.props.onFocus(e);
+                    }
                 }}
                 onBlur={(e) => {
                     e.target.removeEventListener('wheel', this.onWheel.bind(this), false);
@@ -43,6 +48,10 @@ class BoxInputNumber extends Component {
                         }
                         } else if (document.selection) {  // IE?
                         document.selection.empty();
+                    }
+
+                    if(this.props.onBlur) {
+                        this.props.onBlur(e)
                     }
                 }}
             />
