@@ -1,5 +1,6 @@
 import React from 'react';
 import Input from '../Input';
+import BoxInputNumber from '../../BoxInputNumber/BoxInputNumber';
 import exactMath from 'exact-math';
 import * as Utils from '../../../Utils';
 import SVG from 'react-svg';
@@ -55,28 +56,16 @@ class Random extends Input {
     render() {
         return (
             <div className='Input Random'>
-                <input type='number' min={this.props.min} max={exactMath.sub(this.state.to, this.step)} step={this.step} value={this.state.from} onChange={(e) => {
-                    const value = parseFloat(e.target.value ? e.target.value : 0);
-                    if(e.target.min > value || e.target.max < value) return;
-                    this.update({from: this.fix(value)});
-                }}
-                onMouseUp={(e) => {
-                    const target = e.target;
-                    target.select();
-                  }}
+                <BoxInputNumber min={this.props.min} max={exactMath.sub(this.state.to, this.step)} step={this.step} value={this.state.from} onChange={(value) => {
+                        this.update({from: this.fix(value)});
+                    }}
                 />
                 <SVG className='Random__arrow' src={arrowLeft}/>
                 <SVG className='Random__icon' src={random} />
                 <SVG className='Random__arrow' src={arrowRight}/>
-                <input type='number' min={exactMath.add(this.state.from, this.step)} max={this.props.max} step={this.step} value={this.state.to} onChange={(e) => {
-                    const value = parseFloat(e.target.value ? e.target.value : 0);
-                    if(e.target.min > value || e.target.max < value) return;
-                    this.update({to: this.fix(value)});
-                }}
-                onMouseUp={(e) => {
-                    const target = e.target;
-                    target.select();
-                  }}
+                <BoxInputNumber min={exactMath.add(this.state.from, this.step)} max={this.props.max} step={this.step} value={this.state.to} onChange={(value) => {
+                        this.update({to: this.fix(value)});
+                    }}
                 />
             </div>
         );

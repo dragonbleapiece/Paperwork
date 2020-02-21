@@ -1,6 +1,7 @@
 import React from 'react';
 import Input from '../Input';
 import Canvas from '../../Canvas/Canvas';
+import BoxInputNumber from '../../BoxInputNumber/BoxInputNumber';
 import exactMath from 'exact-math';
 import * as Utils from '../../../Utils';
 import SVG from 'react-svg';
@@ -156,29 +157,17 @@ class Increment extends Input {
         return (
             <div className='Input Increment'>
                 <div className='Increment__limits'>
-                    <input type='number' min={this.props.min} max={exactMath.sub(this.state.to, this.step)} step={this.step} value={this.state.from} onChange={(e) => {
-                        const value = parseFloat(e.target.value ? e.target.value : 0);
-                        if(e.target.min > value || e.target.max < value) return;
-                        this.update({from: this.fix(value)});
-                    }}
-                    onMouseUp={(e) => {
-                        const target = e.target;
-                        target.select();
-                      }}
+                    <BoxInputNumber min={this.props.min} max={exactMath.sub(this.state.to, this.step)} step={this.step} value={this.state.from} onChange={(value) => {
+                            this.update({from: this.fix(value)});
+                        }}
                     />
 
                     <SVG className='Random__arrow' src={arrowLeft} style={(this.state.increment === 1) ? ({visibility: 'hidden'}) : {}}/>
                     
                     <div className='Increment__step'>
-                        <input title='step' type='number' min={this.step} max={exactMath.sub(this.state.to, this.state.from)} step={this.step} value={this.state.step} onChange={(e) => {
-                            const value = parseFloat(e.target.value ? e.target.value : 0);
-                            if(e.target.min > value || e.target.max < value) return;
-                            this.update({step: this.fix(value)});
-                        }}
-                        onMouseUp={(e) => {
-                            const target = e.target;
-                            target.select();
-                          }}
+                        <BoxInputNumber title='step' min={this.step} max={exactMath.sub(this.state.to, this.state.from)} step={this.step} value={this.state.step} onChange={(value) => {
+                                this.update({step: this.fix(value)});
+                            }}
                         />
                         <SVG className='Increment__icon' src={incrementIcon} onClick={(e) => {
                             this.update({increment : -this.state.increment});
@@ -186,15 +175,9 @@ class Increment extends Input {
                     </div>
                     <SVG className='Random__arrow' src={arrowRight} style={(this.state.increment === -1) ? ({visibility: 'hidden'}) : {}}/>
 
-                    <input type='number' min={exactMath.add(this.state.from, this.step)} max={this.props.max} step={this.step} value={this.state.to} onChange={(e) => {
-                        const value = parseFloat(e.target.value ? e.target.value : 0);
-                        if(e.target.min > value || e.target.max < value) return;
-                        this.update({to: this.fix(value)});
-                    }}
-                    onMouseUp={(e) => {
-                        const target = e.target;
-                        target.select();
-                      }}
+                    <BoxInputNumber min={exactMath.add(this.state.from, this.step)} max={this.props.max} step={this.step} value={this.state.to} onChange={(value) => {
+                            this.update({to: this.fix(value)});
+                        }}
                     />
                 </div>
                 <div className='Increment__options'>

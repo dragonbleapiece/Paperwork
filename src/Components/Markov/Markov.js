@@ -1,6 +1,6 @@
 import React from 'react';
 import BoxGroup from '../BoxGroup/BoxGroup';
-import 'rc-slider/assets/index.css';
+import BoxInputNumber from '../BoxInputNumber/BoxInputNumber';
 import './Markov.css';
 import markovIcon from '../../Icons/markov.svg';
 import Radar from './Radar';
@@ -176,21 +176,13 @@ class Markov extends BoxGroup {
               {iconSelected && <SVG src={next} className="exponent" />}
               <SVG src={this.state.children[i].type.icon} onClick={() => {this.setState({index: i})}}/>
             </span>
-            <input className="Markov__Input"
+            <BoxInputNumber className="Markov__Input"
               min={0}
               max={100}
-              type='number'
               value={this.state.proba[index][i]}
-              onChange={(e) => {
-                const target = e.target;
-                const intValue = parseInt(target.value, 10);
-                const value = Number.isInteger(intValue) ? intValue : 0;
-                if(target.min > value || target.max < value) return;
-                this.checkProba(value, i);
-              }}
-              onMouseUp={(e) => {
-                const target = e.target;
-                target.select();
+              onChange={(value) => {
+                const intValue = parseInt(value, 10);
+                this.checkProba(intValue, i);
               }}
             />
           </div>);

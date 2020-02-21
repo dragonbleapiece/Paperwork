@@ -115,7 +115,7 @@ class Transform2D extends Transform {
               <div className="Transform2D__inputs">
                 <ContextMenuBox id={this.constructor.className + this.id} menu={this.menuX}>
                     <div className='TransformBox__input'>
-                        <this.state.input {...this.props} ref={this.inputElement} onChange={this.componentDidUpdate.bind(this)} input={input}/>
+                        <this.state.input {...this.props} ref={this.inputElement} placementTip='top' onChange={this.componentDidUpdate.bind(this)} input={input}/>
                     </div>
                 </ContextMenuBox>
                 <ContextMenuBox id={this.constructor.className + this.id + '1'} menu={this.menuY}>

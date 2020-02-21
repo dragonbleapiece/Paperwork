@@ -1,0 +1,15 @@
+.rc-slider-tooltip-placement-top .rc-slider-tooltip-inner {
+    margin-bottom: -8px;
+}
+
+.rc-slider-tooltip-arrow {
+    display: none;
+}
+
+.rc-slider-tooltip-inner {
+    background-color: black;
+    color: white;
+    border-radius: 0;
+    box-shadow: none;
+    border: solid white 1px;
+}

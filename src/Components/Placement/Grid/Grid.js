@@ -1,7 +1,6 @@
 import React from 'react';
 import Placement from '../Placement';
 import './Grid.css';
-import 'rc-slider/assets/index.css';
 import SliderBox from '../../Input/SliderBox/SliderBox';
 import grid_on from '../../../Icons/grid_on.svg';
 import InBox from '../../InBox/InBox';
