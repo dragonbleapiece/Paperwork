@@ -456,7 +456,7 @@ class Box extends Component {
 
     const json = JSON.parse(e.dataTransfer.getData(e.dataTransfer.types[last]));
     this.insertChild({type: window.getClassFromName(json.type), id: json.id, state: json.state}, this.state.dragEnter);
-    this.setState({dragEnter: -1});
+    this.setState({dragEnter: -1}, () => {window.updateWorkspace()});
     e.stopPropagation();
   }
 
