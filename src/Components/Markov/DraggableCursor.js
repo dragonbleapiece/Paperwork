@@ -47,10 +47,13 @@ class DraggableCursor extends Component {
     this.movement = 0;
     e.stopPropagation();
     e.preventDefault();
+    if(this.props.onAfterChange) {
+      this.props.onAfterChange();
+    }
   }
 
   onDrag(e) {
-    const {vector, step, radius, minRadius, maxRadius, callback} = this.props;
+    const {vector, step, radius, minRadius, maxRadius, onChange} = this.props;
 
     const scalar = e.movementX * vector.x  + e.movementY * vector.y;
     this.movement -= scalar;
@@ -58,8 +61,8 @@ class DraggableCursor extends Component {
       const movement = Math.sign(this.movement) * Math.floor(Math.abs(this.movement) / (step * this.ratio));
       const newRadius = radius + movement;
       this.movement -= movement * step * this.ratio;
-      if(minRadius <= newRadius && newRadius <= maxRadius) {
-        callback(newRadius);
+      if(minRadius <= newRadius && newRadius <= maxRadius && onChange) {
+        onChange(newRadius);
       }
     }
     e.stopPropagation();

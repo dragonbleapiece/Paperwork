@@ -144,7 +144,6 @@ class Markov extends BoxGroup {
       i = (i + 1) % length;
     }
     this.setState({proba: newProba});
-    window.updateWorkspace();
   }
 
   getInfo() {
@@ -188,7 +187,7 @@ class Markov extends BoxGroup {
           </div>);
         }
 
-        radar = <Radar points={this.getProbas(index)} callback={this.checkProba.bind(this)} />;
+        radar = <Radar points={this.getProbas(index)} onChange={this.checkProba.bind(this)} onAfterChange={() => window.updateWorkspace()} />;
 
 
         header = <span className="Markov__RangeIcon">

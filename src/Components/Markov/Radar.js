@@ -62,9 +62,16 @@ class Radar extends Component {
           minRadius={0}
           maxRadius={maxRadius}
           radius={radius}
-          callback={(newRadius) => {
+          onChange={(newRadius) => {
+            if(this.props.onChange) {
               const newProba = (maxRadius - newRadius);
-              callback(newProba, index);
+              this.props.onChange(newProba, index);
+            }
+          }}
+          onAfterChange={() => {
+            if(this.props.onAfterChange) {
+              this.props.onAfterChange();
+            }
           }}
           key={index}
         />
