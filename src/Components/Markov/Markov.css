@@ -92,17 +92,17 @@
 
 .Markov__Radar .Radar__Outline {
   stroke: #000000;
-  fill: #FFFFFF;
+  fill: #000000;
   stroke-linecap: round;
   /*stroke-alignment: outer;*/
 }
 
 .Markov__Radar .Radar__Shape {
-  fill: #000000;
+  fill: #FFFFFF;
 }
 
 .Markov__Radar .Radar__Line {
-  stroke: #FFFFFF;
+  stroke: #000000;
   stroke-width: 1;
   stroke-linecap: round;
 }

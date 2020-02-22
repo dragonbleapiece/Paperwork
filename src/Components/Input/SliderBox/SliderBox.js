@@ -54,6 +54,7 @@ class SliderBox extends Input {
             }}
             onAfterChange={() => Workspace.forceUpdate()}
             tipProps={{placement: this.props.placementTip ? this.props.placementTip : 'bottom'}}
+            tipFormatter={this.props.tipFormatter ? this.props.tipFormatter : (value) => value}
         />
         );
     }

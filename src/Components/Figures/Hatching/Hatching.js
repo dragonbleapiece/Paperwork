@@ -40,12 +40,13 @@ class Hatching extends Figure {
       // Density
       <Transform
         min={2}
-        max={20}
+        max={21}
         defaultValue={this._density}
-        marks={{2:1, 11:10, 20:19}}
+        marks={{2:1, 11:10, 21:20}}
         step={1}
         key={0}
         ref={(el) => {this.transforms['density'] = el}}
+        tipFormatter={(value) => value - 1}
       />
     ];
     return Transforms;

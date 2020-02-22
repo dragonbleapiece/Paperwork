@@ -22,9 +22,9 @@ const menuColor = [
   }
 ];
 
-const menuRefresh = [
+const menuReset = [
   {
-    type: 'Refresh'
+    type: 'Reset'
   }
 ];
 
@@ -87,14 +87,14 @@ class Workspace extends BoxGroup {
           if(data.type) {
             let color = window.getClassFromName(data.type);
             if(color) this.setState({color: new color()});
-            window.updateWorkspace();
           }
         }
       },
       {
-        menu: menuRefresh,
+        menu: menuReset,
         handleClick: (event, data) => {
-          window.updateWorkspace();
+          this.setState({children: [], color: new Black()});
+          this.elements = [];
         }
       }
     ];
