@@ -182,6 +182,7 @@ class Markov extends BoxGroup {
               onChange={(value) => {
                 const intValue = parseInt(value, 10);
                 this.checkProba(intValue, i);
+                window.updateWorkspace();
               }}
             />
           </div>);
