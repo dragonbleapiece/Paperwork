@@ -86,7 +86,7 @@ Recursion Number | 1 | 2 | 3 | 4 | 5
 Result | ![RecursionLevel1](/pictures/RecursionLevel1.png) | ![RecursionLevel1](/pictures/RecursionLevel2.png) | ![RecursionLevel1](/pictures/RecursionLevel3.png) | ![RecursionLevel1](/pictures/RecursionLevel4.png) | ![RecursionLevel1](/pictures/RecursionLevel5.png)
 
 ##### Recursion Restriction
-![RecursionWithRestriction](/pictures/RecursionWithRestriction.png) | ![RecursionWithoutRestriction](/pictures/RecursionWithoutRestriction.png)
+![RecursionWithRestriction](/pictures/RecursionWithRestriction.PNG) | ![RecursionWithoutRestriction](/pictures/RecursionWithoutRestriction.PNG)
 --- | ---
 
 The Recursion Drawing is done on the apparition number of the ThisBox element.
