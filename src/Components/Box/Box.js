@@ -1,5 +1,4 @@
 import React, { Component } from 'react';
-import ReactDOM from 'react-dom';
 import './Box.css';
 import ContextMenuBox from '../ContextMenuBox/ContextMenuBox';
 import { ContextMenuTrigger } from "react-contextmenu";
@@ -12,6 +11,7 @@ import cancel from '../../Icons/cancel.svg';
 import minimize from '../../Icons/minimize.svg';
 import info from '../../Icons/info.svg';
 
+// Constant Contextual Menu
 const menu = [
   {
     type: 'Placement',
@@ -91,6 +91,8 @@ const menu = [
   }
 ];
 
+
+// Constant Color Menu
 const menuColor = [
   {
     type: 'Color',
@@ -108,8 +110,15 @@ const menuColor = [
 ];
 
 const className = "Box";
+
+// Constant unauthorized box as child
 const unauthorized = [];
 
+/**
+ * Returns a callback function depends on the class of the box
+ * @param {Box} child - The child of the box 
+ * @param {Object} object - The object containing the callback as {boxClassname: callback}
+ */
 function getFunctionClass(child, object) {
   for(let key in object) {
     const cl = window.getClassFromName(key);
@@ -121,25 +130,44 @@ function getFunctionClass(child, object) {
   }
 }
 
-/*Pencil*/
+/**
+ * Class basis for all Box
+ */
 class Box extends Component {
 
+  /**
+   * Get the id of the box
+   * @return {number} the id of the box
+   */
   static get id() {
     return Box._id++;
   }
 
+  /**
+   * get the className of the class
+   * @return {string} the name of the class
+   */
   static get className() {
     return className;
   }
 
+  /**
+   * get the class icon
+   * @return {*} Icon of the class
+   */
   static get icon() {
     return undefined;
   }
 
+  /**
+   * get the unauthorized box for the class
+   * @return {string[]} array - names of the unauthorized box class
+   */
   static get unauthorized() {
     return unauthorized;
   }
 
+  // STATE
   state = {
     children: [],
     style: {},
@@ -149,9 +177,14 @@ class Box extends Component {
     transforms: {}
   };
 
+  /**
+   * Create the Box
+   * @param {*} props - React props
+   */
   constructor(props) {
     super(props);
 
+    // Check if there are saved datas
     if(props && this.props.state) {
       this.state = this.props.state;
       this.initStateFromSavedState();
@@ -159,35 +192,71 @@ class Box extends Component {
       this.initState();
     }
 
+    // For allowing ThisBox only in Recursion box
     this.parentsList = this.props ? {...this.props.parentsList, [this.constructor.className]: true} : {[this.constructor.className]: true};
+    
     this.ref = this;
+    
+    // For transforms inputs
     this.transforms = {};
+
+    // Dunno why
     this.className = Box.className;
+    
+    // object containing callback for each box type. To be called before drawing
     this.drawBeforeType = {};
+
+    // init Contextual Menu
     this.reloadMenu();
     
+    // for supplementary menu
     this.suppMenu = [];
+
+    // object containing callback for each box type. To be called before adding child
     this.doBeforeAddChild = {};
+
+    // if the dragging is done vertically
     this.isFlexVertical = true;
+
+    // Last dragged in Element
     this.lastEnter = null;
+
+    // Refs
     this.content = React.createRef();
-    this.contentRect = {height: 0, width: 0};
     this.dropbox = React.createRef();
     this.container = React.createRef();
+
+    // Dimensions of the content of the box
+    this.contentRect = {height: 0, width: 0};
+
+    // This box has info ?
     this.hasInfo = false;
+
+    // This box can minimize ?
     this.canMinimize = true;
   }
 
+  /**
+   * Init the state from saved data
+   */
   initStateFromSavedState() {
     const {r, g, b, a} = this.state.color;
     this.state.color = new Color(r, g, b, a);
     this.state = Box.checkChildrenFromSavedState(this.state);
   }
 
+  /**
+   * Check if the box has parent from classname
+   * @param {string} className - classname of the parent 
+   */
   hasParent(className) {
     return this.parentsList[className];
   }
 
+  /**
+   * Init children state from saved state
+   * @param {*} state - saved state
+   */
   static checkChildrenFromSavedState(state) {
     if(state === undefined) return state;
     if(state.children !== undefined && state.children.length > 0) {
@@ -205,6 +274,10 @@ class Box extends Component {
     return {...state};
   }
 
+  /**
+   * Filter the unauthorized box for Contextual Menu
+   * @param {*} menu - Menu to filter
+   */
   filterUnauthorized(menu) {
     if(this.constructor.unauthorized.indexOf('*') !== -1) {
       return [];
@@ -216,6 +289,9 @@ class Box extends Component {
     return filteredMenu;
   }
 
+  /**
+   * Reload the contextual menu object
+   */
   reloadMenu() {
     this.menu = [
       {
@@ -229,15 +305,30 @@ class Box extends Component {
     ];
   }
 
+  /**
+   * Init the state
+   */
   initState() {
     this.state.color = new Color(255, 255, 255);
     this.state.scale = {x: 1, y: 1};
   }
 
+  /**
+   * Called before set children
+   * TO OVERRIDE
+   * @param {*} children 
+   * @return {Object} Object containing modified children
+   */
   doBeforeSetChildren(children) {
     return {children};
   }
 
+  /**
+   * Add a function callback to drawBeforeType
+   * @param {string} type - type of the box
+   * @param {Function} f - callback function
+   * @param {string[]} exceptions - Exceptions for some derived type 
+   */
   addDrawBeforeType(type, f, exceptions = []) {
     if(!(f instanceof Function)) return;
     if(!this.drawBeforeType[type]) {
@@ -247,6 +338,12 @@ class Box extends Component {
     }
   }
 
+  /**
+   * Call the function callback in drawBeforeType if type match
+   * @param {Paper} sk - Paper object
+   * @param {string} type - Type of the box 
+   * @param {BoxClass} child - Box Class to check
+   */
   callDrawBeforeType(sk, type, child) {
     for(let i = 0; i < this.drawBeforeType[type].length; ++i) {
       const isException = this.drawBeforeType[type][i].exceptions.reduce((acc, exception) => acc || child instanceof window.getClassFromName(exception), false);
@@ -257,6 +354,12 @@ class Box extends Component {
     }
   }
 
+  /**
+   * Call the callback for the BoxClass to add.
+   * It can be useful to wrap the BoxClass by another
+   * @param {BoxClass} child - BoxClass to add
+   * @return {BoxClass} the BoxClass
+   */
   beforeAddChild(child) {
     const functionToCall = getFunctionClass(child, this.doBeforeAddChild);
 
@@ -267,6 +370,10 @@ class Box extends Component {
     }
   }
 
+  /**
+   * Add a child to this box
+   * @param {BoxClass} child - BoxClass to add 
+   */
   addChild(child) {
     if(!child) return;
     let obj = new child(); //tricky
@@ -275,6 +382,11 @@ class Box extends Component {
     }
   }
 
+  /**
+   * Push a child in the chidren list of this box
+   * For a simple Box, the children are the child
+   * @param {Box} child - Box Object
+   */
   pushChild(child) {
     if(!child || !child.type || !child.id) return;
     let obj = new child.type(); //tricky
@@ -283,19 +395,36 @@ class Box extends Component {
     }
   }
 
+  /**
+   * Insert child in the children list of this box
+   * If not BoxGroup, the index must be 0
+   * @param {Box} child - Box Object
+   * @param {int} index - The index of the child
+   */
   insertChild(child, index = 0) {
     this.pushChild(child);
   }
 
+  /**
+   * Set Children State
+   * @param {Box} children - Box Object
+   */
   setChildren(children) {
     this.setState(this.doBeforeSetChildren(children));
   }
 
+  /**
+   * Check if the Class is authorized in this box
+   * @param {Class} cl - BoxClass
+   */
   isAuthorized(cl) {
     const unauthorized = this.constructor.unauthorized;
     return window.isAuthorized(cl, unauthorized);
   }
 
+  /**
+   * Remove this box from its parent
+   */
   removeFromParent() {
     let children = this.props.parent.state.children;
     children = children.filter(el => el.id !== this.props.id);
@@ -303,21 +432,11 @@ class Box extends Component {
     window.updateWorkspace();
   }
 
-  addNext(elmnt) {
-    if(elmnt !== undefined) {
-      if(elmnt instanceof Box) {
-        this.next = elmnt;
-        this.nextType = elmnt.constructor.name;
-      }
-    }
-  }
-
-  setStyle(style) {
-    this.setState({
-      style: {...this.state.style, ...style}
-    });
-  }
-
+  /**
+   * Call the callback before drawing the Box
+   * @param {Paper} sk - Paper object
+   * @param {Box} child - Box to draw
+   */
   drawBeforeChild(sk, child) {
     if(!child) return;
     for(let key in this.drawBeforeType) {
@@ -327,10 +446,19 @@ class Box extends Component {
     }
   }
 
+  /**
+   * Method to implement for drawing this Box
+   * TO OVERRIDE
+   * @param {Paper} sk - Paper object (Visitor) 
+   */
   draw(sk) {
-
+    // VOID
   }
 
+  /**
+   * Get the ReactElement derived from Box and children of this box.
+   * @return {ReactElement} the ReactElements obtained from Box
+   */
   getChildren() {
     this.next = undefined;
     let children = [];
@@ -347,18 +475,38 @@ class Box extends Component {
     return children;
   }
 
+  /**
+   * Render the special parameters of this box
+   * @return {ReactElement} React Element
+   */
   renderBox() {
     return null;
   }
 
+  /**
+   * Get the JSON data conversion of the class
+   * @param {*} constructor - constructor class
+   * @param {*} state - state to convert
+   * @param {*} id - id of the box
+   * @return {Object} JSON data conversion of the class
+   */
   static boxToJSON(constructor, state, id = Box.id) {
     return {type: constructor.className, id: id, state: Box.stateToJSON(state)};
   }
 
+  /**
+   * Get the JSON data conversion of this box
+   * @return JSON data conversion of this box
+   */
   toJSON() {
     return this.constructor.boxToJSON(this.constructor, this.state);
   }
 
+  /**
+   * Get the JSON data converted from the state
+   * @param {State} state - state of the box 
+   * @return {Object} the converted state
+   */
   static stateToJSON(state) {
     if(state === undefined) return state;
     if(state.children !== undefined && state.children.length > 0) {
@@ -367,15 +515,27 @@ class Box extends Component {
     return {...state};
   }
 
+  /**
+   * Get the transform parameters of this box
+   * @return {ReactElement} the transform parameters of this box
+   */
   getTransforms() {
     return null;
   }
 
+  /**
+   * Get the BoxPlaceHolder for drag&drop
+   * @return {ReactElement} the BoxPlaceHolder
+   */
   getBoxPlaceHolder() {
     const dropboxRect = this.dropbox.current.getBoundingClientRect();
     return <div className="BoxPlaceHolder PlaceHolder" key='ph20' style={{minHeight: dropboxRect.height ? dropboxRect.height : ''}}><p>The Box will replace the content</p></div>;
   }
 
+  /**
+   * Get the color menu of this box
+   * @return {Menu} the color menu
+   */
   getColorMenu() {
     const colorMenu = [
       {
@@ -393,6 +553,9 @@ class Box extends Component {
     return colorMenu;
   }
 
+  /**
+   * React Method called after update
+   */
   componentDidUpdate() {
     const {saveState} = this.props;
     if(saveState) {
@@ -400,6 +563,10 @@ class Box extends Component {
     }
   }
 
+  /**
+   * Start Dragging the Box. Convert the box to json for data transmission
+   * @param {Event} e - Drag Event
+   */
   onDragStart(e) {
     const json = this.toJSON();
     e.dataTransfer.setData(this.constructor.className, JSON.stringify(json));
@@ -407,6 +574,10 @@ class Box extends Component {
     DragManager.instance.draggable = this;
   }
 
+  /**
+   * End Dragging the box. If successful, remove the original box from parent
+   * @param {Event} e - Drag Event 
+   */
   onDragEnd(e) {
     if(e.dataTransfer.dropEffect === 'move') {
       this.removeFromParent();
@@ -415,6 +586,10 @@ class Box extends Component {
     DragManager.instance.clear();
   }
 
+  /**
+   * Start Dragging over the box. If the dragged box is authorized, get its placeholder index
+   * @param {*} e - Drag Event
+   */
   onDragEnter(e) {
     const last = e.dataTransfer.types.length - 1;
     if(last >= 0 && this.isAuthorized(e.dataTransfer.types[last])) {
@@ -433,10 +608,18 @@ class Box extends Component {
     e.stopPropagation();
   }
 
+  /**
+   * Called during Dragging the box.
+   * @param {*} e - Drag Event
+   */
   onDrag(e) {
 
   }
 
+  /**
+   * End Dragging over the box. Reset the PlaceHolder index
+   * @param {*} e - Drag Event
+   */
   onDragLeave(e) {
     if(e.target === this.lastEnter && this.state.dragEnter >= 0) {
       this.setState({dragEnter: -1});
@@ -446,10 +629,18 @@ class Box extends Component {
     e.stopPropagation();
   }
 
+  /**
+   * Called during Dragging over the box
+   * @param {*} e  - Drag Event
+   */
   onDragOver(e) {
     this.onDragEnter(e);
   }
 
+  /**
+   * Dropping in this box. Insert the new child inside of it
+   * @param {*} e - Drag Event
+   */
   onDrop(e) {
 
     const last = e.dataTransfer.types.length - 1;
@@ -461,6 +652,12 @@ class Box extends Component {
     e.stopPropagation();
   }
 
+  /**
+   * Get Placeholder index from cursor position
+   * @param {number} x - cursor x-position
+   * @param {number} y - cursor y-position
+   * @return {int} the placeholder index 
+   */
   getDragItemIndex(x, y) {
     const container = this.container.current;
     let index = 0;
@@ -491,32 +688,57 @@ class Box extends Component {
     return index;
   }
 
+  /**
+   * OnClick Close Event. By default, remove the box from parent
+   */
   onClose() {
     this.removeFromParent();
     window.updateWorkspace();
   }
 
+  /**
+   * OnClick Minimize Event. By default, minimize the box
+   */
   onMinimize() {
     this.setState({isMinimized: !this.state.isMinimized, isInfo: false});
   }
 
+  /**
+   * OnClick Info Event. By default, show the informations of this box
+   */
   onInfo() {
     this.contentRect = this.content.current ? this.content.current.getBoundingClientRect() : {height: 0, width: 0};
     this.setState({isInfo: !this.state.isInfo});
   }
 
+  /**
+   * Get the informations as React Elements of this box
+   * @return {ReactElement} React Element
+   */
   getInfo() {
     return null;
   }
 
+  /**
+   * Method called before render the box
+   * TO OVERRIDE
+   */
   doBeforeRender() {
     // Void
   }
 
+  /**
+   * Check if the maximum children length is reached
+   * Actually, there is no maximum for the BoxGroup
+   * @return {bool} hasReachedLimit
+   */
   hasReachedLimit() {
     return !!this.state.children.length;
   }
 
+  /**
+   * React render method
+   */
   render() {
     let c = this.state.color;
     let isNotBlack = (c.r+c.g+c.b !== 0);
