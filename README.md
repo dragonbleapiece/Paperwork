@@ -6,7 +6,7 @@ Paperwork is an online software for research in art and in the field of computer
 
 Paperwork’s main algorithm is based on Markov chain, an algorithm that was used by artists such as Frieder Nake (Germany), Hiroshi Kawano (Japan), Hervé Huitric and Monique Nahas (France) in early Computer Art. It is now heavily used in our digital environment (google page ranking, chatbots, physical phenomenon modeling, ...). It is also classified in the machine learning area of the computational field.
 
-The Paperwork web application is based on the previous software experiment Generic Images (2018). Paperwork’s project is developed thanks to [IMAC-ESIPE](https://www.ingenieur-imac.fr) training program in the University Gustave Eiffel. Made in [React](https://reactjs.org) and [Paper.js](https://paperjs.org).
+The Paperwork web application is based on the previous software experiment Generic Images (2018). Paperwork’s project is developed thanks to [IMAC-ESIPE](https://www.ingenieur-imac.fr) training program in the University Gustave Eiffel. Made in [React](https://reactjs.org) and [Paper.js](http://paperjs.org).
 
 ### How does Paper work ?
 
@@ -44,7 +44,7 @@ There are 3 types of input.
 
 Allow to dispatch elements in a Square Grid
 
-![Grid](/pictures/grid.PNG)
+![Grid](/pictures/Grid.PNG)
 
 ##### Modes
 
@@ -95,7 +95,7 @@ The Recursion Drawing is done on the apparition number of the ThisBox element.
 
 You can save your work in JPG or SVG. The SVG is here to permit modifications on the image without information loss.
 
-The library [Paper.js](https://paperjs.org) is mainly used in this purpose.
+The library [Paper.js](http://paperjs.org) is mainly used in this purpose.
 
 ##### Working Exemple
 
