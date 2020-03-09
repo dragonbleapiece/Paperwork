@@ -6,7 +6,7 @@ Paperwork is an online software for research in art and in the field of computer
 
 Paperwork’s main algorithm is based on Markov chain, an algorithm that was used by artists such as Frieder Nake (Germany), Hiroshi Kawano (Japan), Hervé Huitric and Monique Nahas (France) in early Computer Art. It is now heavily used in our digital environment (google page ranking, chatbots, physical phenomenon modeling, ...). It is also classified in the machine learning area of the computational field.
 
-The Paperwork web application is based on the previous software experiment Generic Images (2018). Paperwork’s project is developed thanks to [IMAC-ESIPE](https://www.ingenieur-imac.fr) training program in the University Gustave Eiffel. Made in [React](https://reactjs.org) and [Paper.js](paperjs.org).
+The Paperwork web application is based on the previous software experiment Generic Images (2018). Paperwork’s project is developed thanks to [IMAC-ESIPE](https://www.ingenieur-imac.fr) training program in the University Gustave Eiffel. Made in [React](https://reactjs.org) and [Paper.js](https://paperjs.org).
 
 ### How does Paper work ?
 
@@ -31,6 +31,13 @@ Right click on anything you can and add shapes or organizing elements.
 * Arrow
 * Void *(To be used in Grid)*
 
+#### Inputs
+
+There are 3 types of input.
+* Value
+* Increment
+* Random
+
 ### Organizing Elements List
 
 #### Grid
@@ -42,9 +49,11 @@ Allow to dispatch elements in a Square Grid
 ##### Modes
 
 Exist 6 Grid Distribution Modes :
+
 Linear X |  Linear Y | Diagonal Left 
 ------------ | ------------- | -------------
 ![LinearX](/pictures/LinearX.png) | ![LinearY](/pictures/LinearY.png) | ![DiagonalLeft](/pictures/DiagonalLeft.png)
+
 
 Diagonal Right | Orthogonal | Snail Right
 ------------- | ------------- | -------------
@@ -58,6 +67,7 @@ Diagonal Right | Orthogonal | Snail Right
 Briefly, Markov Serie is a random base serie with states. For each state, there are probabilities for state transitions.
 
 ![MarkovParam](/pictures/MarkovParam.PNG)
+
 In this exemple, after a Circle, there are 90% chance to obtain a Circle, 5% chance to obtain a Square and 5% chance for a Triangle.
 
 Paperwork use a Random Behavior to generate different pictures based on the same model.
@@ -85,7 +95,7 @@ The Recursion Drawing is done on the apparition number of the ThisBox element.
 
 You can save your work in JPG or SVG. The SVG is here to permit modifications on the image without information loss.
 
-The library [Paper.js](paperjs.org) is mainly used in this purpose.
+The library [Paper.js](https://paperjs.org) is mainly used in this purpose.
 
 ##### Working Exemple
 
@@ -93,7 +103,7 @@ The library [Paper.js](paperjs.org) is mainly used in this purpose.
 
 ___
 
-*Note :* You might suppose that the name Paperwork comes from the name of the library used. In fact, the name refers to go back to basis for doing Art. At the beginning of the project, it was the [P5.js](p5js.org) library that was used. It is purely coincidence.
+*Note :* You might suppose that the name Paperwork comes from the name of the library used. In fact, the name refers to go back to basis for doing Art. At the beginning of the project, it was the [P5.js](https://p5js.org) library that was used. It is purely coincidence.
 
 ## For development
 
