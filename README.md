@@ -33,10 +33,18 @@ Right click on anything you can and add shapes or organizing elements.
 
 #### Inputs
 
-There are 3 types of input.
-* Value
-* Increment
-* Random
+There are 3 types of input for Transformations Parameters.
+* Value : Ponctual
+* Increment : From a to b with step s
+  * Limited : Stop at extremum
+  * Loop : Restart from a or b (depending on decrement or increment state)
+  * Loop-Reverse : Alternate between decrement and increment
+* Random : Random value in a given range
+
+In a Grid, the increment value is calculated from the previous drawing. The random value is gotten at each drawing.
+In a Recursion, only the value of the ThisBox drawn at level 1 is kept.
+
+![Increment](/pictures/Increment.PNG)
 
 ### Organizing Elements List
 
@@ -76,7 +84,7 @@ Paperwork use a Random Behavior to generate different pictures based on the same
 
 ![Recursion](/pictures/Recursion.PNG)
 
-Paperwork implement recursive drawing with another element named ThisBox. ThisBox refers to its parent box that is a Recursion box and can only be placed inside of it. Changing its transformation parameters give results like fractals.
+Paperwork implements recursive drawing with another element named ThisBox. ThisBox refers to its parent box that is a Recursion box and can only be placed inside of it. Changing its transformation parameters give results like fractals.
 You can vary the number of recursions and uncheck the Restrained Level Recursion box.
 
 ##### Number of Recursions
@@ -89,7 +97,7 @@ Result | ![RecursionLevel1](/pictures/RecursionLevel1.png) | ![RecursionLevel1](
 ![RecursionWithRestriction](/pictures/RecursionWithRestriction.PNG) | ![RecursionWithoutRestriction](/pictures/RecursionWithoutRestriction.PNG)
 --- | ---
 
-The Recursion Drawing is done on the apparition number of the ThisBox element.
+In sum, an interesting mistake.
 
 #### Save
 
