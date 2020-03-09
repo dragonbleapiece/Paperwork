@@ -31,7 +31,7 @@ Right click on anything you can and add shapes or organizing elements.
 * Arrow
 * Void *(To be used in Grid)*
 
-#### Inputs
+### Inputs
 
 There are 3 types of input for Transformations Parameters.
 * Value : Ponctual
@@ -68,7 +68,7 @@ Diagonal Right | Orthogonal | Snail Right
 ![DiagonalRight](/pictures/DiagonalRight.png) | ![Orthogonal](/pictures/Orthogonal.png) | ![SnailRight](/pictures/SnailRight.png)
   
 
-#### Markov (only in Grid)
+#### Markov *(only in Grid)*
 
 ![Markov](/pictures/Markov.PNG)
 
@@ -84,7 +84,7 @@ Paperwork use a Random Behavior to generate different pictures based on the same
 
 ![Recursion](/pictures/Recursion.PNG)
 
-Paperwork implements recursive drawing with another element named ThisBox. ThisBox refers to its parent box that is a Recursion box and can only be placed inside of it. Changing its transformation parameters give results like fractals.
+Paperwork implements recursive drawing with another element named ThisBox. ThisBox refers to its parent box -that is a Recursion box- and can only be placed inside of it. Changing its transformation parameters give results like fractals.
 You can vary the number of recursions and uncheck the Restrained Level Recursion box.
 
 ##### Number of Recursions
@@ -111,7 +111,7 @@ The library [Paper.js](http://paperjs.org) is mainly used in this purpose.
 
 ___
 
-*Note :* You might suppose that the name Paperwork comes from the name of the library used. In fact, the name refers to go back to basis for doing Art. At the beginning of the project, it was the [P5.js](https://p5js.org) library that was used. It is purely coincidence.
+*Note :* You might suppose that the name Paperwork comes from the name of the library used. In fact, it is purely coincidence. At the beginning of the project, it was the [P5.js](https://p5js.org) library that was used. The name refers to go back to basis for doing Art.
 
 ## For development
 
