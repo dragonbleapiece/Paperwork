@@ -411,7 +411,7 @@ class Box extends Component {
     if(e.dataTransfer.dropEffect === 'move') {
       this.removeFromParent();
     }
-    e.dataTransfer.clearData();
+    //e.dataTransfer.clearData();
     DragManager.instance.clear();
   }
 
