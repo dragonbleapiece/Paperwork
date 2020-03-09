@@ -171,6 +171,7 @@ class Box extends Component {
     this.isFlexVertical = true;
     this.lastEnter = null;
     this.content = React.createRef();
+    this.contentRect = {height: 0, width: 0};
     this.dropbox = React.createRef();
     this.container = React.createRef();
     this.hasInfo = false;
@@ -500,6 +501,7 @@ class Box extends Component {
   }
 
   onInfo() {
+    this.contentRect = this.content.current ? this.content.current.getBoundingClientRect() : {height: 0, width: 0};
     this.setState({isInfo: !this.state.isInfo});
   }
 
@@ -528,7 +530,6 @@ class Box extends Component {
     const transforms = this.getTransforms();
     const box = this.renderBox();
     const infoBox = this.getInfo();
-    const contentRect = this.content.current ? this.content.current.getBoundingClientRect() : {height: 0, width: 0};
 
     this.doBeforeRender();
 
@@ -551,8 +552,8 @@ class Box extends Component {
               {icon && <SVG className="Box__titleIcon" src={icon} style={{fill: formatedColor, backgroundColor: formatedBackgroundColor}}/>}
               <span className="Box__titleText" style={{color: formatedTextColor}}>{this.constructor.className}</span>
             </span>
-            {this.state.isInfo && <div className="Box__info" style={{minHeight: contentRect.height ? contentRect.height : '', maxWidth: contentRect.width ? contentRect.width : ''}}>{infoBox}</div>}
-            {!this.state.isMinimized && !this.state.isInfo && <span ref={this.content} className="Box__content">
+            {this.state.isInfo && <div className="Box__info" style={{minHeight: this.contentRect.height ? this.contentRect.height : '', maxWidth: this.contentRect.width ? this.contentRect.width : ''}}>{infoBox}</div>}
+            <span ref={this.content} className="Box__content" style={!this.state.isMinimized && !this.state.isInfo ? {} : {display: 'none'}}>
               <ContextMenuTrigger id={""}>
                 {box}
                 {transforms !== null && <div className='TransformBox'>{transforms}</div>}
@@ -565,7 +566,7 @@ class Box extends Component {
                   </div>}
                 </ContextMenuTrigger>
               </div>
-            </span>}
+            </span>
           </div>
         </ContextMenuBox>
       </div>

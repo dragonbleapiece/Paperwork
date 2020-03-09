@@ -66,6 +66,7 @@ class ThisBox extends Figure {
   }
 
   drawFigure(sk) {
+    window.isInThisBoxCall = true;
     if(this.recursionParent && (this.recursion <= this.recursionParent.state.recursionMax && !this.recursionParent.state.ignoreThisBox || this.recursionParent.globalRecursion <= this.recursionParent.state.recursionMax && this.recursionParent.state.ignoreThisBox)) {
       ++this.recursionParent.globalRecursion;
       ++this.recursion;
@@ -73,11 +74,11 @@ class ThisBox extends Figure {
       --this.recursion;
       --this.recursionParent.globalRecursion;
     }
+    window.isInThisBoxCall = false;
   }
 
   draw(sk) {
     // Prevents randomize and increment inputs
-    window.isInThisBoxCall = true;
     const scale = this.scale;
     const {x, y} = this.position;
     sk.push();
@@ -86,7 +87,6 @@ class ThisBox extends Figure {
       sk.translate(x, y);
       this.drawFigure(sk);
     sk.pop();
-    window.isInThisBoxCall = false;
   }
 
 }

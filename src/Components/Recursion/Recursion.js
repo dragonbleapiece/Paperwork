@@ -6,6 +6,7 @@ import recursion from '../../Icons/filter.svg';
 import recursionOption from '../../Icons/filter_none.svg';
 import Canvas from '../Canvas/Canvas';
 import Log from '../Log/Log';
+import * as Utils from '../../Utils';
 
 const className = "Recursion";
 const unauthorized = ["Placement", "Recursion", "Markov", "Void"];
@@ -122,7 +123,7 @@ class Recursion extends BoxGroup {
                         <label className='Recursion__duplicate'>
                             <input type='checkbox' checked={this.state.ignoreThisBox} onChange={(e) => {
                                 if(this.state.nbThisBox <= maxThisBoxWhenDuplicate) {
-                                    this.setState({ignoreThisBox: !this.state.ignoreThisBox});
+                                    this.setState({ignoreThisBox: !this.state.ignoreThisBox, recursionMax: !this.state.ignoreThisBox ? this.state.recursionMax : Utils.clamp(this.state.recursionMax, 1, maxRecursionWhenDuplicate)});
                                 } else {
                                     this.setState({log: true});
                                 }

@@ -4,7 +4,7 @@ import BoxInputNumber from '../BoxInputNumber/BoxInputNumber';
 import './Markov.css';
 import markovIcon from '../../Icons/markov.svg';
 import Radar from './Radar';
-import shortid from 'shortid';
+import * as Utils from '../../Utils';
 
 //import Icons
 import SVG from 'react-svg';
@@ -13,34 +13,6 @@ import unknown from '../../Icons/unknown.svg';
 
 const CENT = 100;
 const ROUND = 10;
-
-function clamp_left(a, b) {
-   return a < b ? b : a;
-}
-
-function clamp_right(a, b) {
-   return a > b ? b : a;
-}
-
-function clamp(a, b, c) {
-  return clamp_left(clamp_right(a, c), b);
-}
-
-function checkLeft(userValue, i, handle) {
-  if (i < 0) return;
-  if (userValue <= handle[i]) {
-    handle[i] = userValue;
-    checkLeft(userValue, --i, handle);
-  }
-}
-
-function checkRight(userValue, i, handle) {
-  if (i >= handle.length) return;
-  if (userValue >= handle[i]) {
-    handle[i] = userValue;
-    checkRight(userValue, ++i, handle);
-  }
-}
 
 const className = "Markov";
 const unauthorized = ["Placement"];
@@ -87,12 +59,11 @@ class Markov extends BoxGroup {
 
   doBeforeSetChildren(children) {
     const result = super.doBeforeSetChildren(children);
-    if(children.length !== this.state.children.length) {
-      this.currentState = parseInt(Math.random() * (children.length));
-      const newProba = this.initProba(children.length);
-      return {...result, proba: newProba, index: 0};
-    }
-    return result;
+
+    this.currentState = parseInt(Math.random() * (children.length));
+    const newProba = this.initProba(children.length);
+    this.setState({proba: newProba});
+    return {...result, proba: newProba, index: 0};
   }
 
   getColorMenu() {
@@ -138,7 +109,7 @@ class Markov extends BoxGroup {
     let i = (probaIndex + 1) % length;
     while(i !== probaIndex && Math.abs(remaining) > 0) {
       const p = newProba[index][i];
-      let r = clamp(p - remaining, 0, 100);
+      let r = Utils.clamp(p - remaining, 0, 100);
       newProba[index][i] = r;
       remaining -= p - r;
       i = (i + 1) % length;
