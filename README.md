@@ -105,9 +105,9 @@ In sum, an interesting mistake.
 
 You can save your work in JPG or SVG. The SVG is here to permit modifications on the image without information loss.
 
-The library [Paper.js](http://paperjs.org) is mainly used in this purpose.
+The library [Paper.js](http://paperjs.org) is mainly used in that purpose.
 
-##### Working Exemple
+##### Work Exemple
 
 ![Poster](/pictures/Affiche.png)
 
