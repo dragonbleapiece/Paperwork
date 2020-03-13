@@ -109,6 +109,11 @@ input[type=radio] {
   width: 500px;
 }
 
+.Git-logo svg {
+  width: 35px;
+  height: 35px;
+}
+
 .App-links a {
   text-decoration: none;
   color: black;
@@ -205,6 +210,12 @@ main {
 .aboutContainer p {
   margin: 10px 0px;
   font-weight: 300;
+}
+
+.App-logo-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
 
 .about {

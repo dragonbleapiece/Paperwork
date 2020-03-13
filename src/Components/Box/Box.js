@@ -118,6 +118,7 @@ const unauthorized = [];
  * Returns a callback function depends on the class of the box
  * @param {Box} child - The child of the box 
  * @param {Object} object - The object containing the callback as {boxClassname: callback}
+ * @return {Function|undefined} the callback function for the type
  */
 function getFunctionClass(child, object) {
   for(let key in object) {
@@ -132,6 +133,7 @@ function getFunctionClass(child, object) {
 
 /**
  * Class basis for all Box
+ * @extends Component
  */
 class Box extends Component {
 
@@ -170,7 +172,6 @@ class Box extends Component {
   // STATE
   state = {
     children: [],
-    style: {},
     dragEnter: -1,
     isMinimized: false,
     isInfo: false,
@@ -195,12 +196,13 @@ class Box extends Component {
     // For allowing ThisBox only in Recursion box
     this.parentsList = this.props ? {...this.props.parentsList, [this.constructor.className]: true} : {[this.constructor.className]: true};
     
+    // Reference of this box. Useful for getting children from ReactElement
     this.ref = this;
     
     // For transforms inputs
     this.transforms = {};
 
-    // Dunno why
+    // Final ClassName of this box
     this.className = Box.className;
     
     // object containing callback for each box type. To be called before drawing
@@ -248,6 +250,7 @@ class Box extends Component {
   /**
    * Check if the box has parent from classname
    * @param {string} className - classname of the parent 
+   * @return {bool} hasParent from the classname 
    */
   hasParent(className) {
     return this.parentsList[className];
@@ -255,7 +258,8 @@ class Box extends Component {
 
   /**
    * Init children state from saved state
-   * @param {*} state - saved state
+   * @param {State} state - saved state
+   * @return {State} updated state
    */
   static checkChildrenFromSavedState(state) {
     if(state === undefined) return state;
@@ -276,7 +280,8 @@ class Box extends Component {
 
   /**
    * Filter the unauthorized box for Contextual Menu
-   * @param {*} menu - Menu to filter
+   * @param {Menu} menu - Menu to filter
+   * @return {Menu} filtered menu
    */
   filterUnauthorized(menu) {
     if(this.constructor.unauthorized.indexOf('*') !== -1) {
@@ -340,7 +345,7 @@ class Box extends Component {
 
   /**
    * Call the function callback in drawBeforeType if type match
-   * @param {Paper} sk - Paper object
+   * @param {Canvas} sk - Canvas object
    * @param {string} type - Type of the box 
    * @param {BoxClass} child - Box Class to check
    */
@@ -434,7 +439,7 @@ class Box extends Component {
 
   /**
    * Call the callback before drawing the Box
-   * @param {Paper} sk - Paper object
+   * @param {Canvas} sk - Canvas object
    * @param {Box} child - Box to draw
    */
   drawBeforeChild(sk, child) {
@@ -449,7 +454,7 @@ class Box extends Component {
   /**
    * Method to implement for drawing this Box
    * TO OVERRIDE
-   * @param {Paper} sk - Paper object (Visitor) 
+   * @param {Canvas} sk - Canvas object (Visitor) 
    */
   draw(sk) {
     // VOID
@@ -756,7 +761,7 @@ class Box extends Component {
     this.doBeforeRender();
 
     return (
-      <div className={this.className} style={this.state.style} ref='box'>
+      <div className={this.className} ref='box'>
         <ContextMenuBox id={this.constructor.className + this.props.id} menu={[...this.menu, ...this.getColorMenu(), ...this.suppMenu]}>
           <div className="Box__wrapper">
             <div className="Box_titleOptions">

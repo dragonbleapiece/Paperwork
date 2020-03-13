@@ -5,6 +5,7 @@ import './App.css';
 //import Icons
 import SVG from 'react-svg'
 import icon_info from '../../Icons/info.svg';
+import icon_git from '../../Icons/Github.svg';
 // import Components
 import Workspace from '../../Components/Workspace/Workspace';
 import Save from '../../Components/Save/Save';
@@ -100,10 +101,9 @@ class App extends Component {
     return (
       <div className='App' onClick={(e) => this.handleOutsideClick(e)}>
         <header className='App-header border-bottom'>
-          <h1 className='App-logo'>Paperwork&nbsp;<sup className='textExponent'>2020</sup></h1>
-          <div className='App-links'>
-          <a className='App-link' href='http://mobitool.free.fr/edu/ma-ex1.html' target='_blank' rel='noopener noreferrer'>Markov Example #1</a>
-          <a className='App-link' href='http://mobitool.free.fr/edu/ma-ex2.html' target='_blank' rel='noopener noreferrer'>Markov Example #2</a>
+          <div className='App-logo-container'>
+            <h1 className='App-logo'>Paperwork&nbsp;<sup className='textExponent'>2020</sup></h1>
+            <a className='Git-logo' href='https://github.com/dragonbleapiece/Paperwork' target='_blank' rel='noopener noreferrer'><SVG src={icon_git}/></a>
           </div>
           <div className='about' ref={aboutButton => { this.aboutButton = aboutButton; }}>
             <SVG src={icon_info}/>

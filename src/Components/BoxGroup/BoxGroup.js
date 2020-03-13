@@ -65,22 +65,6 @@ class BoxGroup extends Box {
     }
   }
 
-  initElements() {
-
-    let elements = [];
-
-    const children = React.Children.map(this.props.children,
-       (child, index) => {
-              elements.push(child);
-              //box.parent = callback;
-    });
-
-  }
-
-  componentDidMount() {
-    //this.initElements();
-  }
-
   getChildren() {
     this.elements = [];
     let children = this.state.children.map((child, index) =>
