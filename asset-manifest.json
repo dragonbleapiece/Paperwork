@@ -1,19 +1,20 @@
 {
   "files": {
-    "main.css": "/Paperwork/static/css/main.fd8f87f4.chunk.css",
-    "main.js": "/Paperwork/static/js/main.be51c4c7.chunk.js",
-    "main.js.map": "/Paperwork/static/js/main.be51c4c7.chunk.js.map",
+    "main.css": "/Paperwork/static/css/main.d8744278.chunk.css",
+    "main.js": "/Paperwork/static/js/main.01f85314.chunk.js",
+    "main.js.map": "/Paperwork/static/js/main.01f85314.chunk.js.map",
     "runtime-main.js": "/Paperwork/static/js/runtime-main.6f2833b6.js",
     "runtime-main.js.map": "/Paperwork/static/js/runtime-main.6f2833b6.js.map",
     "static/css/2.96479aa2.chunk.css": "/Paperwork/static/css/2.96479aa2.chunk.css",
-    "static/js/2.4d00491e.chunk.js": "/Paperwork/static/js/2.4d00491e.chunk.js",
-    "static/js/2.4d00491e.chunk.js.map": "/Paperwork/static/js/2.4d00491e.chunk.js.map",
+    "static/js/2.e3454b94.chunk.js": "/Paperwork/static/js/2.e3454b94.chunk.js",
+    "static/js/2.e3454b94.chunk.js.map": "/Paperwork/static/js/2.e3454b94.chunk.js.map",
     "index.html": "/Paperwork/index.html",
-    "precache-manifest.6a34b25e43b00aabd109c37869700b2e.js": "/Paperwork/precache-manifest.6a34b25e43b00aabd109c37869700b2e.js",
+    "precache-manifest.b93ed93168f02d45a9fd04f8d48ad23d.js": "/Paperwork/precache-manifest.b93ed93168f02d45a9fd04f8d48ad23d.js",
     "service-worker.js": "/Paperwork/service-worker.js",
     "static/css/2.96479aa2.chunk.css.map": "/Paperwork/static/css/2.96479aa2.chunk.css.map",
-    "static/css/main.fd8f87f4.chunk.css.map": "/Paperwork/static/css/main.fd8f87f4.chunk.css.map",
-    "static/js/2.4d00491e.chunk.js.LICENSE": "/Paperwork/static/js/2.4d00491e.chunk.js.LICENSE",
+    "static/css/main.d8744278.chunk.css.map": "/Paperwork/static/css/main.d8744278.chunk.css.map",
+    "static/js/2.e3454b94.chunk.js.LICENSE": "/Paperwork/static/js/2.e3454b94.chunk.js.LICENSE",
+    "static/media/Github.svg": "/Paperwork/static/media/Github.a8e91636.svg",
     "static/media/HHatching.svg": "/Paperwork/static/media/HHatching.f3da2da9.svg",
     "static/media/LOHatching.svg": "/Paperwork/static/media/LOHatching.186b393d.svg",
     "static/media/ROHatching.svg": "/Paperwork/static/media/ROHatching.8c0092fd.svg",
@@ -55,8 +56,8 @@
   "entrypoints": [
     "static/js/runtime-main.6f2833b6.js",
     "static/css/2.96479aa2.chunk.css",
-    "static/js/2.4d00491e.chunk.js",
-    "static/css/main.fd8f87f4.chunk.css",
-    "static/js/main.be51c4c7.chunk.js"
+    "static/js/2.e3454b94.chunk.js",
+    "static/css/main.d8744278.chunk.css",
+    "static/js/main.01f85314.chunk.js"
   ]
 }
