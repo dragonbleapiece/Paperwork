@@ -109,9 +109,13 @@ input[type=radio] {
   width: 500px;
 }
 
-.Git-logo svg {
+.Header-logo svg {
   width: 35px;
   height: 35px;
+}
+
+.Header-logo {
+  margin-right: 17px;
 }
 
 .App-links a {

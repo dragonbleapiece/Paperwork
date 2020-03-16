@@ -6,6 +6,7 @@ import './App.css';
 import SVG from 'react-svg'
 import icon_info from '../../Icons/info.svg';
 import icon_git from '../../Icons/Github.svg';
+import icon_insta from '../../Icons/Instagram.svg';
 // import Components
 import Workspace from '../../Components/Workspace/Workspace';
 import Save from '../../Components/Save/Save';
@@ -103,7 +104,8 @@ class App extends Component {
         <header className='App-header border-bottom'>
           <div className='App-logo-container'>
             <h1 className='App-logo'>Paperwork&nbsp;<sup className='textExponent'>2020</sup></h1>
-            <a className='Git-logo' href='https://github.com/dragonbleapiece/Paperwork' target='_blank' rel='noopener noreferrer'><SVG src={icon_git}/></a>
+            <a className='Header-logo' href='https://github.com/dragonbleapiece/Paperwork' target='_blank' rel='noopener noreferrer'><SVG src={icon_git}/></a>
+            <a className='Header-logo' href='https://www.instagram.com/paperwork_imac/' target='_blank' rel='noopener noreferrer'><SVG src={icon_insta}/></a>
           </div>
           <div className='about' ref={aboutButton => { this.aboutButton = aboutButton; }}>
             <SVG src={icon_info}/>
