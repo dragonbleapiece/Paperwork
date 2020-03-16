@@ -1,21 +1,22 @@
 {
   "files": {
-    "main.css": "/Paperwork/static/css/main.d8744278.chunk.css",
-    "main.js": "/Paperwork/static/js/main.01f85314.chunk.js",
-    "main.js.map": "/Paperwork/static/js/main.01f85314.chunk.js.map",
+    "main.css": "/Paperwork/static/css/main.22fa105b.chunk.css",
+    "main.js": "/Paperwork/static/js/main.279bf50b.chunk.js",
+    "main.js.map": "/Paperwork/static/js/main.279bf50b.chunk.js.map",
     "runtime-main.js": "/Paperwork/static/js/runtime-main.6f2833b6.js",
     "runtime-main.js.map": "/Paperwork/static/js/runtime-main.6f2833b6.js.map",
     "static/css/2.96479aa2.chunk.css": "/Paperwork/static/css/2.96479aa2.chunk.css",
-    "static/js/2.e3454b94.chunk.js": "/Paperwork/static/js/2.e3454b94.chunk.js",
-    "static/js/2.e3454b94.chunk.js.map": "/Paperwork/static/js/2.e3454b94.chunk.js.map",
+    "static/js/2.9b5137c5.chunk.js": "/Paperwork/static/js/2.9b5137c5.chunk.js",
+    "static/js/2.9b5137c5.chunk.js.map": "/Paperwork/static/js/2.9b5137c5.chunk.js.map",
     "index.html": "/Paperwork/index.html",
-    "precache-manifest.b93ed93168f02d45a9fd04f8d48ad23d.js": "/Paperwork/precache-manifest.b93ed93168f02d45a9fd04f8d48ad23d.js",
+    "precache-manifest.fe55884bd72a6cc52a0259dc1e04ec64.js": "/Paperwork/precache-manifest.fe55884bd72a6cc52a0259dc1e04ec64.js",
     "service-worker.js": "/Paperwork/service-worker.js",
     "static/css/2.96479aa2.chunk.css.map": "/Paperwork/static/css/2.96479aa2.chunk.css.map",
-    "static/css/main.d8744278.chunk.css.map": "/Paperwork/static/css/main.d8744278.chunk.css.map",
-    "static/js/2.e3454b94.chunk.js.LICENSE": "/Paperwork/static/js/2.e3454b94.chunk.js.LICENSE",
-    "static/media/Github.svg": "/Paperwork/static/media/Github.a8e91636.svg",
+    "static/css/main.22fa105b.chunk.css.map": "/Paperwork/static/css/main.22fa105b.chunk.css.map",
+    "static/js/2.9b5137c5.chunk.js.LICENSE": "/Paperwork/static/js/2.9b5137c5.chunk.js.LICENSE",
+    "static/media/Github.svg": "/Paperwork/static/media/Github.6d2c7609.svg",
     "static/media/HHatching.svg": "/Paperwork/static/media/HHatching.f3da2da9.svg",
+    "static/media/Instagram.svg": "/Paperwork/static/media/Instagram.b862d228.svg",
     "static/media/LOHatching.svg": "/Paperwork/static/media/LOHatching.186b393d.svg",
     "static/media/ROHatching.svg": "/Paperwork/static/media/ROHatching.8c0092fd.svg",
     "static/media/SpaceGrotesk.css": "/Paperwork/static/media/SpaceGrotesk-SemiBold.18970edf.ttf",
@@ -56,8 +57,8 @@
   "entrypoints": [
     "static/js/runtime-main.6f2833b6.js",
     "static/css/2.96479aa2.chunk.css",
-    "static/js/2.e3454b94.chunk.js",
-    "static/css/main.d8744278.chunk.css",
-    "static/js/main.01f85314.chunk.js"
+    "static/js/2.9b5137c5.chunk.js",
+    "static/css/main.22fa105b.chunk.css",
+    "static/js/main.279bf50b.chunk.js"
   ]
 }
